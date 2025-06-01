@@ -5,6 +5,7 @@ import { FaMicrophoneAlt } from "react-icons/fa";
 import { FaFileAlt } from "react-icons/fa";
 import { PiMagnifyingGlassBold } from "react-icons/pi";
 import { LuLayoutTemplate } from "react-icons/lu";
+import { FaChartLine } from "react-icons/fa";
 const Features = () => {
   const featuresDetails = [
     {
@@ -36,6 +37,12 @@ const Features = () => {
       description:
         "No CV? Answer a few questions about your experience and education, and our tool will create a professional resume from scratch.",
       icon: <FaFileAlt />,
+    },
+    {
+      title: "Progress Tracker",
+      description:
+        "Track your mock interviews by job—save, review, and improve your performance with personalized trends and tips for every role",
+      icon: <FaChartLine />,
     },
   ];
   return (

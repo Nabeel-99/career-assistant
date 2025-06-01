@@ -41,7 +41,7 @@ const Features = () => {
     {
       title: "Progress Tracker",
       description:
-        "Track your mock interviews by job—save, review, and improve your performance with personalized trends and tips for every role",
+        "Track your mock interviews, review, and improve your performance with personalized trends and tips for every role.",
       icon: <FaChartLine />,
     },
   ];
@@ -57,7 +57,7 @@ const Features = () => {
         From AI-powered CV creation to realistic interview prep &mdash; get
         fully prepared, build confidence, and stand out in your job hunt.
       </p>
-      <div className="grid grid-cols-1 lg:grid-cols-3 mt-4 lg:mt-20 gap-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-4 lg:mt-20 gap-10">
         {featuresDetails.map((feature, index) => (
           <FeatureCard
             key={index}

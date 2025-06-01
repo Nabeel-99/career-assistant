@@ -11,7 +11,7 @@ const Navbar = () => {
         <GiArtificialHive className="text-3xl" />
       </div>
       {/* nav links */}
-      <nav className="flex max-sm:hidden items-center gap-2 border py-4 max-w-md w-full rounded-4xl border-[#1f1f1f]">
+      <nav className="flex max-lg:hidden items-center gap-2 border py-4 max-w-md w-full rounded-4xl border-[#1f1f1f]">
         <ul className="flex items-center justify-center gap-10 w-full">
           <li className="nav-link">
             <Link href={"/"}>Features</Link>
@@ -31,7 +31,7 @@ const Navbar = () => {
         </ul>
       </nav>
       {/* auth btns */}
-      <div className="max-sm:hidden z-50 lg:fixed top-8 right-10">
+      <div className="max-lg:hidden z-50 lg:fixed top-8 right-10">
         <div className="flex items-center border p-2 border-transparent rounded-4xl backdrop-blur-lg gap-4">
           <Link href={"/"} className="nav-link">
             Login

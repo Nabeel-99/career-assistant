@@ -17,7 +17,7 @@ const Hero = () => {
         Get Started
       </Link>
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[300px] w-[300px] blur-xl lg:h-[900px] lg:w-[900px]  -z-10 rounded-full bg-gradient-to-t from-[#0a0a0a] via-[#033a2c] to-[#0d828a] lg:blur-3xl opacity-30" />
-      <div className="perspective-distant ">
+      <div className="perspective-distant overflow-hidden">
         {/* <Image
           src={AIimage}
           width={400}
@@ -30,8 +30,13 @@ const Hero = () => {
           width={800}
           height={800}
           alt="ai"
-          className="relative transform-3d rotate-x-45 "
+          className="relative  transform-3d rotate-x-45 "
         />
+        {/* <img
+          src={CVimage}
+          alt=""
+          className="relative w-[800px] h-full object-contain"
+        /> */}
       </div>
     </div>
   );

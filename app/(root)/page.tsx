@@ -1,5 +1,6 @@
 import Features from "@/components/Features";
 import Hero from "@/components/Hero";
+import HowItWorks from "@/components/HowItWorks";
 
 export default function Home() {
   return (
@@ -11,6 +12,9 @@ export default function Home() {
       </section>
       <section className="pb-10 px-4  lg:px-20 2xl:container 2xl:mx-auto">
         <Features />
+      </section>
+      <section className="pb-10 px-4  lg:px-20 2xl:container 2xl:mx-auto">
+        <HowItWorks />
       </section>
     </div>
   );

@@ -19,8 +19,8 @@ const HowItWorks = () => {
         From uploading your resume to mastering interviews, every step is
         seamless and purposeful.
       </p>
-      <div className="flex justify-between gap-10   w-full   mt-10">
-        <div className="flex max-w-sm flex-col sticky top-20 h-full  ">
+      <div className="flex flex-col xl:flex-row items-center justify-center xl:justify-start xl:items-start gap-10   w-full   mt-10">
+        <div className="flex xl:max-w-sm flex-col xl:sticky top-20 h-full  ">
           <IconCard
             icon={<MdOutlineFileUpload size={40} />}
             title="Upload Your Resume"
@@ -38,22 +38,40 @@ const HowItWorks = () => {
             hide={true}
           />
         </div>
-
-        <div className="  sticky top-40  right-0 flex flex-col gap-[100vh]">
+        {/* large screen */}
+        <div className=" hidden xl:flex xl:sticky top-40  right-0 flex-col gap-[100vh]">
           <img
             src={CVupload.src}
             alt="cv-upload"
-            className=" drop-shadow-xl drop-shadow-[#05362e]   object-cover w-[1000px]  rounded-lg"
+            className=" drop-shadow-xl drop-shadow-[#05362e]   object-cover w-[1000px] border border-[#3b3b3b]  rounded-lg"
           />
           <img
             src={Practice.src}
             alt="cv-upload"
-            className=" drop-shadow-xl drop-shadow-[#05362e]   object-cover w-[1000px]  rounded-lg"
+            className=" drop-shadow-xl drop-shadow-[#05362e]   object-cover w-[1000px]  border border-[#3b3b3b] rounded-lg"
           />
           <img
             src={Feedback.src}
             alt="cv-upload"
-            className=" drop-shadow-xl drop-shadow-[#05362e]   object-cover w-[1000px]  rounded-lg"
+            className=" drop-shadow-xl drop-shadow-[#05362e]   object-cover w-[1000px] border border-[#3b3b3b] mb-20  rounded-lg"
+          />
+        </div>
+        {/* small screen */}
+        <div className="flex  xl:hidden overflow-scroll hide-scrollbar gap-20">
+          <img
+            src={CVupload.src}
+            alt="cv-upload"
+            className=" drop-shadow-xl drop-shadow-[#05362e] max-w-lg  object-contain h-full w-full border border-[#3b3b3b]  rounded-lg"
+          />
+          <img
+            src={Practice.src}
+            alt="cv-upload"
+            className=" drop-shadow-xl drop-shadow-[#05362e] max-w-lg  object-contain h-full w-full  border border-[#3b3b3b] rounded-lg"
+          />
+          <img
+            src={Feedback.src}
+            alt="cv-upload"
+            className=" drop-shadow-xl drop-shadow-[#05362e] max-w-lg  object-contain h-full w-full border border-[#3b3b3b] mb-20  rounded-lg"
           />
         </div>
       </div>

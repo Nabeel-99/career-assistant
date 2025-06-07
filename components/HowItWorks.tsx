@@ -12,12 +12,13 @@ const HowItWorks = () => {
       <h1 className="shadow-sm shadow-[#b6b6b6] border-[#1f1f1f] px-4 py-2 border-2 rounded-4xl">
         How it works
       </h1>
-      <h1 className="text-4xl lg:text-5xl text-center">
-        Smarter career preparation powered <br /> by AI, designed for success.
+      <h1 className="text-3xl lg:text-5xl text-center">
+        Smarter career preparation powered <br className="max-lg:hidden" /> by
+        AI, designed for success.
       </h1>
       <p className="text-base lg:text-lg max-w-lg text-center text-subheadline">
-        From uploading your resume to mastering interviews, every step is
-        seamless and purposeful.
+        From uploading your resume to mastering interviews,{" "}
+        <br className="max-lg:hidden" /> every step is seamless and purposeful.
       </p>
       <div className="flex flex-col xl:flex-row items-center justify-center xl:justify-start xl:items-start gap-10   w-full   mt-10">
         <div className="flex xl:max-w-sm flex-col xl:sticky top-20 h-full  ">

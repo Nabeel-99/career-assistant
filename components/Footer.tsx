@@ -1,64 +1,87 @@
 import Link from "next/link";
 import React from "react";
-import { FaGithub } from "react-icons/fa";
+import { FaDiscord, FaEnvelope, FaGithub } from "react-icons/fa";
 import { GiArtificialHive } from "react-icons/gi";
+import SocialIcon from "./SocialIcon";
+import { FaXTwitter } from "react-icons/fa6";
 
 const Footer = () => {
   return (
-    <footer className="border-t p-10 rounded-t-4xl flex flex-col  border-[#113123] backdrop-blur-3xl">
-      <div className="grid grid-cols-3 gap-10">
-        <div className="">
-          <GiArtificialHive className="size-24" />
+    <footer className="relative z-10 mt-20">
+      <div className="absolute left-0 -z-10">
+        <div className="h-[300px] w-[300px] bg-gradient-to-l from-[#0a0a0a] via-[#613e05] to-[#0d828a] blur-3xl opacity-30" />
+      </div>
+      <div className="absolute  right-0 -z-10">
+        <div className="h-[300px] w-[300px] bg-gradient-to-l from-[#0a0a0a] via-[#232aea] to-[#0d828a] blur-3xl opacity-30" />
+      </div>
+
+      {/* Main Footer Content */}
+      <div className="border-t backdrop-blur-xl bg-[#0a0a0a]/80  rounded-t-[100px] p-10 lg:p-32 flex flex-col gap-10  border-[#113123]">
+        <div className="flex flex-col items-center lg:flex-row lg:justify-between gap-10 ">
+          <div className="flex items-center gap-3">
+            <GiArtificialHive className="size-24 " />
+            <span className="font-extrabold text-2xl lg:text-4xl leading-tight">
+              AI Career <br /> Assistant
+            </span>
+          </div>
+
+          {/* Quick Links */}
+          {/* <div className="flex flex-col gap-3">
+            <p className="font-bold text-white">Quick Links</p>
+            <ul className="flex flex-col gap-3 text-subheadline text-gray-400">
+              <li>
+                <Link href="/" className="hover:text-white">
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link href="#features" className="hover:text-white">
+                  Features
+                </Link>
+              </li>
+              <li>
+                <Link href="#how-it-works" className="hover:text-white">
+                  How it works
+                </Link>
+              </li>
+              <li>
+                <Link href="#faq" className="hover:text-white">
+                  FAQ
+                </Link>
+              </li>
+            </ul>
+          </div> */}
+
+          {/* Contact / Social */}
+          <div className="flex flex-col gap-3">
+            <p className="font-extrabold text-2xl lg:text-5xl md:text-center xl:text-left text-white ">
+              Get In Touch{" "}
+            </p>
+            <ul className="flex flex-col md:flex-row  gap-3 text-subheadline text-gray-400 w-full">
+              <SocialIcon
+                icon={<FaGithub className="size-6" />}
+                title="Github"
+              />
+              <SocialIcon
+                icon={<FaDiscord className="size-6" />}
+                title="Discord"
+              />
+              <SocialIcon
+                icon={<FaEnvelope className="size-6" />}
+                title="Email"
+              />
+              <SocialIcon
+                icon={<FaXTwitter className="size-6" />}
+                title="Twitter"
+              />
+            </ul>
+          </div>
         </div>
-        <div className="flex flex-col gap-3">
-          <p className="font-bold">Quick Links</p>
-          <ul className="flex flex-col gap-4 text-subheadline">
-            <li>
-              <Link href={"/"} className="hover:text-white">
-                Home
-              </Link>
-            </li>
-            <li>
-              <Link href={"/"} className="hover:text-white">
-                Features
-              </Link>
-            </li>
-            <li>
-              <Link href={"/"} className="hover:text-white">
-                How it works
-              </Link>
-            </li>
-            <li>
-              <Link href={"/"} className="hover:text-white">
-                FAQ
-              </Link>
-            </li>
-          </ul>
-        </div>
-        <div className="flex flex-col gap-3">
-          <p className="font-bold">Contact Us</p>
-          <ul className="flex flex-col gap-4 text-subheadline">
-            <li>
-              <Link href={"/"} className="hover:text-white">
-                <FaGithub className="size-8" />
-              </Link>
-            </li>
-            <li>
-              <Link href={"/"} className="hover:text-white">
-                Features
-              </Link>
-            </li>
-            <li>
-              <Link href={"/"} className="hover:text-white">
-                How it works
-              </Link>
-            </li>
-            <li>
-              <Link href={"/"} className="hover:text-white">
-                FAQ
-              </Link>
-            </li>
-          </ul>
+        <div className="w-full h-0.5 bg-gradient-to-r from-[#0a0a0a] via-[#113123] to-[#0a0a0a]"></div>
+        <div className=" text-center text-gray-500 text-sm">
+          &copy;2025{" "}
+          <span className="font-bold text-white">AI Career Assistant.</span> All
+          rights reserved.
         </div>
       </div>
     </footer>

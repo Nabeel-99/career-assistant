@@ -18,7 +18,7 @@ export default function Home() {
       <section className="pb-10 px-4  lg:px-20 2xl:container 2xl:mx-auto">
         <HowItWorks />
       </section>
-      <section className="pb-10 px-6  lg:px-20 2xl:container 2xl:mx-auto">
+      <section className="pb-60 px-6  lg:px-20 2xl:container 2xl:mx-auto">
         <Faq />
       </section>
       {/* <section className="pb-10 px-4  lg:px-20 2xl:container 2xl:mx-auto">

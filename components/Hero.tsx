@@ -5,7 +5,7 @@ import AIimage from "../public/ai.webp";
 import CVimage from "../public/cv.svg";
 const Hero = () => {
   return (
-    <div className="mt-10   z-20  flex flex-col gap-6 items-center">
+    <div className="mt-10  px-2 z-20  flex flex-col gap-6 items-center">
       <h1 className="text-5xl lg:text-7xl text-center">
         AI-Powered <br /> Career Assistant
       </h1>

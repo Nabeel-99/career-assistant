@@ -78,6 +78,12 @@
   );
 }
 
+/* .bg-how-it-works {
+  background-color: #0a0a0a;
+  background-image: url("../public/otis-redding.png");
+  opacity: 0.3;
+} */
+
 :root {
   --radius: 0.625rem;
   --background: oklch(1 0 0);

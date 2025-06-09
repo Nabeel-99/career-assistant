@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import AIimage from "../public/ai.webp";
-import CVimage from "../public/cv.svg";
+import DashboardImage from "../public/dashboard.svg";
 const Hero = () => {
   return (
     <div className="mt-10  px-2 z-20  flex flex-col gap-6 items-center">
@@ -17,7 +17,7 @@ const Hero = () => {
         Get Started
       </Link>
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[300px] w-[300px] blur-xl lg:h-[900px] lg:w-[900px]  -z-10 rounded-full bg-gradient-to-t from-[#0a0a0a] via-[#033a2c] to-[#0d828a] lg:blur-3xl opacity-30" />
-      <div className="perspective-distant overflow-hidden">
+      <div className="perspective-distant  max-lg:overflow-hidden">
         {/* <Image
           src={AIimage}
           width={400}
@@ -26,11 +26,11 @@ const Hero = () => {
           className="border border-[#1f1f1f] rounded-2xl "
         /> */}
         <Image
-          src={CVimage}
-          width={800}
-          height={800}
+          src={DashboardImage}
+          width={900}
+          height={900}
           alt="ai"
-          className="relative  transform-3d rotate-x-45 "
+          className="relative border rounded-md transform-3d rotate-x-45 "
         />
         {/* <img
           src={CVimage}

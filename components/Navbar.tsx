@@ -14,19 +14,19 @@ const Navbar = () => {
       <nav className="flex max-lg:hidden items-center gap-2 border py-4 max-w-md w-full rounded-4xl border-[#1f1f1f]">
         <ul className="flex items-center justify-center gap-10 w-full">
           <li className="nav-link">
-            <Link href={"/"}>Features</Link>
+            <Link href={"#features"}>Features</Link>
           </li>
           <li className="nav-link">
             {" "}
-            <Link href={"/"}>How it works</Link>
+            <Link href={"#how-it-works"}>How it works</Link>
           </li>
           <li className="nav-link">
             {" "}
-            <Link href={"/"}>FAQ</Link>
+            <Link href={"#testimonials"}>Testimonials</Link>
           </li>
           <li className="nav-link">
             {" "}
-            <Link href={"/"}>Contact</Link>
+            <Link href={"#faq"}>FAQ</Link>
           </li>
         </ul>
       </nav>

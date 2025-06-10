@@ -51,6 +51,10 @@
   display: none;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 @layer utilities {
   .nav-link {
     @apply text-[#b3b3b3] hover:text-[#ffffffda] transition-all duration-300  cursor-pointer;

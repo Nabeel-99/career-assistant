@@ -9,10 +9,10 @@ const Footer = () => {
   return (
     <footer className="relative z-10 mt-20">
       <div className="absolute left-0 -z-10">
-        <div className="h-[300px] w-[300px] bg-gradient-to-l from-[#0a0a0a] via-[#613e05] to-[#0d828a] blur-3xl opacity-30" />
+        <div className="h-[200px] w-[200px] lg:h-[300px] lg:w-[300px] bg-gradient-to-l from-[#0a0a0a] via-[#613e05] to-[#0d828a] blur-3xl opacity-30" />
       </div>
       <div className="absolute  right-0 -z-10">
-        <div className="h-[300px] w-[300px] bg-gradient-to-l from-[#0a0a0a] via-[#232aea] to-[#0d828a] blur-3xl opacity-30" />
+        <div className="h-[200px] w-[200px] lg:h-[300px] lg:w-[300px] bg-gradient-to-l from-[#0a0a0a] via-[#232aea] to-[#0d828a] blur-3xl opacity-30" />
       </div>
 
       {/* Main Footer Content */}
@@ -61,18 +61,24 @@ const Footer = () => {
               <SocialIcon
                 icon={<FaGithub className="size-6" />}
                 title="Github"
+                href={"https://github.com/Nabeel-99/career-assistant.git"}
               />
               <SocialIcon
                 icon={<FaDiscord className="size-6" />}
                 title="Discord"
+                href={"https://discord.gg/pG8mVHFHGS"}
               />
               <SocialIcon
                 icon={<FaEnvelope className="size-6" />}
                 title="Email"
+                href={
+                  "https://mail.google.com/mail/?view=cm&fs=1&to=codingacademy599@gmail.com"
+                }
               />
               <SocialIcon
                 icon={<FaXTwitter className="size-6" />}
                 title="Twitter"
+                href={"https://x.com/Nabeel_umarr"}
               />
             </ul>
           </div>

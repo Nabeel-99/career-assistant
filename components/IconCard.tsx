@@ -1,7 +1,7 @@
 import React from "react";
 
 type IconProps = {
-  title: string;
+  title: any;
   description: any;
   icon: any;
   hide?: boolean;
@@ -19,8 +19,8 @@ const IconCard = ({ title, description, icon, hide }: IconProps) => {
         <div className="xl:hidden w-1 h-32 rounded-xl bg-gray-50"></div> */}
       </div>
       <div className="flex flex-col items-center justify-center text-center xl:text-left xl:items-start xl:justify-start gap-3">
-        <h1 className="font-extrabold text-5xl ">{title}</h1>
-        <div className="text-subheadline text-xl">{description}</div>
+        <div className="font-extrabold text-3xl md:text-5xl ">{title}</div>
+        <div className="text-subheadline md:text-xl">{description}</div>
       </div>
     </div>
   );

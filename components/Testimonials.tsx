@@ -10,23 +10,23 @@ const Testimonials = () => {
       name: "Farouq Nabeel",
       title: "Product Designer",
       review:
-        "Honestly, this tool made job hunting way less stressful. The AI feedback after mock interviews? Super useful.",
+        "Made the job hunt easier. Helpful suggestions, quick setup, and clean layout. Not overwhelming like other platforms.",
     },
     {
       id: 2,
+      initials: "DR",
+      name: "Daniel R.",
+      title: "Software Engineer Intern",
+      review:
+        "I prepped for my Google interview using this. The mock questions were realistic, and the feedback made me more structured. I passed the first round. Would recommend to any intern prepping for tech interviews.",
+    },
+    {
+      id: 3,
       initials: "SJ",
       name: "Sarah Johnson",
       title: "Frontend Developer",
       review:
-        "I wasn’t sure at first, but wow — the interview practice feels *real*. And the CV feedback? Spot on!",
-    },
-    {
-      id: 3,
-      initials: "KM",
-      name: "Kelechi M.",
-      title: "Data Analyst",
-      review:
-        "I literally landed 2 interviews within a week of using this. The AI insights helped me clean up my CV big time.",
+        "Didn’t expect much, but the feedback was surprisingly detailed. Helped tighten my CV and spot weak points in minutes.",
     },
     {
       id: 4,
@@ -34,23 +34,40 @@ const Testimonials = () => {
       name: "Anika Lopez",
       title: "Marketing Strategist",
       review:
-        "Super smooth UX, love the dashboard. The career tips feel personalized, not generic. Big win.",
+        "Honestly one of the best UX flows I’ve seen for a career tool. Dashboard’s intuitive, and the guidance actually feels like it adapts to your role. Super polished end-to-end.",
     },
     {
       id: 5,
-      initials: "DR",
-      name: "Daniel R.",
-      title: "Software Engineer Intern",
+      initials: "KM",
+      name: "Kelechi M.",
+      title: "Data Analyst",
       review:
-        "I used this to prep for my Google interview — no cap, it helped me stay calm and focused. Definitely recommending!",
+        "Two interviews in a week. The resume edits and interview prep actually work. It’s focused and fast.",
     },
+
     {
       id: 6,
       initials: "MO",
       name: "Muna Olayemi",
       title: "UX Researcher",
       review:
-        "CV templates are clean and modern. I finally feel confident sending mine out. The interview prep? Gold.",
+        "The resume templates are modern, simple, and actually highlight your skills. I sent mine out with confidence. The AI feedback nailed tone and structure too.",
+    },
+    {
+      id: 7,
+      initials: "LC",
+      name: "Lena Chen",
+      title: "Technical Writer",
+      review:
+        "Straight to the point. Clean UI. Smart feedback suggestions. Helped my resume get seen.",
+    },
+    {
+      id: 8,
+      initials: "BA",
+      name: "Bilal Adebayo",
+      title: "Cloud Architect",
+      review:
+        "From CV feedback to mock interviews, it all felt practical. It’s not fluff content. You get real output — faster, clearer, and job-focused. My only regret was not using it sooner.",
     },
   ];
   return (
@@ -61,7 +78,12 @@ const Testimonials = () => {
       <h1 className="text-3xl lg:text-6xl text-center">
         Here's what our clients say
       </h1>
-      <div>
+      <div className="flex flex-col gap-4 md:hidden">
+        {reviews.slice(0, 3).map((review, index) => (
+          <TestimonialCard {...review} key={index} />
+        ))}
+      </div>
+      <div className="hidden md:block p-4  mask-radial-from-90% mask-x-from-90% mx-auto container  overflow-hidden   border-white">
         <MarqueeEffect>
           {reviews.map((review, index) => (
             <TestimonialCard {...review} key={index} />

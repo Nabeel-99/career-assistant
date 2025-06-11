@@ -35,8 +35,10 @@ export default function Home() {
       {/* testimonials */}
       <section
         id="testimonials"
-        className="pb-10 px-4  lg:px-20 2xl:container 2xl:mx-auto"
+        className="pb-10 px-4  relative lg:px-20 w-full 2xl:container 2xl:mx-auto"
       >
+        <div className="absolute top-32  bg-radial-[at_75%_50%] opacity-25 from-[#343333] from-50% to-[#343333] w-[400px] h-[100px] rounded-full  blur-[90px] -translate-x-1/2 -translate-y-1/12 -z-40 left-1/2"></div>
+
         <Testimonials />
       </section>
       {/* faq */}

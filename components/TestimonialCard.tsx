@@ -14,7 +14,7 @@ const TestimonialCard = ({
   title,
 }: TestimonialProps) => {
   return (
-    <div className="backdrop-blur-2xl bg-black/40 md:hover:scale-105 transition-all duration-300 ease-in-out hover:inset-ring-[#343333] rounded-xl h-full  hover:drop-shadow-[#343333]">
+    <div className="backdrop-blur-2xl bg-black/40 md:hover:scale-105 transition-all duration-300 ease-in-out  rounded-xl h-full  md:hover:outline-4 md:hover:outline-offset-2 md:hover:shadow-2xs">
       <div className="flex flex-col   text-subheadline cursor-pointer hover:text-white w-full md:w-sm md:max-w-sm transition-all duration-300 ease-in-out border h-full border-[#1f1f1f] rounded-xl">
         <div className="p-4  ">
           <p className="">{review}</p>

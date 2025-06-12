@@ -1,5 +1,5 @@
 import React from "react";
-import StepsCard from "./StepsCard";
+import StepsCards from "./StepsCards";
 
 const HowItWorks = () => {
   return (
@@ -16,7 +16,7 @@ const HowItWorks = () => {
         <br className="max-lg:hidden" /> every step is seamless and purposeful.
       </p>
       <div className="flex flex-col items-center gap-10 lg:gap-44  mt-20 ">
-        <StepsCard />
+        <StepsCards />
       </div>
     </div>
   );

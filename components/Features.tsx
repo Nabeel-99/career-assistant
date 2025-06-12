@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import FeatureCard from "./FeatureCard";
 import { MdOutlineFileUpload } from "react-icons/md";
@@ -54,7 +56,7 @@ const Features = () => {
         Everything you <br /> need to stand out
       </h1>
       <p className="text-base lg:text-lg max-w-lg text-center text-subheadline">
-        From AI-p owered CV creation to realistic interview prep &mdash; get
+        From AI-powered CV creation to realistic interview prep &mdash; get
         fully prepared, build confidence, and stand out in your job hunt.
       </p>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-4 lg:mt-20 gap-10">

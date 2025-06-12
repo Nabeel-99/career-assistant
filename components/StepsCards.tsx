@@ -9,8 +9,8 @@ import IconCard from "./IconCard";
 const StepsCard = () => {
   return (
     <>
-      <div className="flex flex-col lg:flex-row justify-between  max-lg:items-center w-full">
-        <div className=" lg:w-1/2 ">
+      <div className="flex flex-col xl:flex-row justify-between items-center xl:items-start w-full lg:gap-10">
+        <div className=" lg:w-lg xl:w-1/2 ">
           <IconCard
             icon={<MdOutlineFileUpload size={40} />}
             title={
@@ -50,8 +50,8 @@ const StepsCard = () => {
       </div>
 
       {/* second */}
-      <div className="flex flex-col lg:flex-row justify-between max-lg:items-center w-full">
-        <div className="lg:order-2 lg:w-1/2 ">
+      <div className="flex flex-col xl:flex-row justify-between items-center xl:items-start  w-full lg:gap-10">
+        <div className=" lg:w-lg xl:order-2 xl:w-1/2 ">
           <IconCard
             icon={<FaMicrophoneAlt size={40} />}
             title={
@@ -92,8 +92,8 @@ const StepsCard = () => {
       </div>
 
       {/* third */}
-      <div className="flex flex-col lg:flex-row justify-between max-lg:items-center mb-20 items-start w-full">
-        <div className=" lg:w-1/2 ">
+      <div className="flex flex-col xl:flex-row justify-between items-center xl:items-start mb-20  w-full lg:gap-10">
+        <div className=" lg:w-lg xl:w-1/2 ">
           <IconCard
             icon={<FaMicrophoneAlt size={40} />}
             title={

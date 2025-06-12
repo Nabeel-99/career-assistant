@@ -36,7 +36,7 @@ const BurgerMenu = () => {
         )}
       </div>
       {isBurgerOpen && (
-        <div className="absolute top-20 lg:hidden inset-0 bg-[#0a0a0a] z-50 h-screen right-0 left-0">
+        <div className="absolute top-16 lg:hidden inset-0 bg-[#0a0a0a] z-50 h-screen right-0 left-0">
           <ul className="flex flex-col items-left px-4 p-4 gap-8 w-full">
             <li className="text-lg">
               <Link href={"/"}>Features</Link>

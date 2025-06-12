@@ -17,7 +17,7 @@ const Footer = () => {
 
       {/* Main Footer Content */}
       <div className="border-t backdrop-blur-xl bg-[#0a0a0a]/80  rounded-t-[100px] p-10 lg:p-32 flex flex-col gap-10  border-[#113123]">
-        <div className="flex flex-col items-center lg:flex-row lg:justify-between gap-10 ">
+        <div className="flex flex-col items-center  2xl:container 2xl:mx-auto lg:flex-row lg:justify-between gap-10 ">
           <div className="flex items-center gap-3">
             <GiArtificialHive className="size-24 " />
             <span className="font-extrabold text-2xl lg:text-4xl leading-tight">
@@ -83,8 +83,8 @@ const Footer = () => {
             </ul>
           </div>
         </div>
-        <div className="w-full h-0.5 bg-gradient-to-r from-[#0a0a0a] via-[#113123] to-[#0a0a0a]"></div>
-        <div className=" text-center text-gray-500 text-sm">
+        <div className="w-full h-0.5 bg-gradient-to-r from-[#0a0a0a] 2xl:container 2xl:mx-auto via-[#113123] to-[#0a0a0a]"></div>
+        <div className=" text-center 2xl:container 2xl:mx-auto text-gray-500 text-sm">
           &copy;2025{" "}
           <span className="font-bold text-white">AI Career Assistant.</span> All
           rights reserved.

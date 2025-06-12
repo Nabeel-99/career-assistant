@@ -3,7 +3,6 @@
 import React, { useRef } from "react";
 import { motion, useAnimationFrame } from "motion/react";
 const MarqueeEffect = ({ children }: { children: React.ReactNode }) => {
-  const containerRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const x = useRef(0);
   const speedRef = useRef(0.4);

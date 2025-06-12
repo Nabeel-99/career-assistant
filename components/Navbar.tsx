@@ -5,7 +5,7 @@ import BurgerMenu from "./BurgerMenu";
 
 const Navbar = () => {
   return (
-    <div className="flex  max-sm:fixed max-sm:p-4 p-8  max-sm:backdrop-blur-md max-lg:border-b border-b-[#1f1f1f] items-center justify-between lg:justify-center w-full z-50">
+    <div className="flex 2xl:container 2xl:mx-auto max-sm:fixed max-sm:p-4 p-8 max-sm:bg-black/40  max-sm:backdrop-blur-md max-lg:border-b border-b-[#1f1f1f] items-center justify-between lg:justify-center w-full z-50">
       {/* logo */}
       <div className="lg:fixed z-50 lg:top-12 lg:left-10">
         <GiArtificialHive className="text-3xl" />

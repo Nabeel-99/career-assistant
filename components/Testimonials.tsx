@@ -1,6 +1,8 @@
 import React from "react";
 import TestimonialCard from "./TestimonialCard";
 import MarqueeEffect from "./MarqueeEffect";
+import FadeContent from "./Animations/FadeContent/FadeContent";
+import AnimatedContent from "./Animations/AnimatedContent/AnimatedContent";
 
 const Testimonials = () => {
   const reviews = [
@@ -71,26 +73,49 @@ const Testimonials = () => {
     },
   ];
   return (
-    <div className=" flex flex-col gap-6  overflow-hidden items-center">
+    <AnimatedContent
+      distance={40}
+      direction="vertical"
+      reverse={false}
+      duration={1.2}
+      ease="power3.out"
+      initialOpacity={0}
+      animateOpacity
+      scale={1}
+      threshold={0.2}
+      delay={0.3}
+      className=" flex flex-col gap-6  overflow-hidden items-center"
+    >
       <h1 className="shadow-sm shadow-[#b6b6b6] border-[#1f1f1f] px-4 py-2 border-2 rounded-4xl">
         Testimonials
       </h1>
       <h1 className="text-3xl lg:text-6xl text-center">
         Here's what our clients say
       </h1>
+      {/* small screen */}
       <div className="flex flex-col gap-4 md:hidden">
         {reviews.slice(0, 3).map((review, index) => (
           <TestimonialCard {...review} key={index} />
         ))}
       </div>
-      <div className="hidden md:block p-4  mask-radial-from-90% mask-x-from-90% mx-auto container  overflow-hidden   border-white">
-        <MarqueeEffect>
-          {reviews.map((review, index) => (
-            <TestimonialCard {...review} key={index} />
-          ))}
-        </MarqueeEffect>
-      </div>
-    </div>
+      {/* large screen */}
+      <FadeContent
+        blur={true}
+        easing="ease-out"
+        initialOpacity={0}
+        delay={0.2}
+        duration={2000}
+        className="flex flex-col gap-6 items-center"
+      >
+        <div className="hidden md:block p-4  mask-radial-from-90% mask-x-from-90% mx-auto container  overflow-hidden   border-white">
+          <MarqueeEffect>
+            {reviews.map((review, index) => (
+              <TestimonialCard {...review} key={index} />
+            ))}
+          </MarqueeEffect>
+        </div>
+      </FadeContent>
+    </AnimatedContent>
   );
 };
 

@@ -39,20 +39,29 @@ const BurgerMenu = () => {
         <div className="absolute top-16 lg:hidden inset-0 bg-[#0a0a0a] z-50 h-screen right-0 left-0">
           <ul className="flex flex-col items-left px-4 p-4 gap-8 w-full">
             <li className="text-lg">
-              <Link href={"/"}>Features</Link>
+              <Link onClick={closeMenu} href={"#features"}>
+                Features
+              </Link>
             </li>
             <li className="text-lg">
               {" "}
-              <Link href={"/"}>How it works</Link>
+              <Link onClick={closeMenu} href={"#how-it-works"}>
+                How it works
+              </Link>
             </li>
             <li className="text-lg">
               {" "}
-              <Link href={"/"}>FAQ</Link>
+              <Link onClick={closeMenu} href={"#testimonials"}>
+                Testimonials
+              </Link>
             </li>
             <li className="text-lg">
               {" "}
-              <Link href={"/"}>Contact</Link>
+              <Link onClick={closeMenu} href={"#faq"}>
+                FAQ
+              </Link>
             </li>
+
             <li className="text-lg text-center border border-[#1f1f1f] p-2 rounded-xl">
               {" "}
               <Link href={"/"} className="">

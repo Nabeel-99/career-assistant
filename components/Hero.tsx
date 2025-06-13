@@ -18,8 +18,8 @@ const Hero = () => {
     }
     return 0;
   });
-  const rotateX = useTransform(scrollProgress, [0, 1], [0, 45]);
-  console.log("rotate X", rotateX);
+  const rotateX = useTransform(scrollProgress, [0.2, 1], [0, 45]);
+
   return (
     <div className="mt-10  px-2 z-20  flex flex-col gap-6 items-center">
       <AnimatedContent

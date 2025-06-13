@@ -5,7 +5,7 @@ import Feedback from "../public/feedback.svg";
 import { MdOutlineFileUpload } from "react-icons/md";
 import { FaMicrophoneAlt } from "react-icons/fa";
 import IconCard from "./IconCard";
-
+import { motion } from "motion/react";
 const StepsCard = () => {
   return (
     <>
@@ -40,7 +40,17 @@ const StepsCard = () => {
         </div>
         <div className="bg-radial-[at_50%_0%] from-white/90 to-[#0a0a0a] to-[40%] p-[0.5px]">
           <div className=" border-4 border-[#171717] mask-radial-at-bottom-right   mask-b-from-60% bg-gradient-to-t from-transparent to-[#040303] max-w-xl h-[400px] md:h-[500px] rounded-lg p-6 overflow-hidden">
-            <img
+            <motion.img
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.5 }}
+              transition={{
+                duration: 0.5,
+                ease: "anticipate",
+                type: "spring",
+                stiffness: 100,
+                delay: 0.2,
+              }}
               src={CVupload.src}
               alt="cv-upload"
               className=" translate-y-20 translate-x-14   scale-120   "
@@ -82,7 +92,17 @@ const StepsCard = () => {
         </div>
         <div className="bg-radial-[at_50%_0%]  from-white/90 to-[#0a0a0a] to-[40%] p-[0.5px]">
           <div className="  border-4 border-[#171717] mask-radial-at-bottom-right   mask-b-from-60% bg-gradient-to-t from-transparent to-[#040303] max-w-xl h-[400px] md:h-[500px] rounded-lg p-6 overflow-hidden">
-            <img
+            <motion.img
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{
+                duration: 0.5,
+                ease: "anticipate",
+                type: "spring",
+                stiffness: 100,
+                delay: 0.2,
+              }}
               src={Practice.src}
               alt="practice"
               className=" translate-y-20 -translate-x-10   scale-120   "
@@ -130,7 +150,17 @@ const StepsCard = () => {
         </div>
         <div className="bg-radial-[at_50%_0%] from-white/90 to-[#0a0a0a] to-[40%] p-[0.5px]">
           <div className=" border-4 border-[#171717] mask-radial-at-bottom-right   mask-b-from-60% bg-gradient-to-t from-transparent to-[#040303] max-w-xl h-[350px] md:h-[500px] rounded-lg p-6 overflow-hidden">
-            <img
+            <motion.img
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.5 }}
+              transition={{
+                duration: 0.5,
+                ease: "anticipate",
+                type: "spring",
+                stiffness: 100,
+                delay: 0.2,
+              }}
               src={Feedback.src}
               alt="feedback"
               className=" translate-y-20 translate-x-14   scale-120   "

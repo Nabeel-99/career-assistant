@@ -59,12 +59,13 @@ const Hero = () => {
       </AnimatedContent>
 
       <motion.div
-        initial={{ opacity: 0.1 }}
+        initial={{ opacity: 0 }}
         whileInView={{ opacity: 0.3 }}
         transition={{
           duration: 0.5,
+          delay: 0.8,
         }}
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[300px] w-[300px] blur-[100px] md:h-[700px] md:w-[700px] lg:h-[900px] lg:w-[900px]   -z-10 rounded-full bg-gradient-to-t from-[#0a0a0a] via-[#033a2c] to-[#0d828a] lg:blur-3xl opacity-30"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[300px] w-[300px] blur-[100px] md:h-[700px] md:w-[700px] lg:h-[900px] lg:w-[900px]   -z-10 rounded-full bg-gradient-to-t from-[#0a0a0a] via-[#033a2c] to-[#0d828a] "
       />
       <AnimatedContent
         distance={150}

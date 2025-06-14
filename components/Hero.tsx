@@ -64,7 +64,7 @@ const Hero = () => {
         transition={{
           duration: 0.5,
         }}
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[300px] w-[300px] blur-xl lg:h-[900px] lg:w-[900px]   -z-10 rounded-full bg-gradient-to-t from-[#0a0a0a] via-[#033a2c] to-[#0d828a] lg:blur-3xl opacity-30"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[300px] w-[300px] blur-[100px] md:h-[700px] md:w-[700px] lg:h-[900px] lg:w-[900px]   -z-10 rounded-full bg-gradient-to-t from-[#0a0a0a] via-[#033a2c] to-[#0d828a] lg:blur-3xl opacity-30"
       />
       <AnimatedContent
         distance={150}
@@ -76,6 +76,7 @@ const Hero = () => {
         scale={1}
         threshold={0.1}
         delay={0.5}
+        className=" px-2 "
       >
         <div
           ref={sectionRef}

@@ -20,7 +20,7 @@ export default function Home() {
         id="features"
         className="pb-10 px-4 relative  lg:px-20 2xl:container 2xl:mx-auto"
       >
-        <div className="absolute inset-0 -z-10 overflow-hidden">
+        <div className="absolute overflow-hidden 2xl:overflow-visible  inset-0 -z-10 ">
           <motion.div
             initial={{ opacity: 0.1 }}
             whileInView={{
@@ -31,7 +31,7 @@ export default function Home() {
               ease: "easeInOut",
               delay: 0.2,
             }}
-            className="absolute top-1/2  bg-radial-[at_75%_25%]  from-[#0d828a] from-50% to-[#232aea] w-[600px] h-[100px] rounded-full rotate-45 blur-[70px] left-0"
+            className="absolute top-1/2 border  bg-radial-[at_75%_25%]  from-[#0d828a] from-50% to-[#232aea] w-[600px] h-[100px] rounded-full rotate-45 blur-[70px] left-0"
           />
           <motion.div
             initial={{ opacity: 0.1 }}
@@ -58,7 +58,7 @@ export default function Home() {
       {/* testimonials */}
       <section
         id="testimonials"
-        className="pb-10 px-4  relative lg:px-20 w-full 2xl:container 2xl:mx-auto"
+        className="pb-10 px-4  relative lg:px-20 w-full "
       >
         <div className="absolute top-32  bg-radial-[at_75%_50%] opacity-25 from-[#343333] from-50% to-[#343333] w-[400px] h-[100px] rounded-full  blur-[90px] -translate-x-1/2 -translate-y-1/12 -z-40 left-1/2"></div>
         <Testimonials />
@@ -66,7 +66,7 @@ export default function Home() {
       {/* faq */}
       <section
         id="faq"
-        className="pb-60 px-6  lg:px-20 2xl:container 2xl:mx-auto"
+        className="pb-40 lg:pb-60 px-6 mt-10 lg:mt-20 lg:px-20 2xl:container 2xl:mx-auto"
       >
         <Faq />
       </section>

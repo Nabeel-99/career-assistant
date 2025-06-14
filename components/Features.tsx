@@ -67,7 +67,7 @@ const Features = () => {
       scale={1}
       threshold={0.2}
       delay={0.2}
-      className=" flex flex-col gap-6 items-center"
+      className=" flex flex-col gap-6 items-center 2xl:container 2xl:mx-auto"
     >
       <h1 className="shadow-sm shadow-[#b6b6b6] border-[#1f1f1f] px-4 py-2 border-2 rounded-4xl">
         Features

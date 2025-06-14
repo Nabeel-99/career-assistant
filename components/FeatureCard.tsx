@@ -26,7 +26,7 @@ const FeatureCard = ({ title, description, icon, delay }: CardProps) => {
             delay,
           }}
           viewport={{ once: true, amount: 0.5 }}
-          className="bg-radial-[at_50%_0%]  min-h-[240px] rounded-2xl  lg:h-[200px] from-white/50 to-[#0a0a0a] to-[40%] p-[0.5px]  "
+          className="bg-radial-[at_50%_0%]  h-[240px] rounded-2xl  lg:min-h-[240px] lg:h-[200px] from-white/50 to-[#0a0a0a] to-[40%] p-[0.5px]  "
         >
           <div className="bg-[#0a0a0a] border border-[#1f1f1f] rounded-2xl flex flex-col justify-between p-6 h-full">
             <div className="flex justify-start">

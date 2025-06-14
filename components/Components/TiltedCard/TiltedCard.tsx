@@ -7,17 +7,8 @@ import { useRef, useState } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 
 interface TiltedCardProps {
-  imageSrc?: React.ComponentProps<"img">["src"];
-  altText?: string;
-  captionText?: string;
-  containerHeight?: React.CSSProperties["height"];
-  containerWidth?: React.CSSProperties["width"];
-  imageHeight?: React.CSSProperties["height"];
-  imageWidth?: React.CSSProperties["width"];
   scaleOnHover?: number;
   rotateAmplitude?: number;
-  showMobileWarning?: boolean;
-  showTooltip?: boolean;
   overlayContent?: React.ReactNode;
   displayOverlayContent?: boolean;
   children: React.ReactNode;
@@ -31,17 +22,8 @@ const springValues: SpringOptions = {
 };
 
 export default function TiltedCard({
-  imageSrc,
-  altText = "Tilted card image",
-  captionText = "",
-  containerHeight = "300px",
-  containerWidth = "100%",
-  imageHeight = "300px",
-  imageWidth = "300px",
   scaleOnHover = 1.1,
   rotateAmplitude = 14,
-  showMobileWarning = true,
-  showTooltip = true,
   overlayContent = null,
   displayOverlayContent = false,
   children,
@@ -100,39 +82,18 @@ export default function TiltedCard({
     <figure
       ref={ref}
       className="relative w-full h-ful [perspective:800px] flex flex-col items-center justify-center"
-      // style={{
-      //   height: containerHeight,
-      //   width: containerWidth,
-      // }}
       onMouseMove={handleMouse}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      {/* {showMobileWarning && (
-        <div className="absolute top-4 text-center text-sm block sm:hidden">
-          This effect is not optimized for mobile. Check on desktop.
-        </div>
-      )} */}
-
       <motion.div
         className={`relative [transform-style:preserve-3d] ${className}`}
         style={{
-          // width: imageWidth,
-          // height: imageHeight,
           rotateX,
           rotateY,
           scale,
         }}
       >
-        {/* <motion.img
-          src={imageSrc}
-          alt={altText}
-          className="absolute top-0 left-0 object-cover rounded-[15px] will-change-transform [transform:translateZ(0)]"
-          style={{
-            width: imageWidth,
-            height: imageHeight,
-          }}
-        /> */}
         {children}
         {displayOverlayContent && overlayContent && (
           <motion.div className="absolute top-0 left-0 z-[2] will-change-transform [transform:translateZ(30px)]">
@@ -140,20 +101,6 @@ export default function TiltedCard({
           </motion.div>
         )}
       </motion.div>
-
-      {/* {showTooltip && (
-        <motion.figcaption
-          className="pointer-events-none absolute left-0 top-0 rounded-[4px] bg-white px-[10px] py-[4px] text-[10px] text-[#2d2d2d] opacity-0 z-[3] hidden sm:block"
-          style={{
-            x,
-            y,
-            opacity,
-            rotate: rotateFigcaption,
-          }}
-        >
-          {captionText}
-        </motion.figcaption>
-      )} */}
     </figure>
   );
 }

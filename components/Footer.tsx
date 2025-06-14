@@ -1,4 +1,3 @@
-import Link from "next/link";
 import React from "react";
 import { FaDiscord, FaEnvelope, FaGithub } from "react-icons/fa";
 import { GiArtificialHive } from "react-icons/gi";
@@ -24,33 +23,6 @@ const Footer = () => {
               AI Career <br /> Assistant
             </span>
           </div>
-
-          {/* Quick Links */}
-          {/* <div className="flex flex-col gap-3">
-            <p className="font-bold text-white">Quick Links</p>
-            <ul className="flex flex-col gap-3 text-subheadline text-gray-400">
-              <li>
-                <Link href="/" className="hover:text-white">
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link href="#features" className="hover:text-white">
-                  Features
-                </Link>
-              </li>
-              <li>
-                <Link href="#how-it-works" className="hover:text-white">
-                  How it works
-                </Link>
-              </li>
-              <li>
-                <Link href="#faq" className="hover:text-white">
-                  FAQ
-                </Link>
-              </li>
-            </ul>
-          </div> */}
 
           {/* Contact / Social */}
           <div className="flex flex-col gap-3">

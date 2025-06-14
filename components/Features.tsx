@@ -9,7 +9,6 @@ import { PiMagnifyingGlassBold } from "react-icons/pi";
 import { LuLayoutTemplate } from "react-icons/lu";
 import { FaChartLine } from "react-icons/fa";
 import FadeContent from "./Animations/FadeContent/FadeContent";
-import { delay } from "framer-motion";
 import AnimatedContent from "./Animations/AnimatedContent/AnimatedContent";
 const Features = () => {
   const featuresDetails = [

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef } from "react";
-import { motion, useAnimationFrame } from "motion/react";
+import { useAnimationFrame } from "motion/react";
 const MarqueeEffect = ({ children }: { children: React.ReactNode }) => {
   const contentRef = useRef<HTMLDivElement>(null);
   const x = useRef(0);

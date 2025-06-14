@@ -20,7 +20,7 @@ const Footer = () => {
           <div className="flex items-center gap-3">
             <GiArtificialHive className="size-24 " />
             <span className="font-extrabold text-2xl lg:text-4xl leading-tight">
-              AI Career <br /> Assistant
+              AI-Powered <br /> Career Assistant
             </span>
           </div>
 

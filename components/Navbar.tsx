@@ -4,21 +4,13 @@ import Link from "next/link";
 import React from "react";
 import { GiArtificialHive } from "react-icons/gi";
 import BurgerMenu from "./BurgerMenu";
-import AnimatedContent from "./Animations/AnimatedContent/AnimatedContent";
-
+import { motion } from "motion/react";
 const Navbar = () => {
   return (
-    <AnimatedContent
-      distance={40}
-      direction="vertical"
-      reverse={true}
-      duration={1.2}
-      ease="power3.out"
-      initialOpacity={0}
-      animateOpacity
-      scale={1}
-      threshold={0.2}
-      delay={0}
+    <motion.div
+      initial={{ opacity: 0, y: -50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
       className="flex 2xl:container 2xl:mx-auto max-sm:fixed max-sm:p-4 p-8 max-sm:bg-black/40  max-sm:backdrop-blur-md max-lg:border-b border-b-[#1f1f1f] items-center justify-between lg:justify-center w-full z-50"
     >
       {/* logo */}
@@ -59,7 +51,7 @@ const Navbar = () => {
       {/* button burger menu */}
 
       <BurgerMenu />
-    </AnimatedContent>
+    </motion.div>
   );
 };
 

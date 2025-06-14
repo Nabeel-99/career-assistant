@@ -10,6 +10,9 @@ const manrope = Manrope({
 export const metadata: Metadata = {
   title: "AI-Powered Career Assistant",
   description: "AI-Powered Career Assistant",
+  icons: {
+    icon: "/logo.png",
+  },
 };
 
 export default function RootLayout({

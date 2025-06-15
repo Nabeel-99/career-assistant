@@ -22,6 +22,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" data-theme="dark" className="dark">
+      <head>
+        <link rel="icon" type="image/png" href="/logo.png" />
+      </head>
       <body className={`${manrope.variable}  antialiased`}>{children}</body>
     </html>
   );

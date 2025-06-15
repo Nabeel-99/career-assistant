@@ -1,9 +1,9 @@
 "use client";
 
 import React from "react";
-import StepsCards from "./StepsCards";
-import FadeContent from "./Animations/FadeContent/FadeContent";
-import AnimatedContent from "./Animations/AnimatedContent/AnimatedContent";
+import StepsCards from "../Steps";
+import FadeContent from "../Animations/FadeContent/FadeContent";
+import AnimatedContent from "../Animations/AnimatedContent/AnimatedContent";
 
 const HowItWorks = () => {
   return (

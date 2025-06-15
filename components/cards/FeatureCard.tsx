@@ -1,8 +1,8 @@
 "use client";
 
 import React from "react";
-import TiltedCard from "./Components/TiltedCard/TiltedCard";
 import { motion } from "motion/react";
+import TiltedCard from "../Components/TiltedCard/TiltedCard";
 type CardProps = {
   title: string;
   description: string;

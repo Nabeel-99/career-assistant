@@ -1,5 +1,5 @@
 import React from "react";
-import FadeContent from "./Animations/FadeContent/FadeContent";
+import FadeContent from "../Animations/FadeContent/FadeContent";
 
 type IconProps = {
   title: any;

@@ -1,15 +1,15 @@
 "use client";
 
 import React from "react";
-import FeatureCard from "./FeatureCard";
 import { MdOutlineFileUpload } from "react-icons/md";
 import { FaMicrophoneAlt } from "react-icons/fa";
 import { FaFileAlt } from "react-icons/fa";
 import { PiMagnifyingGlassBold } from "react-icons/pi";
 import { LuLayoutTemplate } from "react-icons/lu";
 import { FaChartLine } from "react-icons/fa";
-import FadeContent from "./Animations/FadeContent/FadeContent";
-import AnimatedContent from "./Animations/AnimatedContent/AnimatedContent";
+import FadeContent from "../Animations/FadeContent/FadeContent";
+import AnimatedContent from "../Animations/AnimatedContent/AnimatedContent";
+import FeatureCard from "../cards/FeatureCard";
 const Features = () => {
   const featuresDetails = [
     {

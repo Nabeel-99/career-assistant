@@ -1,8 +1,8 @@
 import React from "react";
-import TestimonialCard from "./TestimonialCard";
-import MarqueeEffect from "./MarqueeEffect";
-import FadeContent from "./Animations/FadeContent/FadeContent";
-import AnimatedContent from "./Animations/AnimatedContent/AnimatedContent";
+import TestimonialCard from "../cards/TestimonialCard";
+import MarqueeEffect from "../MarqueeEffect";
+import FadeContent from "../Animations/FadeContent/FadeContent";
+import AnimatedContent from "../Animations/AnimatedContent/AnimatedContent";
 
 const Testimonials = () => {
   const reviews = [

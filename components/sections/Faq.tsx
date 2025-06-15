@@ -4,8 +4,8 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "./ui/accordion";
-import AnimatedContent from "./Animations/AnimatedContent/AnimatedContent";
+} from "../ui/accordion";
+import AnimatedContent from "../Animations/AnimatedContent/AnimatedContent";
 
 const Faq = () => {
   const questions = [

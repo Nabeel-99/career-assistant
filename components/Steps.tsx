@@ -4,9 +4,9 @@ import Practice from "../public/practice.svg";
 import Feedback from "../public/feedback.svg";
 import { MdOutlineFileUpload } from "react-icons/md";
 import { FaMicrophoneAlt } from "react-icons/fa";
-import IconCard from "./IconCard";
 import { motion } from "motion/react";
-const StepsCard = () => {
+import IconCard from "./cards/IconCard";
+const Steps = () => {
   return (
     <>
       <div className="flex flex-col xl:flex-row justify-between items-center xl:items-start w-full lg:gap-10">
@@ -172,4 +172,4 @@ const StepsCard = () => {
   );
 };
 
-export default StepsCard;
+export default Steps;

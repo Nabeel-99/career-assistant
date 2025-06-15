@@ -1,10 +1,10 @@
 "use client";
 
-import Faq from "@/components/Faq";
-import Features from "@/components/Features";
-import Hero from "@/components/Hero";
-import HowItWorks from "@/components/HowItWorks";
-import Testimonials from "@/components/Testimonials";
+import Faq from "@/components/sections/Faq";
+import Features from "@/components/sections/Features";
+import Hero from "@/components/sections/Hero";
+import HowItWorks from "@/components/sections/HowItWorks";
+import Testimonials from "@/components/sections/Testimonials";
 import { motion } from "motion/react";
 export default function Home() {
   return (

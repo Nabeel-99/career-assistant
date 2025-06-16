@@ -64,13 +64,13 @@ const BurgerMenu = () => {
 
             <li className="text-lg text-center border border-[#1f1f1f] p-2 rounded-xl">
               {" "}
-              <Link href={"/"} className="">
+              <Link onClick={closeMenu} href={"/login"} className="">
                 Login
               </Link>
             </li>
             <li className="text-lg text-center bg-white text-black border border-[#1f1f1f] p-2 rounded-xl">
               {" "}
-              <Link href={"/"} className="">
+              <Link onClick={closeMenu} href={"/signup"} className="">
                 Sign up
               </Link>
             </li>

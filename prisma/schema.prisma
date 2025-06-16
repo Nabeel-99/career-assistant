@@ -1,0 +1,59 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id String @id @default(uuid())
+  email String? @unique
+  firstname String?
+  lastname String?
+  password String
+  image String?
+  isUserNew Boolean? @default(true)
+  hasResume Boolean? @default(false)
+  practices Practice[]
+  resumes Resume[]
+
+}
+
+model Practice{
+  id Int @id @default(autoincrement())
+  title String?
+  description String?
+  stacks String[]
+  role String?
+  level String?
+  userId String
+  users User @relation(fields: [userId], references: [id])
+  feedback Feedback?
+  createdAt   DateTime  @default(now())
+}
+
+model Resume {
+  id Int @id @default(autoincrement())
+  name String?
+  content Json?
+  userId String
+  users User @relation(fields: [userId], references: [id])
+  createdAt   DateTime  @default(now())
+}
+model Feedback {
+  id Int @id @default(autoincrement())
+  practiceId Int @unique
+  practice Practice @relation(fields: [practiceId], references: [id])
+  comment String
+  score Int
+  createdAt   DateTime  @default(now())
+}

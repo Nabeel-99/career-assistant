@@ -39,7 +39,7 @@ const Navbar = () => {
       </nav>
       {/* auth btns */}
       <div className="max-lg:hidden z-50 lg:fixed top-8 right-10">
-        <div className="flex items-center border p-2 border-transparent rounded-4xl backdrop-blur-lg gap-4">
+        <div className="flex items-center border p-2 px-4 border-transparent rounded-4xl backdrop-blur-lg gap-4">
           <Link href={"/login"} className="nav-link">
             Login
           </Link>

@@ -4,8 +4,9 @@ import React from "react";
 import Link from "next/link";
 
 import { GiArtificialHive } from "react-icons/gi";
-import { FaGoogle } from "react-icons/fa";
-
+import { FaGithub, FaGoogle } from "react-icons/fa";
+import { ImSpinner9 } from "react-icons/im";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import {
   Form,
@@ -18,6 +19,8 @@ import {
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import AnimatedContent from "./Animations/AnimatedContent/AnimatedContent";
+import { z } from "zod";
+import { signInWithGithub, signInWithGoogle } from "@/lib/action";
 
 interface FormLayoutProps {
   title: string;
@@ -26,7 +29,12 @@ interface FormLayoutProps {
   linkTo: string;
   btnText: string;
   isSignup?: boolean;
+  schema?: any;
+  defaultValues?: object;
+  loading?: boolean;
+  onSubmit: (values: any) => Promise<void>;
 }
+
 const FormLayout = ({
   title,
   accountPrompt,
@@ -34,16 +42,18 @@ const FormLayout = ({
   linkTo,
   btnText,
   isSignup,
+  defaultValues,
+  schema,
+  onSubmit,
+  loading,
 }: FormLayoutProps) => {
-  const form = useForm({
-    resolver: undefined,
-    defaultValues: {
-      firstname: "",
-      lastname: "",
-      email: "",
-      password: "",
-    },
+  // type SignUpFormData = z.infer<typeof SignUpSchema>;
+  // type LoginFormData = z.infer<typeof LoginSchema>;
+  const form = useForm<z.infer<typeof schema>>({
+    resolver: zodResolver(schema),
+    defaultValues: defaultValues,
   });
+
   return (
     <AnimatedContent
       distance={40}
@@ -59,7 +69,10 @@ const FormLayout = ({
       className="w-full flex items-center justify-center px-6 lg:min-w-[300px] lg:max-w-[400px]"
     >
       <Form {...form}>
-        <form className="flex flex-col items-center justify-center gap-4 h-screen w-full ">
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="flex flex-col items-center justify-center gap-4 h-screen w-full "
+        >
           <Link href={"/"} className="">
             <GiArtificialHive className="text-4xl" />
           </Link>
@@ -126,7 +139,7 @@ const FormLayout = ({
             />
             <FormField
               control={form.control}
-              name="email"
+              name="password"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Password</FormLabel>
@@ -138,16 +151,31 @@ const FormLayout = ({
               )}
             />
             <Button type="submit" className="cursor-pointer">
-              {btnText}
+              {loading ? (
+                <span className="animate-spin">
+                  <ImSpinner9 />
+                </span>
+              ) : (
+                btnText
+              )}
             </Button>
           </div>
           <div className=" mt-10 bg-gradient-to-r from-[#0a0a0a] via-[#0d828a] to-[#0a0a0a] h-[1px] w-full"></div>
           <Button
             type="button"
-            className="flex items-center gap-2 w-full cursor-pointer"
+            onClick={() => signInWithGoogle()}
+            className="flex bg-zinc-800 hover:bg-zinc-700  text-white items-center gap-2 w-full cursor-pointer"
           >
             <FaGoogle />
             Continue with email
+          </Button>
+          <Button
+            type="button"
+            onClick={() => signInWithGithub()}
+            className="flex bg-zinc-800 hover:bg-zinc-700 text-white items-center gap-2 w-full cursor-pointer"
+          >
+            <FaGithub />
+            Continue with github
           </Button>
         </form>
       </Form>

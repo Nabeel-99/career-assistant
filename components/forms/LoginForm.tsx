@@ -1,18 +1,36 @@
 "use client";
 
-import React from "react";
-
-import { useForm } from "react-hook-form";
+import React, { useState } from "react";
 
 import FormLayout from "../FormLayout";
+import { LoginSchema } from "@/lib/validation";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 const LoginForm = () => {
-  const form = useForm({
-    resolver: undefined,
-    defaultValues: {
-      email: "",
-      password: "",
-    },
-  });
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
+  const defaultValues = {
+    email: "",
+    password: "",
+  };
+  const onSubmit = async (values: { email: string; password: string }) => {
+    try {
+      setLoading(true);
+      const res = await signIn("credentials", {
+        email: values.email,
+        password: values.password,
+        redirect: false,
+      });
+      if (res?.ok) {
+        console.log("logged in successfully");
+        router.push("/dashboard");
+      }
+    } catch (error) {
+      console.log("error", error);
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <FormLayout
       title="Sign into your account"
@@ -20,6 +38,10 @@ const LoginForm = () => {
       linkText="Sign up"
       linkTo="/signup"
       btnText="Login"
+      schema={LoginSchema}
+      defaultValues={defaultValues}
+      onSubmit={onSubmit}
+      loading={loading}
     />
   );
 };

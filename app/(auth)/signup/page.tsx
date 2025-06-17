@@ -1,8 +1,13 @@
+import { auth } from "@/auth";
 import SignupForm from "@/components/forms/SignupForm";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import React from "react";
 
-const page = () => {
+const page = async () => {
+  const session = await auth();
+  console.log("session", session);
+  if (session) redirect("/dashboard");
   return (
     <div className="flex flex-col relative bg-gradient-to-tr from-[#0a0a0a] from-70% to-transparent   items-center justify-center w-full h-screen">
       <div className="absolute w-full  h-full bg-hero"></div>

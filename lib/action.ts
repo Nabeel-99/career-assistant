@@ -1,7 +1,8 @@
 "use server";
 import bcrypt from "bcrypt";
 import prisma from "./prisma";
-import { signIn } from "@/auth";
+import { signIn, signOut } from "@/auth";
+import { redirect } from "next/navigation";
 export const signup = async (data: {
   firstname: string;
   lastname: string;
@@ -29,4 +30,9 @@ export const signInWithGoogle = async () => {
 
 export const signInWithGithub = async () => {
   await signIn("github");
+};
+
+export const signOutAction = async () => {
+  await signOut();
+  redirect("/");
 };

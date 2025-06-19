@@ -15,10 +15,19 @@ import { RiFileUploadFill } from "react-icons/ri";
 import { FaMicrophone } from "react-icons/fa";
 import { AiFillMessage } from "react-icons/ai";
 import { HiTemplate } from "react-icons/hi";
-import { IoMdLogOut } from "react-icons/io";
 import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-const SideNav = () => {
+import prisma from "@/lib/prisma";
+import { auth } from "@/auth";
+import LogoutBtn from "./LogoutBtn";
+const SideNav = async () => {
+  const session = await auth();
+  console.log("session", session);
+  if (!session?.user?.id) return null;
+  const user = await prisma.user.findUnique({
+    where: { id: session?.user?.id },
+  });
+
   const navItems = [
     {
       name: "Dashboard",
@@ -46,16 +55,21 @@ const SideNav = () => {
       icon: <HiTemplate />,
     },
   ];
+
   return (
     <Sidebar className="">
       <SidebarContent className="bg-[#0a0a0a] pt-8 ">
         <SidebarGroup>
           <SidebarGroupLabel className="flex items-center  mb-5">
             <Avatar>
-              <AvatarImage src="https://github.com/shadcn.png" />
-              <AvatarFallback>CN</AvatarFallback>
+              <AvatarImage src={user?.image!} />
+              <AvatarFallback>
+                {user?.firstname?.charAt(0)} {user?.lastname?.charAt(0)}
+              </AvatarFallback>
             </Avatar>
-            <span className="text-[16px] pl-1">Farouk Nabeel</span>
+            <span className="text-[16px] pl-1">
+              {user?.firstname} {user?.lastname}
+            </span>
           </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu className="flex flex-col gap-1 text-sidebar-foreground/70">
@@ -77,12 +91,7 @@ const SideNav = () => {
         <SidebarMenu className="">
           <SidebarMenuItem className="text-sidebar-foreground/70">
             <SidebarMenuButton className="text-[16px]">
-              <span className="text-xl">
-                {" "}
-                <IoMdLogOut />
-              </span>
-
-              <span className="pl-1">Logout</span>
+              <LogoutBtn />
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>

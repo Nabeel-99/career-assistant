@@ -44,7 +44,9 @@ model Practice{
 model Resume {
   id Int @id @default(autoincrement())
   name String?
+  rawText String?
   content Json?
+  filePath String?
   userId String
   users User @relation(fields: [userId], references: [id])
   createdAt   DateTime  @default(now())

@@ -22,7 +22,6 @@ import { auth } from "@/auth";
 import LogoutBtn from "./LogoutBtn";
 const SideNav = async () => {
   const session = await auth();
-  console.log("session", session);
   if (!session?.user?.id) return null;
   const user = await prisma.user.findUnique({
     where: { id: session?.user?.id },
@@ -63,8 +62,9 @@ const SideNav = async () => {
           <SidebarGroupLabel className="flex items-center  mb-5">
             <Avatar>
               <AvatarImage src={user?.image!} />
-              <AvatarFallback>
-                {user?.firstname?.charAt(0)} {user?.lastname?.charAt(0)}
+              <AvatarFallback className="flex items-center">
+                <span>{user?.firstname?.charAt(0)} </span>
+                <span>{user?.lastname?.charAt(0)}</span>
               </AvatarFallback>
             </Avatar>
             <span className="text-[16px] pl-1">

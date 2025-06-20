@@ -69,11 +69,11 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           });
         }
         if (dbUser) {
-          token.id = dbUser.id;
-          token.email = dbUser.email;
-          token.firstname = dbUser.firstname;
-          token.lastname = dbUser.lastname;
-          token.isUserNew = dbUser.isUserNew;
+          token.id = dbUser.id as string;
+          token.email = dbUser.email as string;
+          token.firstname = dbUser.firstname as string;
+          token.lastname = dbUser.lastname as string;
+          token.isUserNew = dbUser.isUserNew as boolean;
         }
       }
       return token;

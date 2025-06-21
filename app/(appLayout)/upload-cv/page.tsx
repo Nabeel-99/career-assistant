@@ -1,6 +1,5 @@
 import { auth } from "@/auth";
 import UploadCard from "@/components/UploadCard";
-import { getToken } from "next-auth/jwt";
 import React from "react";
 
 const page = async () => {

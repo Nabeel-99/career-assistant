@@ -1,7 +1,7 @@
 "use client";
 
 import React, { ChangeEvent, useEffect, useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { RiFileUploadFill } from "react-icons/ri";
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
@@ -13,12 +13,13 @@ import { ResumeProps } from "@/lib/types";
 
 const UploadCard = ({ userId }: { userId: string | undefined }) => {
   const [filename, setFilename] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [uploading, setUploading] = useState(false);
+  const [fetching, setFetching] = useState(false);
   const [resumes, setResumes] = useState<ResumeProps[]>([]);
-  console.log("resumes", userId);
+
   const fetchResumes = async () => {
     try {
-      setLoading(true);
+      setFetching(true);
       const { data, error } = await supabase.storage
         .from("resumes")
         .list(`${userId}`, {
@@ -26,10 +27,10 @@ const UploadCard = ({ userId }: { userId: string | undefined }) => {
         });
       if (error) {
         console.log("error fetching resumes", error);
-        setLoading(false);
+        setFetching(false);
         return [];
       }
-      console.log("data", data);
+
       const formatted = data.map((file) => ({
         name: file.name.split("_")[1],
         createdAt: file.created_at,
@@ -39,7 +40,7 @@ const UploadCard = ({ userId }: { userId: string | undefined }) => {
     } catch (error) {
       console.log("error", error);
     } finally {
-      setLoading(false);
+      setFetching(false);
     }
   };
 
@@ -48,30 +49,28 @@ const UploadCard = ({ userId }: { userId: string | undefined }) => {
     if (!file) return;
     setFilename(file.name);
     const filePath = `${userId}/${Date.now()}_${file.name}`;
-    const { data, error } = await supabase.storage
-      .from("resumes")
-      .upload(filePath, file);
-
-    if (error) {
-      console.log("error uploading file", error);
-      toast.error("Error uploading file");
-    } else {
-      try {
-        setLoading(true);
-        const formData = new FormData();
-        formData.append("file", file);
-        formData.append("filePath", filePath);
-        const res = await axios.post("/api/parse-cv", formData);
-        if (res.status === 200) {
-          fetchResumes();
-          toast.success("File uploaded successfully");
-          setFilename("");
+    try {
+      setUploading(true);
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("filePath", filePath);
+      const res = await axios.post("/api/parse-cv", formData);
+      if (res.status === 200) {
+        const { data, error } = await supabase.storage
+          .from("resumes")
+          .upload(filePath, file);
+        if (error) {
+          console.log("error uploading file", error);
+          toast.error("Error uploading file");
         }
-      } catch (error) {
-        toast.error("Error parsing file");
-      } finally {
-        setLoading(false);
+        fetchResumes();
+        toast.success("File uploaded successfully");
+        setFilename("");
       }
+    } catch (error) {
+      toast.error("Error uploading file");
+    } finally {
+      setUploading(false);
     }
   };
 
@@ -80,7 +79,11 @@ const UploadCard = ({ userId }: { userId: string | undefined }) => {
   }, [filename]);
   return (
     <>
-      <ResumeCard loading={loading} resumes={resumes} />
+      <ResumeCard
+        loading={fetching || uploading}
+        resumes={resumes}
+        fetchResumes={fetchResumes}
+      />
       <Card className="flex items-center justify-center  w-full xl:w-3/4">
         <CardContent className="flex flex-col gap-10">
           <div className="border border-dashed p-10 rounded-xl flex flex-col items-center justify-center gap-2 ">

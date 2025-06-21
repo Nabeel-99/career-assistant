@@ -61,20 +61,23 @@ const BurgerMenu = () => {
                 FAQ
               </Link>
             </li>
-
-            <li className="text-lg text-center border border-[#1f1f1f] p-2 rounded-xl">
-              {" "}
-              <Link onClick={closeMenu} href={"/login"} className="">
-                Login
-              </Link>
-            </li>
-            <li className="text-lg text-center bg-white text-black border border-[#1f1f1f] p-2 rounded-xl">
-              {" "}
-              <Link onClick={closeMenu} href={"/signup"} className="">
-                Sign up
-              </Link>
-            </li>
           </ul>
+          <div className="flex flex-col gap-4 px-4 mt-4">
+            <Link
+              onClick={closeMenu}
+              href={"/login"}
+              className="  text-lg text-center border border-[#1f1f1f] p-2 w-full rounded-xl"
+            >
+              Login
+            </Link>
+            <Link
+              onClick={closeMenu}
+              href={"/signup"}
+              className="w-full text-lg text-center bg-white text-black border border-[#1f1f1f] p-2 rounded-xl "
+            >
+              Sign up
+            </Link>
+          </div>
         </div>
       )}
     </>

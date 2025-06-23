@@ -17,3 +17,11 @@ export const LoginSchema = z.object({
   email: z.string().email(),
   password: strongPassword,
 });
+
+export const PracticeSchema = z.object({
+  jobDescription: z.string().min(1),
+  resume: z.string().min(1),
+  experienceLevel: z.enum(["entry-level", "mid-level", "senior-level"], {
+    required_error: "Please select an experience level",
+  }),
+});

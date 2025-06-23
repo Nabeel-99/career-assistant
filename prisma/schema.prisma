@@ -35,9 +35,18 @@ model Practice{
   stacks String[]
   role String?
   level String?
+  questions Question[]
   userId String
   users User @relation(fields: [userId], references: [id])
   feedback Feedback?
+  createdAt   DateTime  @default(now())
+}
+
+model Question {
+  id Int @id @default(autoincrement())
+  question String?
+  practiceId Int
+  practices Practice @relation(fields: [practiceId], references: [id])
   createdAt   DateTime  @default(now())
 }
 

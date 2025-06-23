@@ -24,7 +24,10 @@ const CreatePracticeBtn = ({ resumes }: { resumes: Resume[] }) => {
             <Button className="">Create Practice</Button>
           </div>
         </SheetTrigger>
-        <SheetContent side="left" className=" overflow-scroll hide-scrollbar ">
+        <SheetContent
+          side="left"
+          className=" overflow-scroll hide-scrollbar w-full  "
+        >
           <SheetHeader>
             <SheetTitle>Create Practice</SheetTitle>
             <SheetDescription>

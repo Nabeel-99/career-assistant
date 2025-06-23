@@ -13,6 +13,7 @@ import { Dialog, DialogContent, DialogHeader } from "./ui/dialog";
 import { DialogDescription, DialogTitle } from "@radix-ui/react-dialog";
 import axios from "axios";
 import { DeleteDialog } from "./DeleteDialog";
+import { toast } from "sonner";
 
 const ResumeCard = ({
   loading,
@@ -61,11 +62,13 @@ const ResumeCard = ({
         }
         if (data) {
           setShowDelete(false);
+          toast.success("File deleted successfully");
           fetchResumes();
         }
       }
     } catch (error) {
       console.log("error", error);
+      toast.error("Error deleting file");
     } finally {
       setDeleteLoading(false);
     }

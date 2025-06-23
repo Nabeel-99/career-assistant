@@ -23,6 +23,7 @@ const UploadCard = ({ userId }: { userId: string | undefined }) => {
       const { data, error } = await supabase.storage
         .from("resumes")
         .list(`${userId}`, {
+          sortBy: { column: "name", order: "desc" },
           //   sortBy: { column: "name", order: "desc" },
         });
       if (error) {

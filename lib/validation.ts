@@ -20,7 +20,7 @@ export const LoginSchema = z.object({
 
 export const PracticeSchema = z.object({
   jobDescription: z.string().min(1),
-  resume: z.string().min(1),
+  resume: z.string().min(1, { message: "Please select a resume" }),
   experienceLevel: z.enum(["entry-level", "mid-level", "senior-level"], {
     required_error: "Please select an experience level",
   }),

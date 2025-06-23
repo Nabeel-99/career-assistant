@@ -36,7 +36,6 @@ const CreatePracticeBtn = ({ resumes }: { resumes: Resume[] }) => {
           </SheetHeader>
           <PracticeForm resumes={resumes} />
           <SheetFooter>
-            <Button type="submit">Generate Interview</Button>
             <SheetClose asChild>
               <Button variant="outline">Close</Button>
             </SheetClose>

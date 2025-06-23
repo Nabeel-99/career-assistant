@@ -64,6 +64,7 @@ const PracticeForm = ({ resumes }: { resumes: Resume[] }) => {
   };
 
   const onSubmit = async (data: z.infer<typeof PracticeSchema>) => {
+    console.log("data", data);
     try {
       const res = await axios.post("/api/practice", {
         jobDescription: data.jobDescription,
@@ -73,15 +74,15 @@ const PracticeForm = ({ resumes }: { resumes: Resume[] }) => {
       console.log(res);
     } catch (error) {}
   };
-  console.log("resumes", resumes);
+
   return (
     <>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="flex flex-col gap-10"
+          className="flex flex-col gap-10 px-4"
         >
-          <div className="flex flex-col gap-10 w-full px-4">
+          <div className="flex flex-col gap-10 w-full ">
             <div className="flex flex-col gap-3 w-full">
               <FormField
                 control={form.control}
@@ -101,7 +102,7 @@ const PracticeForm = ({ resumes }: { resumes: Resume[] }) => {
                 )}
               />
             </div>
-            <div className="w- h-full  max-h-full flex flex-col gap-3">
+            <div className="w-full h-full  max-h-full flex flex-col gap-3">
               <FormField
                 control={form.control}
                 name="resume"
@@ -115,33 +116,36 @@ const PracticeForm = ({ resumes }: { resumes: Resume[] }) => {
                         className="flex flex-col gap-4 max-h-[190px] overflow-scroll hide-scrollbar bg-[#151515] border w-full rounded-sm p-2"
                       >
                         {resumes.map((resume) => (
-                          <FormItem
-                            className="flex items-center justify-between border py-2  px-2 w-full bg-[#1f1f1f]  rounded-sm"
+                          <label
                             key={resume.id}
+                            htmlFor={`${resume.filePath}`}
+                            className="flex items-center justify-between border py-2 px-2 w-full bg-[#1f1f1f] rounded-sm cursor-pointer"
                           >
-                            <FormControl>
-                              <div className="flex items-center  gap-3 w-full ">
-                                <RadioGroupItem
-                                  value={`${resume.name}`}
-                                  className=""
-                                />
-                                <FormLabel className="w-full">
-                                  {resume.name}
-                                </FormLabel>
-                              </div>
-                            </FormControl>
-                            <FormMessage className="text-red-500" />
+                            <div className="flex items-center gap-3 w-full">
+                              <RadioGroupItem
+                                id={`${resume.filePath}`}
+                                value={`${resume.rawText}`}
+                                className=""
+                              />
+                              <span className="w-full text-left">
+                                {resume.name}
+                              </span>
+                            </div>
                             <Button
                               type="button"
-                              onClick={() => openPreview(resume.filePath!)}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                openPreview(resume.filePath!);
+                              }}
                               className="hover:bg-[#151515] bg-[#343333] cursor-pointer rounded-xl text-white"
                             >
                               <FaEye />
                             </Button>
-                          </FormItem>
+                          </label>
                         ))}
                       </RadioGroup>
                     </FormControl>
+                    <FormMessage className="text-red-500" />
                   </FormItem>
                 )}
               />
@@ -163,20 +167,18 @@ const PracticeForm = ({ resumes }: { resumes: Resume[] }) => {
                         className="flex flex-col gap-4 w-full"
                       >
                         {experienceLevels.map((level) => (
-                          <FormItem
+                          <label
                             className="flex items-center gap-3 border py-2 px-1 w-full bg-[#151515] rounded-sm"
                             key={level.value}
                           >
-                            <FormControl>
+                            <div>
                               <RadioGroupItem
                                 value={level.value}
                                 className=""
                               />
-                            </FormControl>
-                            <FormLabel className="w-full">
-                              {level.label}
-                            </FormLabel>
-                          </FormItem>
+                            </div>
+                            <span className="w-full">{level.label}</span>
+                          </label>
                         ))}
                       </RadioGroup>
                     </FormControl>
@@ -186,6 +188,9 @@ const PracticeForm = ({ resumes }: { resumes: Resume[] }) => {
               />
             </div>
           </div>
+          <Button type="submit" className="px-4">
+            Generate Interview
+          </Button>
         </form>
       </Form>
       <Dialog open={preview} onOpenChange={setPreview}>

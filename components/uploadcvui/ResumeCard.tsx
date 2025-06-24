@@ -4,15 +4,15 @@ import React, { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { IoDocumentText } from "react-icons/io5";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import { FaEye, FaTrash } from "react-icons/fa";
 import { formatTime } from "@/lib/utils";
 import { ResumeProps } from "@/lib/types";
 import supabase from "@/lib/supabase";
-import { Dialog, DialogContent, DialogHeader } from "./ui/dialog";
+import { Dialog, DialogContent, DialogHeader } from "../ui/dialog";
 import { DialogDescription, DialogTitle } from "@radix-ui/react-dialog";
 import axios from "axios";
-import { DeleteDialog } from "./DeleteDialog";
+import { DeleteDialog } from "../DeleteDialog";
 import { toast } from "sonner";
 
 const ResumeCard = ({

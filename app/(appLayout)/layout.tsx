@@ -1,5 +1,5 @@
-import SideNav from "@/components/SideNav";
-import SiteHeader from "@/components/SiteHeader";
+import SideNav from "@/components/applayoutui/SideNav";
+import SiteHeader from "@/components/applayoutui/SiteHeader";
 import {
   SidebarInset,
   SidebarProvider,

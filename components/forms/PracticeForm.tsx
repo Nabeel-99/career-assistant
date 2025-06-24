@@ -27,8 +27,25 @@ import {
   DialogTitle,
 } from "../ui/dialog";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { toast } from "sonner";
+import { ImSpinner9 } from "react-icons/im";
+import { useRouter } from "next/navigation";
+import { Skeleton } from "../ui/skeleton";
 
-const PracticeForm = ({ resumes }: { resumes: Resume[] }) => {
+const PracticeForm = ({
+  resumes,
+  closeSheet,
+  fetchingResumes,
+  userId,
+  getUserPractices,
+}: {
+  resumes: Resume[];
+  closeSheet: () => void;
+  fetchingResumes: boolean;
+  userId: string;
+  getUserPractices: () => void;
+}) => {
+  console.log("userId", userId);
   const form = useForm<z.infer<typeof PracticeSchema>>({
     resolver: zodResolver(PracticeSchema),
     defaultValues: {
@@ -53,6 +70,8 @@ const PracticeForm = ({ resumes }: { resumes: Resume[] }) => {
   ];
   const [preview, setPreview] = useState(false);
   const [publicUrl, setPublicUrl] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
   const openPreview = async (filePath: string) => {
     if (!filePath) return;
     const { data } = supabase.storage.from("resumes").getPublicUrl(filePath);
@@ -65,14 +84,25 @@ const PracticeForm = ({ resumes }: { resumes: Resume[] }) => {
 
   const onSubmit = async (data: z.infer<typeof PracticeSchema>) => {
     console.log("data", data);
+    setLoading(true);
     try {
-      const res = await axios.post("/api/practice", {
+      const res = await axios.post("/api/practice/create", {
         jobDescription: data.jobDescription,
         experienceLevel: data.experienceLevel,
         resume: data.resume,
       });
       console.log(res);
-    } catch (error) {}
+      if (res.status === 200) {
+        toast.success("Interview practice created successfully");
+        closeSheet();
+        getUserPractices();
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Error creating interview practice");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -115,34 +145,45 @@ const PracticeForm = ({ resumes }: { resumes: Resume[] }) => {
                         onValueChange={field.onChange}
                         className="flex flex-col gap-4 max-h-[190px] overflow-scroll hide-scrollbar bg-[#151515] border w-full rounded-sm p-2"
                       >
-                        {resumes.map((resume) => (
-                          <label
-                            key={resume.id}
-                            htmlFor={`${resume.filePath}`}
-                            className="flex items-center justify-between border py-2 px-2 w-full bg-[#1f1f1f] rounded-sm cursor-pointer"
-                          >
-                            <div className="flex items-center gap-3 w-full">
-                              <RadioGroupItem
-                                id={`${resume.filePath}`}
-                                value={`${resume.rawText}`}
-                                className=""
+                        {fetchingResumes ? (
+                          <span className="flex flex-col gap-4">
+                            {Array.from({ length: 3 }).map((_, index) => (
+                              <Skeleton
+                                className="flex items-center justify-between border py-2 px-2 w-full h-10  bg-[#1f1f1f] rounded-sm cursor-pointer"
+                                key={index}
                               />
-                              <span className="w-full text-left">
-                                {resume.name}
-                              </span>
-                            </div>
-                            <Button
-                              type="button"
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                openPreview(resume.filePath!);
-                              }}
-                              className="hover:bg-[#151515] bg-[#343333] cursor-pointer rounded-xl text-white"
+                            ))}
+                          </span>
+                        ) : (
+                          resumes.map((resume) => (
+                            <label
+                              key={resume.id}
+                              htmlFor={`${resume.filePath}`}
+                              className="flex items-center justify-between border py-2 px-2 w-full bg-[#1f1f1f] rounded-sm cursor-pointer"
                             >
-                              <FaEye />
-                            </Button>
-                          </label>
-                        ))}
+                              <div className="flex items-center gap-3 w-full">
+                                <RadioGroupItem
+                                  id={`${resume.filePath}`}
+                                  value={`${resume.rawText}`}
+                                  className=""
+                                />
+                                <span className="w-full text-left">
+                                  {resume.name}
+                                </span>
+                              </div>
+                              <Button
+                                type="button"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  openPreview(resume.filePath!);
+                                }}
+                                className="hover:bg-[#151515] bg-[#343333] cursor-pointer rounded-xl text-white"
+                              >
+                                <FaEye />
+                              </Button>
+                            </label>
+                          ))
+                        )}
                       </RadioGroup>
                     </FormControl>
                     <FormMessage className="text-red-500" />
@@ -188,8 +229,12 @@ const PracticeForm = ({ resumes }: { resumes: Resume[] }) => {
               />
             </div>
           </div>
-          <Button type="submit" className="px-4">
-            Generate Interview
+          <Button type="submit" className="px-4" disabled={loading}>
+            {loading ? (
+              <ImSpinner9 className="animate-spin" />
+            ) : (
+              "Generate Interview"
+            )}
           </Button>
         </form>
       </Form>

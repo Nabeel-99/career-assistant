@@ -1,4 +1,5 @@
 "use server";
+
 import bcrypt from "bcrypt";
 import prisma from "./prisma";
 import { signIn, signOut } from "@/auth";
@@ -35,4 +36,28 @@ export const signInWithGithub = async () => {
 export const signOutAction = async () => {
   await signOut();
   redirect("/");
+};
+
+export const fetchResumes = async (userId: string) => {
+  const resumes = await prisma.resume.findMany({
+    where: {
+      userId,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+  return resumes;
+};
+
+export const fetchPractices = async (userId: string) => {
+  const practices = await prisma.practice.findMany({
+    where: {
+      userId,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+  return practices;
 };

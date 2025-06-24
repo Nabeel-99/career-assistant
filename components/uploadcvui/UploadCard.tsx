@@ -3,8 +3,8 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { RiFileUploadFill } from "react-icons/ri";
-import { Label } from "./ui/label";
-import { Input } from "./ui/input";
+import { Label } from "../ui/label";
+import { Input } from "../ui/input";
 import supabase from "@/lib/supabase";
 import { toast } from "sonner";
 import ResumeCard from "./ResumeCard";

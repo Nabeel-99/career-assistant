@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import FormLayout from "../FormLayout";
+import FormLayout from "./FormLayout";
 import { SignUpSchema } from "@/lib/validation";
 import { signup } from "@/lib/action";
 import { useRouter } from "next/navigation";

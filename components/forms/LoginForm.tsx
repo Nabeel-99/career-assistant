@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 
-import FormLayout from "../FormLayout";
+import FormLayout from "./FormLayout";
 import { LoginSchema } from "@/lib/validation";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";

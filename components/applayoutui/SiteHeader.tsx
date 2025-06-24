@@ -1,13 +1,29 @@
 "use client";
 
 import React from "react";
-import { SidebarTrigger } from "./ui/sidebar";
-import { Separator } from "./ui/separator";
+import { SidebarTrigger } from "../ui/sidebar";
+import { Separator } from "../ui/separator";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
+import { SlashIcon } from "lucide-react";
 
 const SiteHeader = () => {
   const mapCurrentPage = () => {
     const pathname = usePathname();
+    if (pathname.startsWith("/practice/interview")) {
+      return (
+        <nav className="text-base text-muted-foreground flex items-center gap-2  px-4">
+          <Link
+            href="/practice"
+            className="text-muted-foreground hover:text-white"
+          >
+            Practice
+          </Link>
+          <span className="mx-1">/</span>
+          <span className="text-white">Interview Room</span>
+        </nav>
+      );
+    }
     switch (pathname) {
       case "/dashboard":
         return "Dashboard";
@@ -15,6 +31,7 @@ const SiteHeader = () => {
         return "Upload CV";
       case "/practice":
         return "Practice";
+
       default:
         return "Dashboard";
     }
@@ -28,18 +45,6 @@ const SiteHeader = () => {
           className="mx-2 data-[orientation=vertical]:h-4"
         />
         <h1 className="text-base font-medium">{mapCurrentPage()}</h1>
-        {/* <div className="ml-auto flex items-center gap-2">
-          <Button variant="ghost" asChild size="sm" className="hidden sm:flex">
-            <a
-              href="https://github.com/shadcn-ui/ui/tree/main/apps/v4/app/(examples)/dashboard"
-              rel="noopener noreferrer"
-              target="_blank"
-              className="dark:text-foreground"
-            >
-              GitHub
-            </a>
-          </Button>
-        </div> */}
       </div>
     </header>
   );

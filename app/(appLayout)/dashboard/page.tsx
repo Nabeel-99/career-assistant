@@ -1,7 +1,8 @@
 import { auth } from "@/auth";
-import ChartCard from "@/components/ChartCard";
-import NavButton from "@/components/NavButton";
-import SectionCards from "@/components/SectionCards";
+
+import NavButton from "@/components/dashboardui/NavButton";
+import ChartCard from "@/components/dashboardui/ChartCard";
+import SectionCards from "@/components/dashboardui/SectionCards";
 import { redirect } from "next/navigation";
 import React from "react";
 import { AiFillMessage } from "react-icons/ai";

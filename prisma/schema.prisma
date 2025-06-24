@@ -35,6 +35,7 @@ model Practice{
   stacks String[]
   role String?
   level String?
+  isTaken Boolean? @default(false)
   questions Question[]
   userId String
   users User @relation(fields: [userId], references: [id])
@@ -46,7 +47,7 @@ model Question {
   id Int @id @default(autoincrement())
   question String?
   practiceId Int
-  practices Practice @relation(fields: [practiceId], references: [id])
+  practices Practice @relation(fields: [practiceId], references: [id], onDelete: Cascade)
   createdAt   DateTime  @default(now())
 }
 

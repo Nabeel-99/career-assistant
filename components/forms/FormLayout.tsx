@@ -15,10 +15,10 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "./ui/form";
-import { Input } from "./ui/input";
-import { Button } from "./ui/button";
-import AnimatedContent from "./Animations/AnimatedContent/AnimatedContent";
+} from "../ui/form";
+import { Input } from "../ui/input";
+import { Button } from "../ui/button";
+import AnimatedContent from "../Animations/AnimatedContent/AnimatedContent";
 import { z } from "zod";
 import { signInWithGithub, signInWithGoogle } from "@/lib/action";
 

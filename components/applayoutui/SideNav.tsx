@@ -9,17 +9,18 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "./ui/sidebar";
+} from "../ui/sidebar";
 import { IoGrid } from "react-icons/io5";
 import { RiFileUploadFill } from "react-icons/ri";
 import { FaMicrophone } from "react-icons/fa";
 import { AiFillMessage } from "react-icons/ai";
 import { HiTemplate } from "react-icons/hi";
 import Link from "next/link";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import prisma from "@/lib/prisma";
 import { auth } from "@/auth";
 import LogoutBtn from "./LogoutBtn";
+
 const SideNav = async () => {
   const session = await auth();
   if (!session?.user?.id) return null;

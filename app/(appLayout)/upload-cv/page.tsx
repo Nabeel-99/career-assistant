@@ -1,5 +1,5 @@
 import { auth } from "@/auth";
-import UploadCard from "@/components/UploadCard";
+import UploadCard from "@/components/uploadcvui/UploadCard";
 import React from "react";
 
 const page = async () => {

@@ -7,16 +7,26 @@ import { User } from "@/app/generated/prisma";
 
 const CallCard = ({ user }: { user: User | null }) => {
   return (
-    <Card className="w-full @container/card  p-10 xl:w-[1050px]  h-00px]">
-      <div className="grid grid-cols-2 gap-6">
-        <Card className="flex items-center bg-[#111111] p-20 justify-center">
+    <Card className="w-full @container/card  bg-[#0a0a0a] p-6 lg:p-10 xl:w-[1050px] flex flex-col gap-10  h-full">
+      <div className="flex flex-col gap-2">
+        <h1 className="text-xl font-bold">Frontend Developer Interview</h1>
+        <p className="font-medium">
+          Level: <span>Mid Level</span>
+        </p>
+        <p className="italic text-subheadline">
+          A mock interview for a mid-level frontend developer position at Tesco
+          Technology, focusing on JavaScript, React, and Node.js skills
+        </p>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <Card className="flex items-center bg-[#111111] xl:p-20 justify-center">
           <div className="flex items-center">
-            <RiUserVoiceFill className="size-44 " />
+            <RiUserVoiceFill className="size-24 xl:size-44 " />
           </div>
         </Card>
-        <Card className="flex items-center bg-[#111111] justify-center">
+        <Card className="flex items-center bg-[#111111] xl:p-20 justify-center">
           <div className="flex items-center bg-black rounded-full">
-            <Avatar className="size-44">
+            <Avatar className="size-24 xl:size-44">
               <AvatarImage src={user?.image!} />
               <AvatarFallback className="flex items-center">
                 <span className="text-[100px]">
@@ -30,11 +40,7 @@ const CallCard = ({ user }: { user: User | null }) => {
           </div>
         </Card>
       </div>
-      <div className="flex flex-col items-center w-full  gap-10 ">
-        <div className="flex items-center justify-center gap-2 w-full">
-          <Button>Start Practice</Button>
-        </div>
-      </div>
+      {/* transcripts */}
     </Card>
   );
 };

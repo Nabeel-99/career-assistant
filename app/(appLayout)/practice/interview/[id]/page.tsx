@@ -5,7 +5,7 @@ import React from "react";
 import { FaMicrophone } from "react-icons/fa";
 import { MdCallEnd } from "react-icons/md";
 
-const page = async ({ params }: { params: { id: number } }) => {
+const page = async ({ params }: { params: Promise<{ id: string }> }) => {
   const id = (await params).id;
   const session = await auth();
   const user = await prisma.user.findUnique({

@@ -2,9 +2,12 @@ import Vapi from "@vapi-ai/web";
 import { CreateAssistantDTO } from "@vapi-ai/web/dist/api";
 
 export const vapi = new Vapi(process.env.NEXT_PUBLIC_VAPI_API_KEY!);
-export const assistant: CreateAssistantDTO = {
+export const assistant = (
+  firstname: string,
+  questions: string
+): CreateAssistantDTO => ({
   name: "Interviewer",
-  firstMessage: ` Hello, {{firstname}}, Thanks for joining! I'm excited to learn more about you and your experience.  `,
+  firstMessage: ` Hello, ${firstname}, Thanks for joining! I'm excited to learn more about you and your experience.  `,
   model: {
     provider: "groq",
     model: "llama-3.1-8b-instant",
@@ -16,7 +19,7 @@ export const assistant: CreateAssistantDTO = {
 
 Interview Flow:
 - Follow this structured sequence of questions:
-{{questions}}
+${questions}
 
 Conversation Guidelines:
 - Begin with “Tell me about yourself".
@@ -54,4 +57,4 @@ Remember:
     model: "nova-2",
     language: "en",
   },
-};
+});

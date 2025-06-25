@@ -29,6 +29,7 @@ const CallCard = ({ user, id }: { user: User | null; id: string }) => {
   const formattedQuestions = practice?.questions
     .map((q, i) => `${i + 1}. ${q.question}`)
     .join("\n");
+
   const [isConnected, setIsConnected] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [transcript, setTranscript] = useState<Message[]>([]);
@@ -58,7 +59,7 @@ const CallCard = ({ user, id }: { user: User | null; id: string }) => {
           ...prev,
           {
             role: message.role,
-            text: message.text,
+            text: message.transcript,
           },
         ]);
       }
@@ -90,12 +91,7 @@ const CallCard = ({ user, id }: { user: User | null; id: string }) => {
   }, []);
 
   const startCall = async () => {
-    await vapi.start(assistant, {
-      variableValues: {
-        firstname: user?.firstname,
-        questions: formattedQuestions,
-      },
-    });
+    await vapi.start(assistant(user?.firstname!, formattedQuestions!));
   };
 
   const endCall = () => {
@@ -122,7 +118,7 @@ const CallCard = ({ user, id }: { user: User | null; id: string }) => {
                 <div
                   className={cn(
                     "flex items-center",
-                    isSpeaking && "animate-pulse"
+                    isSpeaking && "text-sky-500 animate-pulse"
                   )}
                 >
                   <RiUserVoiceFill className="size-24 xl:size-44 " />
@@ -146,18 +142,22 @@ const CallCard = ({ user, id }: { user: User | null; id: string }) => {
             </div>
             {/* transcripts */}
             {isConnected ? (
-              <div className="border rounded-lg py-6 px-4 text-center">
+              <div className="border rounded-lg py-6 px-4 min-h-10 flex space-y-2 items-center justify-center text-center">
                 {transcript.length === 0 ? (
                   <span className="text-subheadline">
                     Conversation will appear here
                   </span>
                 ) : (
                   transcript.map((m, i) => (
-                    <div className="" key={i}>
-                      <span>
-                        {m.role === "user" ? "You:" : "AI:"}
-                        {m.text}
+                    <div key={i} className="mb-2">
+                      <span
+                        className={
+                          m.role === "user" ? "text-white" : "text-sky-500"
+                        }
+                      >
+                        {m.role === "user" ? "You" : "AI"}:{" "}
                       </span>
+                      <span>{m.text}</span>
                     </div>
                   ))
                 )}

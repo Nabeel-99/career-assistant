@@ -23,7 +23,7 @@ export const devIconsMappings = {
   firebase: "firebase",
   docker: "docker",
   kubernetes: "kubernetes",
-  aws: "aws",
+  aws: "amazonwebservices",
   azure: "azure",
   gcp: "gcp",
   digitalocean: "digitalocean",

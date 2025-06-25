@@ -55,9 +55,27 @@ export const fetchPractices = async (userId: string) => {
     where: {
       userId,
     },
+    include: {
+      questions: true,
+    },
     orderBy: {
       createdAt: "desc",
     },
   });
   return practices;
+};
+
+export const fetchPracticeById = async (id: string) => {
+  const practice = await prisma.practice.findUnique({
+    where: {
+      id: Number(id),
+    },
+    include: {
+      questions: true,
+    },
+  });
+  if (!practice) {
+    throw new Error("Practice not found");
+  }
+  return practice;
 };

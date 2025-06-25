@@ -1,9 +1,8 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import PracticeCard from "./PracticeCard";
 import { Practice } from "@/app/generated/prisma";
-import { fetchPractices } from "@/lib/action";
 import { Skeleton } from "../ui/skeleton";
 
 const PracticeCardGrid = ({

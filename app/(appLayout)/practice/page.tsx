@@ -1,9 +1,5 @@
 import React from "react";
-import prisma from "@/lib/prisma";
 import { auth } from "@/auth";
-import CreatePracticeBtn from "@/components/practiceui/CreatePracticeBtn";
-import PracticeCard from "@/components/practiceui/PracticeCard";
-import PracticeCardGrid from "@/components/practiceui/PracticeCardGrid";
 import PracticeWrapper from "@/components/practiceui/PracticeWrapper";
 
 const page = async () => {

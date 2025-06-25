@@ -1,10 +1,6 @@
 import SideNav from "@/components/applayoutui/SideNav";
 import SiteHeader from "@/components/applayoutui/SiteHeader";
-import {
-  SidebarInset,
-  SidebarProvider,
-  SidebarTrigger,
-} from "@/components/ui/sidebar";
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { Toaster } from "@/components/ui/sonner";
 import React from "react";
 

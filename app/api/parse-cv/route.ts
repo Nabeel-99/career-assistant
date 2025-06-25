@@ -5,7 +5,12 @@ import pdfParse from "pdf-parse";
 import prisma from "@/lib/prisma";
 export const POST = async (req: NextRequest) => {
   try {
-    const token = await getToken({ req, secret: process.env.AUTH_SECRET });
+    const isProduction = process.env.NODE_ENV === "production";
+    const token = await getToken({
+      req,
+      secret: process.env.AUTH_SECRET,
+      secureCookie: isProduction,
+    });
     if (!token) {
       return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
     }
@@ -48,7 +53,12 @@ export const POST = async (req: NextRequest) => {
 
 export const DELETE = async (req: NextRequest) => {
   try {
-    const token = await getToken({ req, secret: process.env.AUTH_SECRET });
+    const isProduction = process.env.NODE_ENV === "production";
+    const token = await getToken({
+      req,
+      secret: process.env.AUTH_SECRET,
+      secureCookie: isProduction,
+    });
     if (!token) {
       return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
     }

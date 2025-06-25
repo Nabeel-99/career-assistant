@@ -2,7 +2,6 @@ import React from "react";
 import { Card } from "./ui/card";
 import { RiUserVoiceFill } from "react-icons/ri";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import { Button } from "./ui/button";
 import { User } from "@/app/generated/prisma";
 
 const CallCard = ({ user }: { user: User | null }) => {

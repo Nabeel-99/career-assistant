@@ -91,9 +91,7 @@ const SideNav = async () => {
       <SidebarFooter className="bg-[#0a0a0a]">
         <SidebarMenu className="">
           <SidebarMenuItem className="text-sidebar-foreground/70">
-            <SidebarMenuButton className="text-[16px]">
-              <LogoutBtn />
-            </SidebarMenuButton>
+            <LogoutBtn />
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarFooter>

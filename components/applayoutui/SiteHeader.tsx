@@ -5,7 +5,6 @@ import { SidebarTrigger } from "../ui/sidebar";
 import { Separator } from "../ui/separator";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { SlashIcon } from "lucide-react";
 
 const SiteHeader = () => {
   const mapCurrentPage = () => {

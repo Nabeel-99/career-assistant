@@ -1,6 +1,5 @@
 import Link from "next/link";
 import React from "react";
-import { FaMicrophone } from "react-icons/fa";
 import { PiCaretRightBold } from "react-icons/pi";
 
 type NavButtonProps = {

@@ -4,7 +4,8 @@ import { CreateAssistantDTO } from "@vapi-ai/web/dist/api";
 export const vapi = new Vapi(process.env.NEXT_PUBLIC_VAPI_API_KEY!);
 export const assistant = (
   firstname: string,
-  questions: string
+  questions: string,
+  role: string
 ): CreateAssistantDTO => ({
   name: "Interviewer",
   firstMessage: ` Hello, ${firstname}, Thanks for joining! I'm excited to learn more about you and your experience.  `,
@@ -15,9 +16,10 @@ export const assistant = (
     messages: [
       {
         role: "system",
-        content: `You are a professional job interviewer conducting a real-time voice interview with a candidate. Your goal is to assess their qualifications, motivation, and fit for the role.
+        content: `You are a professional job interviewer conducting a **real** interview for a ${role} role. Respond naturally as if it's a real conversation.. Your goal is to assess their qualifications, motivation, and fit for the role.
 
 Interview Flow:
+- This interview should last no more than 10 minutes. Keep things moving efficiently.
 - Follow this structured sequence of questions:
 ${questions}
 

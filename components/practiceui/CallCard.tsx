@@ -2,17 +2,17 @@
 
 import React, { useEffect, useState } from "react";
 import { Card } from "../ui/card";
-import { RiUserVoiceFill } from "react-icons/ri";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Prisma, User } from "@/lib/generated/prisma";
-import { FaMicrophone } from "react-icons/fa";
 import { MdCallEnd } from "react-icons/md";
 import { fetchPracticeById } from "@/lib/action";
 import CallCardSkeleton from "../CallCardSkeleton";
 import { cn, mapLevel } from "@/lib/utils";
 import { Button } from "../ui/button";
 import { assistant, vapi } from "@/lib/vapi";
-
+import { RiSpeakAiFill } from "react-icons/ri";
+import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
+import { ImSpinner9 } from "react-icons/im";
 interface Message {
   role: string;
   text: string;
@@ -33,6 +33,7 @@ const CallCard = ({ user, id }: { user: User | null; id: string }) => {
   const [isConnected, setIsConnected] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [transcript, setTranscript] = useState<Message[]>([]);
+  const [starting, setStarting] = useState(false);
 
   useEffect(() => {
     vapi.on("call-start", () => {
@@ -91,7 +92,16 @@ const CallCard = ({ user, id }: { user: User | null; id: string }) => {
   }, []);
 
   const startCall = async () => {
-    await vapi.start(assistant(user?.firstname!, formattedQuestions!));
+    try {
+      setStarting(true);
+      await vapi.start(
+        assistant(user?.firstname!, formattedQuestions!, practice?.role!)
+      );
+    } catch (error) {
+      console.log("error", error);
+    } finally {
+      setStarting(false);
+    }
   };
 
   const endCall = () => {
@@ -114,15 +124,11 @@ const CallCard = ({ user, id }: { user: User | null; id: string }) => {
               </p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <Card className="flex items-center bg-[#111111] xl:p-20 justify-center">
-                <div
-                  className={cn(
-                    "flex items-center",
-                    isSpeaking && "text-sky-500 animate-pulse"
-                  )}
-                >
-                  <RiUserVoiceFill className="size-24 xl:size-44 " />
+              <Card className="flex flex-col  gap-5 items-center bg-[#111111] xl:p-20 justify-center">
+                <div className={cn(isSpeaking && "text-sky-500 animate-pulse")}>
+                  <RiSpeakAiFill className="size-24 xl:ml10 xl:size-44 " />
                 </div>
+                <p className="lg:text-xl font-bold">AI Interviewer</p>
               </Card>
               <Card className="flex items-center bg-[#111111] xl:p-20 justify-center">
                 <div className="flex items-center bg-black rounded-full">
@@ -138,6 +144,9 @@ const CallCard = ({ user, id }: { user: User | null; id: string }) => {
                     </AvatarFallback>
                   </Avatar>
                 </div>
+                <p className="lg:text-xl font-bold">
+                  {user?.firstname} {user?.lastname}
+                </p>
               </Card>
             </div>
             {/* transcripts */}
@@ -167,20 +176,38 @@ const CallCard = ({ user, id }: { user: User | null; id: string }) => {
               <div className="flex items-center justify-center">
                 <Button
                   onClick={startCall}
+                  disabled={starting}
                   className="px-8 text-lg py-6 text-white bg-green-600 hover:bg-green-500"
                 >
-                  Start
+                  {starting ? (
+                    <span>
+                      {" "}
+                      <ImSpinner9 className="animate-spin w-full" />
+                    </span>
+                  ) : (
+                    "Start"
+                  )}
                 </Button>
               </div>
             )}
           </Card>
           <div className="flex flex-col h-full items-center gap-6 justify-start">
-            <div className="flex items-center justify-center border bg-[#1f1f1f]  p-6 rounded-full">
+            {/* <div className="flex items-center justify-center border bg-[#1f1f1f]  p-6 rounded-full">
               <FaMicrophone className="size-10" />
-            </div>
-            <div className="flex items-center justify-center border bg-[#1f1f1f]  p-6 rounded-full">
-              <MdCallEnd className="size-10" onClick={endCall} />
-            </div>
+            </div> */}
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <div
+                  className="flex items-center justify-center border bg-red-700 hover:bg-red-600 cursor-pointer p-6 rounded-full"
+                  onClick={endCall}
+                >
+                  <MdCallEnd className="size-10" />
+                </div>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>End Call</p>
+              </TooltipContent>
+            </Tooltip>
           </div>
         </>
       )}

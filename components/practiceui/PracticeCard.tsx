@@ -3,7 +3,7 @@ import { FaRegCalendarAlt } from "react-icons/fa";
 import { FaStar } from "react-icons/fa6";
 import { Button } from "../ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import { Practice } from "@/app/generated/prisma";
+import { Practice } from "@/lib/generated/prisma";
 import { formatDate, getDevIconUrl, mapLevel } from "@/lib/utils";
 import Link from "next/link";
 const PracticeCard = ({
@@ -25,7 +25,7 @@ const PracticeCard = ({
               <AvatarImage
                 src={getDevIconUrl(stack)}
                 alt={stack}
-                className="backdrop-blur-lg bg-white/40"
+                className="backdrop-blur-lg rounded-full bg-white/40"
               />
               <AvatarFallback>{stack}</AvatarFallback>
             </Avatar>
@@ -35,7 +35,6 @@ const PracticeCard = ({
       <div className="flex flex-col justify-between text-sm h-full">
         <div className="mt-2 flex flex-col gap-2">
           <p className="text-base font-bold">{title}</p>
-
           <p className="line-clamp-3">{description}</p>
           <div className="flex items-center gap-10 text-sm">
             <div className="flex items-center gap-1">

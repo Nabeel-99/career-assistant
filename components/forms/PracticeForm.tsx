@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { z } from "zod";
 import { Textarea } from "../ui/textarea";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
-import { Resume } from "@/app/generated/prisma";
+import { Resume } from "@/lib/generated/prisma";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { PracticeSchema } from "@/lib/validation";

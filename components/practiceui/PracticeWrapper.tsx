@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import CreatePracticeBtn from "./CreatePracticeBtn";
 import PracticeCardGrid from "./PracticeCardGrid";
-import { Practice } from "@/app/generated/prisma";
+import { Practice } from "@/lib/generated/prisma";
 import { fetchPractices } from "@/lib/action";
 
 const PracticeWrapper = ({ userId }: { userId: string }) => {

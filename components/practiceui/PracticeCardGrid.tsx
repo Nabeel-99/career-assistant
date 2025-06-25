@@ -2,8 +2,9 @@
 
 import React from "react";
 import PracticeCard from "./PracticeCard";
-import { Practice } from "@/app/generated/prisma";
+import { Practice } from "@/lib/generated/prisma";
 import { Skeleton } from "../ui/skeleton";
+import { useSidebar } from "../ui/sidebar";
 
 const PracticeCardGrid = ({
   loading,
@@ -12,15 +13,24 @@ const PracticeCardGrid = ({
   loading: boolean;
   practices: Practice[];
 }) => {
+  const { open } = useSidebar();
   return loading ? (
-    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+    <div
+      className={`grid grid-cols-1 ${
+        open ? "md:grid-cols-1" : "md:grid-cols-2"
+      } xl:grid-cols-3 gap-6`}
+    >
       {Array.from({ length: 6 }).map((_, index) => (
         <Skeleton className="h-[400px] rounded-lg" key={index} />
       ))}
     </div>
   ) : (
     <>
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+      <div
+        className={`grid grid-cols-1 ${
+          open ? "md:grid-cols-1" : "md:grid-cols-2"
+        } xl:grid-cols-3 gap-6`}
+      >
         {practices.map((practice) => (
           <PracticeCard key={practice.id} {...practice} />
         ))}

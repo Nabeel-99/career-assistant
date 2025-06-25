@@ -12,7 +12,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "../ui/sheet";
-import { Resume } from "@/app/generated/prisma";
+import { Resume } from "@/lib/generated/prisma";
 import PracticeForm from "../forms/PracticeForm";
 import { fetchResumes } from "@/lib/action";
 

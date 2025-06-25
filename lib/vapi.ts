@@ -9,10 +9,12 @@ export const assistant = (
 ): CreateAssistantDTO => ({
   name: "Interviewer",
   firstMessage: ` Hello, ${firstname}, Thanks for joining! I'm excited to learn more about you and your experience.  `,
+  maxDurationSeconds: 900,
   model: {
     provider: "groq",
     model: "llama-3.1-8b-instant",
     temperature: 0.7,
+
     messages: [
       {
         role: "system",
@@ -20,6 +22,7 @@ export const assistant = (
 
 Interview Flow:
 - This interview should last no more than 10 minutes. Keep things moving efficiently.
+- if 10mins has reached and you haven't asked all the questions, end the interview properly.
 - Follow this structured sequence of questions:
 ${questions}
 

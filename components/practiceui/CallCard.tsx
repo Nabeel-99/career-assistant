@@ -151,14 +151,14 @@ const CallCard = ({ user, id }: { user: User | null; id: string }) => {
             </div>
             {/* transcripts */}
             {isConnected ? (
-              <div className="border rounded-lg py-6 px-4 min-h-10 flex space-y-2 items-center justify-center text-center">
+              <div className="border rounded-lg py-6 px-4 min-h-10  max-w-sm  mx-auto space-y-2 items-center justify-center text-center">
                 {transcript.length === 0 ? (
                   <span className="text-subheadline">
                     Conversation will appear here
                   </span>
                 ) : (
                   transcript.map((m, i) => (
-                    <div key={i} className="mb-2">
+                    <div key={i} className="mb-2 animate-in">
                       <span
                         className={
                           m.role === "user" ? "text-white" : "text-sky-500"
@@ -166,7 +166,7 @@ const CallCard = ({ user, id }: { user: User | null; id: string }) => {
                       >
                         {m.role === "user" ? "You" : "AI"}:{" "}
                       </span>
-                      <span>{m.text}</span>
+                      <span className="inline-block">{m.text}</span>
                     </div>
                   ))
                 )}

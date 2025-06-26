@@ -4,6 +4,8 @@ import bcrypt from "bcrypt";
 import prisma from "./prisma";
 import { signIn, signOut } from "@/auth";
 import { redirect } from "next/navigation";
+import { generateFeedback } from "./ai";
+import { Transcript } from "./types";
 export const signup = async (data: {
   firstname: string;
   lastname: string;
@@ -78,4 +80,36 @@ export const fetchPracticeById = async (id: string) => {
     throw new Error("Practice not found");
   }
   return practice;
+};
+
+export const createFeedback = async (
+  transcript: Transcript[],
+  practiceId: string
+): Promise<{ success: boolean; message: string }> => {
+  try {
+    const aiFeedback = await generateFeedback(transcript);
+    if (aiFeedback) {
+      await prisma.practice.update({
+        where: { id: Number(practiceId) },
+        data: { isTaken: true },
+      });
+
+      await prisma.feedback.upsert({
+        where: { practiceId: Number(practiceId) },
+        update: {
+          comment: aiFeedback.comment,
+          score: aiFeedback.totalScore,
+        },
+        create: {
+          practiceId: Number(practiceId),
+          comment: aiFeedback.comment,
+          score: aiFeedback.totalScore,
+        },
+      });
+    }
+    return { success: true, message: "Feedback created successfully" };
+  } catch (error) {
+    console.log("error", error);
+    return { success: false, message: "Error creating feedback" };
+  }
 };

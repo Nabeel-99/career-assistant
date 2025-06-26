@@ -1,22 +1,14 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Card } from "../ui/card";
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Prisma, User } from "@/lib/generated/prisma";
-import { MdCallEnd } from "react-icons/md";
-import { fetchPracticeById } from "@/lib/action";
+import { createFeedback, fetchPracticeById } from "@/lib/action";
 import CallCardSkeleton from "../CallCardSkeleton";
-import { cn, mapLevel } from "@/lib/utils";
-import { Button } from "../ui/button";
 import { assistant, vapi } from "@/lib/vapi";
-import { RiSpeakAiFill } from "react-icons/ri";
-import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
-import { ImSpinner9 } from "react-icons/im";
-interface Message {
-  role: string;
-  text: string;
-}
+import InterviewContainer from "../InterviewContainer";
+import { Transcript } from "@/lib/types";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 type PracticeWithQuestions = Prisma.PracticeGetPayload<{
   include: { questions: true };
@@ -25,25 +17,58 @@ type PracticeWithQuestions = Prisma.PracticeGetPayload<{
 const CallCard = ({ user, id }: { user: User | null; id: string }) => {
   const [practice, setPractice] = useState<PracticeWithQuestions | null>(null);
   const [loading, setLoading] = useState(false);
-  const level = practice?.level as keyof typeof mapLevel;
+  const router = useRouter();
   const formattedQuestions = practice?.questions
     .map((q, i) => `${i + 1}. ${q.question}`)
     .join("\n");
 
   const [isConnected, setIsConnected] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
-  const [transcript, setTranscript] = useState<Message[]>([]);
+  const [transcript, setTranscript] = useState<Transcript[]>([]);
   const [starting, setStarting] = useState(false);
+  const [lastMessage, setLastMessage] = useState<Transcript | null>(null);
+  const [generatingFeedback, setGeneratingFeedback] = useState(false);
+  const fetchInterview = async () => {
+    try {
+      setLoading(true);
+      const res = await fetchPracticeById(id);
+      console.log("res", res);
+      setPractice(res);
+    } catch (error) {
+      console.log("error", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchInterview();
+  }, []);
 
   useEffect(() => {
     vapi.on("call-start", () => {
       console.log("call started");
       setIsConnected(true);
     });
-    vapi.on("call-end", () => {
+    vapi.on("call-end", async () => {
       console.log("call ended");
       setIsConnected(false);
       setIsSpeaking(false);
+
+      if (transcript.length >= 4) {
+        try {
+          setGeneratingFeedback(true);
+          const res = await createFeedback(transcript, id);
+          if (res.success) {
+            toast.success(res.message);
+            router.push(`/feedback`);
+          }
+        } catch (error) {
+          console.log("error", error);
+        } finally {
+          setGeneratingFeedback(false);
+        }
+      }
     });
     vapi.on("speech-start", () => {
       console.log("speech started");
@@ -74,22 +99,12 @@ const CallCard = ({ user, id }: { user: User | null; id: string }) => {
       vapi.stop();
     };
   }, []);
-  const fetchInterview = async () => {
-    try {
-      setLoading(true);
-      const res = await fetchPracticeById(id);
-      console.log("res", res);
-      setPractice(res);
-    } catch (error) {
-      console.log("error", error);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   useEffect(() => {
-    fetchInterview();
-  }, []);
+    if (transcript.length > 0) {
+      setLastMessage(transcript[transcript.length - 1]);
+    }
+  }, [transcript]);
 
   const startCall = async () => {
     try {
@@ -113,102 +128,18 @@ const CallCard = ({ user, id }: { user: User | null; id: string }) => {
         <CallCardSkeleton />
       ) : (
         <>
-          <Card className="w-full @container/card  bg-[#0a0a0a] p-6 lg:p-10 xl:w-[1050px] flex flex-col gap-10  h-full">
-            <div className="flex flex-col gap-2">
-              <h1 className="text-xl font-bold">{practice?.title}</h1>
-              <p className="font-medium">
-                Level: <span>{mapLevel[level]?.title}</span>
-              </p>
-              <p className="italic text-subheadline">
-                {practice?.description}.
-              </p>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <Card className="flex flex-col  gap-5 items-center bg-[#111111] xl:p-20 justify-center">
-                <div className={cn(isSpeaking && "text-sky-500 animate-pulse")}>
-                  <RiSpeakAiFill className="size-24 xl:ml10 xl:size-44 " />
-                </div>
-                <p className="lg:text-xl font-bold">AI Interviewer</p>
-              </Card>
-              <Card className="flex items-center bg-[#111111] xl:p-20 justify-center">
-                <div className="flex items-center bg-black rounded-full">
-                  <Avatar className="size-24 xl:size-44">
-                    <AvatarImage src={user?.image!} />
-                    <AvatarFallback className="flex items-center">
-                      <span className="text-[100px]">
-                        {user?.firstname?.charAt(0)}{" "}
-                      </span>
-                      <span className="text-[100px]">
-                        {user?.lastname?.charAt(0)}
-                      </span>
-                    </AvatarFallback>
-                  </Avatar>
-                </div>
-                <p className="lg:text-xl font-bold">
-                  {user?.firstname} {user?.lastname}
-                </p>
-              </Card>
-            </div>
-            {/* transcripts */}
-            {isConnected ? (
-              <div className="border rounded-lg py-6 px-4 min-h-10  max-w-sm  mx-auto space-y-2 items-center justify-center text-center">
-                {transcript.length === 0 ? (
-                  <span className="text-subheadline">
-                    Conversation will appear here
-                  </span>
-                ) : (
-                  transcript.map((m, i) => (
-                    <div key={i} className="mb-2 animate-in">
-                      <span
-                        className={
-                          m.role === "user" ? "text-white" : "text-sky-500"
-                        }
-                      >
-                        {m.role === "user" ? "You" : "AI"}:{" "}
-                      </span>
-                      <span className="inline-block">{m.text}</span>
-                    </div>
-                  ))
-                )}
-              </div>
-            ) : (
-              // start call
-              <div className="flex items-center justify-center">
-                <Button
-                  onClick={startCall}
-                  disabled={starting}
-                  className="px-8 text-lg py-6 text-white bg-green-600 hover:bg-green-500"
-                >
-                  {starting ? (
-                    <span>
-                      {" "}
-                      <ImSpinner9 className="animate-spin w-full" />
-                    </span>
-                  ) : (
-                    "Start"
-                  )}
-                </Button>
-              </div>
-            )}
-          </Card>
-          <div className="flex flex-col h-full items-center gap-6 justify-start">
-            {/* <div className="flex items-center justify-center border bg-[#1f1f1f]  p-6 rounded-full">
-              <FaMicrophone className="size-10" />
-            </div> */}
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <div
-                  className="flex items-center justify-center border bg-red-700 hover:bg-red-600 cursor-pointer p-6 rounded-full"
-                  onClick={endCall}
-                >
-                  <MdCallEnd className="size-10" />
-                </div>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>End Call</p>
-              </TooltipContent>
-            </Tooltip>
-          </div>
+          <InterviewContainer
+            practice={practice}
+            isSpeaking={isSpeaking}
+            user={user}
+            isConnected={isConnected}
+            lastMessage={lastMessage}
+            transcript={transcript}
+            starting={starting}
+            generatingFeedback={generatingFeedback}
+            startCall={startCall}
+            endCall={endCall}
+          />
         </>
       )}
     </div>

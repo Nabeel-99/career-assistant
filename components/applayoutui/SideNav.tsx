@@ -1,7 +1,7 @@
 import React from "react";
 import prisma from "@/lib/prisma";
 import { auth } from "@/auth";
-import SideNavWrapper from "../SideNavWrapper";
+import SideNavWrapper from "./SideNavWrapper";
 
 const SideNav = async () => {
   const session = await auth();

@@ -13,9 +13,9 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   useSidebar,
-} from "./ui/sidebar";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import LogoutBtn from "./applayoutui/LogoutBtn";
+} from "../ui/sidebar";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import LogoutBtn from "./LogoutBtn";
 import Link from "next/link";
 import { IoGrid } from "react-icons/io5";
 import { RiFileUploadFill } from "react-icons/ri";

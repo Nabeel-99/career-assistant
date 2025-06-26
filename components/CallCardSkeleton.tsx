@@ -25,7 +25,7 @@ const CallCardSkeleton = () => {
       </Card>
 
       <div className="flex flex-col h-full items-center gap-6 justify-start">
-        <Skeleton className="p-6 rounded-full size-16" />
+        {/* <Skeleton className="p-6 rounded-full size-16" /> */}
         <Skeleton className="p-6 rounded-full size-16" />
       </div>
     </>

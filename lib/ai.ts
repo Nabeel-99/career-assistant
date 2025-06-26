@@ -1,6 +1,7 @@
 import { groq } from "@ai-sdk/groq";
 import { cleanJSONparse } from "./utils";
 import { generateText } from "ai";
+import { Transcript } from "./types";
 
 export const generateQuestions = async (
   jobDescription: string,
@@ -59,6 +60,109 @@ ${level}
 `,
   });
 
+  const data = text;
+  console.log("data", data);
+  try {
+    if (data) {
+      const parsed = cleanJSONparse(data);
+      console.log("parsed", parsed);
+      return parsed;
+    }
+  } catch (error) {
+    console.log("error", error);
+    throw new Error("Error parsing JSON");
+  }
+};
+
+export const generateFeedback = async (transcript: Transcript[]) => {
+  const { text } = await generateText({
+    model: groq("llama-3.1-8b-instant"),
+
+    prompt: `You are an AI interview evaluator for a tech company.
+
+You will be given a transcript of a mock interview between an AI interviewer and a candidate.
+
+Your task is to evaluate the candidate's performance as if you are a professional hiring manager. Be objective, insightful, and detailed.
+
+---
+
+### TRANSCRIPT:
+${transcript
+  .map((t) => `${t.role === "user" ? "USER" : "AI"}: ${t.text}`)
+  .join("\n")}
+
+---
+
+### EVALUATION CRITERIA:
+
+1. **Communication & Clarity (20 points)**  
+   - Did the candidate communicate their thoughts clearly?
+   - Did they avoid filler words and stay on-topic?
+   - Was their tone confident and structured?
+
+2. **Technical Knowledge & Accuracy (30 points)**  
+   - Did their responses reflect sound technical understanding?
+   - Were they able to explain technical topics correctly?
+   - Did they demonstrate relevant experience or solutions?
+
+3. **Problem-Solving Ability (15 points)**  
+   - Did they show logical thinking or creativity in problem-solving?
+   - Did they break down complex questions effectively?
+
+4. **Relevance to Role & Experience (15 points)**  
+   - Did their experience and answers align with what is expected for the role?
+   - Do their examples show practical knowledge and real-world application?
+
+5. **Behavioral Insight & Soft Skills (10 points)**  
+   - Did they show good interpersonal skills, motivation, or leadership?
+   - Did they reflect a growth mindset or adaptability?
+
+6. **Overall Impression & Fit for Role (10 points)**  
+   - Based on all the above, would you recommend them for the next stage?
+
+---
+
+### OUTPUT FORMAT:
+
+1. **Section Scores**  
+   - Communication & Clarity: __ / 20  
+   - Technical Knowledge & Accuracy: __ / 30  
+   - Problem-Solving Ability: __ / 15  
+   - Relevance to Role & Experience: __ / 15  
+   - Behavioral Insight & Soft Skills: __ / 10  
+   - Overall Impression & Fit: __ / 10
+
+2. **Total Score**  
+   - __ / 100
+
+3. **Verdict**  
+   - ✅ Strong candidate – Recommend for next stage  
+   - ⚠️ Moderate – Could improve in some areas  
+   - ❌ Weak – Not recommended based on this interview
+
+4. **Feedback Summary**  
+Write a detailed, constructive, and well-organized paragraph of feedback for the candidate.  
+- Clearly highlight the candidate's strengths.  
+- Point out specific areas for improvement.  
+- Offer actionable suggestions to help them do better in future interviews.  
+Avoid being vague or generic. Be specific and professional.
+---
+
+### TONE:
+Be honest, balanced, and professional. Avoid overly generic responses.
+
+---
+
+Return the final output as a valid JSON object with the following shape:
+
+{
+  "totalScore": number,
+  "comment": "Full feedback summary..."
+}
+
+Make sure the output can be parsed with JSON.parse(). Do not include markdown or extra text outside the JSON.
+`,
+  });
   const data = text;
   console.log("data", data);
   try {

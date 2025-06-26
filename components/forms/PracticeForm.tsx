@@ -29,7 +29,6 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 import { ImSpinner9 } from "react-icons/im";
-import { useRouter } from "next/navigation";
 import { Skeleton } from "../ui/skeleton";
 
 const PracticeForm = ({
@@ -71,7 +70,7 @@ const PracticeForm = ({
   const [preview, setPreview] = useState(false);
   const [publicUrl, setPublicUrl] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
-  const router = useRouter();
+
   const openPreview = async (filePath: string) => {
     if (!filePath) return;
     const { data } = supabase.storage.from("resumes").getPublicUrl(filePath);

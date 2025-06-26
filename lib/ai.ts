@@ -141,7 +141,7 @@ ${transcript
    - ❌ Weak – Not recommended based on this interview
 
 4. **Feedback Summary**  
-Write a detailed, constructive, and well-organized paragraph of feedback for the candidate.  
+Write a detailed, constructive, and well-organized paragraph of feedback **addressed directly to the candidate**. Use "you" instead of "the candidate". This is personal feedback.
 - Clearly highlight the candidate's strengths.  
 - Point out specific areas for improvement.  
 - Offer actionable suggestions to help them do better in future interviews.  

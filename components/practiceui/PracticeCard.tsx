@@ -3,9 +3,10 @@ import { FaRegCalendarAlt } from "react-icons/fa";
 import { FaStar } from "react-icons/fa6";
 import { Button } from "../ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import { Practice } from "@/lib/generated/prisma";
 import { formatDate, getDevIconUrl, mapLevel } from "@/lib/utils";
 import Link from "next/link";
+import { PracticeWithFeedback } from "@/lib/types";
+
 const PracticeCard = ({
   id,
   title,
@@ -14,8 +15,10 @@ const PracticeCard = ({
   level,
   createdAt,
   isTaken,
-}: Practice) => {
+  feedback,
+}: PracticeWithFeedback) => {
   const expLevel = level as keyof typeof mapLevel;
+  console.log("feedback", feedback);
   return (
     <div className="flex flex-col border rounded-lg p-4 xl:h-[400px] bg-[#0a0a0a]/30">
       <div className="border rounded-lg p-4 flex items-center justify-center">
@@ -43,15 +46,22 @@ const PracticeCard = ({
             </div>
             <div className="flex items-center gap-1">
               <FaStar className="text-[#FFD700]" />
-              <p className="">0/100</p>
+              <p className="">{feedback ? feedback.score : 0}/100</p>
             </div>
           </div>
         </div>
-        {!isTaken && (
+        {!isTaken ? (
           <div className="mt-2">
             <p className="text-sm text-subheadline">
               {" "}
               You have not taken this practice yet
+            </p>
+          </div>
+        ) : (
+          <div className="mt-2">
+            <p className="text-sm text-subheadline">
+              {" "}
+              You have taken this practice
             </p>
           </div>
         )}
@@ -62,14 +72,23 @@ const PracticeCard = ({
           >
             {mapLevel[expLevel].title}
           </p>
-
-          <Link
-            href={`/practice/interview/${id}`}
-            className="border border-black "
-          >
-            {" "}
-            <Button>Start Interview</Button>
-          </Link>
+          {isTaken ? (
+            <Link
+              href={`/practice/feedback/${id}`}
+              className="border border-black "
+            >
+              {" "}
+              <Button>View Feedback</Button>
+            </Link>
+          ) : (
+            <Link
+              href={`/practice/interview/${id}`}
+              className="border border-black "
+            >
+              {" "}
+              <Button>Start Interview</Button>
+            </Link>
+          )}
         </div>
       </div>
 

@@ -2,16 +2,16 @@
 
 import React from "react";
 import PracticeCard from "./PracticeCard";
-import { Practice } from "@/lib/generated/prisma";
 import { Skeleton } from "../ui/skeleton";
 import { useSidebar } from "../ui/sidebar";
+import { PracticeWithFeedback } from "@/lib/types";
 
 const PracticeCardGrid = ({
   loading,
   practices,
 }: {
   loading: boolean;
-  practices: Practice[];
+  practices: PracticeWithFeedback[];
 }) => {
   const { open } = useSidebar();
   return loading ? (

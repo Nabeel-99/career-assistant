@@ -3,12 +3,12 @@
 import React, { useEffect, useState } from "react";
 import { Prisma, User } from "@/lib/generated/prisma";
 import { createFeedback, fetchPracticeById } from "@/lib/action";
-import CallCardSkeleton from "../CallCardSkeleton";
 import { assistant, vapi } from "@/lib/vapi";
 import InterviewContainer from "../InterviewContainer";
 import { Transcript } from "@/lib/types";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import CallCardSkeleton from "../skeletons/CallCardSkeleton";
 
 type PracticeWithQuestions = Prisma.PracticeGetPayload<{
   include: { questions: true };
@@ -50,25 +50,10 @@ const CallCard = ({ user, id }: { user: User | null; id: string }) => {
       console.log("call started");
       setIsConnected(true);
     });
-    vapi.on("call-end", async () => {
+    vapi.on("call-end", () => {
       console.log("call ended");
       setIsConnected(false);
       setIsSpeaking(false);
-
-      if (transcript.length >= 4) {
-        try {
-          setGeneratingFeedback(true);
-          const res = await createFeedback(transcript, id);
-          if (res.success) {
-            toast.success(res.message);
-            router.push(`/feedback`);
-          }
-        } catch (error) {
-          console.log("error", error);
-        } finally {
-          setGeneratingFeedback(false);
-        }
-      }
     });
     vapi.on("speech-start", () => {
       console.log("speech started");
@@ -99,7 +84,25 @@ const CallCard = ({ user, id }: { user: User | null; id: string }) => {
       vapi.stop();
     };
   }, []);
-
+  useEffect(() => {
+    if (!isConnected && transcript.length >= 4 && !generatingFeedback) {
+      const runFeedback = async () => {
+        try {
+          setGeneratingFeedback(true);
+          const res = await createFeedback(transcript, id);
+          if (res.success) {
+            toast.success(res.message);
+            router.push(`/practice`);
+          }
+        } catch (error) {
+          console.log("error", error);
+        } finally {
+          setGeneratingFeedback(false);
+        }
+      };
+      runFeedback();
+    }
+  }, [isConnected, transcript.length]);
   useEffect(() => {
     if (transcript.length > 0) {
       setLastMessage(transcript[transcript.length - 1]);

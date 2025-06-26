@@ -5,9 +5,9 @@ import ChartCard from "@/components/dashboardui/ChartCard";
 import SectionCards from "@/components/dashboardui/SectionCards";
 import { redirect } from "next/navigation";
 import React from "react";
-import { AiFillMessage } from "react-icons/ai";
 import { FaMicrophone } from "react-icons/fa";
 import { HiTemplate } from "react-icons/hi";
+import { RiFileUploadFill } from "react-icons/ri";
 
 const page = async () => {
   const session = await auth();
@@ -26,10 +26,10 @@ const page = async () => {
       url: "/cv-templates",
     },
     {
-      title: "View Feedback",
-      description: "See insights and improve your CV",
-      icon: <AiFillMessage className="size-8" />,
-      url: "/feedback",
+      title: "Upload Your CV",
+      description: "Personalize your practice",
+      icon: <RiFileUploadFill className="size-8" />,
+      url: "/upload-cv",
     },
   ];
 

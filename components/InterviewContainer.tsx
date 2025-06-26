@@ -9,7 +9,7 @@ import { ImSpinner9 } from "react-icons/im";
 import { User } from "@/lib/generated/prisma";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
 import { MdCallEnd } from "react-icons/md";
-import { cn, mapLevel } from "@/lib/utils";
+import { cn, getDevIconUrl, mapLevel } from "@/lib/utils";
 import { Transcript } from "@/lib/types";
 
 type InterviewProps = {
@@ -50,7 +50,22 @@ const InterviewContainer = ({
 
       <Card className="w-full @container/card  bg-[#0a0a0a] transition-all duraiton-300 ease-in-out p-6 lg:p-10 xl:w-[1050px] flex flex-col gap-10  h-full">
         <div className="flex flex-col gap-2">
-          <h1 className="text-xl font-bold">{practice?.title}</h1>
+          <div className="flex flex-col gap-4 md:flex-row items-center md:justify-between">
+            <h1 className="text-xl font-bold">{practice?.title}</h1>
+            <div className="*:data-[slot=avatar]:ring-[#4b4b4b] order-first md:order-last flex -space-x-1 *:data-[slot=avatar]:ring-2 ">
+              {practice?.stacks.map((stack: string, index: any) => (
+                <Avatar className="size-6" key={index}>
+                  <AvatarImage
+                    src={getDevIconUrl(stack)}
+                    alt={stack}
+                    className="backdrop-blur-lg rounded-full bg-white/40"
+                  />
+                  <AvatarFallback>{stack}</AvatarFallback>
+                </Avatar>
+              ))}
+            </div>
+          </div>
+
           <p className="font-medium">
             Level: <span>{mapLevel[level]?.title}</span>
           </p>

@@ -59,7 +59,9 @@ export const fetchPractices = async (userId: string) => {
     },
     include: {
       questions: true,
+      feedback: true,
     },
+
     orderBy: {
       createdAt: "desc",
     },
@@ -74,6 +76,7 @@ export const fetchPracticeById = async (id: string) => {
     },
     include: {
       questions: true,
+      feedback: true,
     },
   });
   if (!practice) {

@@ -20,9 +20,10 @@ import Link from "next/link";
 import { IoGrid } from "react-icons/io5";
 import { RiFileUploadFill } from "react-icons/ri";
 import { FaMicrophone } from "react-icons/fa";
-import { AiFillMessage } from "react-icons/ai";
+
 import { HiTemplate } from "react-icons/hi";
 import { User } from "@/lib/generated/prisma";
+import { IoMdSettings } from "react-icons/io";
 const SideNavWrapper = ({ user }: { user: User | null }) => {
   const { setOpenMobile } = useSidebar();
   const navItems = [
@@ -42,13 +43,8 @@ const SideNavWrapper = ({ user }: { user: User | null }) => {
       icon: <FaMicrophone />,
     },
     {
-      name: "Feedback",
-      url: "/feedback",
-      icon: <AiFillMessage />,
-    },
-    {
       name: "CV Templates",
-      url: "/templates",
+      url: "/cv-templates",
       icon: <HiTemplate />,
     },
   ];
@@ -89,6 +85,18 @@ const SideNavWrapper = ({ user }: { user: User | null }) => {
         </SidebarGroup>
       </SidebarContent>
       <SidebarFooter className="bg-[#0a0a0a]">
+        <SidebarMenu className="">
+          <SidebarMenuItem className="text-sidebar-foreground/70">
+            <SidebarMenuButton className="text-[16px]">
+              <Link href="/settings" className=" flex items-center gap-2">
+                <span>
+                  <IoMdSettings className="text-xl" />
+                </span>
+                <span className="pl-1">Settings</span>
+              </Link>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
         <SidebarMenu className="">
           <SidebarMenuItem className="text-sidebar-foreground/70">
             <LogoutBtn />

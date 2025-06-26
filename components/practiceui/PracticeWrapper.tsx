@@ -3,11 +3,11 @@
 import React, { useEffect, useState } from "react";
 import CreatePracticeBtn from "./CreatePracticeBtn";
 import PracticeCardGrid from "./PracticeCardGrid";
-import { Practice } from "@/lib/generated/prisma";
 import { fetchPractices } from "@/lib/action";
+import { PracticeWithFeedback } from "@/lib/types";
 
 const PracticeWrapper = ({ userId }: { userId: string }) => {
-  const [practices, setPractices] = useState<Practice[]>([]);
+  const [practices, setPractices] = useState<PracticeWithFeedback[]>([]);
   const [loading, setLoading] = useState(false);
   const getUserPractices = async () => {
     try {

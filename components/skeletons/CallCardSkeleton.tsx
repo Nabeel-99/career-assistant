@@ -1,6 +1,6 @@
 import React from "react";
-import { Card } from "./ui/card";
-import { Skeleton } from "./ui/skeleton";
+import { Card } from "../ui/card";
+import { Skeleton } from "../ui/skeleton";
 
 const CallCardSkeleton = () => {
   return (

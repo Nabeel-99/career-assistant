@@ -29,6 +29,14 @@ export const POST = async (req: NextRequest) => {
 
     const parsed = await pdfParse(buffer);
     if (parsed.text) {
+      await prisma.user.update({
+        where: {
+          id: token.id,
+        },
+        data: {
+          hasResume: true,
+        },
+      });
       await prisma.resume.create({
         data: {
           name: file.name,
@@ -70,6 +78,22 @@ export const DELETE = async (req: NextRequest) => {
           filePath: filePath,
         },
       });
+      const resumes = await prisma.resume.findMany({
+        where: {
+          userId: token.id,
+        },
+      });
+      if (resumes.length === 0) {
+        await prisma.user.update({
+          where: {
+            id: token.id,
+          },
+          data: {
+            hasResume: false,
+          },
+        });
+      }
+
       return NextResponse.json(
         { message: "File deleted successfully" },
         { status: 200 }

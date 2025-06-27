@@ -137,7 +137,9 @@ const PracticeForm = ({
                 name="resume"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Choose Resume for Interview Practice</FormLabel>
+                    <FormLabel>
+                      Choose Resume for Interview Practice (optional)
+                    </FormLabel>
                     <FormControl>
                       <RadioGroup
                         defaultValue={field.value}
@@ -153,7 +155,7 @@ const PracticeForm = ({
                               />
                             ))}
                           </span>
-                        ) : (
+                        ) : resumes.length > 0 ? (
                           resumes.map((resume) => (
                             <label
                               key={resume.id}
@@ -182,6 +184,10 @@ const PracticeForm = ({
                               </Button>
                             </label>
                           ))
+                        ) : (
+                          <span className="text-sm text-subheadline text-center py-1">
+                            You haven't uploaded a resume yet.
+                          </span>
                         )}
                       </RadioGroup>
                     </FormControl>

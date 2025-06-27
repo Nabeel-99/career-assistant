@@ -10,6 +10,9 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
     where: {
       id: session?.user?.id,
     },
+    include: {
+      resumes: true,
+    },
   });
   return <CallCard user={user} id={id} />;
 };

@@ -34,6 +34,7 @@ model Practice {
   stacks      String[]
   role        String?
   level       String?
+  resumeText  String?
   isTaken     Boolean?   @default(false)
   questions   Question[]
   userId      String

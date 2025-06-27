@@ -36,7 +36,7 @@ export const signInWithGithub = async () => {
 };
 
 export const signOutAction = async () => {
-  await signOut();
+  await signOut({ redirect: false });
   redirect("/");
 };
 

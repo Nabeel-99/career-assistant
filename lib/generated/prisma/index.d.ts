@@ -2466,6 +2466,7 @@ export namespace Prisma {
     description: string | null
     role: string | null
     level: string | null
+    resumeText: string | null
     isTaken: boolean | null
     userId: string | null
     createdAt: Date | null
@@ -2477,6 +2478,7 @@ export namespace Prisma {
     description: string | null
     role: string | null
     level: string | null
+    resumeText: string | null
     isTaken: boolean | null
     userId: string | null
     createdAt: Date | null
@@ -2489,6 +2491,7 @@ export namespace Prisma {
     stacks: number
     role: number
     level: number
+    resumeText: number
     isTaken: number
     userId: number
     createdAt: number
@@ -2510,6 +2513,7 @@ export namespace Prisma {
     description?: true
     role?: true
     level?: true
+    resumeText?: true
     isTaken?: true
     userId?: true
     createdAt?: true
@@ -2521,6 +2525,7 @@ export namespace Prisma {
     description?: true
     role?: true
     level?: true
+    resumeText?: true
     isTaken?: true
     userId?: true
     createdAt?: true
@@ -2533,6 +2538,7 @@ export namespace Prisma {
     stacks?: true
     role?: true
     level?: true
+    resumeText?: true
     isTaken?: true
     userId?: true
     createdAt?: true
@@ -2632,6 +2638,7 @@ export namespace Prisma {
     stacks: string[]
     role: string | null
     level: string | null
+    resumeText: string | null
     isTaken: boolean | null
     userId: string
     createdAt: Date
@@ -2663,6 +2670,7 @@ export namespace Prisma {
     stacks?: boolean
     role?: boolean
     level?: boolean
+    resumeText?: boolean
     isTaken?: boolean
     userId?: boolean
     createdAt?: boolean
@@ -2679,6 +2687,7 @@ export namespace Prisma {
     stacks?: boolean
     role?: boolean
     level?: boolean
+    resumeText?: boolean
     isTaken?: boolean
     userId?: boolean
     createdAt?: boolean
@@ -2692,6 +2701,7 @@ export namespace Prisma {
     stacks?: boolean
     role?: boolean
     level?: boolean
+    resumeText?: boolean
     isTaken?: boolean
     userId?: boolean
     createdAt?: boolean
@@ -2705,12 +2715,13 @@ export namespace Prisma {
     stacks?: boolean
     role?: boolean
     level?: boolean
+    resumeText?: boolean
     isTaken?: boolean
     userId?: boolean
     createdAt?: boolean
   }
 
-  export type PracticeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "stacks" | "role" | "level" | "isTaken" | "userId" | "createdAt", ExtArgs["result"]["practice"]>
+  export type PracticeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "stacks" | "role" | "level" | "resumeText" | "isTaken" | "userId" | "createdAt", ExtArgs["result"]["practice"]>
   export type PracticeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     questions?: boolean | Practice$questionsArgs<ExtArgs>
     users?: boolean | UserDefaultArgs<ExtArgs>
@@ -2738,6 +2749,7 @@ export namespace Prisma {
       stacks: string[]
       role: string | null
       level: string | null
+      resumeText: string | null
       isTaken: boolean | null
       userId: string
       createdAt: Date
@@ -3173,6 +3185,7 @@ export namespace Prisma {
     readonly stacks: FieldRef<"Practice", 'String[]'>
     readonly role: FieldRef<"Practice", 'String'>
     readonly level: FieldRef<"Practice", 'String'>
+    readonly resumeText: FieldRef<"Practice", 'String'>
     readonly isTaken: FieldRef<"Practice", 'Boolean'>
     readonly userId: FieldRef<"Practice", 'String'>
     readonly createdAt: FieldRef<"Practice", 'DateTime'>
@@ -6965,6 +6978,7 @@ export namespace Prisma {
     stacks: 'stacks',
     role: 'role',
     level: 'level',
+    resumeText: 'resumeText',
     isTaken: 'isTaken',
     userId: 'userId',
     createdAt: 'createdAt'
@@ -7216,6 +7230,7 @@ export namespace Prisma {
     stacks?: StringNullableListFilter<"Practice">
     role?: StringNullableFilter<"Practice"> | string | null
     level?: StringNullableFilter<"Practice"> | string | null
+    resumeText?: StringNullableFilter<"Practice"> | string | null
     isTaken?: BoolNullableFilter<"Practice"> | boolean | null
     userId?: StringFilter<"Practice"> | string
     createdAt?: DateTimeFilter<"Practice"> | Date | string
@@ -7231,6 +7246,7 @@ export namespace Prisma {
     stacks?: SortOrder
     role?: SortOrderInput | SortOrder
     level?: SortOrderInput | SortOrder
+    resumeText?: SortOrderInput | SortOrder
     isTaken?: SortOrderInput | SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
@@ -7249,6 +7265,7 @@ export namespace Prisma {
     stacks?: StringNullableListFilter<"Practice">
     role?: StringNullableFilter<"Practice"> | string | null
     level?: StringNullableFilter<"Practice"> | string | null
+    resumeText?: StringNullableFilter<"Practice"> | string | null
     isTaken?: BoolNullableFilter<"Practice"> | boolean | null
     userId?: StringFilter<"Practice"> | string
     createdAt?: DateTimeFilter<"Practice"> | Date | string
@@ -7264,6 +7281,7 @@ export namespace Prisma {
     stacks?: SortOrder
     role?: SortOrderInput | SortOrder
     level?: SortOrderInput | SortOrder
+    resumeText?: SortOrderInput | SortOrder
     isTaken?: SortOrderInput | SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
@@ -7284,6 +7302,7 @@ export namespace Prisma {
     stacks?: StringNullableListFilter<"Practice">
     role?: StringNullableWithAggregatesFilter<"Practice"> | string | null
     level?: StringNullableWithAggregatesFilter<"Practice"> | string | null
+    resumeText?: StringNullableWithAggregatesFilter<"Practice"> | string | null
     isTaken?: BoolNullableWithAggregatesFilter<"Practice"> | boolean | null
     userId?: StringWithAggregatesFilter<"Practice"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Practice"> | Date | string
@@ -7556,6 +7575,7 @@ export namespace Prisma {
     stacks?: PracticeCreatestacksInput | string[]
     role?: string | null
     level?: string | null
+    resumeText?: string | null
     isTaken?: boolean | null
     createdAt?: Date | string
     questions?: QuestionCreateNestedManyWithoutPracticesInput
@@ -7570,6 +7590,7 @@ export namespace Prisma {
     stacks?: PracticeCreatestacksInput | string[]
     role?: string | null
     level?: string | null
+    resumeText?: string | null
     isTaken?: boolean | null
     userId: string
     createdAt?: Date | string
@@ -7583,6 +7604,7 @@ export namespace Prisma {
     stacks?: PracticeUpdatestacksInput | string[]
     role?: NullableStringFieldUpdateOperationsInput | string | null
     level?: NullableStringFieldUpdateOperationsInput | string | null
+    resumeText?: NullableStringFieldUpdateOperationsInput | string | null
     isTaken?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     questions?: QuestionUpdateManyWithoutPracticesNestedInput
@@ -7597,6 +7619,7 @@ export namespace Prisma {
     stacks?: PracticeUpdatestacksInput | string[]
     role?: NullableStringFieldUpdateOperationsInput | string | null
     level?: NullableStringFieldUpdateOperationsInput | string | null
+    resumeText?: NullableStringFieldUpdateOperationsInput | string | null
     isTaken?: NullableBoolFieldUpdateOperationsInput | boolean | null
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -7611,6 +7634,7 @@ export namespace Prisma {
     stacks?: PracticeCreatestacksInput | string[]
     role?: string | null
     level?: string | null
+    resumeText?: string | null
     isTaken?: boolean | null
     userId: string
     createdAt?: Date | string
@@ -7622,6 +7646,7 @@ export namespace Prisma {
     stacks?: PracticeUpdatestacksInput | string[]
     role?: NullableStringFieldUpdateOperationsInput | string | null
     level?: NullableStringFieldUpdateOperationsInput | string | null
+    resumeText?: NullableStringFieldUpdateOperationsInput | string | null
     isTaken?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -7633,6 +7658,7 @@ export namespace Prisma {
     stacks?: PracticeUpdatestacksInput | string[]
     role?: NullableStringFieldUpdateOperationsInput | string | null
     level?: NullableStringFieldUpdateOperationsInput | string | null
+    resumeText?: NullableStringFieldUpdateOperationsInput | string | null
     isTaken?: NullableBoolFieldUpdateOperationsInput | boolean | null
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -7995,6 +8021,7 @@ export namespace Prisma {
     stacks?: SortOrder
     role?: SortOrder
     level?: SortOrder
+    resumeText?: SortOrder
     isTaken?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
@@ -8010,6 +8037,7 @@ export namespace Prisma {
     description?: SortOrder
     role?: SortOrder
     level?: SortOrder
+    resumeText?: SortOrder
     isTaken?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
@@ -8021,6 +8049,7 @@ export namespace Prisma {
     description?: SortOrder
     role?: SortOrder
     level?: SortOrder
+    resumeText?: SortOrder
     isTaken?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
@@ -8642,6 +8671,7 @@ export namespace Prisma {
     stacks?: PracticeCreatestacksInput | string[]
     role?: string | null
     level?: string | null
+    resumeText?: string | null
     isTaken?: boolean | null
     createdAt?: Date | string
     questions?: QuestionCreateNestedManyWithoutPracticesInput
@@ -8655,6 +8685,7 @@ export namespace Prisma {
     stacks?: PracticeCreatestacksInput | string[]
     role?: string | null
     level?: string | null
+    resumeText?: string | null
     isTaken?: boolean | null
     createdAt?: Date | string
     questions?: QuestionUncheckedCreateNestedManyWithoutPracticesInput
@@ -8724,6 +8755,7 @@ export namespace Prisma {
     stacks?: StringNullableListFilter<"Practice">
     role?: StringNullableFilter<"Practice"> | string | null
     level?: StringNullableFilter<"Practice"> | string | null
+    resumeText?: StringNullableFilter<"Practice"> | string | null
     isTaken?: BoolNullableFilter<"Practice"> | boolean | null
     userId?: StringFilter<"Practice"> | string
     createdAt?: DateTimeFilter<"Practice"> | Date | string
@@ -8917,6 +8949,7 @@ export namespace Prisma {
     stacks?: PracticeCreatestacksInput | string[]
     role?: string | null
     level?: string | null
+    resumeText?: string | null
     isTaken?: boolean | null
     createdAt?: Date | string
     users: UserCreateNestedOneWithoutPracticesInput
@@ -8930,6 +8963,7 @@ export namespace Prisma {
     stacks?: PracticeCreatestacksInput | string[]
     role?: string | null
     level?: string | null
+    resumeText?: string | null
     isTaken?: boolean | null
     userId: string
     createdAt?: Date | string
@@ -8958,6 +8992,7 @@ export namespace Prisma {
     stacks?: PracticeUpdatestacksInput | string[]
     role?: NullableStringFieldUpdateOperationsInput | string | null
     level?: NullableStringFieldUpdateOperationsInput | string | null
+    resumeText?: NullableStringFieldUpdateOperationsInput | string | null
     isTaken?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateOneRequiredWithoutPracticesNestedInput
@@ -8971,6 +9006,7 @@ export namespace Prisma {
     stacks?: PracticeUpdatestacksInput | string[]
     role?: NullableStringFieldUpdateOperationsInput | string | null
     level?: NullableStringFieldUpdateOperationsInput | string | null
+    resumeText?: NullableStringFieldUpdateOperationsInput | string | null
     isTaken?: NullableBoolFieldUpdateOperationsInput | boolean | null
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9047,6 +9083,7 @@ export namespace Prisma {
     stacks?: PracticeCreatestacksInput | string[]
     role?: string | null
     level?: string | null
+    resumeText?: string | null
     isTaken?: boolean | null
     createdAt?: Date | string
     questions?: QuestionCreateNestedManyWithoutPracticesInput
@@ -9060,6 +9097,7 @@ export namespace Prisma {
     stacks?: PracticeCreatestacksInput | string[]
     role?: string | null
     level?: string | null
+    resumeText?: string | null
     isTaken?: boolean | null
     userId: string
     createdAt?: Date | string
@@ -9088,6 +9126,7 @@ export namespace Prisma {
     stacks?: PracticeUpdatestacksInput | string[]
     role?: NullableStringFieldUpdateOperationsInput | string | null
     level?: NullableStringFieldUpdateOperationsInput | string | null
+    resumeText?: NullableStringFieldUpdateOperationsInput | string | null
     isTaken?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     questions?: QuestionUpdateManyWithoutPracticesNestedInput
@@ -9101,6 +9140,7 @@ export namespace Prisma {
     stacks?: PracticeUpdatestacksInput | string[]
     role?: NullableStringFieldUpdateOperationsInput | string | null
     level?: NullableStringFieldUpdateOperationsInput | string | null
+    resumeText?: NullableStringFieldUpdateOperationsInput | string | null
     isTaken?: NullableBoolFieldUpdateOperationsInput | boolean | null
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9114,6 +9154,7 @@ export namespace Prisma {
     stacks?: PracticeCreatestacksInput | string[]
     role?: string | null
     level?: string | null
+    resumeText?: string | null
     isTaken?: boolean | null
     createdAt?: Date | string
   }
@@ -9133,6 +9174,7 @@ export namespace Prisma {
     stacks?: PracticeUpdatestacksInput | string[]
     role?: NullableStringFieldUpdateOperationsInput | string | null
     level?: NullableStringFieldUpdateOperationsInput | string | null
+    resumeText?: NullableStringFieldUpdateOperationsInput | string | null
     isTaken?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     questions?: QuestionUpdateManyWithoutPracticesNestedInput
@@ -9146,6 +9188,7 @@ export namespace Prisma {
     stacks?: PracticeUpdatestacksInput | string[]
     role?: NullableStringFieldUpdateOperationsInput | string | null
     level?: NullableStringFieldUpdateOperationsInput | string | null
+    resumeText?: NullableStringFieldUpdateOperationsInput | string | null
     isTaken?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     questions?: QuestionUncheckedUpdateManyWithoutPracticesNestedInput
@@ -9159,6 +9202,7 @@ export namespace Prisma {
     stacks?: PracticeUpdatestacksInput | string[]
     role?: NullableStringFieldUpdateOperationsInput | string | null
     level?: NullableStringFieldUpdateOperationsInput | string | null
+    resumeText?: NullableStringFieldUpdateOperationsInput | string | null
     isTaken?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

@@ -24,8 +24,12 @@ import { FaMicrophone } from "react-icons/fa";
 import { HiTemplate } from "react-icons/hi";
 import { User } from "@/lib/generated/prisma";
 import { IoMdSettings } from "react-icons/io";
+import { usePathname } from "next/navigation";
+import { cn } from "@/lib/utils";
 const SideNavWrapper = ({ user }: { user: User | null }) => {
   const { setOpenMobile } = useSidebar();
+  const pathname = usePathname();
+  const isSettingsActive = pathname.startsWith("/settings");
   const navItems = [
     {
       name: "Dashboard",
@@ -66,20 +70,26 @@ const SideNavWrapper = ({ user }: { user: User | null }) => {
           </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu className="flex flex-col gap-1 text-sidebar-foreground/70">
-              {navItems.map((item) => (
-                <SidebarMenuItem key={item.name}>
-                  <SidebarMenuButton
-                    asChild
-                    className="text-[16px]"
-                    onClick={() => setOpenMobile(false)}
-                  >
-                    <Link href={item.url} className=" ">
-                      <span className="text-xl">{item.icon}</span>
-                      <span className="pl-1">{item.name}</span>
-                    </Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
+              {navItems.map((item) => {
+                const isActive = pathname.startsWith(item.url);
+                return (
+                  <SidebarMenuItem key={item.name}>
+                    <SidebarMenuButton
+                      asChild
+                      className={cn(
+                        "text-[16px]",
+                        isActive && "bg-sidebar-accent"
+                      )}
+                      onClick={() => setOpenMobile(false)}
+                    >
+                      <Link href={item.url} className=" ">
+                        <span className="text-xl">{item.icon}</span>
+                        <span className="pl-1">{item.name}</span>
+                      </Link>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                );
+              })}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
@@ -87,7 +97,12 @@ const SideNavWrapper = ({ user }: { user: User | null }) => {
       <SidebarFooter className="bg-[#0a0a0a]">
         <SidebarMenu className="">
           <SidebarMenuItem className="text-sidebar-foreground/70">
-            <SidebarMenuButton className="text-[16px]">
+            <SidebarMenuButton
+              className={cn(
+                "text-[16px]",
+                isSettingsActive && "bg-sidebar-accent"
+              )}
+            >
               <Link href="/settings" className=" flex items-center gap-2">
                 <span>
                   <IoMdSettings className="text-xl" />

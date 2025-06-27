@@ -48,7 +48,7 @@ const InterviewContainer = ({
         </div>
       )}
 
-      <Card className="w-full @container/card  bg-[#0a0a0a] transition-all duraiton-300 ease-in-out p-6 lg:p-10 xl:w-[1050px] flex flex-col gap-10  h-full">
+      <Card className="w-full @container/card  bg-[#0a0a0a] transition-all duraiton-300 ease-in-out p-6 lg:p-10 xl:w-[1050px] flex flex-col gap-10 2xl:container 2xl:mx-auto 2xl:max-h-[1000px]  h-full">
         <div className="flex flex-col gap-2">
           <div className="flex flex-col gap-4 md:flex-row items-center md:justify-between">
             <h1 className="text-xl font-bold">{practice?.title}</h1>

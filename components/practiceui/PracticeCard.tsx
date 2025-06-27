@@ -21,10 +21,10 @@ const PracticeCard = ({
   console.log("feedback", feedback);
   return (
     <div className="flex flex-col border rounded-lg p-4 xl:h-[400px] bg-[#0a0a0a]/30">
-      <div className="border rounded-lg p-4 flex items-center justify-center">
+      <div className="border rounded-lg p-4 overflow-clip flex items-center justify-center">
         <div className="*:data-[slot=avatar]:ring-[#4b4b4b]  flex -space-x-8 *:data-[slot=avatar]:ring-2 ">
           {stacks.map((stack, index) => (
-            <Avatar className="size-28" key={index}>
+            <Avatar className="size-20 xl:size-28" key={index}>
               <AvatarImage
                 src={getDevIconUrl(stack)}
                 alt={stack}

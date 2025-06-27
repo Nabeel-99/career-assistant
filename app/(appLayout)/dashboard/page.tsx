@@ -34,7 +34,7 @@ const page = async () => {
   ];
 
   return (
-    <div className="flex flex-col gap-10">
+    <div className="flex flex-col gap-10 2xl:container 2xl:mx-auto">
       <div className="grid grid-cols-1  lg:grid-cols-2 xl:grid-cols-3 gap-4 xl:gap-10">
         {navbtnItems.map((item) => (
           <NavButton

@@ -5,7 +5,8 @@ export const vapi = new Vapi(process.env.NEXT_PUBLIC_VAPI_API_KEY!);
 export const assistant = (
   firstname: string,
   questions: string,
-  role: string
+  role: string,
+  resume?: string
 ): CreateAssistantDTO => ({
   name: "Interviewer",
   firstMessage: ` Hello, ${firstname}, Thanks for joining! I'm excited to learn more about you and your experience.  `,
@@ -50,7 +51,13 @@ End the interview properly:
 
 Remember:
 - This is a real-time voice conversation.
-- Do not talk too much — keep your responses efficient and natural.`,
+- Do not talk too much — keep your responses efficient and natural.
+${
+  resume?.trim()
+    ? `You may refer to the candidate's resume below for additional context during the interview:\n\n---\n${resume}`
+    : ""
+}
+`,
       },
     ],
   },

@@ -30,7 +30,10 @@ const SiteHeader = () => {
         return "Upload CV";
       case "/practice":
         return "Practice";
-
+      case "/cv-templates":
+        return "CV Templates";
+      case "/settings":
+        return "Settings";
       default:
         return "Dashboard";
     }

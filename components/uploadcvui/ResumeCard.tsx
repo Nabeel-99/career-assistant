@@ -131,14 +131,20 @@ const ResumeCard = ({
 
       {/* show Resume */}
       <Dialog open={showResume} onOpenChange={setShowResume}>
-        <DialogContent className="mx-auto h-[90vh] overflow-scroll ">
-          <DialogHeader>
+        <DialogContent className="max-w-[95vw] p-0 overflow-hidden">
+          <DialogHeader className="p-4">
             <DialogTitle>Resume</DialogTitle>
             <DialogDescription className="text-sm text-subheadline">
-              resume preview
+              Resume preview
             </DialogDescription>
           </DialogHeader>
-          <iframe src={publicUrl!} className="w-full h-[90vh]"></iframe>
+          <div className="w-full h-[80vh] overflow-auto">
+            <iframe
+              src={publicUrl!}
+              className="w-full h-full"
+              style={{ border: "none" }}
+            />
+          </div>
         </DialogContent>
       </Dialog>
 

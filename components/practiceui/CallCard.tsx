@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Prisma, User } from "@/lib/generated/prisma";
+import { Prisma } from "@/lib/generated/prisma";
 import { createFeedback, fetchPracticeById } from "@/lib/action";
 import { assistant, vapi } from "@/lib/vapi";
 import InterviewContainer from "../InterviewContainer";
@@ -10,11 +10,22 @@ import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import CallCardSkeleton from "../skeletons/CallCardSkeleton";
 
+type UserWithResume = Prisma.UserGetPayload<{
+  include: {
+    resumes: true;
+  };
+}>;
 type PracticeWithQuestions = Prisma.PracticeGetPayload<{
   include: { questions: true };
 }>;
 
-const CallCard = ({ user, id }: { user: User | null; id: string }) => {
+const CallCard = ({
+  user,
+  id,
+}: {
+  user: UserWithResume | null;
+  id: string;
+}) => {
   const [practice, setPractice] = useState<PracticeWithQuestions | null>(null);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
@@ -92,7 +103,7 @@ const CallCard = ({ user, id }: { user: User | null; id: string }) => {
           const res = await createFeedback(transcript, id);
           if (res.success) {
             toast.success(res.message);
-            router.push(`/practice`);
+            router.push(`/practice/feedback/${id}`);
           }
         } catch (error) {
           console.log("error", error);
@@ -113,7 +124,12 @@ const CallCard = ({ user, id }: { user: User | null; id: string }) => {
     try {
       setStarting(true);
       await vapi.start(
-        assistant(user?.firstname!, formattedQuestions!, practice?.role!)
+        assistant(
+          user?.firstname!,
+          formattedQuestions!,
+          practice?.role!,
+          practice?.resumeText!
+        )
       );
     } catch (error) {
       console.log("error", error);

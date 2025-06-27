@@ -27,6 +27,7 @@ export const POST = async (req: NextRequest) => {
           description: interview.description,
           stacks: interview.stacks,
           role: interview.role,
+          resumeText: resume,
           level: experienceLevel,
           questions: {
             create: interview.questions.map((q: string) => ({

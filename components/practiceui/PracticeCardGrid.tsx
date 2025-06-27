@@ -15,22 +15,14 @@ const PracticeCardGrid = ({
 }) => {
   const { open } = useSidebar();
   return loading ? (
-    <div
-      className={`grid grid-cols-1 ${
-        open ? "md:grid-cols-1" : "md:grid-cols-2"
-      } xl:grid-cols-3 gap-6`}
-    >
+    <div className="grid gap-6 grid-cols-[repeat(auto-fill,minmax(300px,1fr))]">
       {Array.from({ length: 6 }).map((_, index) => (
         <Skeleton className="h-[400px] rounded-lg" key={index} />
       ))}
     </div>
   ) : (
     <>
-      <div
-        className={`grid grid-cols-1 ${
-          open ? "md:grid-cols-1" : "md:grid-cols-2"
-        } xl:grid-cols-3 gap-6`}
-      >
+      <div className="grid gap-6 grid-cols-[repeat(auto-fill,minmax(300px,1fr))]">
         {practices.map((practice) => (
           <PracticeCard key={practice.id} {...practice} />
         ))}

@@ -15,7 +15,7 @@ You are an AI system for generating realistic mock interviews.
 
 You will be given:
 - A job description
-- A user's resume (raw text)
+- A user's resume (raw text) / or empty resume incase the user just wants to practice without selecting a resume
 - Their experience level (e.g., "entry", "mid", "senior")
 
 Your task is to return a JSON object with the following:

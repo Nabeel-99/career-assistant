@@ -18,7 +18,7 @@ const PracticeCard = ({
   feedback,
 }: PracticeWithFeedback) => {
   const expLevel = level as keyof typeof mapLevel;
-  console.log("feedback", feedback);
+
   return (
     <div className="flex flex-col border rounded-lg p-4 xl:h-[400px] bg-[#0a0a0a]/30">
       <div className="border rounded-lg p-4 overflow-clip flex items-center justify-center">

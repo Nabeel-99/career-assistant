@@ -61,11 +61,11 @@ ${level}
   });
 
   const data = text;
-  console.log("data", data);
+
   try {
     if (data) {
       const parsed = cleanJSONparse(data);
-      console.log("parsed", parsed);
+
       return parsed;
     }
   } catch (error) {
@@ -164,11 +164,11 @@ Make sure the output can be parsed with JSON.parse(). Do not include markdown or
 `,
   });
   const data = text;
-  console.log("data", data);
+
   try {
     if (data) {
       const parsed = cleanJSONparse(data);
-      console.log("parsed", parsed);
+
       return parsed;
     }
   } catch (error) {

@@ -27,7 +27,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           if (!isPasswordValid) {
             return null;
           }
-          console.log("user", user);
+
           return user;
         } catch (error) {
           if (error instanceof ZodError) {

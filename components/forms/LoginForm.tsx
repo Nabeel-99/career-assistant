@@ -22,7 +22,6 @@ const LoginForm = () => {
         redirect: false,
       });
       if (res?.ok) {
-        console.log("logged in successfully");
         router.push("/dashboard");
       }
     } catch (error) {

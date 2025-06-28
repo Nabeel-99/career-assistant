@@ -43,7 +43,7 @@ const CallCard = ({
     try {
       setLoading(true);
       const res = await fetchPracticeById(id);
-      console.log("res", res);
+
       setPractice(res);
     } catch (error) {
       console.log("error", error);
@@ -58,20 +58,16 @@ const CallCard = ({
 
   useEffect(() => {
     vapi.on("call-start", () => {
-      console.log("call started");
       setIsConnected(true);
     });
     vapi.on("call-end", () => {
-      console.log("call ended");
       setIsConnected(false);
       setIsSpeaking(false);
     });
     vapi.on("speech-start", () => {
-      console.log("speech started");
       setIsSpeaking(true);
     });
     vapi.on("speech-end", () => {
-      console.log("speech ended");
       setIsSpeaking(false);
     });
 

@@ -27,7 +27,6 @@ const SignupForm = () => {
       const data = values;
       const user = await signup(data);
       if (user) {
-        console.log("user", user);
         router.push("/login");
       }
     } catch (error) {

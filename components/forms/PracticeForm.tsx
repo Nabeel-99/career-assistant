@@ -44,7 +44,6 @@ const PracticeForm = ({
   userId: string;
   getUserPractices: () => void;
 }) => {
-  console.log("userId", userId);
   const form = useForm<z.infer<typeof PracticeSchema>>({
     resolver: zodResolver(PracticeSchema),
     defaultValues: {
@@ -82,7 +81,6 @@ const PracticeForm = ({
   };
 
   const onSubmit = async (data: z.infer<typeof PracticeSchema>) => {
-    console.log("data", data);
     setLoading(true);
     try {
       const res = await axios.post("/api/practice/create", {
@@ -90,7 +88,7 @@ const PracticeForm = ({
         experienceLevel: data.experienceLevel,
         resume: data.resume,
       });
-      console.log(res);
+
       if (res.status === 200) {
         toast.success("Interview practice created successfully");
         closeSheet();

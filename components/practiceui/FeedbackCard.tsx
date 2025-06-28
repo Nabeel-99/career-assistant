@@ -24,7 +24,7 @@ const FeedbackCard = ({ id }: { id: string }) => {
     try {
       setFetching(true);
       const res = await fetchPracticeById(id);
-      console.log("res", res);
+
       setFeedback(res);
     } catch (error) {
       console.log("error", error);

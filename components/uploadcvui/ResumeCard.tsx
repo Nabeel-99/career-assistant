@@ -41,7 +41,7 @@ const ResumeCard = ({
 
   const showDeleteDialog = (filePath: string) => {
     setShowDelete(true);
-    console.log("filePath", filePath);
+
     setSelectedFile(filePath);
   };
 
@@ -131,20 +131,14 @@ const ResumeCard = ({
 
       {/* show Resume */}
       <Dialog open={showResume} onOpenChange={setShowResume}>
-        <DialogContent className="max-w-[95vw] p-0 overflow-hidden">
-          <DialogHeader className="p-4">
+        <DialogContent className="mx-auto h-[90vh] overflow-scroll ">
+          <DialogHeader>
             <DialogTitle>Resume</DialogTitle>
             <DialogDescription className="text-sm text-subheadline">
-              Resume preview
+              resume preview
             </DialogDescription>
           </DialogHeader>
-          <div className="w-full h-[80vh] overflow-auto">
-            <iframe
-              src={publicUrl!}
-              className="w-full h-full"
-              style={{ border: "none" }}
-            />
-          </div>
+          <iframe src={publicUrl!} className="w-full h-[90vh]"></iframe>
         </DialogContent>
       </Dialog>
 

@@ -48,7 +48,7 @@ const page = async () => {
       </div>
       <div className="flex flex-col xl:flex-row gap-10">
         <div className="w-full xl:w-[1200px]">
-          <ChartCard />
+          <ChartCard userId={session?.user?.id!} />
         </div>
 
         <div className="flex flex-col gap-4 w-full xl:w-2/4">

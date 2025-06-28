@@ -13,7 +13,7 @@ const PracticeWrapper = ({ userId }: { userId: string }) => {
     try {
       setLoading(true);
       const res = await fetchPractices(userId);
-      console.log("res", res);
+
       setPractices(res);
     } catch (error) {
       console.log("something went wrong", error);

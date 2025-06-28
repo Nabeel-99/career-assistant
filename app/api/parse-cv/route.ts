@@ -71,7 +71,7 @@ export const DELETE = async (req: NextRequest) => {
       return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
     }
     const { filePath } = await req.json();
-    console.log("filePath", filePath);
+
     if (filePath) {
       await prisma.resume.deleteMany({
         where: {

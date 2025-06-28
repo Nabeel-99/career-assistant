@@ -37,7 +37,7 @@ export const POST = async (req: NextRequest) => {
           userId: token.id,
         },
       });
-      console.log("result", result);
+
       return NextResponse.json({ message: "Success" }, { status: 200 });
     }
   } catch (error) {

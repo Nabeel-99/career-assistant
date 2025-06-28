@@ -17,3 +17,9 @@ export type PracticeWithFeedback = Prisma.PracticeGetPayload<{
     feedback: true;
   };
 }>;
+
+export type ActivityData = {
+  date: string;
+  practice: number;
+  feedbacks: number;
+};

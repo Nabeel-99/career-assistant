@@ -6,7 +6,6 @@ import React from "react";
 
 const page = async () => {
   const session = await auth();
-  console.log("session", session);
   if (session) redirect("/dashboard");
   return (
     <div className="flex flex-col relative bg-gradient-to-tr from-[#0a0a0a] from-70% to-transparent   items-center justify-center w-full h-screen">

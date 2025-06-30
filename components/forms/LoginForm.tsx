@@ -6,8 +6,10 @@ import FormLayout from "./FormLayout";
 import { LoginSchema } from "@/lib/validation";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+
 const LoginForm = () => {
   const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const router = useRouter();
   const defaultValues = {
     email: "",
@@ -21,8 +23,15 @@ const LoginForm = () => {
         password: values.password,
         redirect: false,
       });
-      if (res?.ok) {
+      if (res?.ok && !res.error) {
         router.push("/dashboard");
+      } else {
+        if (res?.error) {
+          setErrorMessage("Invalid email or password");
+          setTimeout(() => {
+            setErrorMessage("");
+          }, 5000);
+        }
       }
     } catch (error) {
       console.log("error", error);
@@ -41,6 +50,7 @@ const LoginForm = () => {
       defaultValues={defaultValues}
       onSubmit={onSubmit}
       loading={loading}
+      errorMessage={errorMessage}
     />
   );
 };

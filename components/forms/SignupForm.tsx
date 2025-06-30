@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 
 const SignupForm = () => {
   const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const router = useRouter();
   const defaultValues = {
     firstname: "",
@@ -29,7 +30,18 @@ const SignupForm = () => {
       if (user) {
         router.push("/login");
       }
-    } catch (error) {
+    } catch (error: any) {
+      if (error?.message === "EMAIL_EXISTS") {
+        setErrorMessage("Email already exists");
+        setTimeout(() => {
+          setErrorMessage("");
+        }, 5000);
+      } else {
+        setErrorMessage("Something went wrong. Please try again later.");
+        setTimeout(() => {
+          setErrorMessage("");
+        }, 5000);
+      }
       console.log("error", error);
     } finally {
       setLoading(false);
@@ -47,6 +59,7 @@ const SignupForm = () => {
       defaultValues={defaultValues}
       onSubmit={onSubmit}
       loading={loading}
+      errorMessage={errorMessage}
     />
   );
 };

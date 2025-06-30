@@ -1,10 +1,10 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 
 import { GiArtificialHive } from "react-icons/gi";
-import { FaGithub, FaGoogle } from "react-icons/fa";
+import { FaEye, FaEyeSlash, FaGithub, FaGoogle } from "react-icons/fa";
 import { ImSpinner9 } from "react-icons/im";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -31,6 +31,7 @@ interface FormLayoutProps {
   isSignup?: boolean;
   schema?: any;
   defaultValues?: object;
+  errorMessage?: string;
   loading?: boolean;
   onSubmit: (values: any) => Promise<void>;
 }
@@ -45,10 +46,12 @@ const FormLayout = ({
   defaultValues,
   schema,
   onSubmit,
+  errorMessage,
   loading,
 }: FormLayoutProps) => {
   // type SignUpFormData = z.infer<typeof SignUpSchema>;
   // type LoginFormData = z.infer<typeof LoginSchema>;
+  const [showPassword, setShowPassword] = useState(false);
   const form = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
     defaultValues: defaultValues,
@@ -66,7 +69,7 @@ const FormLayout = ({
       scale={1}
       threshold={0.2}
       delay={0.2}
-      className="w-full flex items-center justify-center px-6 lg:min-w-[300px] lg:max-w-[400px]"
+      className="w-full flex items-center justify-center px-6 sm:min-w-[300px] sm:max-w-[400px]"
     >
       <Form {...form}>
         <form
@@ -76,7 +79,7 @@ const FormLayout = ({
           <Link href={"/"} className="">
             <GiArtificialHive className="text-4xl" />
           </Link>
-          <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-white to-[#ababab]">
+          <h1 className="text-2xl sm:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-white to-[#ababab]">
             {title}
           </h1>
           <p className="text-subheadline">
@@ -143,9 +146,23 @@ const FormLayout = ({
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Password</FormLabel>
-                  <FormControl>
-                    <Input type="password" placeholder="password" {...field} />
-                  </FormControl>
+                  <div className="relative">
+                    <FormControl>
+                      <Input
+                        type={showPassword ? "text" : "password"}
+                        placeholder="password"
+                        {...field}
+                      />
+                    </FormControl>
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword((prev) => !prev)}
+                      className="absolute top-1/2 right-2 -translate-y-1/2 text-muted-foreground"
+                    >
+                      {showPassword ? <FaEyeSlash /> : <FaEye />}
+                    </button>
+                  </div>
+
                   <FormMessage />
                 </FormItem>
               )}
@@ -159,6 +176,11 @@ const FormLayout = ({
                 btnText
               )}
             </Button>
+            {errorMessage && (
+              <p className="text-red-500 text-sm transition-all duration-300 ease-in-out">
+                {errorMessage}
+              </p>
+            )}
           </div>
           <div className=" mt-10 bg-gradient-to-r from-[#0a0a0a] via-[#0d828a] to-[#0a0a0a] h-[1px] w-full"></div>
           <Button

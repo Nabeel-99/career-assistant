@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import {
   Sidebar,
@@ -20,15 +20,16 @@ import Link from "next/link";
 import { IoGrid } from "react-icons/io5";
 import { RiFileUploadFill } from "react-icons/ri";
 import { FaMicrophone } from "react-icons/fa";
-
 import { HiTemplate } from "react-icons/hi";
 import { User } from "@/lib/generated/prisma";
 import { IoMdSettings } from "react-icons/io";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import supabase from "@/lib/supabase";
 const SideNavWrapper = ({ user }: { user: User | null }) => {
   const { setOpenMobile } = useSidebar();
   const pathname = usePathname();
+  const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
   const isSettingsActive = pathname.startsWith("/settings");
   const navItems = [
     {
@@ -52,13 +53,29 @@ const SideNavWrapper = ({ user }: { user: User | null }) => {
       icon: <HiTemplate />,
     },
   ];
+
+  useEffect(() => {
+    const loadAvatar = async () => {
+      if (!user?.image?.startsWith("http")) {
+        const { data } = supabase.storage
+          .from("avatars")
+          .getPublicUrl(user?.image!);
+        if (data.publicUrl) {
+          setAvatarUrl(`${data.publicUrl}?t=${Date.now()}`);
+        }
+      } else {
+        setAvatarUrl(user?.image);
+      }
+    };
+    loadAvatar();
+  }, [user?.image]);
   return (
     <Sidebar className="">
       <SidebarContent className="bg-[#0a0a0a] pt-8 ">
         <SidebarGroup>
           <SidebarGroupLabel className="flex items-center  mb-5">
             <Avatar>
-              <AvatarImage src={user?.image!} />
+              <AvatarImage src={avatarUrl!} className="object-contain" />
               <AvatarFallback className="flex items-center">
                 <span>{user?.firstname?.charAt(0)} </span>
                 <span>{user?.lastname?.charAt(0)}</span>
@@ -82,7 +99,10 @@ const SideNavWrapper = ({ user }: { user: User | null }) => {
                       )}
                       onClick={() => setOpenMobile(false)}
                     >
-                      <Link href={item.url} className=" ">
+                      <Link
+                        href={item.url}
+                        className={cn(isActive && "text-white")}
+                      >
                         <span className="text-xl">{item.icon}</span>
                         <span className="pl-1">{item.name}</span>
                       </Link>
@@ -98,12 +118,19 @@ const SideNavWrapper = ({ user }: { user: User | null }) => {
         <SidebarMenu className="">
           <SidebarMenuItem className="text-sidebar-foreground/70">
             <SidebarMenuButton
+              asChild
               className={cn(
                 "text-[16px]",
                 isSettingsActive && "bg-sidebar-accent"
               )}
             >
-              <Link href="/settings" className=" flex items-center gap-2">
+              <Link
+                href="/settings"
+                className={cn(
+                  " flex items-center gap-2 w-full",
+                  isSettingsActive && "text-white"
+                )}
+              >
                 <span>
                   <IoMdSettings className="text-xl" />
                 </span>

@@ -20,12 +20,16 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           const user = await prisma.user.findUnique({
             where: { email },
           });
-          if (!user || !user.password) {
-            return null;
+          if (!user) {
+            throw new Error("User not found");
+          }
+
+          if (!user.password) {
+            throw new Error("Account uses social login");
           }
           const isPasswordValid = await bcrypt.compare(password, user.password);
           if (!isPasswordValid) {
-            return null;
+            throw new Error("Invalid password");
           }
 
           return user;
@@ -33,7 +37,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           if (error instanceof ZodError) {
             return null;
           }
-          return null;
+          throw error;
         }
       },
     }),

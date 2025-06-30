@@ -25,3 +25,12 @@ export const PracticeSchema = z.object({
     required_error: "Please select an experience level",
   }),
 });
+
+export const updateProfileSchema = z.object({
+  image: z.string().optional(),
+  firstname: z.string().min(1).optional(),
+  lastname: z.string().min(1).optional(),
+  email: z.string().email().optional(),
+  password: strongPassword.optional(),
+  currentPassword: z.string().min(1).optional(),
+});

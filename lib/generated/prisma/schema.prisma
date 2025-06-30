@@ -38,7 +38,7 @@ model Practice {
   isTaken     Boolean?   @default(false)
   questions   Question[]
   userId      String
-  users       User       @relation(fields: [userId], references: [id])
+  users       User       @relation(fields: [userId], references: [id], onDelete: Cascade)
   feedback    Feedback?
   createdAt   DateTime   @default(now())
 }
@@ -58,14 +58,14 @@ model Resume {
   content   Json?
   filePath  String?
   userId    String
-  users     User     @relation(fields: [userId], references: [id])
+  users     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
 }
 
 model Feedback {
   id         Int      @id @default(autoincrement())
   practiceId Int      @unique
-  practice   Practice @relation(fields: [practiceId], references: [id])
+  practice   Practice @relation(fields: [practiceId], references: [id], onDelete: Cascade)
   comment    String
   score      Int
   createdAt  DateTime @default(now())

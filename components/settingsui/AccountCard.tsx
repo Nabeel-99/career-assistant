@@ -22,9 +22,9 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "./ui/form";
+} from "../ui/form";
 import { z } from "zod";
-import { Skeleton } from "./ui/skeleton";
+import { Skeleton } from "../ui/skeleton";
 import axios from "axios";
 import { toast } from "sonner";
 import { ImSpinner9 } from "react-icons/im";

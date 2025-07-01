@@ -142,13 +142,13 @@ const PracticeForm = ({
                       <RadioGroup
                         defaultValue={field.value}
                         onValueChange={field.onChange}
-                        className="flex flex-col gap-4 max-h-[190px] overflow-scroll hide-scrollbar bg-[#151515] border w-full rounded-sm p-2"
+                        className="flex flex-col gap-4 max-h-[190px] overflow-scroll hide-scrollbar dark:bg-[#151515] border w-full rounded-sm p-2"
                       >
                         {fetchingResumes ? (
                           <span className="flex flex-col gap-4">
                             {Array.from({ length: 3 }).map((_, index) => (
                               <Skeleton
-                                className="flex items-center justify-between border py-2 px-2 w-full h-10  bg-[#1f1f1f] rounded-sm cursor-pointer"
+                                className="flex items-center justify-between border py-2 px-2 w-full h-10  dark:bg-[#1f1f1f] rounded-sm cursor-pointer"
                                 key={index}
                               />
                             ))}
@@ -158,7 +158,7 @@ const PracticeForm = ({
                             <label
                               key={resume.id}
                               htmlFor={`${resume.filePath}`}
-                              className="flex items-center justify-between border py-2 px-2 w-full bg-[#1f1f1f] rounded-sm cursor-pointer"
+                              className="flex items-center justify-between border py-2 px-2 w-full dark:bg-[#1f1f1f] rounded-sm cursor-pointer"
                             >
                               <div className="flex items-center gap-3 w-full">
                                 <RadioGroupItem
@@ -176,7 +176,7 @@ const PracticeForm = ({
                                   e.stopPropagation();
                                   openPreview(resume.filePath!);
                                 }}
-                                className="hover:bg-[#151515] bg-[#343333] cursor-pointer rounded-xl text-white"
+                                className="bg-black/10 hover:bg-black/20 text-black dark:bg-[#151515] dark:hover:bg-[#343333] cursor-pointer rounded-xl dark:text-white"
                               >
                                 <FaEye />
                               </Button>
@@ -212,7 +212,7 @@ const PracticeForm = ({
                       >
                         {experienceLevels.map((level) => (
                           <label
-                            className="flex items-center gap-3 border py-2 px-1 w-full bg-[#151515] rounded-sm"
+                            className="flex items-center gap-3 border py-2 px-1 w-full dark:bg-[#151515] rounded-sm"
                             key={level.value}
                           >
                             <div>

@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Prisma } from "@/lib/generated/prisma";
 import { createFeedback, fetchPracticeById } from "@/lib/action";
 import { assistant, vapi } from "@/lib/vapi";
-import InterviewContainer from "../InterviewContainer";
+import InterviewContainer from "./InterviewContainer";
 import { Transcript } from "@/lib/types";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";

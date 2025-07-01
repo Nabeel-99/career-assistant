@@ -14,12 +14,12 @@ const SiteHeader = () => {
         <nav className="text-base text-muted-foreground flex items-center gap-2  px-4">
           <Link
             href="/practice"
-            className="text-muted-foreground hover:text-white"
+            className="text-muted-foreground hover:text-accent-foreground dark:hover:text-white"
           >
             Practice
           </Link>
           <span className="mx-1">/</span>
-          <span className="text-white">Interview Room</span>
+          <span className="text-black dark:text-white">Interview Room</span>
         </nav>
       );
     }
@@ -39,7 +39,7 @@ const SiteHeader = () => {
     }
   };
   return (
-    <header className="flex border-b items-center bg-[#0a0a0a] py-2">
+    <header className="flex border-b items-center dark:bg-[#0a0a0a] py-2">
       <div className="flex w-full items-center gap-1 px-4 lg:gap-2 lg:px-6">
         <SidebarTrigger className="-ml-1" />
         <Separator

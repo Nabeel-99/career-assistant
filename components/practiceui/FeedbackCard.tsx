@@ -44,7 +44,7 @@ const FeedbackCard = ({ id }: { id: string }) => {
         <CardHeader>
           <CardTitle className="flex items-center justify-between">
             <span>Feedback</span>
-            <div className="*:data-[slot=avatar]:ring-[#4b4b4b]  flex -space-x-1 *:data-[slot=avatar]:ring-2 ">
+            <div className="*:data-[slot=avatar]:ring-[#c3c3c3] dark:*:data-[slot=avatar]:ring-[#4b4b4b]  flex -space-x-1 *:data-[slot=avatar]:ring-2 ">
               {feedback?.stacks.map((stack, index) => (
                 <Avatar className="size-6" key={index}>
                   <AvatarImage
@@ -78,10 +78,7 @@ const FeedbackCard = ({ id }: { id: string }) => {
         </CardContent>
       </Card>
       <div className="flex justify-end">
-        <Link
-          href={`/practice/interview/${id}`}
-          className="border border-black "
-        >
+        <Link href={`/practice/interview/${id}`} className=" ">
           {" "}
           <Button>Retake Interview</Button>
         </Link>

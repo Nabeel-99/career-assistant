@@ -20,9 +20,9 @@ const PracticeCard = ({
   const expLevel = level as keyof typeof mapLevel;
 
   return (
-    <div className="flex flex-col border rounded-lg p-4 xl:h-[400px] bg-[#0a0a0a]/30">
+    <div className="flex flex-col border rounded-lg p-4 xl:h-[400px] dark:bg-[#0a0a0a]/30">
       <div className="border rounded-lg p-4 overflow-clip flex items-center justify-center">
-        <div className="*:data-[slot=avatar]:ring-[#4b4b4b]  flex -space-x-8 *:data-[slot=avatar]:ring-2 ">
+        <div className=" *:data-[slot=avatar]:ring-[#c3c3c3] dark:*:data-[slot=avatar]:ring-[#4b4b4b]  flex -space-x-8 *:data-[slot=avatar]:ring-2 ">
           {stacks.map((stack, index) => (
             <Avatar className="size-20 xl:size-28" key={index}>
               <AvatarImage
@@ -41,7 +41,7 @@ const PracticeCard = ({
           <p className="line-clamp-3">{description}</p>
           <div className="flex items-center gap-10 text-sm">
             <div className="flex items-center gap-1">
-              <FaRegCalendarAlt className="text-subheadline" />
+              <FaRegCalendarAlt className="text-black/60 text-subheadline" />
               <p className="text-nowrap">{formatDate(createdAt)}</p>
             </div>
             <div className="flex items-center gap-1">
@@ -73,18 +73,12 @@ const PracticeCard = ({
             {mapLevel[expLevel].title}
           </p>
           {isTaken ? (
-            <Link
-              href={`/practice/feedback/${id}`}
-              className="border border-black "
-            >
+            <Link href={`/practice/feedback/${id}`} className="  ">
               {" "}
               <Button>View Feedback</Button>
             </Link>
           ) : (
-            <Link
-              href={`/practice/interview/${id}`}
-              className="border border-black "
-            >
+            <Link href={`/practice/interview/${id}`} className="  ">
               {" "}
               <Button>Start Interview</Button>
             </Link>

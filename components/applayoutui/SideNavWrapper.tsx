@@ -71,11 +71,11 @@ const SideNavWrapper = ({ user }: { user: User | null }) => {
   }, [user?.image]);
   return (
     <Sidebar className="">
-      <SidebarContent className="bg-[#0a0a0a] pt-8 ">
+      <SidebarContent className="dark:bg-[#0a0a0a] pt-8 ">
         <SidebarGroup>
           <SidebarGroupLabel className="flex items-center  mb-5">
-            <Avatar>
-              <AvatarImage src={avatarUrl!} className="object-contain" />
+            <Avatar className="border">
+              <AvatarImage src={avatarUrl!} className="object-cover" />
               <AvatarFallback className="flex items-center">
                 <span>{user?.firstname?.charAt(0)} </span>
                 <span>{user?.lastname?.charAt(0)}</span>
@@ -101,7 +101,7 @@ const SideNavWrapper = ({ user }: { user: User | null }) => {
                     >
                       <Link
                         href={item.url}
-                        className={cn(isActive && "text-white")}
+                        className={cn(isActive && "text-black dark:text-white")}
                       >
                         <span className="text-xl">{item.icon}</span>
                         <span className="pl-1">{item.name}</span>
@@ -114,21 +114,21 @@ const SideNavWrapper = ({ user }: { user: User | null }) => {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter className="bg-[#0a0a0a]">
+      <SidebarFooter className="dark:bg-[#0a0a0a]">
         <SidebarMenu className="">
           <SidebarMenuItem className="text-sidebar-foreground/70">
             <SidebarMenuButton
               asChild
               className={cn(
                 "text-[16px]",
-                isSettingsActive && "bg-sidebar-accent"
+                isSettingsActive && " bg-sidebar-accent"
               )}
             >
               <Link
                 href="/settings"
                 className={cn(
                   " flex items-center gap-2 w-full",
-                  isSettingsActive && "text-white"
+                  isSettingsActive && "text-black dark:text-white"
                 )}
               >
                 <span>

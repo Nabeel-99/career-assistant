@@ -95,7 +95,7 @@ const UploadCard = ({ userId }: { userId: string | undefined }) => {
             <span>or</span>
             <Label
               htmlFor="file"
-              className="bg-[#303030] px-4 py-2 rounded-md cursor-pointer hover:bg-[#343333] transition-all duration-300"
+              className="bg-black/20 hover:bg-black/30 dark:bg-[#303030] px-4 py-2 rounded-md cursor-pointer dark:hover:bg-[#343333] transition-all duration-300"
             >
               Choose File
             </Label>
@@ -111,8 +111,12 @@ const UploadCard = ({ userId }: { userId: string | undefined }) => {
           <div className="flex flex-col items-center gap-2">
             <span className="text-sm text-subheadline">Supported Formats</span>
             <div className="flex items-center gap-2">
-              <span className="bg-[#252424] p-2 rounded-md text-sm">PDF</span>
-              <span className="bg-[#252424] p-2 rounded-md text-sm">DOCX</span>
+              <span className="bg-black/20 dark:bg-[#252424] p-2 rounded-md text-sm">
+                PDF
+              </span>
+              <span className="bg-black/20 dark:bg-[#252424] p-2 rounded-md text-sm">
+                DOCX
+              </span>
             </div>
           </div>
         </CardContent>

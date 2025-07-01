@@ -21,7 +21,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" data-theme="dark" className="dark">
+    <html lang="en" data-theme="dark" className="dark" suppressHydrationWarning>
       <head>
         <link rel="icon" type="image/png" href="/logo.png" />
       </head>

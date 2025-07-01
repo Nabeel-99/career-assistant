@@ -12,7 +12,7 @@ import supabase from "@/lib/supabase";
 import { Dialog, DialogContent, DialogHeader } from "../ui/dialog";
 import { DialogDescription, DialogTitle } from "@radix-ui/react-dialog";
 import axios from "axios";
-import { DeleteDialog } from "../DeleteDialog";
+import { DeleteDialog } from "../practiceui/DeleteDialog";
 import { toast } from "sonner";
 
 const ResumeCard = ({
@@ -95,7 +95,7 @@ const ResumeCard = ({
                 key={index}
               >
                 <div className="flex items-center gap-2">
-                  <div className="flex items-center justify-center p-2 border border-[#343333] bg-[#1f1f1f] rounded-lg">
+                  <div className="flex items-center justify-center p-2 border dark:border-[#343333] dark:bg-[#1f1f1f] rounded-lg">
                     <IoDocumentText className="xl:size-8" />
                   </div>
                   <div className="flex flex-col text-sm xl:text-base">
@@ -108,13 +108,13 @@ const ResumeCard = ({
                 <div className="flex items-center gap-2">
                   <Button
                     onClick={() => openPreview(resume.filePath!)}
-                    className="bg-[#1f1f1f] hover:bg-[#343333] cursor-pointer rounded-xl text-white"
+                    className="bg-black/10 hover:bg-black/20 text-black dark:bg-[#1f1f1f] dark:hover:bg-[#343333] cursor-pointer rounded-xl dark:text-white"
                   >
                     <FaEye />
                   </Button>
                   <Button
                     onClick={() => showDeleteDialog(resume.filePath!)}
-                    className="bg-[#1f1f1f] hover:bg-[#343333] cursor-pointer rounded-xl text-white"
+                    className="bg-black/10 hover:bg-black/20 text-black dark:bg-[#1f1f1f] dark:hover:bg-[#343333] cursor-pointer rounded-xl dark:text-white"
                   >
                     <FaTrash />
                   </Button>

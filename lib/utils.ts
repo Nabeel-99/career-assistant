@@ -2,6 +2,7 @@ import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { formatDistanceToNow } from "date-fns";
 import { devIconsMappings } from "./helper";
+
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }

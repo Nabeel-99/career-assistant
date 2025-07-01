@@ -1,13 +1,13 @@
 "use client";
 
 import React from "react";
-import { Card } from "./ui/card";
+import { Card } from "../ui/card";
 import { RiSpeakAiFill } from "react-icons/ri";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import { Button } from "./ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { Button } from "../ui/button";
 import { ImSpinner9 } from "react-icons/im";
 import { User } from "@/lib/generated/prisma";
-import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
+import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 import { MdCallEnd } from "react-icons/md";
 import { cn, getDevIconUrl, mapLevel } from "@/lib/utils";
 import { Transcript } from "@/lib/types";
@@ -40,7 +40,7 @@ const InterviewContainer = ({
   return (
     <>
       {generatingFeedback && (
-        <div className="absolute inset-0 bg-black/80 z-50 flex items-center  justify-center">
+        <div className="absolute inset-0 bg-black/60 dark:bg-black/80 z-50 flex items-center  justify-center">
           <div className=" flex flex-col gap-2 items-center justify-center">
             <ImSpinner9 className="animate-spin text-white text-center text-4xl" />
             <p className="animate-pulse">Generating Feedback</p>
@@ -48,11 +48,11 @@ const InterviewContainer = ({
         </div>
       )}
 
-      <Card className="w-full @container/card  bg-[#0a0a0a] transition-all duraiton-300 ease-in-out p-6 lg:p-10 xl:w-[1050px] flex flex-col gap-10 2xl:container 2xl:mx-auto 2xl:max-h-[1000px]  h-full">
+      <Card className="w-full @container/card  dark:bg-[#0a0a0a] transition-all duraiton-300 ease-in-out p-6 lg:p-10 xl:w-[1050px] flex flex-col gap-10 2xl:container 2xl:mx-auto 2xl:max-h-[1000px]  h-full">
         <div className="flex flex-col gap-2">
           <div className="flex flex-col gap-4 md:flex-row items-center md:justify-between">
             <h1 className="text-xl font-bold">{practice?.title}</h1>
-            <div className="*:data-[slot=avatar]:ring-[#4b4b4b] order-first md:order-last flex -space-x-1 *:data-[slot=avatar]:ring-2 ">
+            <div className="*:data-[slot=avatar]:ring-[#c3c3c3] dark:*:data-[slot=avatar]:ring-[#4b4b4b] order-first md:order-last flex -space-x-1 *:data-[slot=avatar]:ring-2 ">
               {practice?.stacks.map((stack: string, index: any) => (
                 <Avatar className="size-6" key={index}>
                   <AvatarImage
@@ -72,13 +72,13 @@ const InterviewContainer = ({
           <p className="italic text-subheadline">{practice?.description}.</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <Card className="flex flex-col  gap-5 items-center bg-[#111111] xl:p-20 justify-center">
+          <Card className="flex flex-col  gap-5 items-center dark:bg-[#111111] xl:p-20 justify-center">
             <div className={cn(isSpeaking && "text-sky-500 animate-pulse")}>
               <RiSpeakAiFill className="size-24 xl:ml10 xl:size-44 " />
             </div>
             <p className="lg:text-xl font-bold">AI Interviewer</p>
           </Card>
-          <Card className="flex items-center bg-[#111111] xl:p-20 justify-center">
+          <Card className="flex items-center dark:bg-[#111111] xl:p-20 justify-center">
             <div className="flex items-center bg-black rounded-full">
               <Avatar className="size-24 xl:size-44">
                 <AvatarImage src={user?.image!} />
@@ -153,7 +153,7 @@ const InterviewContainer = ({
           <TooltipTrigger asChild>
             <div
               className={cn(
-                "flex items-center justify-center border bg-red-700 hover:bg-red-600 cursor-pointer p-6 rounded-full",
+                "flex items-center justify-center border text-white bg-red-700 hover:bg-red-600 cursor-pointer p-6 rounded-full",
                 !isConnected && "hidden"
               )}
               onClick={endCall}

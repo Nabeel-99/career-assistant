@@ -1,12 +1,10 @@
 "use client";
 
-import { AccountCard } from "@/components/AccountCard";
-import DeleteAccountCard from "@/components/DeleteAccountCard";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { AccountCard } from "@/components/settingsui/AccountCard";
+import DeleteAccountCard from "@/components/settingsui/DeleteAccountCard";
+import ProfilePictureCard from "@/components/settingsui/ProfilePictureCard";
+import ThemeCard from "@/components/settingsui/ThemeCard";
 import { Card } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Skeleton } from "@/components/ui/skeleton";
 import { fetchUser } from "@/lib/action";
 import { User } from "@/lib/generated/prisma";
 import supabase from "@/lib/supabase";
@@ -80,34 +78,14 @@ const page = () => {
   }, [user?.image]);
 
   return (
-    <Card className="border flex flex-col gap-10 p-10">
-      <div className="flex items-center gap-6">
-        {uploading ? (
-          <Skeleton className="w-full rounded-full size-20 xl:size-29" />
-        ) : (
-          <Avatar className="size-20 xl:size-28">
-            <AvatarImage
-              src={avatarUrl!}
-              alt={user?.firstname!}
-              className="backdrop-blur-lg rounded-full object-cover bg-white/40"
-            />
-            <AvatarFallback>{user?.firstname}</AvatarFallback>
-          </Avatar>
-        )}
-        <Label
-          htmlFor="file"
-          className="bg-primary px-4 py-3 text-black rounded-md cursor-pointer hover:bg-primary/90"
-        >
-          Edit Profile picture
-        </Label>
-        <Input
-          id="file"
-          type="file"
-          accept="image/*"
-          hidden
-          onChange={handleFileUpload}
-        />
-      </div>
+    <Card className="border flex flex-col gap-10 p-4 md:p-10">
+      <ProfilePictureCard
+        uploading={uploading}
+        avatarUrl={avatarUrl!}
+        user={user}
+        handleFileUpload={handleFileUpload}
+      />
+      <ThemeCard />
       <AccountCard user={user} loading={loading} />
       <DeleteAccountCard />
     </Card>

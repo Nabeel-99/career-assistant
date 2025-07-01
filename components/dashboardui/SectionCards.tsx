@@ -8,7 +8,7 @@ const SectionCards = () => {
       <Card className="@container/card w-full">
         <CardHeader className="">
           <CardTitle className="flex items-center gap-2">
-            <div className="flex items-center justify-center p-2 border border-[#343333] bg-[#1f1f1f] rounded-lg">
+            <div className="flex items-center justify-center p-2 border dark:border-[#343333] dark:bg-[#1f1f1f] rounded-lg">
               <FaLightbulb className="size-8" />
             </div>
             <p className="text-xl">AI Tips to improve</p>
@@ -29,7 +29,7 @@ const SectionCards = () => {
         </CardHeader>
         <CardContent>
           <div className="flex items-center gap-2">
-            <div className="flex items-center justify-center p-2 border border-[#343333] bg-[#1f1f1f] rounded-lg">
+            <div className="flex items-center justify-center p-2 border dark:border-[#343333] dark:bg-[#1f1f1f] rounded-lg">
               <IoDocumentText className="size-8" />
             </div>
             <div className="flex flex-col">

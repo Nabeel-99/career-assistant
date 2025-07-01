@@ -5,7 +5,7 @@ import { Skeleton } from "../ui/skeleton";
 const CallCardSkeleton = () => {
   return (
     <>
-      <Card className="w-full @container/card bg-[#0a0a0a] p-6 lg:p-10 xl:w-[1050px] flex flex-col gap-10 h-full">
+      <Card className="w-full @container/card dark:bg-[#0a0a0a] p-6 lg:p-10 xl:w-[1050px] flex flex-col gap-10 h-full">
         <div className="flex flex-col gap-2">
           <Skeleton className="h-6 w-2/3" />
           <Skeleton className="h-4 w-1/4" />
@@ -13,10 +13,10 @@ const CallCardSkeleton = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <Card className="flex items-center bg-[#111111] xl:p-20 justify-center">
+          <Card className="flex items-center dark:bg-[#111111] xl:p-20 justify-center">
             <Skeleton className="size-24 xl:size-44 rounded-full" />
           </Card>
-          <Card className="flex items-center bg-[#111111] xl:p-20 justify-center">
+          <Card className="flex items-center dark:bg-[#111111] xl:p-20 justify-center">
             <Skeleton className="size-24 xl:size-44 rounded-full" />
           </Card>
         </div>

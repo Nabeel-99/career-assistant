@@ -7,7 +7,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "./ui/card";
+} from "../ui/card";
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -17,8 +17,8 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "./ui/alert-dialog";
-import { Button } from "./ui/button";
+} from "../ui/alert-dialog";
+import { Button } from "../ui/button";
 import axios from "axios";
 import { toast } from "sonner";
 import { ImSpinner9 } from "react-icons/im";

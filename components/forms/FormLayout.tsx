@@ -176,6 +176,17 @@ const FormLayout = ({
                 btnText
               )}
             </Button>
+            {!isSignup && (
+              <div className="flex justify-end">
+                <Link
+                  href={"/forgot-password"}
+                  className="text-white/80 transition-all duration-300 ease-in-out hover:text-white"
+                >
+                  Forgot password?
+                </Link>
+              </div>
+            )}
+
             {errorMessage && (
               <p className="text-red-500 text-sm transition-all duration-300 ease-in-out">
                 {errorMessage}

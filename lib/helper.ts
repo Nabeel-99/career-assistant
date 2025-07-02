@@ -132,3 +132,36 @@ export const generateChartData = (practices: PracticeWithFeedback[]) => {
 
   return chart;
 };
+
+export const generateResetPasswordEmail = (name: string, resetLink: string) => `
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Reset Your Password</title>
+  </head>
+  <body style="margin: 0; padding: 0; background-color: #f9f9f9; font-family: Arial, sans-serif;">
+    <div style="max-width: 600px; margin: 40px auto; padding: 20px; background-color: #ffffff; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.05);">
+      <h2 style="color: #2c3e50;">Reset Your Password</h2>
+      <p style="font-size: 16px; color: #333;">
+        Hi ${name || "there"},
+      </p>
+      <p style="font-size: 16px; color: #333;">
+        We received a request to reset your password for your Career Assistant account. Click the button below to choose a new one:
+      </p>
+      <div style="text-align: center; margin: 30px 0;">
+        <a href="${resetLink}" style="display: inline-block; background-color: #0070f3; color: #ffffff; padding: 12px 24px; text-decoration: none; border-radius: 5px; font-weight: bold;">
+          Reset Password
+        </a>
+      </div>
+      <p style="font-size: 14px; color: #888;">
+        This link will expire in 15 minutes. If you didn’t request a password reset, you can safely ignore this email.
+      </p>
+      <hr style="border: none; border-top: 1px solid #eee; margin: 40px 0;" />
+      <p style="font-size: 12px; color: #aaa; text-align: center;">
+        © AI-Career Assistant. All rights reserved.
+      </p>
+    </div>
+  </body>
+</html>
+`;

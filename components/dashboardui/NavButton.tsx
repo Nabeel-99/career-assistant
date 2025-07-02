@@ -13,7 +13,7 @@ const NavButton = ({ url, icon, title, description }: NavButtonProps) => {
   return (
     <Link
       href={url}
-      className="border flex hover:bg-sidebar-accent dark:hover:bg-[#1f1f1f] transition-all duration-300 ease-in-out py-4 px-4 items-center justify-between dark:border-[#343333] dark:g-[#151515] p-2 rounded-lg"
+      className="border flex hover:bg-sidebar-accent dark:hover:bg-[#1f1f1f] transition-all duration-300 ease-in-out py-4 px-4 items-center justify-between dark:border-[#343333] dark:bg-[#151515] p-2 rounded-lg"
     >
       <div className="flex items-center gap-2">
         <div className="flex items-center justify-center p-2 border dark:border-[#343333] dark:bg-[#1f1f1f] rounded-md">

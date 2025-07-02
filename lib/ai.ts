@@ -176,3 +176,8 @@ Make sure the output can be parsed with JSON.parse(). Do not include markdown or
     throw new Error("Error parsing JSON");
   }
 };
+
+export const generateCV = async () => {
+  try {
+  } catch (error) {}
+};

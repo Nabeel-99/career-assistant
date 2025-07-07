@@ -21,7 +21,7 @@ export const POST = async (req: NextRequest) => {
       experienceLevel
     );
     if (interview) {
-      const result = await prisma.practice.create({
+      await prisma.practice.create({
         data: {
           title: interview.title,
           description: interview.description,

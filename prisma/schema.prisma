@@ -57,6 +57,7 @@ model Resume {
   name String?
   rawText String?
   content Json?
+  template String?
   filePath String?
   userId String
   users User @relation(fields: [userId], references: [id], onDelete: Cascade)

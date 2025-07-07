@@ -4753,6 +4753,7 @@ export namespace Prisma {
     id: number | null
     name: string | null
     rawText: string | null
+    template: string | null
     filePath: string | null
     userId: string | null
     createdAt: Date | null
@@ -4762,6 +4763,7 @@ export namespace Prisma {
     id: number | null
     name: string | null
     rawText: string | null
+    template: string | null
     filePath: string | null
     userId: string | null
     createdAt: Date | null
@@ -4772,6 +4774,7 @@ export namespace Prisma {
     name: number
     rawText: number
     content: number
+    template: number
     filePath: number
     userId: number
     createdAt: number
@@ -4791,6 +4794,7 @@ export namespace Prisma {
     id?: true
     name?: true
     rawText?: true
+    template?: true
     filePath?: true
     userId?: true
     createdAt?: true
@@ -4800,6 +4804,7 @@ export namespace Prisma {
     id?: true
     name?: true
     rawText?: true
+    template?: true
     filePath?: true
     userId?: true
     createdAt?: true
@@ -4810,6 +4815,7 @@ export namespace Prisma {
     name?: true
     rawText?: true
     content?: true
+    template?: true
     filePath?: true
     userId?: true
     createdAt?: true
@@ -4907,6 +4913,7 @@ export namespace Prisma {
     name: string | null
     rawText: string | null
     content: JsonValue | null
+    template: string | null
     filePath: string | null
     userId: string
     createdAt: Date
@@ -4936,6 +4943,7 @@ export namespace Prisma {
     name?: boolean
     rawText?: boolean
     content?: boolean
+    template?: boolean
     filePath?: boolean
     userId?: boolean
     createdAt?: boolean
@@ -4947,6 +4955,7 @@ export namespace Prisma {
     name?: boolean
     rawText?: boolean
     content?: boolean
+    template?: boolean
     filePath?: boolean
     userId?: boolean
     createdAt?: boolean
@@ -4958,6 +4967,7 @@ export namespace Prisma {
     name?: boolean
     rawText?: boolean
     content?: boolean
+    template?: boolean
     filePath?: boolean
     userId?: boolean
     createdAt?: boolean
@@ -4969,12 +4979,13 @@ export namespace Prisma {
     name?: boolean
     rawText?: boolean
     content?: boolean
+    template?: boolean
     filePath?: boolean
     userId?: boolean
     createdAt?: boolean
   }
 
-  export type ResumeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "rawText" | "content" | "filePath" | "userId" | "createdAt", ExtArgs["result"]["resume"]>
+  export type ResumeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "rawText" | "content" | "template" | "filePath" | "userId" | "createdAt", ExtArgs["result"]["resume"]>
   export type ResumeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     users?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -4995,6 +5006,7 @@ export namespace Prisma {
       name: string | null
       rawText: string | null
       content: Prisma.JsonValue | null
+      template: string | null
       filePath: string | null
       userId: string
       createdAt: Date
@@ -5426,6 +5438,7 @@ export namespace Prisma {
     readonly name: FieldRef<"Resume", 'String'>
     readonly rawText: FieldRef<"Resume", 'String'>
     readonly content: FieldRef<"Resume", 'Json'>
+    readonly template: FieldRef<"Resume", 'String'>
     readonly filePath: FieldRef<"Resume", 'String'>
     readonly userId: FieldRef<"Resume", 'String'>
     readonly createdAt: FieldRef<"Resume", 'DateTime'>
@@ -7002,6 +7015,7 @@ export namespace Prisma {
     name: 'name',
     rawText: 'rawText',
     content: 'content',
+    template: 'template',
     filePath: 'filePath',
     userId: 'userId',
     createdAt: 'createdAt'
@@ -7368,6 +7382,7 @@ export namespace Prisma {
     name?: StringNullableFilter<"Resume"> | string | null
     rawText?: StringNullableFilter<"Resume"> | string | null
     content?: JsonNullableFilter<"Resume">
+    template?: StringNullableFilter<"Resume"> | string | null
     filePath?: StringNullableFilter<"Resume"> | string | null
     userId?: StringFilter<"Resume"> | string
     createdAt?: DateTimeFilter<"Resume"> | Date | string
@@ -7379,6 +7394,7 @@ export namespace Prisma {
     name?: SortOrderInput | SortOrder
     rawText?: SortOrderInput | SortOrder
     content?: SortOrderInput | SortOrder
+    template?: SortOrderInput | SortOrder
     filePath?: SortOrderInput | SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
@@ -7393,6 +7409,7 @@ export namespace Prisma {
     name?: StringNullableFilter<"Resume"> | string | null
     rawText?: StringNullableFilter<"Resume"> | string | null
     content?: JsonNullableFilter<"Resume">
+    template?: StringNullableFilter<"Resume"> | string | null
     filePath?: StringNullableFilter<"Resume"> | string | null
     userId?: StringFilter<"Resume"> | string
     createdAt?: DateTimeFilter<"Resume"> | Date | string
@@ -7404,6 +7421,7 @@ export namespace Prisma {
     name?: SortOrderInput | SortOrder
     rawText?: SortOrderInput | SortOrder
     content?: SortOrderInput | SortOrder
+    template?: SortOrderInput | SortOrder
     filePath?: SortOrderInput | SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
@@ -7422,6 +7440,7 @@ export namespace Prisma {
     name?: StringNullableWithAggregatesFilter<"Resume"> | string | null
     rawText?: StringNullableWithAggregatesFilter<"Resume"> | string | null
     content?: JsonNullableWithAggregatesFilter<"Resume">
+    template?: StringNullableWithAggregatesFilter<"Resume"> | string | null
     filePath?: StringNullableWithAggregatesFilter<"Resume"> | string | null
     userId?: StringWithAggregatesFilter<"Resume"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Resume"> | Date | string
@@ -7713,6 +7732,7 @@ export namespace Prisma {
     name?: string | null
     rawText?: string | null
     content?: NullableJsonNullValueInput | InputJsonValue
+    template?: string | null
     filePath?: string | null
     createdAt?: Date | string
     users: UserCreateNestedOneWithoutResumesInput
@@ -7723,6 +7743,7 @@ export namespace Prisma {
     name?: string | null
     rawText?: string | null
     content?: NullableJsonNullValueInput | InputJsonValue
+    template?: string | null
     filePath?: string | null
     userId: string
     createdAt?: Date | string
@@ -7732,6 +7753,7 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     rawText?: NullableStringFieldUpdateOperationsInput | string | null
     content?: NullableJsonNullValueInput | InputJsonValue
+    template?: NullableStringFieldUpdateOperationsInput | string | null
     filePath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateOneRequiredWithoutResumesNestedInput
@@ -7742,6 +7764,7 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     rawText?: NullableStringFieldUpdateOperationsInput | string | null
     content?: NullableJsonNullValueInput | InputJsonValue
+    template?: NullableStringFieldUpdateOperationsInput | string | null
     filePath?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -7752,6 +7775,7 @@ export namespace Prisma {
     name?: string | null
     rawText?: string | null
     content?: NullableJsonNullValueInput | InputJsonValue
+    template?: string | null
     filePath?: string | null
     userId: string
     createdAt?: Date | string
@@ -7761,6 +7785,7 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     rawText?: NullableStringFieldUpdateOperationsInput | string | null
     content?: NullableJsonNullValueInput | InputJsonValue
+    template?: NullableStringFieldUpdateOperationsInput | string | null
     filePath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -7770,6 +7795,7 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     rawText?: NullableStringFieldUpdateOperationsInput | string | null
     content?: NullableJsonNullValueInput | InputJsonValue
+    template?: NullableStringFieldUpdateOperationsInput | string | null
     filePath?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -8153,6 +8179,7 @@ export namespace Prisma {
     name?: SortOrder
     rawText?: SortOrder
     content?: SortOrder
+    template?: SortOrder
     filePath?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
@@ -8166,6 +8193,7 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     rawText?: SortOrder
+    template?: SortOrder
     filePath?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
@@ -8175,6 +8203,7 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     rawText?: SortOrder
+    template?: SortOrder
     filePath?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
@@ -8706,6 +8735,7 @@ export namespace Prisma {
     name?: string | null
     rawText?: string | null
     content?: NullableJsonNullValueInput | InputJsonValue
+    template?: string | null
     filePath?: string | null
     createdAt?: Date | string
   }
@@ -8715,6 +8745,7 @@ export namespace Prisma {
     name?: string | null
     rawText?: string | null
     content?: NullableJsonNullValueInput | InputJsonValue
+    template?: string | null
     filePath?: string | null
     createdAt?: Date | string
   }
@@ -8785,6 +8816,7 @@ export namespace Prisma {
     name?: StringNullableFilter<"Resume"> | string | null
     rawText?: StringNullableFilter<"Resume"> | string | null
     content?: JsonNullableFilter<"Resume">
+    template?: StringNullableFilter<"Resume"> | string | null
     filePath?: StringNullableFilter<"Resume"> | string | null
     userId?: StringFilter<"Resume"> | string
     createdAt?: DateTimeFilter<"Resume"> | Date | string
@@ -9164,6 +9196,7 @@ export namespace Prisma {
     name?: string | null
     rawText?: string | null
     content?: NullableJsonNullValueInput | InputJsonValue
+    template?: string | null
     filePath?: string | null
     createdAt?: Date | string
   }
@@ -9211,6 +9244,7 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     rawText?: NullableStringFieldUpdateOperationsInput | string | null
     content?: NullableJsonNullValueInput | InputJsonValue
+    template?: NullableStringFieldUpdateOperationsInput | string | null
     filePath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -9220,6 +9254,7 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     rawText?: NullableStringFieldUpdateOperationsInput | string | null
     content?: NullableJsonNullValueInput | InputJsonValue
+    template?: NullableStringFieldUpdateOperationsInput | string | null
     filePath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -9229,6 +9264,7 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     rawText?: NullableStringFieldUpdateOperationsInput | string | null
     content?: NullableJsonNullValueInput | InputJsonValue
+    template?: NullableStringFieldUpdateOperationsInput | string | null
     filePath?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

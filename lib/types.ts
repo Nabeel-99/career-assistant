@@ -23,3 +23,10 @@ export type ActivityData = {
   practice: number;
   feedbacks: number;
 };
+
+export type Template = {
+  image: string;
+  name: string;
+  title: string;
+  description: string;
+};

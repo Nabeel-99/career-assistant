@@ -37,7 +37,7 @@ export const updateProfileSchema = z.object({
 
 export const resumeSchema = z.object({
   fullname: z.string().min(1),
-  title: z.string().min(1),
+  title: z.string().min(1).optional(),
   summary: z.string().min(1),
 
   email: z.string().email(),
@@ -53,24 +53,28 @@ export const resumeSchema = z.object({
     .optional(),
 
   education: z.array(
-    z.object({
-      school: z.string().min(1),
-      degree: z.string().min(1),
-      startDate: z.string().min(1),
-      endDate: z.string().min(1),
-      location: z.string().min(1),
-    })
+    z
+      .object({
+        school: z.string().min(1),
+        degree: z.string().min(1),
+        startDate: z.string().min(1),
+        endDate: z.string().min(1),
+        location: z.string().min(1),
+      })
+      .optional()
   ),
 
   experience: z.array(
-    z.object({
-      company: z.string().min(1),
-      title: z.string().min(1),
-      startDate: z.string().min(1),
-      endDate: z.string().min(1),
-      location: z.string().min(1),
-      description: z.array(z.string().min(1)),
-    })
+    z
+      .object({
+        company: z.string().min(1),
+        title: z.string().min(1),
+        startDate: z.string().min(1),
+        endDate: z.string().min(1),
+        location: z.string().min(1),
+        description: z.array(z.string().min(1)),
+      })
+      .optional()
   ),
 
   projects: z

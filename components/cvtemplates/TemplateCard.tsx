@@ -1,16 +1,16 @@
 import React from "react";
 
-const TemplateCard = () => {
+const TemplateCard = ({ image, name }: { image: string; name: string }) => {
   return (
     <div className="flex flex-col  rounded gap-2">
-      <div className="w-full aspect-[3/4] overflow-clip max-h-[400px] rounded bg-white p-2 flex items-center justify-center">
+      <div className="w-full aspect-[3/4] border overflow-clip max-h-[400px] rounded bg-white p-2 flex items-center justify-center">
         <img
-          src={"/templateone.png"}
-          alt="template-one"
+          src={image}
+          alt={name}
           className="h-full w-full object-top object-cover"
         />
       </div>
-      <p>Template Name</p>
+      <p>{name}</p>
     </div>
   );
 };

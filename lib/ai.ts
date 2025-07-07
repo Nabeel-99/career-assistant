@@ -1,5 +1,6 @@
 import { groq } from "@ai-sdk/groq";
 import { cleanJSONparse } from "./utils";
+import { google } from "@ai-sdk/google";
 import { generateText } from "ai";
 import { Transcript } from "./types";
 
@@ -177,7 +178,77 @@ Make sure the output can be parsed with JSON.parse(). Do not include markdown or
   }
 };
 
-export const generateCV = async () => {
+export const generateCV = async (rawText: string) => {
+  const { text } = await generateText({
+    model: google("gemini-2.5-flash"),
+    prompt: `You are an intelligent resume parsing assistant.
+Your task is to analyze the raw resume text below and extract its content into structured JSON format following the exact schema provided.
+Make sure the output can be parsed with JSON.parse(). Do not include markdown or extra text outside the JSON.. Every field must match the types and structure of the schema. If a value is missing, set it to null or an empty array if applicable.
+for the links be it project or social links like github, linkedin etc.. if it doesn't start with http, return null. Do not assume or have a placeholder for them. simply return null.
+Return the final output as a valid JSON object with the following shape:
+
+{
+  fullname: string,
+  title: string,
+  summary: string,
+
+  email: string,
+  phone: string,
+  location: string,
+
+  links: {
+    linkedin?: string,
+    github?: string,
+    portfolio?: string
+  },
+
+  education: {
+    school: string,
+    degree: string,
+    startDate: string,
+    endDate: string,
+    location: string
+  }[],
+
+  experience: {
+    company: string,
+    title: string,
+    startDate: string,
+    endDate: string,
+    location: string,
+    description: string[]
+  }[],
+
+  projects?: {
+    title: string,
+    description: string,
+    stacks: string,
+    link: string
+  }[],
+
+  skills: string[],
+
+  awards?: {
+    title: string,
+    description: string,
+    year: string
+  }[]
+}
+
+if the raw Text is not a resume, return an empty object.
+
+Now, extract the resume below into this format:
+
+${rawText}`,
+  });
+  const data = text;
   try {
-  } catch (error) {}
+    if (data) {
+      const parsed = cleanJSONparse(data);
+      return parsed;
+    }
+  } catch (error) {
+    console.log("error", error);
+    throw new Error("Error parsing JSON");
+  }
 };

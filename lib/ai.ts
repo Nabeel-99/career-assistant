@@ -233,6 +233,11 @@ Return the final output as a valid JSON object with the following shape:
     description: string,
     year: string
   }[]
+
+  languages: {
+    name: string,
+    level: "beginner" | "intermediate" | "advanced"
+  }[]
 }
 
 if the raw Text is not a resume, return an empty object.

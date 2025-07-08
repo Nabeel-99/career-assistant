@@ -36,67 +36,83 @@ export const updateProfileSchema = z.object({
 });
 
 export const resumeSchema = z.object({
+  image: z.string().optional(),
   fullname: z.string().min(1),
   title: z.string().min(1).optional(),
-  summary: z.string().min(1),
+  summary: z.string().min(1).optional(),
 
-  email: z.string().email(),
-  phone: z.string().min(1),
-  location: z.string().min(1),
+  email: z.string().email().optional(),
+  phone: z.string().min(1).optional(),
+  location: z.string().min(1).optional(),
 
   links: z
     .object({
-      linkedin: z.string().optional().nullable(),
-      github: z.string().optional().nullable(),
-      portfolio: z.string().optional().nullable(),
+      linkedin: z.string().optional(),
+      github: z.string().optional(),
+      portfolio: z.string().optional(),
     })
     .optional(),
 
-  education: z.array(
-    z
-      .object({
-        school: z.string().min(1),
-        degree: z.string().min(1),
-        startDate: z.string().min(1),
-        endDate: z.string().min(1),
-        location: z.string().min(1),
-      })
-      .optional()
-  ),
+  education: z
+    .array(
+      z
+        .object({
+          school: z.string().min(1),
+          degree: z.string().min(1),
+          startDate: z.string().min(1),
+          endDate: z.string().min(1),
+          location: z.string().min(1),
+        })
+        .optional()
+    )
+    .optional(),
 
-  experience: z.array(
-    z
-      .object({
-        company: z.string().min(1),
-        title: z.string().min(1),
-        startDate: z.string().min(1),
-        endDate: z.string().min(1),
-        location: z.string().min(1),
-        description: z.array(z.string().min(1)),
-      })
-      .optional()
-  ),
+  experience: z
+    .array(
+      z
+        .object({
+          company: z.string().min(1),
+          title: z.string().min(1),
+          startDate: z.string().min(1),
+          endDate: z.string().min(1),
+          location: z.string().min(1),
+          description: z.array(z.string().min(1)),
+        })
+        .optional()
+    )
+    .optional(),
 
   projects: z
     .array(
-      z.object({
-        title: z.string().min(1),
-        description: z.string().min(1),
-        stacks: z.string().min(1),
-        link: z.string().min(1),
-      })
+      z
+        .object({
+          title: z.string().min(1),
+          description: z.string().min(1),
+          stacks: z.string().min(1),
+          link: z.string().min(1),
+        })
+        .optional()
     )
     .optional(),
 
   skills: z.array(z.string().min(1)),
-
-  awards: z
+  languages: z
     .array(
       z.object({
-        title: z.string().min(1),
-        description: z.string().min(1),
-        year: z.string().min(1),
+        name: z.string().min(1),
+        level: z.enum(["beginner", "intermediate", "advanced"]).optional(),
       })
+    )
+    .optional(),
+  awards: z
+    .array(
+      z
+        .object({
+          title: z.string().min(1),
+          description: z.string().min(1),
+          year: z.string().min(1),
+        })
+        .optional()
     )
     .optional(),
 });

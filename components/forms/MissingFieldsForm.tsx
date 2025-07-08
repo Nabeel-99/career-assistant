@@ -41,7 +41,7 @@ const MissingFieldsForm = ({
   setResumeModal,
 }: MissingFieldsFormProps) => {
   const missingProjectLinks =
-    incompleteResume?.projects?.filter((project) => !project.link) || [];
+    incompleteResume?.projects?.filter((project) => !project?.link) || [];
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const form = useForm<MissingLinksFormType>({
@@ -57,7 +57,7 @@ const MissingFieldsForm = ({
   const onSubmit = async (data: MissingLinksFormType) => {
     let projectIndex = 0;
     const updatedProjects = incompleteResume?.projects?.map((project) => {
-      if (!project.link) {
+      if (!project?.link) {
         const newLink = data.projectLinks[projectIndex];
         projectIndex++;
         return {
@@ -128,11 +128,11 @@ const MissingFieldsForm = ({
               name={`projectLinks.${index}`}
               render={({ field }) => (
                 <FormItem className="mt-4">
-                  <FormLabel>{project.title}</FormLabel>
+                  <FormLabel>{project?.title}</FormLabel>
                   <FormControl>
                     <Input
                       type="text"
-                      placeholder={`Enter the project link for ${project.title}`}
+                      placeholder={`Enter the project link for ${project?.title}`}
                       {...field}
                     />
                   </FormControl>

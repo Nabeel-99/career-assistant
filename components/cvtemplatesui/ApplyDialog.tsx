@@ -27,7 +27,7 @@ import { ImSpinner9 } from "react-icons/im";
 import { Skeleton } from "../ui/skeleton";
 import { Resume } from "@/lib/generated/prisma";
 import { resumeSchema } from "@/lib/validation";
-import MissingFieldsForm from "./MissingFieldsForm";
+import MissingFieldsForm from "../forms/MissingFieldsForm";
 
 const mockSchema = z.object({
   resumeId: z.string(),

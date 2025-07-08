@@ -53,7 +53,7 @@ const Hero = () => {
           Generate a tailored CV, optimize it for any job, and practice
           interviews. Land your next job smarter and faster.
         </p>
-        <Link href={"/"} className="mt-4 sign-up-btn  ">
+        <Link href={"/login"} className="mt-4 sign-up-btn  ">
           Get Started
         </Link>
       </AnimatedContent>

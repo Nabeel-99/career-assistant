@@ -6,6 +6,7 @@ import { auth, signIn, signOut } from "@/auth";
 import { redirect } from "next/navigation";
 import { generateFeedback } from "./ai";
 import { Transcript } from "./types";
+import { Prisma } from "./generated/prisma";
 export const signup = async (data: {
   firstname: string;
   lastname: string;
@@ -71,6 +72,20 @@ export const fetchResumes = async (userId: string) => {
   return resumes;
 };
 
+export const fetchResumeWithContent = async (userId: string) => {
+  const resumes = await prisma.resume.findMany({
+    where: {
+      userId,
+      content: {
+        not: Prisma.JsonNull,
+      },
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+  return resumes;
+};
 export const fetchPractices = async (userId: string) => {
   const practices = await prisma.practice.findMany({
     where: {

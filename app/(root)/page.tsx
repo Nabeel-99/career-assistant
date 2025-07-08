@@ -6,7 +6,13 @@ import Hero from "@/components/sections/Hero";
 import HowItWorks from "@/components/sections/HowItWorks";
 import Testimonials from "@/components/sections/Testimonials";
 import { motion } from "motion/react";
+import { useEffect } from "react";
 export default function Home() {
+  useEffect(() => {
+    localStorage.removeItem("theme");
+    document.documentElement.classList.remove("light");
+    document.documentElement.classList.add("dark");
+  }, []);
   return (
     <div className="flex flex-col  w-full gap-10">
       {/* hero */}

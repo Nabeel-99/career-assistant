@@ -75,7 +75,7 @@ const Faq = () => {
                 {question.question}
               </AccordionTrigger>
               <AccordionContent className="text-lg">
-                <p className="text-subheadline">{question.answer}</p>
+                <p className="">{question.answer}</p>
               </AccordionContent>
             </AccordionItem>
           ))}

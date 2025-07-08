@@ -1,10 +1,11 @@
 "use client";
 
 import React, { useState } from "react";
-import TemplateCard from "../cvtemplates/TemplateCard";
+
 import { Dialog, DialogContent, DialogTrigger } from "../ui/dialog";
 import PreviewCard from "./PreviewCard";
 import { Template } from "@/lib/types";
+import TemplateCard from "./TemplateCard";
 
 const CvTemplatesContainer = ({
   templates,
@@ -24,7 +25,7 @@ const CvTemplatesContainer = ({
             onOpenChange={setOpenPreviewCard}
           >
             <DialogTrigger asChild>
-              <div className="w-full cursor-pointer text-left">
+              <div className="w-full  rounded cursor-pointer text-left">
                 <TemplateCard {...template} />
               </div>
             </DialogTrigger>

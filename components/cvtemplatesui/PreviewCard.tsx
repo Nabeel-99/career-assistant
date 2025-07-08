@@ -7,6 +7,7 @@ import { fetchResumes } from "@/lib/action";
 import { Resume } from "@/lib/generated/prisma";
 import ApplyDialog from "./ApplyDialog";
 import { Template } from "@/lib/types";
+import CreateCVDialog from "./CreateCVDialog";
 
 const PreviewCard = ({
   userId,
@@ -43,7 +44,7 @@ const PreviewCard = ({
   return (
     <>
       <div className="flex flex-col gap-5 lg:flex-row w-full">
-        <div className="w-full border mt-4  overflow-y-auto max-h-[650px] rounded bg-white p-2 hide-scrollbar">
+        <div className="w-full border max-xl:mt-4  overflow-y-auto max-h-[650px] rounded bg-white p-2 hide-scrollbar">
           <img src={template.image} alt="template-one" className=" w-full " />
         </div>
         <div className="flex flex-col gap-2">
@@ -58,7 +59,7 @@ const PreviewCard = ({
               templateName={template.name}
               setOpenPreviewCard={setOpenPreviewCard}
             />
-            <Button>Create New CV</Button>
+            <CreateCVDialog />
           </div>
         </div>
       </div>

@@ -36,7 +36,7 @@ export const updateProfileSchema = z.object({
 });
 
 export const resumeSchema = z.object({
-  image: z.string().optional(),
+  image: z.any().optional(),
   fullname: z.string().min(1),
   title: z.string().min(1).optional(),
   summary: z.string().min(1).optional(),
@@ -76,7 +76,7 @@ export const resumeSchema = z.object({
           startDate: z.string().min(1),
           endDate: z.string().min(1),
           location: z.string().min(1),
-          description: z.array(z.string().min(1)),
+          description: z.string().min(1),
         })
         .optional()
     )

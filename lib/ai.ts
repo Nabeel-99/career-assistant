@@ -183,23 +183,34 @@ export const generateCV = async (rawText: string) => {
     model: google("gemini-2.5-flash"),
     prompt: `You are an intelligent resume parsing assistant.
 Your task is to analyze the raw resume text below and extract its content into structured JSON format following the exact schema provided.
-Make sure the output can be parsed with JSON.parse(). Do not include markdown or extra text outside the JSON.. Every field must match the types and structure of the schema. If a value is missing, set it to null or an empty array if applicable.
-for the links be it project or social links like github, linkedin etc.. if it doesn't start with http, return null. Do not assume or have a placeholder for them. simply return null.
-Return the final output as a valid JSON object with the following shape:
+Make sure the output can be parsed with JSON.parse(). Do not include markdown or extra text outside the JSON. Every field must match the types and structure of the schema.
+
+If a value is missing in the text, return:
+- null for optional single fields (e.g., title, email, location, etc.)
+- [] for missing arrays (e.g., skills, projects, languages, etc.)
+
+**Special rules:**
+- For "image", always return null (as it's not in the raw text).
+- For links (e.g., LinkedIn, GitHub, portfolio, or project links), only return them if they start with "http". Otherwise, return null.
+- Do not guess or fill placeholders.
+- Do not return markdown, explanations, or any text outside the JSON object.
+
+Return the final result as a valid JSON object matching this schema:
 
 {
+  image: string | null,
   fullname: string,
-  title: string,
-  summary: string,
+  title: string | null,
+  summary: string | null,
 
-  email: string,
-  phone: string,
-  location: string,
+  email: string | null,
+  phone: string | null,
+  location: string | null,
 
   links: {
-    linkedin?: string,
-    github?: string,
-    portfolio?: string
+    linkedin?: string | null,
+    github?: string | null,
+    portfolio?: string | null
   },
 
   education: {
@@ -216,14 +227,14 @@ Return the final output as a valid JSON object with the following shape:
     startDate: string,
     endDate: string,
     location: string,
-    description: string[]
+    description: string
   }[],
 
   projects?: {
     title: string,
     description: string,
     stacks: string,
-    link: string
+    link: string | null
   }[],
 
   skills: string[],
@@ -232,7 +243,7 @@ Return the final output as a valid JSON object with the following shape:
     title: string,
     description: string,
     year: string
-  }[]
+  }[],
 
   languages: {
     name: string,
@@ -240,9 +251,9 @@ Return the final output as a valid JSON object with the following shape:
   }[]
 }
 
-if the raw Text is not a resume, return an empty object.
+If the raw text is not a resume, return an empty object: {}.
 
-Now, extract the resume below into this format:
+Now extract the resume from the text below:
 
 ${rawText}`,
   });

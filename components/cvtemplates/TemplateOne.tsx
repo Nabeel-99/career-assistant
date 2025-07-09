@@ -148,10 +148,14 @@ const TemplateOne = ({
                   <div className="col-span-2">
                     <div className="flex flex-col gap-1">
                       <h1 className="font-bold">{item?.title}</h1>
-                      <ul className="list-disc">
-                        {item?.description?.map((task, index) => (
-                          <li key={index}>{task}</li>
-                        ))}
+                      <ul className="list-disc ">
+                        {item?.description
+                          ?.split("\n")
+                          .map((line, index) => line.trim())
+                          .filter((line) => line !== "")
+                          .map((line, index) => (
+                            <li key={index}>{line}</li>
+                          ))}
                       </ul>
                     </div>
                   </div>

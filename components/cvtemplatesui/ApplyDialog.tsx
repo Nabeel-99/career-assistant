@@ -71,7 +71,7 @@ const ApplyDialog = ({
     setSelectedResume(data.resumeId);
     try {
       setSubmitting(true);
-      const res = await axios.post("/api/generate-cv", {
+      const res = await axios.post("/api/cv/generate-cv", {
         resumeId: data.resumeId,
       });
       console.log("res", res);

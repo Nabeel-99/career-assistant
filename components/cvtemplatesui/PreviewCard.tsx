@@ -59,7 +59,7 @@ const PreviewCard = ({
               templateName={template.name}
               setOpenPreviewCard={setOpenPreviewCard}
             />
-            <CreateCVDialog />
+            <CreateCVDialog templateName={template.name} />
           </div>
         </div>
       </div>

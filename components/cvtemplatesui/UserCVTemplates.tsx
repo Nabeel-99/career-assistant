@@ -85,11 +85,12 @@ const UserCVTemplates = ({ userId }: { userId: string }) => {
           );
         })}
       </div>
-      {!loading && userTemplates.length === 0 && (
-        <div className="text-left text-sm text-subheadline">
-          <p className="">You have not created any CV template yet</p>
-        </div>
-      )}
+      {!loading &&
+        userTemplates.filter((t) => t.template && t.content).length === 0 && (
+          <div className="text-left text-sm text-subheadline">
+            <p className="">You have not created any CV template yet</p>
+          </div>
+        )}
     </>
   );
 };

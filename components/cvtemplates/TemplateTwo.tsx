@@ -88,7 +88,7 @@ const TemplateTwo = ({
         {content.skills && content.skills.length > 0 && (
           <div className="mt-4">
             <h2 className="font-bold text-green-600">Skills</h2>
-            <p>{content.skills.join(", ")}</p>
+            <p>{content.skills.split(",").join(", ")}</p>
           </div>
         )}
 
@@ -152,7 +152,7 @@ const TemplateTwo = ({
                 </p>
                 <p>{exp?.location}</p>
                 <ul className="list-disc ml-5">
-                  {exp?.description.map((desc, i) => (
+                  {exp?.description.split("\n").map((desc, i) => (
                     <li key={i}>{desc}</li>
                   ))}
                 </ul>

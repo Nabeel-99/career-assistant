@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { z } from "zod";
 import {
   Form,
@@ -23,8 +23,18 @@ import LanguageInputs from "./LanguageInputs";
 import AwardsInputs from "./AwardsInputs";
 import UserInfoInputs from "./UserInfoInputs";
 import axios from "axios";
+import supabase from "@/lib/supabase";
+import { toast } from "sonner";
+import { ImSpinner9 } from "react-icons/im";
 
-const CVForm = ({ templateName }: { templateName: string }) => {
+const CVForm = ({
+  templateName,
+  userId,
+}: {
+  templateName: string;
+  userId: string;
+}) => {
+  const [loading, setLoading] = useState(false);
   const form = useForm<z.infer<typeof resumeSchema>>({
     resolver: zodResolver(resumeSchema),
     defaultValues: {
@@ -57,6 +67,7 @@ const CVForm = ({ templateName }: { templateName: string }) => {
           endDate: "",
           location: "",
           description: "",
+          currentlyWorking: false,
         },
       ],
       projects: [
@@ -67,7 +78,7 @@ const CVForm = ({ templateName }: { templateName: string }) => {
           link: "",
         },
       ],
-      skills: [],
+      skills: "",
       languages: [
         {
           name: "",
@@ -126,7 +137,9 @@ const CVForm = ({ templateName }: { templateName: string }) => {
   });
   const onSubmit = async (data: z.infer<typeof resumeSchema>) => {
     try {
+      setLoading(true);
       const formData = new FormData();
+
       Object.entries(data).forEach(([key, value]) => {
         if (key === "image") return;
         formData.append(key, JSON.stringify(value));
@@ -134,16 +147,38 @@ const CVForm = ({ templateName }: { templateName: string }) => {
       if (data.image instanceof File) {
         formData.append("image", data.image);
       }
+      const imageFilePath = `${userId}/profile-images/${Date.now()}_${
+        data.image.name
+      }`;
 
       const res = await axios.post("/api/cv/create-cv", {
         formData,
         templateName,
+        imageFilePath,
       });
-    } catch (error) {}
+      if (res.status === 200) {
+        if (data.image) {
+          const { data: resume, error } = await supabase.storage
+            .from("resumes")
+            .upload(imageFilePath, data.image);
+          if (error) {
+            console.log(error);
+            toast.error("Error uploading image");
+          }
+        }
+      }
+    } catch (error) {
+      console.log("error", error);
+    } finally {
+      setLoading(false);
+    }
   };
   return (
     <Form {...form}>
-      <form className="flex flex-col gap-4">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="flex flex-col gap-4"
+      >
         <UserInfoInputs form={form} />
         <FormLabel className="">Links</FormLabel>
         <SocialLinksInputs form={form} />
@@ -202,7 +237,15 @@ const CVForm = ({ templateName }: { templateName: string }) => {
         />
 
         <div className="flex justify-end mt-3">
-          <Button>Submit</Button>
+          <Button type="submit" disabled={loading}>
+            {loading ? (
+              <span className="animate-spin">
+                <ImSpinner9 />
+              </span>
+            ) : (
+              "Submit"
+            )}
+          </Button>
         </div>
       </form>
     </Form>

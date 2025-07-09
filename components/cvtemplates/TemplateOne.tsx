@@ -212,7 +212,7 @@ const TemplateOne = ({
               </span>
             ))}
           </div> */}
-            <p>{content.skills?.join(", ")}</p>
+            <p>{content.skills?.split(", ").join(", ")}</p>
           </section>
         )}
 

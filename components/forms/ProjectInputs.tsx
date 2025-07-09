@@ -89,12 +89,10 @@ const ProjectInputs = ({
           type="button"
           onClick={() =>
             appendProject({
-              company: "",
               title: "",
-              location: "",
-              startDate: "",
-              endDate: "",
-              description: [""],
+              description: "",
+              stacks: "",
+              link: "",
             })
           }
         >

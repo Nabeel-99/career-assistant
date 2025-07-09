@@ -60,7 +60,7 @@ export const resumeSchema = z.object({
           school: z.string().min(1),
           degree: z.string().min(1),
           startDate: z.string().min(1),
-          endDate: z.string().min(1),
+          endDate: z.union([z.string().min(1), z.literal("Present")]),
           location: z.string().min(1),
         })
         .optional()
@@ -74,9 +74,10 @@ export const resumeSchema = z.object({
           company: z.string().min(1),
           title: z.string().min(1),
           startDate: z.string().min(1),
-          endDate: z.string().min(1),
+          endDate: z.union([z.string().min(1), z.literal("Present")]),
           location: z.string().min(1),
           description: z.string().min(1),
+          currentlyWorking: z.boolean().optional(),
         })
         .optional()
     )
@@ -95,7 +96,7 @@ export const resumeSchema = z.object({
     )
     .optional(),
 
-  skills: z.array(z.string().min(1)),
+  skills: z.string().min(1),
   languages: z
     .array(
       z.object({
@@ -108,9 +109,9 @@ export const resumeSchema = z.object({
     .array(
       z
         .object({
-          title: z.string().min(1),
-          description: z.string().min(1),
-          year: z.string().min(1),
+          title: z.string().optional(),
+          description: z.string().optional(),
+          year: z.string().optional(),
         })
         .optional()
     )

@@ -1,3 +1,4 @@
+import prisma from "@/lib/prisma";
 import { getToken } from "next-auth/jwt";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -8,8 +9,8 @@ export const POST = async (req: NextRequest) => {
       return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
     }
     const formData = await req.formData();
+    const { templateName, imageFilePath } = await req.json();
 
-    const image = formData.get("image") as File | null;
     const fullname = formData.get("fullname") as string;
     const title = formData.get("title") as string;
     const summary = formData.get("summary") as string;
@@ -25,5 +26,39 @@ export const POST = async (req: NextRequest) => {
     const skills = JSON.parse(formData.get("skills") as string);
     const languages = JSON.parse(formData.get("languages") as string);
     const awards = JSON.parse(formData.get("awards") as string);
-  } catch (error) {}
+
+    const data = {
+      image: imageFilePath,
+      fullname,
+      title,
+      summary,
+      email,
+      phone,
+      location,
+      links,
+      education,
+      experience,
+      projects,
+      skills,
+      languages,
+      awards,
+    };
+    await prisma.resume.create({
+      data: {
+        userId: token.id,
+        template: templateName,
+        content: JSON.stringify(data),
+      },
+    });
+    return NextResponse.json(
+      { message: "Resume created successfully" },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.log("error", error);
+    return NextResponse.json(
+      { message: "Something went wrong" },
+      { status: 500 }
+    );
+  }
 };

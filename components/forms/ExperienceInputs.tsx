@@ -111,6 +111,32 @@ const ExperienceInputs = ({
           </FormItem>
         )}
       />
+      {/* <FormField
+        control={form.control}
+        name={`experience.${index}.currentlyWorking`}
+        render={({ field }) => (
+          <FormItem className="flex items-center col-span-2 gap-2 mt-2">
+            <FormControl>
+              <Checkbox
+                checked={field.value}
+                onCheckedChange={(checked) => {
+                  form.setValue(
+                    `experience.${index}.currentlyWorking`,
+                    checked
+                  );
+                  form.setValue(
+                    `experience.${index}.endDate`,
+                    checked ? "Present" : ""
+                  );
+                }}
+              />
+            </FormControl>
+            <FormLabel className="text-sm font-normal">
+              I currently work here
+            </FormLabel>
+          </FormItem>
+        )}
+      /> */}
       <div className="flex items-center gap-2 justify-start">
         <Button
           className={cn({ hidden: index === 0 })}

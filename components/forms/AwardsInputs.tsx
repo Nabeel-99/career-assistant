@@ -52,7 +52,7 @@ const AwardsInputs = ({
 
       <FormField
         control={form.control}
-        name={`experience.${index}.startDate`}
+        name={`awards.${index}.startDate`}
         render={({ field }) => (
           <FormItem>
             <FormLabel>Year</FormLabel>

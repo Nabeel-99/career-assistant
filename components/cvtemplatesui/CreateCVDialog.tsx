@@ -13,7 +13,13 @@ import {
 } from "../ui/dialog";
 import { Button } from "../ui/button";
 
-const CreateCVDialog = ({ templateName }: { templateName: string }) => {
+const CreateCVDialog = ({
+  templateName,
+  userId,
+}: {
+  templateName: string;
+  userId: string;
+}) => {
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -30,7 +36,7 @@ const CreateCVDialog = ({ templateName }: { templateName: string }) => {
             Fill out the form below to create a new CV
           </DialogDescription>
         </DialogHeader>
-        <CVForm templateName={templateName} />
+        <CVForm userId={userId} templateName={templateName} />
       </DialogContent>
     </Dialog>
   );

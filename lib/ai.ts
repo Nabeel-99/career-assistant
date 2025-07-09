@@ -237,7 +237,7 @@ Return the final result as a valid JSON object matching this schema:
     link: string | null
   }[],
 
-  skills: string[],
+  skills: string,
 
   awards?: {
     title: string,

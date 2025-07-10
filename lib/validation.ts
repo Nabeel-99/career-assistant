@@ -38,12 +38,12 @@ export const updateProfileSchema = z.object({
 export const resumeSchema = z.object({
   image: z.any().optional(),
   fullname: z.string().min(1),
-  title: z.string().min(1).optional(),
-  summary: z.string().min(1).optional(),
+  title: z.string().optional(),
+  summary: z.string().optional(),
 
   email: z.string().email().optional(),
-  phone: z.string().min(1).optional(),
-  location: z.string().min(1).optional(),
+  phone: z.string().optional(),
+  location: z.string().optional(),
 
   links: z
     .object({
@@ -96,11 +96,11 @@ export const resumeSchema = z.object({
     )
     .optional(),
 
-  skills: z.string().min(1),
+  skills: z.string().min(1).optional(),
   languages: z
     .array(
       z.object({
-        name: z.string().min(1),
+        name: z.string(),
         level: z.enum(["beginner", "intermediate", "advanced"]).optional(),
       })
     )

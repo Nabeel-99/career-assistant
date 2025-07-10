@@ -136,6 +136,7 @@ const CVForm = ({
     name: "awards",
   });
   const onSubmit = async (data: z.infer<typeof resumeSchema>) => {
+    console.log("data", data);
     try {
       setLoading(true);
       const formData = new FormData();
@@ -150,12 +151,9 @@ const CVForm = ({
       const imageFilePath = `${userId}/profile-images/${Date.now()}_${
         data.image.name
       }`;
-
-      const res = await axios.post("/api/cv/create-cv", {
-        formData,
-        templateName,
-        imageFilePath,
-      });
+      formData.append("imageFilePath", JSON.stringify(imageFilePath));
+      formData.append("templateName", JSON.stringify(templateName));
+      const res = await axios.post("/api/cv/create-cv", formData);
       if (res.status === 200) {
         if (data.image) {
           const { data: resume, error } = await supabase.storage
@@ -176,7 +174,9 @@ const CVForm = ({
   return (
     <Form {...form}>
       <form
-        onSubmit={form.handleSubmit(onSubmit)}
+        onSubmit={form.handleSubmit(onSubmit, (errors) => {
+          console.log("Validation errors", errors);
+        })}
         className="flex flex-col gap-4"
       >
         <UserInfoInputs form={form} />
@@ -236,8 +236,8 @@ const CVForm = ({
           appendAward={appendAward}
         />
 
-        <div className="flex justify-end mt-3">
-          <Button type="submit" disabled={loading}>
+        <div className="flex justify-end mt-3 z-50">
+          <Button type="submit">
             {loading ? (
               <span className="animate-spin">
                 <ImSpinner9 />

@@ -9,16 +9,13 @@ export const POST = async (req: NextRequest) => {
       return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
     }
     const formData = await req.formData();
-    const { templateName, imageFilePath } = await req.json();
 
-    const fullname = formData.get("fullname") as string;
-    const title = formData.get("title") as string;
-    const summary = formData.get("summary") as string;
-
-    const email = formData.get("email") as string;
-    const phone = formData.get("phone") as string;
-    const location = formData.get("location") as string;
-
+    const fullname = JSON.parse(formData.get("fullname") as string);
+    const title = JSON.parse(formData.get("title") as string);
+    const summary = JSON.parse(formData.get("summary") as string);
+    const email = JSON.parse(formData.get("email") as string);
+    const phone = JSON.parse(formData.get("phone") as string);
+    const location = JSON.parse(formData.get("location") as string);
     const links = JSON.parse(formData.get("links") as string);
     const education = JSON.parse(formData.get("education") as string);
     const experience = JSON.parse(formData.get("experience") as string);
@@ -26,7 +23,8 @@ export const POST = async (req: NextRequest) => {
     const skills = JSON.parse(formData.get("skills") as string);
     const languages = JSON.parse(formData.get("languages") as string);
     const awards = JSON.parse(formData.get("awards") as string);
-
+    const templateName = JSON.parse(formData.get("templateName") as string);
+    const imageFilePath = JSON.parse(formData.get("imageFilePath") as string);
     const data = {
       image: imageFilePath,
       fullname,
@@ -47,7 +45,8 @@ export const POST = async (req: NextRequest) => {
       data: {
         userId: token.id,
         template: templateName,
-        content: JSON.stringify(data),
+        content: data,
+        name: `${token.firstname}-cv`,
       },
     });
     return NextResponse.json(

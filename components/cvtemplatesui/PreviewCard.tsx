@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from "react";
 import { DialogDescription, DialogHeader, DialogTitle } from "../ui/dialog";
-import { Button } from "../ui/button";
 import { fetchResumes } from "@/lib/action";
 import { Resume } from "@/lib/generated/prisma";
 import ApplyDialog from "./ApplyDialog";

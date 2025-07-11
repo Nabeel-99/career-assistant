@@ -70,7 +70,6 @@ ${level}
       return parsed;
     }
   } catch (error) {
-    console.log("error", error);
     throw new Error("Error parsing JSON");
   }
 };
@@ -173,7 +172,6 @@ Make sure the output can be parsed with JSON.parse(). Do not include markdown or
       return parsed;
     }
   } catch (error) {
-    console.log("error", error);
     throw new Error("Error parsing JSON");
   }
 };
@@ -264,7 +262,6 @@ ${rawText}`,
       return parsed;
     }
   } catch (error) {
-    console.log("error", error);
     throw new Error("Error parsing JSON");
   }
 };

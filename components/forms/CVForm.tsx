@@ -136,7 +136,6 @@ const CVForm = ({
     name: "awards",
   });
   const onSubmit = async (data: z.infer<typeof resumeSchema>) => {
-    console.log("data", data);
     try {
       setLoading(true);
       const formData = new FormData();
@@ -160,13 +159,12 @@ const CVForm = ({
             .from("resumes")
             .upload(imageFilePath, data.image);
           if (error) {
-            console.log(error);
             toast.error("Error uploading image");
           }
         }
       }
     } catch (error) {
-      console.log("error", error);
+      toast.error("Error creating resume");
     } finally {
       setLoading(false);
     }
@@ -174,9 +172,7 @@ const CVForm = ({
   return (
     <Form {...form}>
       <form
-        onSubmit={form.handleSubmit(onSubmit, (errors) => {
-          console.log("Validation errors", errors);
-        })}
+        onSubmit={form.handleSubmit(onSubmit)}
         className="flex flex-col gap-4"
       >
         <UserInfoInputs form={form} />

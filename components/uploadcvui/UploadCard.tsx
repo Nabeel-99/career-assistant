@@ -27,19 +27,23 @@ const UploadCard = ({ userId }: { userId: string | undefined }) => {
           //   sortBy: { column: "name", order: "desc" },
         });
       if (error) {
-        console.log("error fetching resumes", error);
+        toast.error("Error fetching resumes");
         setFetching(false);
         return [];
       }
 
-      const formatted = data.map((file) => ({
-        name: file.name.split("_")[1],
-        createdAt: file.created_at,
-        filePath: `${userId}/${file.name}`,
-      }));
+      const formatted = data
+        .filter((file) => file.name && file.metadata)
+        .map((file) => ({
+          name: file.name.split("_")[1],
+          createdAt: file.created_at,
+          filePath: `${userId}/${file.name}`,
+        }))
+        .filter((file) => file.name !== null);
+
       setResumes(formatted);
     } catch (error) {
-      console.log("error", error);
+      toast.error("Error fetching resumes");
     } finally {
       setFetching(false);
     }
@@ -61,7 +65,6 @@ const UploadCard = ({ userId }: { userId: string | undefined }) => {
           .from("resumes")
           .upload(filePath, file);
         if (error) {
-          console.log("error uploading file", error);
           toast.error("Error uploading file");
         }
         fetchResumes();

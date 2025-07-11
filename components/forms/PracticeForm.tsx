@@ -95,7 +95,6 @@ const PracticeForm = ({
         getUserPractices();
       }
     } catch (error) {
-      console.log(error);
       toast.error("Error creating interview practice");
     } finally {
       setLoading(false);

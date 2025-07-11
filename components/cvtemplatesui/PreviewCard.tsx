@@ -7,6 +7,7 @@ import { Resume } from "@/lib/generated/prisma";
 import ApplyDialog from "./ApplyDialog";
 import { Template } from "@/lib/types";
 import CreateCVDialog from "./CreateCVDialog";
+import { toast } from "sonner";
 
 const PreviewCard = ({
   userId,
@@ -23,12 +24,12 @@ const PreviewCard = ({
     try {
       setLoading(true);
       const res = await fetchResumes(userId!);
-      console.log("res", res);
+
       if (res) {
         setResumes(res);
       }
     } catch (error) {
-      console.log("error", error);
+      toast.error("Error fetching resumes");
     } finally {
       setLoading(false);
     }
@@ -37,8 +38,6 @@ const PreviewCard = ({
   useEffect(() => {
     getUserResumes();
   }, []);
-
-  console.log("template", template);
 
   return (
     <>
@@ -53,6 +52,7 @@ const PreviewCard = ({
           </DialogHeader>
           <div className="flex flex-col gap-6 items-center justify-center mt-10">
             <ApplyDialog
+              userId={userId}
               resumes={resumes}
               loading={loading}
               templateName={template.name}

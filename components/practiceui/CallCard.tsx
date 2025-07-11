@@ -46,7 +46,7 @@ const CallCard = ({
 
       setPractice(res);
     } catch (error) {
-      console.log("error", error);
+      toast.error("Error fetching interview");
     } finally {
       setLoading(false);
     }
@@ -84,7 +84,7 @@ const CallCard = ({
     });
 
     vapi.on("error", (error) => {
-      console.log("error", error);
+      toast.error(error.message);
     });
 
     return () => {
@@ -102,7 +102,7 @@ const CallCard = ({
             router.push(`/practice/feedback/${id}`);
           }
         } catch (error) {
-          console.log("error", error);
+          toast.error("Error creating feedback");
         } finally {
           setGeneratingFeedback(false);
         }
@@ -128,7 +128,7 @@ const CallCard = ({
         )
       );
     } catch (error) {
-      console.log("error", error);
+      toast.error("Error starting call");
     } finally {
       setStarting(false);
     }

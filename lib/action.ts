@@ -40,6 +40,8 @@ export const signup = async (data: {
 
 export const fetchUser = async () => {
   const session = await auth();
+  if (!session?.user?.id) throw new Error("Unauthorized");
+
   const user = await prisma.user.findUnique({
     where: {
       id: session?.user?.id,
@@ -61,6 +63,9 @@ export const signOutAction = async () => {
 };
 
 export const fetchResumes = async (userId: string) => {
+  const session = await auth();
+  if (!session?.user?.id) throw new Error("Unauthorized");
+
   const resumes = await prisma.resume.findMany({
     where: {
       userId,
@@ -69,10 +74,12 @@ export const fetchResumes = async (userId: string) => {
       createdAt: "desc",
     },
   });
-  return resumes;
+  return resumes.filter((res) => res.rawText !== null);
 };
 
 export const fetchResumeWithContent = async (userId: string) => {
+  const session = await auth();
+  if (!session?.user?.id) throw new Error("Unauthorized");
   const resumes = await prisma.resume.findMany({
     where: {
       userId,
@@ -87,6 +94,8 @@ export const fetchResumeWithContent = async (userId: string) => {
   return resumes;
 };
 export const fetchPractices = async (userId: string) => {
+  const session = await auth();
+  if (!session?.user?.id) throw new Error("Unauthorized");
   const practices = await prisma.practice.findMany({
     where: {
       userId,
@@ -104,6 +113,8 @@ export const fetchPractices = async (userId: string) => {
 };
 
 export const fetchPracticeById = async (id: string) => {
+  const session = await auth();
+  if (!session?.user?.id) throw new Error("Unauthorized");
   const practice = await prisma.practice.findUnique({
     where: {
       id: Number(id),
@@ -123,6 +134,8 @@ export const createFeedback = async (
   transcript: Transcript[],
   practiceId: string
 ): Promise<{ success: boolean; message: string }> => {
+  const session = await auth();
+  if (!session?.user?.id) throw new Error("Unauthorized");
   try {
     const aiFeedback = await generateFeedback(transcript);
     if (aiFeedback) {
@@ -146,7 +159,64 @@ export const createFeedback = async (
     }
     return { success: true, message: "Feedback created successfully" };
   } catch (error) {
-    console.log("error", error);
     return { success: false, message: "Error creating feedback" };
   }
+};
+
+export const deleteUserTemplate = async (
+  resumeId: number
+): Promise<{ success: boolean }> => {
+  const session = await auth();
+  if (!session?.user?.id) throw new Error("Unauthorized");
+  try {
+    await prisma.resume.delete({
+      where: {
+        id: resumeId,
+      },
+    });
+    return { success: true };
+  } catch (error) {
+    return { success: false };
+  }
+};
+
+export const fetchRecentActivity = async () => {
+  const session = await auth();
+  if (!session?.user?.id) throw new Error("Unauthorized");
+  const userId = session.user.id;
+  const resumes = await prisma.resume.findMany({
+    where: { userId },
+    select: {
+      id: true,
+      template: true,
+      createdAt: true,
+    },
+  });
+
+  const practices = await prisma.practice.findMany({
+    where: { userId },
+    select: {
+      id: true,
+      createdAt: true,
+    },
+  });
+
+  const activity = [
+    ...resumes.map((r) => ({
+      type: r.template ? "template" : "resume",
+      name: r.template || "Resume",
+      timestamp: r.createdAt,
+    })),
+    ...practices.map((p) => ({
+      type: "practice",
+      name: "Mock Interview",
+      timestamp: p.createdAt,
+    })),
+  ];
+
+  // Sort by time descending
+  const sorted = activity.sort(
+    (a, b) => b.timestamp.getTime() - a.timestamp.getTime()
+  );
+  return sorted[0];
 };

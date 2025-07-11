@@ -1,8 +1,9 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { formatDistanceToNow } from "date-fns";
+import { formatDistanceToNow, format } from "date-fns";
 import { devIconsMappings } from "./helper";
 
+import { PracticeWithFeedback } from "./types";
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
@@ -55,3 +56,52 @@ export function formatDate(date: Date | string) {
     year: "numeric",
   });
 }
+
+// Generate 14 past days like "2025-06-25"
+const getPastDays = (n: number) => {
+  return Array.from({ length: n }).map((_, i) => {
+    const d = new Date();
+    d.setDate(d.getDate() - (n - i - 1));
+    return format(d, "yyyy-MM-dd");
+  });
+};
+
+export const generateChartData = (practices: PracticeWithFeedback[]) => {
+  const days = getPastDays(14);
+
+  const chart = days.map((date) => ({
+    date,
+    practice: 0,
+    feedbacks: 0,
+  }));
+
+  for (const p of practices) {
+    const created = format(new Date(p.createdAt), "yyyy-MM-dd");
+    const feedbackCreated = p.feedback
+      ? format(new Date(p.feedback.createdAt), "yyyy-MM-dd")
+      : null;
+
+    const practiceDay = chart.find((d) => d.date === created);
+    if (practiceDay) practiceDay.practice++;
+
+    if (p.isTaken && p.feedback && feedbackCreated) {
+      const feedbackDay = chart.find((d) => d.date === feedbackCreated);
+      if (feedbackDay) feedbackDay.feedbacks++;
+    }
+  }
+
+  return chart;
+};
+
+export const TIPS = [
+  "Upload your resume to get AI-powered improvement suggestions.",
+  "Practice mock interviews with voice AI to boost confidence.",
+  "Add missing project links before applying templates for a polished CV.",
+  "Use clear project titles and tech stacks in your resume.",
+  "Apply a modern template to make your CV stand out visually.",
+  "Get AI feedback instantly after each interview attempt.",
+  "Keep your resume updated with your latest achievements.",
+  "Create different resume versions for different job roles.",
+  "Don’t leave your social links blank — add GitHub or portfolio links.",
+  "Check your activity tab to track recent uploads and interviews.",
+];

@@ -34,6 +34,7 @@ const mockSchema = z.object({
 });
 
 type ApplyDialogProps = {
+  userId: string | null;
   resumes: Resume[];
   loading: boolean;
   templateName?: string;
@@ -46,6 +47,7 @@ const ApplyDialog = ({
   loading,
   templateName,
   setOpenPreviewCard,
+  userId,
 }: ApplyDialogProps) => {
   const [submitting, setSubmitting] = useState(false);
   const [showMissingLinksModal, setShowMissingLinksModal] = useState(false);
@@ -63,7 +65,6 @@ const ApplyDialog = ({
     },
   });
   const onSubmit = async (data: z.infer<typeof mockSchema>) => {
-    console.log(data.resumeId);
     if (!data.resumeId) {
       toast.error("Resume is empty");
       return;
@@ -74,17 +75,16 @@ const ApplyDialog = ({
       const res = await axios.post("/api/cv/generate-cv", {
         resumeId: data.resumeId,
       });
-      console.log("res", res);
+
       if (res.status === 200) {
         toast.success("Resume generated successfully");
       }
     } catch (error: any) {
-      console.log("error", error);
-
       if (error.response.status === 422) {
         const missing = [];
         toast.error("Missing links");
         const parsedContent = error.response.data.data;
+        if (!parsedContent.image) missing.push("image");
         if (!parsedContent?.links?.github) missing.push("github");
         if (!parsedContent?.links?.linkedin) missing.push("linkedin");
         if (!parsedContent?.links?.portfolio) missing.push("portfolio");
@@ -203,6 +203,7 @@ const ApplyDialog = ({
             </DialogDescription>
           </DialogHeader>
           <MissingFieldsForm
+            userId={userId!}
             selectedResume={selectedResume}
             missingFields={missingfields}
             incompleteResume={incompleteResume}

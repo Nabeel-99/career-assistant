@@ -94,45 +94,6 @@ export const devIconsMappings = {
   "aws amplify": "amplify",
 };
 
-import { format } from "date-fns";
-import { PracticeWithFeedback } from "./types";
-
-// Generate 14 past days like "2025-06-25"
-const getPastDays = (n: number) => {
-  return Array.from({ length: n }).map((_, i) => {
-    const d = new Date();
-    d.setDate(d.getDate() - (n - i - 1));
-    return format(d, "yyyy-MM-dd");
-  });
-};
-
-export const generateChartData = (practices: PracticeWithFeedback[]) => {
-  const days = getPastDays(14);
-
-  const chart = days.map((date) => ({
-    date,
-    practice: 0,
-    feedbacks: 0,
-  }));
-
-  for (const p of practices) {
-    const created = format(new Date(p.createdAt), "yyyy-MM-dd");
-    const feedbackCreated = p.feedback
-      ? format(new Date(p.feedback.createdAt), "yyyy-MM-dd")
-      : null;
-
-    const practiceDay = chart.find((d) => d.date === created);
-    if (practiceDay) practiceDay.practice++;
-
-    if (p.isTaken && p.feedback && feedbackCreated) {
-      const feedbackDay = chart.find((d) => d.date === feedbackCreated);
-      if (feedbackDay) feedbackDay.feedbacks++;
-    }
-  }
-
-  return chart;
-};
-
 export const generateResetPasswordEmail = (name: string, resetLink: string) => `
 <!DOCTYPE html>
 <html lang="en">

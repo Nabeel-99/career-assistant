@@ -15,6 +15,7 @@ import {
 import { Resume } from "@/lib/generated/prisma";
 import PracticeForm from "../forms/PracticeForm";
 import { fetchResumes } from "@/lib/action";
+import { toast } from "sonner";
 
 const CreatePracticeBtn = ({
   userId,
@@ -32,7 +33,7 @@ const CreatePracticeBtn = ({
       const res = await fetchResumes(userId);
       setResumes(res);
     } catch (error) {
-      console.log("error");
+      toast.error("Error fetching resumes");
     } finally {
       setFetchingResumes(false);
     }

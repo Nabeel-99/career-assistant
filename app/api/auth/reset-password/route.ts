@@ -15,13 +15,13 @@ export const POST = async (req: NextRequest) => {
       );
     }
     const userId = decoded.user as string;
-    console.log("userId");
+
     const user = await prisma.user.findUnique({
       where: {
         id: userId,
       },
     });
-    console.log("user", user);
+
     if (!user) {
       return NextResponse.json({ message: "User not found" }, { status: 404 });
     }
@@ -42,7 +42,6 @@ export const POST = async (req: NextRequest) => {
       { status: 200 }
     );
   } catch (err) {
-    console.log("error", err);
     return NextResponse.json(
       { message: "Internal Server Error" },
       { status: 500 }

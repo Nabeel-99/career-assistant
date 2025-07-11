@@ -58,7 +58,7 @@ const ResumeCard = ({
           .from("resumes")
           .remove([filePath]);
         if (error) {
-          console.log("error deleting file", error);
+          toast.error("Error deleting file");
         }
         if (data) {
           setShowDelete(false);
@@ -67,7 +67,6 @@ const ResumeCard = ({
         }
       }
     } catch (error) {
-      console.log("error", error);
       toast.error("Error deleting file");
     } finally {
       setDeleteLoading(false);

@@ -1,5 +1,9 @@
 "use client";
-import { fetchResumeWithContent } from "@/lib/action";
+import {
+  deleteUserTemplate,
+  fetchResumeWithContent,
+  fetchUser,
+} from "@/lib/action";
 import { Resume } from "@/lib/generated/prisma";
 import React, { useEffect, useRef, useState } from "react";
 import { Skeleton } from "../ui/skeleton";
@@ -9,12 +13,22 @@ import { z } from "zod";
 import { resumeSchema } from "@/lib/validation";
 import { useReactToPrint } from "react-to-print";
 import { toast } from "sonner";
+import { FaDownload, FaTrash } from "react-icons/fa";
+import { DeleteDialog } from "../practiceui/DeleteDialog";
 
 type Content = z.infer<typeof resumeSchema>;
 const UserCVTemplates = ({ userId }: { userId: string }) => {
   const [userTemplates, setUserTemplates] = useState<Resume[]>([]);
+  const [showDelete, setShowDelete] = useState(false);
+  const [selectedResume, setSelectedResume] = useState<number | null>(null);
+  const [deleteLoading, setDeleteLoading] = useState(false);
   const [loading, setLoading] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
+  const showDeleteDialog = (resumeId: number) => {
+    setShowDelete(true);
+
+    setSelectedResume(resumeId);
+  };
   const reactToPrintFn = useReactToPrint({
     contentRef,
     documentTitle: `Resume-${Date.now()}`,
@@ -29,12 +43,26 @@ const UserCVTemplates = ({ userId }: { userId: string }) => {
     try {
       setLoading(true);
       const res = await fetchResumeWithContent(userId);
-      console.log("res", res);
+
       setUserTemplates(res);
     } catch (error) {
-      console.log("error", error);
+      toast.error("Error fetching resumes");
     } finally {
       setLoading(false);
+    }
+  };
+  const deleteResume = async (resumeId: number) => {
+    try {
+      setDeleteLoading(true);
+      const res = await deleteUserTemplate(resumeId);
+      if (res.success) {
+        toast.success("Template deleted successfully");
+        fetchUserTemplates();
+      }
+    } catch (error) {
+      toast.error("Error deleting template");
+    } finally {
+      setDeleteLoading(false);
     }
   };
   useEffect(() => {
@@ -77,10 +105,20 @@ const UserCVTemplates = ({ userId }: { userId: string }) => {
                   <TemplateComponent content={content} resumeId={resumeId} />
                 </div>
               </div>
-
-              <Button onClick={reactToPrintFn} className="cursor-pointer ">
-                Export PDF
-              </Button>
+              <div className="flex items-center gap-2 justify-end">
+                <Button onClick={reactToPrintFn} className="cursor-pointer ">
+                  <FaDownload />
+                </Button>
+                <Button onClick={() => showDeleteDialog(template.id!)}>
+                  <FaTrash />
+                </Button>
+              </div>
+              <DeleteDialog
+                deleteLoading={deleteLoading}
+                showDelete={showDelete}
+                setShowDelete={setShowDelete}
+                action={() => deleteResume(selectedResume!)}
+              />
             </div>
           );
         })}

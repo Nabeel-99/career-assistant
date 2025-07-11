@@ -38,12 +38,11 @@ const ForgotPasswordForm = () => {
       const res = await axios.post("/api/auth/forgot-password", {
         email: data.email,
       });
-      console.log("res", res);
+
       if (res.status === 200) {
         toast.success("Password reset link has been sent.");
       }
     } catch (error) {
-      console.log("error", error);
       toast.error("Something went wrong. Please try again later.");
     } finally {
       setLoading(false);

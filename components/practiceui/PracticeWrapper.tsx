@@ -5,6 +5,7 @@ import CreatePracticeBtn from "./CreatePracticeBtn";
 import PracticeCardGrid from "./PracticeCardGrid";
 import { fetchPractices } from "@/lib/action";
 import { PracticeWithFeedback } from "@/lib/types";
+import { toast } from "sonner";
 
 const PracticeWrapper = ({ userId }: { userId: string }) => {
   const [practices, setPractices] = useState<PracticeWithFeedback[]>([]);
@@ -16,7 +17,7 @@ const PracticeWrapper = ({ userId }: { userId: string }) => {
 
       setPractices(res);
     } catch (error) {
-      console.log("something went wrong", error);
+      toast.error("Error fetching practices");
     } finally {
       setLoading(false);
     }

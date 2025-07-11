@@ -51,7 +51,6 @@ export const POST = async (req: NextRequest) => {
       { status: 200 }
     );
   } catch (error) {
-    console.log("error", error);
     return NextResponse.json(
       { message: "Something went wrong" },
       { status: 500 }
@@ -100,7 +99,6 @@ export const DELETE = async (req: NextRequest) => {
       );
     }
   } catch (error) {
-    console.log("error", error);
     return NextResponse.json(
       { message: "Something went wrong" },
       { status: 500 }

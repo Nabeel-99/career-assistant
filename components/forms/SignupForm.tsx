@@ -42,7 +42,6 @@ const SignupForm = () => {
           setErrorMessage("");
         }, 5000);
       }
-      console.log("error", error);
     } finally {
       setLoading(false);
     }

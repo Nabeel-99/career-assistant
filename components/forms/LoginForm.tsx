@@ -6,6 +6,7 @@ import FormLayout from "./FormLayout";
 import { LoginSchema } from "@/lib/validation";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 const LoginForm = () => {
   const [loading, setLoading] = useState(false);
@@ -34,7 +35,7 @@ const LoginForm = () => {
         }
       }
     } catch (error) {
-      console.log("error", error);
+      toast.error("Something went wrong. Please try again later.");
     } finally {
       setLoading(false);
     }

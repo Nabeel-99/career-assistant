@@ -39,7 +39,7 @@ export const POST = async (req: NextRequest) => {
         { status: 404 }
       );
     }
-    console.log("parsed data", parsedData);
+
     if (hasMissingLinks(parsedData)) {
       return NextResponse.json(
         { message: "Missing links", data: parsedData },
@@ -49,7 +49,6 @@ export const POST = async (req: NextRequest) => {
 
     return NextResponse.json({ data: parsedData }, { status: 200 });
   } catch (error) {
-    console.log("error", error);
     return NextResponse.json(
       { message: "Something went wrong" },
       { status: 500 }
@@ -68,13 +67,16 @@ export const PATCH = async (req: NextRequest) => {
     return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
   }
   try {
-    const { resumeId, content, templateName } = await req.json();
+    const { resumeId, content, templateName, imagePath } = await req.json();
     const resume = await prisma.resume.update({
       where: {
         id: Number(resumeId),
       },
       data: {
-        content: content,
+        content: {
+          ...content,
+          image: imagePath,
+        },
         template: templateName,
       },
     });
@@ -83,7 +85,6 @@ export const PATCH = async (req: NextRequest) => {
       { status: 200 }
     );
   } catch (error) {
-    console.log("error", error);
     return NextResponse.json(
       { message: "Something went wrong" },
       { status: 500 }

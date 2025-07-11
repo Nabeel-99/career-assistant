@@ -50,7 +50,7 @@ const ResetPasswordForm = ({ token }: { token: string }) => {
         token,
         newPassword: data.newPassword,
       });
-      console.log("res", res);
+
       if (res.status === 200) {
         toast.success("Password updated successfully.");
         form.setValue("newPassword", "");
@@ -58,7 +58,6 @@ const ResetPasswordForm = ({ token }: { token: string }) => {
         router.push("/login");
       }
     } catch (error: any) {
-      console.log("error", error);
       if (error.response.status === 400) {
         toast.error("Reset link has expired. Please request a new one.");
         router.push("/forgot-password");

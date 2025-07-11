@@ -60,7 +60,6 @@ export const PUT = async (req: NextRequest) => {
       );
     }
   } catch (error) {
-    console.log("error", error);
     return NextResponse.json(
       { message: "Something went wrong" },
       { status: 500 }

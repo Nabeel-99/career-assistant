@@ -36,14 +36,13 @@ const page = () => {
             upsert: true,
           });
         if (error) {
-          console.log("error uploading file", error);
           toast.error("Error uploading file");
         }
         getUserDetails();
         toast.success("Profile picture updated successfully");
       }
     } catch (error) {
-      console.log("error", error);
+      toast.error("Error uploading file");
     } finally {
       setUploading(false);
     }
@@ -68,7 +67,7 @@ const page = () => {
         }
       }
     } catch (error) {
-      console.log("error", error);
+      toast.error("Error fetching user details");
     } finally {
       setLoading(false);
     }

@@ -131,9 +131,13 @@ const TemplateTwo = ({
               <div key={index} className="mb-2">
                 <h3 className="font-bold">{edu?.degree}</h3>
                 <p>{edu?.school}</p>
-                <p>
-                  {edu?.startDate} - {edu?.endDate}
-                </p>
+                {edu?.startDate ||
+                  (edu?.endDate && (
+                    <p>
+                      {edu?.startDate} - {edu?.endDate}
+                    </p>
+                  ))}
+
                 <p>{edu?.location}</p>
               </div>
             ))}

@@ -72,7 +72,7 @@ export function AccountCard({
         toast.success("Profile updated successfully");
       }
     } catch (error: any) {
-      console.log("error", error);
+      toast.error("Something went wrong. Please try again later.");
     } finally {
       setUpdating(false);
     }
@@ -89,7 +89,7 @@ export function AccountCard({
         form.setValue("currentPassword", "");
       }
     } catch (error: any) {
-      console.log("error", error);
+      toast.error("Something went wrong. Please try again later.");
       if (error.response.status === 403) {
         setErrorMessage("Current password is incorrect");
         setTimeout(() => {

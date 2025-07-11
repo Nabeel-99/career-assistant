@@ -35,7 +35,6 @@ export const PUT = async (req: NextRequest) => {
       { status: 200 }
     );
   } catch (error) {
-    console.log("error", error);
     return NextResponse.json(
       { message: "Error uploading file" },
       { status: 500 }

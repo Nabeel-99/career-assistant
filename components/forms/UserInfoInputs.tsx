@@ -32,7 +32,6 @@ const UserInfoInputs = ({ form }: { form: any }) => {
                       const previewUrl = URL.createObjectURL(file);
                       setPreview(previewUrl);
                       form.setValue("image", file);
-                      console.log("file", file);
                     }
                   }}
                 />

@@ -16,6 +16,7 @@ import { Button } from "../ui/button";
 import Link from "next/link";
 import { FaStar } from "react-icons/fa";
 import FeedbackSkeleton from "../skeletons/FeedbackSkeleton";
+import { toast } from "sonner";
 
 const FeedbackCard = ({ id }: { id: string }) => {
   const [feedback, setFeedback] = useState<PracticeWithFeedback | null>(null);
@@ -27,7 +28,7 @@ const FeedbackCard = ({ id }: { id: string }) => {
 
       setFeedback(res);
     } catch (error) {
-      console.log("error", error);
+      toast.error("Error fetching feedback");
     } finally {
       setFetching(false);
     }

@@ -17,9 +17,11 @@ import {
 import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { fetchPractices } from "@/lib/action";
-import { generateChartData } from "@/lib/helper";
+
 import { ActivityData } from "@/lib/types";
 import { Skeleton } from "../ui/skeleton";
+import { toast } from "sonner";
+import { generateChartData } from "@/lib/utils";
 
 const ChartCard = ({ userId }: { userId: string }) => {
   const isMobile = useIsMobile();
@@ -40,7 +42,7 @@ const ChartCard = ({ userId }: { userId: string }) => {
       const activityData = generateChartData(res);
       setData(activityData);
     } catch (error) {
-      console.log("error", error);
+      toast.error("Error fetching data");
     } finally {
       setLoading(false);
     }

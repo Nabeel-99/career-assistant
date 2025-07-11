@@ -30,7 +30,6 @@ export const PUT = async (req: NextRequest) => {
       { status: 200 }
     );
   } catch (error) {
-    console.log("error", error);
     return NextResponse.json(
       { message: "Something went wrong" },
       { status: 500 }
@@ -67,17 +66,12 @@ export const DELETE = async (req: NextRequest) => {
       const { error: resumeDeleteError } = await supabase.storage
         .from("resumes")
         .remove(resumes);
-      if (resumeDeleteError) {
-        console.log("error deleting resumes", resumeDeleteError);
-      }
     }
 
     const { error: avatarDeleteError } = await supabase.storage
       .from("avatars")
       .remove([user.image!]);
-    if (avatarDeleteError) {
-      console.log("error deleting avatar", avatarDeleteError);
-    }
+
     await prisma.user.deleteMany({
       where: {
         id: token.id,
@@ -88,7 +82,6 @@ export const DELETE = async (req: NextRequest) => {
       { status: 200 }
     );
   } catch (error) {
-    console.log("error", error);
     return NextResponse.json(
       { message: "Something went wrong" },
       { status: 500 }

@@ -57,13 +57,13 @@ html {
 
 @layer utilities {
   .nav-link {
-    @apply text-[#b3b3b3] hover:text-[#ffffffda] transition-all duration-300  cursor-pointer;
+    @apply text-[#b3b3b3] hover:text-[#ffffffcc] transition-all duration-300  cursor-pointer;
   }
   .sign-up-btn {
-    @apply bg-[#ffffffda] transition-all duration-300 ease-in-out text-black hover:outline-4 outline-offset-2 py-1.5 px-4 rounded-4xl;
+    @apply bg-[#ffffffcc] transition-all duration-300 ease-in-out text-black hover:outline-4 outline-offset-2 py-1.5 px-4 rounded-4xl;
   }
   .text-subheadline {
-    @apply dark:text-[#ffffff8b];
+    @apply dark:text-[#ffffffcc];
   }
 }
 

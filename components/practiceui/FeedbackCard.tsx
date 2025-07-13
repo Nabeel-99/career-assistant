@@ -68,14 +68,22 @@ const FeedbackCard = ({ id }: { id: string }) => {
         </CardHeader>
         <Separator />
         <CardContent className="leading-relaxed">
-          <p>{feedback?.feedback?.comment}</p>
+          {feedback?.feedback?.comment?.length! > 0 ? (
+            <>
+              <p>{feedback?.feedback?.comment}</p>
 
-          <div className="flex items-center gap-1 mt-10">
-            <p>Overall score: </p>
+              <div className="flex items-center gap-1 mt-10">
+                <p>Overall score: </p>
 
-            <FaStar className="text-[#FFD700]" />
-            <p className="">{feedback?.feedback?.score}/100</p>
-          </div>
+                <FaStar className="text-[#FFD700]" />
+                <p className="">{feedback?.feedback?.score}/100</p>
+              </div>
+            </>
+          ) : (
+            <div className="">
+              <p>There was no enough communication to provide feedback. </p>
+            </div>
+          )}
         </CardContent>
       </Card>
       <div className="flex justify-end">

@@ -100,6 +100,8 @@ const CallCard = ({
           if (res.success) {
             toast.success(res.message);
             router.push(`/practice/feedback/${id}`);
+          } else {
+            toast.error(res.message);
           }
         } catch (error) {
           toast.error("Error creating feedback");

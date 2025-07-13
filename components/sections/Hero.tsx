@@ -81,10 +81,11 @@ const Hero = () => {
       >
         <div
           ref={sectionRef}
-          className="perspective-distant hidden md:block mt-10  max-lg:overflow-hidden"
+          className="perspective-distant hidden md:block mt-10 max-lg:overflow-hidden"
         >
           <motion.div style={{ rotateX }}>
             <Image
+              loading="eager"
               src={DashboardImage}
               width={1100}
               height={1100}
@@ -94,6 +95,7 @@ const Hero = () => {
           </motion.div>
         </div>
         <Image
+          loading="eager"
           src={DashboardImage}
           width={1100}
           height={1100}

@@ -57,7 +57,7 @@ const Faq = () => {
       <h1 className="shadow-sm shadow-[#b6b6b6] border-[#1f1f1f] px-4 py-2 border-2 rounded-4xl">
         FAQ
       </h1>
-      <h1 className="text-3xl text-center">Everything you need to know</h1>
+      <h2 className="text-3xl text-center">Everything you need to know</h2>
       <div className="w-full max-w-4xl">
         <Accordion
           type="single"
@@ -72,7 +72,9 @@ const Faq = () => {
               value={`item-${question.id}`}
             >
               <AccordionTrigger className="text-lg ">
-                {question.question}
+                <h3 className="hover:text-white transition-all duration-300 ease-in-out">
+                  {question.question}
+                </h3>
               </AccordionTrigger>
               <AccordionContent className="text-lg">
                 <p className="">{question.answer}</p>

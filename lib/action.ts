@@ -136,8 +136,17 @@ export const createFeedback = async (
 ): Promise<{ success: boolean; message: string }> => {
   const session = await auth();
   if (!session?.user?.id) throw new Error("Unauthorized");
+  if (!transcript || transcript.length === 0) {
+    return { success: false, message: "Transcript is empty" };
+  }
   try {
     const aiFeedback = await generateFeedback(transcript);
+    if (!aiFeedback || !aiFeedback.comment?.trim()) {
+      return {
+        success: false,
+        message: "Feedback was empty or could not be generated",
+      };
+    }
     if (aiFeedback) {
       await prisma.practice.update({
         where: { id: Number(practiceId) },

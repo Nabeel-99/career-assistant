@@ -28,6 +28,7 @@ import { Skeleton } from "../ui/skeleton";
 import { Resume } from "@/lib/generated/prisma";
 import { resumeSchema } from "@/lib/validation";
 import MissingFieldsForm from "../forms/MissingFieldsForm";
+import { fetchResumeWithContent } from "@/lib/action";
 
 const mockSchema = z.object({
   resumeId: z.string(),
@@ -57,7 +58,7 @@ const ApplyDialog = ({
   const [incompleteResume, setIncompleteResume] = useState<ResumeSchema | null>(
     null
   );
-
+  console.log("templateName", templateName);
   const form = useForm<z.infer<typeof mockSchema>>({
     resolver: zodResolver(mockSchema),
     defaultValues: {
@@ -78,6 +79,10 @@ const ApplyDialog = ({
 
       if (res.status === 200) {
         toast.success("Resume generated successfully");
+        setOpenPreviewCard(false);
+        if (userId) {
+          await fetchResumeWithContent(userId);
+        }
       }
     } catch (error: any) {
       if (error.response.status === 422) {

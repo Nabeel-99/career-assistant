@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 
 import CVForm from "../forms/CVForm";
 import {
@@ -16,12 +16,16 @@ import { Button } from "../ui/button";
 const CreateCVDialog = ({
   templateName,
   userId,
+  setOpenPreviewCard,
 }: {
   templateName: string;
   userId: string;
+  setOpenPreviewCard: (openPreviewCard: boolean) => void;
 }) => {
+  const [openForm, setOpenForm] = useState(false);
+
   return (
-    <Dialog>
+    <Dialog open={openForm} onOpenChange={setOpenForm}>
       <DialogTrigger asChild>
         <Button>Create New CV</Button>
       </DialogTrigger>
@@ -36,7 +40,12 @@ const CreateCVDialog = ({
             Fill out the form below to create a new CV
           </DialogDescription>
         </DialogHeader>
-        <CVForm userId={userId} templateName={templateName} />
+        <CVForm
+          userId={userId}
+          templateName={templateName}
+          setOpenForm={setOpenForm}
+          setOpenPreviewCard={setOpenPreviewCard}
+        />
       </DialogContent>
     </Dialog>
   );

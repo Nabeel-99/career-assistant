@@ -1,3 +1,4 @@
+import { formatTemplateDate } from "@/lib/utils";
 import { resumeSchema } from "@/lib/validation";
 import Link from "next/link";
 import React from "react";
@@ -116,12 +117,12 @@ const TemplateOne = ({
                     </div>
                   </div>
                   <div className="flex flex-col gap-1">
-                    {item?.startDate ||
-                      (item?.endDate && (
-                        <p className="italic">
-                          {item?.startDate} - {item?.endDate}
-                        </p>
-                      ))}
+                    {item?.startDate && item?.endDate && (
+                      <p className="italic">
+                        {formatTemplateDate(item?.startDate)} -{" "}
+                        {formatTemplateDate(item?.endDate)}
+                      </p>
+                    )}
 
                     <p>{item?.location}</p>
                   </div>

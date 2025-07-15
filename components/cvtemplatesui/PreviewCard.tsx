@@ -20,11 +20,11 @@ const PreviewCard = ({
 }) => {
   const [loading, setLoading] = useState(false);
   const [resumes, setResumes] = useState<Resume[]>([]);
+  console.log("template", template);
   const getUserResumes = async () => {
     try {
       setLoading(true);
       const res = await fetchResumes(userId!);
-
       if (res) {
         setResumes(res);
       }
@@ -58,7 +58,11 @@ const PreviewCard = ({
               templateName={template.name}
               setOpenPreviewCard={setOpenPreviewCard}
             />
-            <CreateCVDialog userId={userId!} templateName={template.name} />
+            <CreateCVDialog
+              userId={userId!}
+              templateName={template.name}
+              setOpenPreviewCard={setOpenPreviewCard}
+            />
           </div>
         </div>
       </div>

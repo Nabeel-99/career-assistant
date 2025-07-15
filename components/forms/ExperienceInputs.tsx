@@ -10,6 +10,7 @@ import {
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 import { cn } from "@/lib/utils";
+import { Checkbox } from "../ui/checkbox";
 
 type ExperienceInputsProps = {
   experienceFields: any[];
@@ -98,36 +99,48 @@ const ExperienceInputs = ({
           </FormItem>
         )}
       />
+
       <FormField
         control={form.control}
         name={`experience.${index}.endDate`}
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel>End Date</FormLabel>
-            <FormControl>
-              <Input type="date" placeholder="Enter your end date" {...field} />
-            </FormControl>
-            <FormMessage className="text-red-500" />
-          </FormItem>
-        )}
+        render={({ field }) => {
+          const isWorking = form.watch(`experience.${index}.currentlyWorking`);
+          return (
+            <FormItem>
+              <FormLabel>End Date</FormLabel>
+              <FormControl>
+                <Input
+                  type={isWorking ? "text" : "date"}
+                  placeholder="Enter your end date"
+                  disabled={isWorking}
+                  value={isWorking ? "Present" : field.value}
+                  onChange={(e) => {
+                    if (!isWorking) {
+                      field.onChange(e.target.value);
+                    }
+                  }}
+                />
+              </FormControl>
+              <FormMessage className="text-red-500" />
+            </FormItem>
+          );
+        }}
       />
-      {/* <FormField
+      <FormField
         control={form.control}
         name={`experience.${index}.currentlyWorking`}
         render={({ field }) => (
-          <FormItem className="flex items-center col-span-2 gap-2 mt-2">
+          <FormItem className="flex items-center  col-span-2  gap-2 mt-2">
             <FormControl>
               <Checkbox
                 checked={field.value}
                 onCheckedChange={(checked) => {
-                  form.setValue(
-                    `experience.${index}.currentlyWorking`,
-                    checked
-                  );
-                  form.setValue(
-                    `experience.${index}.endDate`,
-                    checked ? "Present" : ""
-                  );
+                  field.onChange(checked);
+                  if (checked) {
+                    form.setValue(`experience.${index}.endDate`, "Present");
+                  } else {
+                    form.setValue(`experience.${index}.endDate`, "");
+                  }
                 }}
               />
             </FormControl>
@@ -136,7 +149,8 @@ const ExperienceInputs = ({
             </FormLabel>
           </FormItem>
         )}
-      /> */}
+      />
+
       <div className="flex items-center gap-2 justify-start">
         <Button
           className={cn({ hidden: index === 0 })}

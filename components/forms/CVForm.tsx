@@ -26,15 +26,21 @@ import axios from "axios";
 import supabase from "@/lib/supabase";
 import { toast } from "sonner";
 import { ImSpinner9 } from "react-icons/im";
+import { fetchResumeWithContent } from "@/lib/action";
 
 const CVForm = ({
   templateName,
   userId,
+  setOpenForm,
+  setOpenPreviewCard,
 }: {
   templateName: string;
   userId: string;
+  setOpenForm: (openForm: boolean) => void;
+  setOpenPreviewCard: (openPreviewCard: boolean) => void;
 }) => {
   const [loading, setLoading] = useState(false);
+  console.log("template name", templateName);
   const form = useForm<z.infer<typeof resumeSchema>>({
     resolver: zodResolver(resumeSchema),
     defaultValues: {
@@ -161,6 +167,12 @@ const CVForm = ({
           if (error) {
             toast.error("Error uploading image");
           }
+        }
+        toast.success("Resume created successfully");
+        setOpenForm(false);
+        setOpenPreviewCard(false);
+        if (userId) {
+          await fetchResumeWithContent(userId);
         }
       }
     } catch (error) {

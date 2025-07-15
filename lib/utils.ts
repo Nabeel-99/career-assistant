@@ -56,6 +56,17 @@ export function formatDate(date: Date | string) {
     year: "numeric",
   });
 }
+export function formatTemplateDate(date: string) {
+  if (date === "Present") return "Present";
+  try {
+    return new Date(date).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+    });
+  } catch {
+    return date;
+  }
+}
 
 // Generate 14 past days like "2025-06-25"
 const getPastDays = (n: number) => {

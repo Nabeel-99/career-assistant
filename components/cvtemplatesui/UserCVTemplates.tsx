@@ -1,9 +1,5 @@
 "use client";
-import {
-  deleteUserTemplate,
-  fetchResumeWithContent,
-  fetchUser,
-} from "@/lib/action";
+import { deleteUserTemplate, fetchResumeWithContent } from "@/lib/action";
 import { Resume } from "@/lib/generated/prisma";
 import React, { useEffect, useRef, useState } from "react";
 import { Skeleton } from "../ui/skeleton";
@@ -43,7 +39,7 @@ const UserCVTemplates = ({ userId }: { userId: string }) => {
     try {
       setLoading(true);
       const res = await fetchResumeWithContent(userId);
-
+      console.log("res", res);
       setUserTemplates(res);
     } catch (error) {
       toast.error("Error fetching resumes");
@@ -68,6 +64,9 @@ const UserCVTemplates = ({ userId }: { userId: string }) => {
   useEffect(() => {
     fetchUserTemplates();
   }, [userId]);
+
+  console.log("selectedResume", selectedResume);
+
   return loading ? (
     <div className="grid gap-6 grid-cols-[repeat(auto-fill,minmax(290px,1fr))]">
       {Array.from({ length: 3 }).map((_, index) => (
@@ -78,12 +77,15 @@ const UserCVTemplates = ({ userId }: { userId: string }) => {
     <>
       <div className="grid gap-6 grid-cols-[repeat(auto-fill,minmax(290px,1fr))]">
         {userTemplates.map((template, index) => {
-          const TemplateComponent = template.template
-            ? templateMap[template.template]
-            : null;
+          const TemplateComponent =
+            template.template && templateMap[template.template]
+              ? templateMap[template.template]
+              : null;
           if (!TemplateComponent || !template.content) return null;
           const content = template.content as Content;
           const resumeId = `resume-template-${index}`;
+          console.log("content", content);
+          console.log("resumeid", resumeId);
           return (
             <div className="flex flex-col gap-2" key={index}>
               {/* printable resume */}

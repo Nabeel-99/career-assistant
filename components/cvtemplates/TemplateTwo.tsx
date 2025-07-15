@@ -1,3 +1,4 @@
+import { formatTemplateDate } from "@/lib/utils";
 import { resumeSchema } from "@/lib/validation";
 import Link from "next/link";
 import React from "react";
@@ -131,12 +132,12 @@ const TemplateTwo = ({
               <div key={index} className="mb-2">
                 <h3 className="font-bold">{edu?.degree}</h3>
                 <p>{edu?.school}</p>
-                {edu?.startDate ||
-                  (edu?.endDate && (
-                    <p>
-                      {edu?.startDate} - {edu?.endDate}
-                    </p>
-                  ))}
+                {edu?.startDate && edu?.endDate && (
+                  <p>
+                    {formatTemplateDate(edu?.startDate)} -{" "}
+                    {formatTemplateDate(edu?.endDate)}
+                  </p>
+                )}
 
                 <p>{edu?.location}</p>
               </div>
@@ -152,7 +153,8 @@ const TemplateTwo = ({
                 <h3 className="font-bold">{exp?.title}</h3>
                 <p>{exp?.company}</p>
                 <p>
-                  {exp?.startDate} - {exp?.endDate}
+                  {formatTemplateDate(exp?.startDate!)} -{" "}
+                  {formatTemplateDate(exp?.endDate!)}
                 </p>
                 <p>{exp?.location}</p>
                 <ul className="list-disc ml-5">

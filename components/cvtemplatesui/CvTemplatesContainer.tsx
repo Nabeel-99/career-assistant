@@ -14,26 +14,28 @@ const CvTemplatesContainer = ({
   templates: Template[];
   userId: string | null;
 }) => {
-  const [openPreviewCard, setOpenPreviewCard] = useState(false);
+  const [openDialogIndex, setOpenDialogIndex] = useState<number | null>(null);
   return (
     <div className="flex flex-col gap-6">
       <div className="grid gap-6 grid-cols-[repeat(auto-fill,minmax(290px,1fr))]">
-        {templates.map((template, item) => (
+        {templates.map((template, index) => (
           <Dialog
-            key={item}
-            open={openPreviewCard}
-            onOpenChange={setOpenPreviewCard}
+            key={index}
+            open={openDialogIndex === index}
+            onOpenChange={(open) => setOpenDialogIndex(open ? index : null)}
           >
             <DialogTrigger asChild>
               <div className="w-full  rounded cursor-pointer text-left">
-                <TemplateCard {...template} />
+                <TemplateCard template={template} />
               </div>
             </DialogTrigger>
             <DialogContent className="overflow-scroll hide-scrollbar h-3/4 md:h-[700px] md:w-3/4 xl:w-3/4">
               <PreviewCard
                 userId={userId!}
                 template={template}
-                setOpenPreviewCard={setOpenPreviewCard}
+                setOpenPreviewCard={(open) =>
+                  setOpenDialogIndex(open ? index : null)
+                }
               />
             </DialogContent>
           </Dialog>

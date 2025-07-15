@@ -22,7 +22,7 @@ const SectionCards = () => {
   const [activity, setActivity] = useState<Activity | null>(null);
   const [fetching, setFetching] = useState(false);
   const [tipIndex, setTipIndex] = useState(0);
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(true);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -44,7 +44,6 @@ const SectionCards = () => {
         if (res) {
           setActivity(res);
         }
-      
       } catch (error) {
         toast.error("Error fetching activity");
       } finally {

@@ -20,7 +20,7 @@ const PreviewCard = ({
 }) => {
   const [loading, setLoading] = useState(false);
   const [resumes, setResumes] = useState<Resume[]>([]);
-  console.log("template", template);
+
   const getUserResumes = async () => {
     try {
       setLoading(true);

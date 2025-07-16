@@ -20,7 +20,15 @@ const page = async () => {
       description:
         "A clean and modern resume template with a two-column layout, perfect for showcasing skills and experience side by side.",
     },
+    {
+      image: "/templatethree.png",
+      name: "Template Three",
+      title: "Modern Professional with Portrait",
+      description:
+        " A clean, modern CV template featuring a prominent portrait image, designed to showcase a professional's credentials with a visually appealing and structured layout.",
+    },
   ];
+
   return (
     <div className="flex flex-col gap-1">
       <h1 className="text-sm">My CV Templates</h1>
@@ -33,8 +41,6 @@ const page = async () => {
           userId={session?.user?.id!}
         />
       </div>
-
-      {/* <TemplateOne /> */}
     </div>
   );
 };

@@ -10,12 +10,39 @@ import {
 } from "../ui/form";
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
+import CropImage from "./CropImage";
+import { Button } from "../ui/button";
 
-const UserInfoInputs = ({ form }: { form: any }) => {
+const UserInfoInputs = ({
+  form,
+  setCroppedFile,
+}: {
+  form: any;
+  setCroppedFile: (file: File) => void;
+}) => {
   const [preview, setPreview] = useState<string | null>(null);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [showCropModal, setShowCropModal] = useState(false);
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      setSelectedImage(reader.result as string);
+      setShowCropModal(true);
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const handleSaveCrop = (data: any) => {
+    console.log("✅ Cropped data:", data);
+    // upload cropped image or store it
+  };
   return (
     <>
-      <div className="flex gap-10 items-center">
+      <div className="flex  gap-10 items-center">
         <FormField
           control={form.control}
           name="image"
@@ -27,6 +54,7 @@ const UserInfoInputs = ({ form }: { form: any }) => {
                   type="file"
                   accept="image/*"
                   onChange={(e) => {
+                    handleImageChange(e);
                     const file = e.target.files?.[0];
                     if (file) {
                       const previewUrl = URL.createObjectURL(file);
@@ -42,13 +70,31 @@ const UserInfoInputs = ({ form }: { form: any }) => {
         />
         {/* preview image */}
         {preview && (
-          <div className="max-w-40  border rounded overflow-hidden">
-            <img
-              src={preview!}
-              alt="preview"
-              className="w-full h-full object-cover"
+          <>
+            <div className="flex flex-col gap-2">
+              <div className="max-w-40  border rounded overflow-hidden">
+                <img
+                  src={preview!}
+                  alt="preview"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="">
+                <Button type="button" onClick={() => setShowCropModal(true)}>
+                  Resize
+                </Button>
+              </div>
+            </div>
+
+            <CropImage
+              form={form}
+              setPreview={setPreview}
+              setCroppedFile={setCroppedFile}
+              image={selectedImage!}
+              open={showCropModal}
+              closeModal={() => setShowCropModal(false)}
             />
-          </div>
+          </>
         )}
       </div>
       <FormField

@@ -27,6 +27,7 @@ import supabase from "@/lib/supabase";
 import { toast } from "sonner";
 import { ImSpinner9 } from "react-icons/im";
 import { fetchResumeWithContent } from "@/lib/action";
+import { useRouter } from "next/navigation";
 
 const CVForm = ({
   templateName,
@@ -40,7 +41,8 @@ const CVForm = ({
   setOpenPreviewCard: (openPreviewCard: boolean) => void;
 }) => {
   const [loading, setLoading] = useState(false);
-  console.log("template name", templateName);
+  const [croppedFile, setCroppedFile] = useState<File | null>(null);
+  const router = useRouter();
   const form = useForm<z.infer<typeof resumeSchema>>({
     resolver: zodResolver(resumeSchema),
     defaultValues: {
@@ -144,18 +146,28 @@ const CVForm = ({
   const onSubmit = async (data: z.infer<typeof resumeSchema>) => {
     try {
       setLoading(true);
-      const formData = new FormData();
 
+      if (data.awards && Array.isArray(data.awards)) {
+        data.awards = data.awards.filter(
+          (award) =>
+            award &&
+            (award.title?.trim() ||
+              award.description?.trim() ||
+              award.year?.trim())
+        );
+      }
+      const formData = new FormData();
       Object.entries(data).forEach(([key, value]) => {
         if (key === "image") return;
         formData.append(key, JSON.stringify(value));
       });
       if (data.image instanceof File) {
-        formData.append("image", data.image);
+        formData.append("image", croppedFile!);
       }
       const imageFilePath = `${userId}/profile-images/${Date.now()}_${
-        data.image.name
+        croppedFile?.name
       }`;
+
       formData.append("imageFilePath", JSON.stringify(imageFilePath));
       formData.append("templateName", JSON.stringify(templateName));
       const res = await axios.post("/api/cv/create-cv", formData);
@@ -163,7 +175,7 @@ const CVForm = ({
         if (data.image) {
           const { data: resume, error } = await supabase.storage
             .from("resumes")
-            .upload(imageFilePath, data.image);
+            .upload(imageFilePath, croppedFile!);
           if (error) {
             toast.error("Error uploading image");
           }
@@ -174,6 +186,7 @@ const CVForm = ({
         if (userId) {
           await fetchResumeWithContent(userId);
         }
+        router.refresh();
       }
     } catch (error) {
       toast.error("Error creating resume");
@@ -187,7 +200,7 @@ const CVForm = ({
         onSubmit={form.handleSubmit(onSubmit)}
         className="flex flex-col gap-4"
       >
-        <UserInfoInputs form={form} />
+        <UserInfoInputs setCroppedFile={setCroppedFile} form={form} />
         <FormLabel className="">Links</FormLabel>
         <SocialLinksInputs form={form} />
         <FormLabel>Education</FormLabel>

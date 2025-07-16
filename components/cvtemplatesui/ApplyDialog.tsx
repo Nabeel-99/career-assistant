@@ -58,7 +58,7 @@ const ApplyDialog = ({
   const [incompleteResume, setIncompleteResume] = useState<ResumeSchema | null>(
     null
   );
-  console.log("templateName", templateName);
+
   const form = useForm<z.infer<typeof mockSchema>>({
     resolver: zodResolver(mockSchema),
     defaultValues: {

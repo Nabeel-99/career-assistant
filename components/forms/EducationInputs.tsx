@@ -90,7 +90,7 @@ const EducationInputs = ({
         name={`education.${index}.endDate`}
         render={({ field }) => (
           <FormItem>
-            <FormLabel>End Date or Expected Graduation Date</FormLabel>
+            <FormLabel> End Date</FormLabel>
             <FormControl>
               <Input type="date" placeholder="Enter your end date" {...field} />
             </FormControl>

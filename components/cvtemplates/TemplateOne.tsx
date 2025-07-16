@@ -141,9 +141,13 @@ const TemplateOne = ({
               {content?.experience?.map((item, index) => (
                 <React.Fragment key={index}>
                   <div className="flex flex-col gap-1">
-                    <p className="italic">
-                      {item?.startDate} - {item?.endDate}
-                    </p>
+                    {item?.startDate && item.endDate && (
+                      <p className="italic">
+                        {formatTemplateDate(item?.startDate)} -{" "}
+                        {formatTemplateDate(item?.endDate)}
+                      </p>
+                    )}
+
                     <p>{item?.company}</p>
                   </div>
                   <div className="col-span-2">

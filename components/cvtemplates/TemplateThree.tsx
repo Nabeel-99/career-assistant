@@ -12,6 +12,7 @@ import {
   FaPhone,
 } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
+import { toast } from "sonner";
 import { z } from "zod";
 
 type Content = z.infer<typeof resumeSchema>;
@@ -33,7 +34,7 @@ const TemplateThree = ({
         setImageUrl(data.publicUrl);
       }
     } catch (error) {
-      console.log(error);
+      toast.error("Error fetching image");
     }
   };
 

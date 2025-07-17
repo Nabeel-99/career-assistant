@@ -26,7 +26,14 @@ import { IoMdSettings } from "react-icons/io";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import supabase from "@/lib/supabase";
-const SideNavWrapper = ({ user }: { user: User | null }) => {
+import { Skeleton } from "../ui/skeleton";
+const SideNavWrapper = ({
+  user,
+  loading,
+}: {
+  user: User | null;
+  loading: boolean;
+}) => {
   const { setOpenMobile } = useSidebar();
   const pathname = usePathname();
   const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
@@ -71,50 +78,69 @@ const SideNavWrapper = ({ user }: { user: User | null }) => {
   }, [user?.image]);
   return (
     <Sidebar className="">
-      <SidebarContent className="dark:bg-[#0a0a0a] pt-8 ">
-        <SidebarGroup>
-          <SidebarGroupLabel className="flex items-center  mb-5">
-            <Avatar className="border">
-              <AvatarImage src={avatarUrl!} className="object-cover" />
-              <AvatarFallback className="flex items-center">
-                <span>{user?.firstname?.charAt(0)} </span>
-                <span>{user?.lastname?.charAt(0)}</span>
-              </AvatarFallback>
-            </Avatar>
-            <span className="text-[16px] pl-1">
-              {user?.firstname} {user?.lastname}
-            </span>
-          </SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu className="flex flex-col gap-1 text-sidebar-foreground/70">
-              {navItems.map((item) => {
-                const isActive = pathname.startsWith(item.url);
-                return (
-                  <SidebarMenuItem key={item.name}>
-                    <SidebarMenuButton
-                      asChild
-                      className={cn(
-                        "text-[16px]",
-                        isActive && "bg-sidebar-accent"
-                      )}
-                      onClick={() => setOpenMobile(false)}
-                    >
-                      <Link
-                        href={item.url}
-                        className={cn(isActive && "text-black dark:text-white")}
+      {loading ? (
+        <div className="flex flex-col gap-4 p-4">
+          {/* Avatar */}
+          <Skeleton className="h-8 w-full rounded" />
+
+          {/* Name */}
+          <Skeleton className="h-8 w-full rounded" />
+
+          {/* Nav links */}
+          <Skeleton className="h-8 w-full rounded " />
+          <Skeleton className="h-8 w-full rounded " />
+          <Skeleton className="h-8 w-full rounded " />
+          <Skeleton className="h-8 w-full rounded " />
+        </div>
+      ) : (
+        <SidebarContent className="dark:bg-[#0a0a0a] pt-8 ">
+          <SidebarGroup>
+            <SidebarGroupLabel className="flex items-center  mb-5">
+              <Avatar className="border">
+                <AvatarImage src={avatarUrl!} className="object-cover" />
+                <AvatarFallback className="flex items-center">
+                  <span>{user?.firstname?.charAt(0)} </span>
+                  <span>{user?.lastname?.charAt(0)}</span>
+                </AvatarFallback>
+              </Avatar>
+              <span className="text-[16px] pl-1">
+                {user?.firstname} {user?.lastname}
+              </span>
+            </SidebarGroupLabel>
+            <SidebarGroupContent>
+              <SidebarMenu className="flex flex-col gap-1 text-sidebar-foreground/70">
+                {navItems.map((item) => {
+                  const isActive = pathname.startsWith(item.url);
+                  return (
+                    <SidebarMenuItem key={item.name}>
+                      <SidebarMenuButton
+                        asChild
+                        className={cn(
+                          "text-[16px]",
+                          isActive && "bg-sidebar-accent"
+                        )}
+                        onClick={() => setOpenMobile(false)}
                       >
-                        <span className="text-xl">{item.icon}</span>
-                        <span className="pl-1">{item.name}</span>
-                      </Link>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                );
-              })}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
-      </SidebarContent>
-      <SidebarFooter className="dark:bg-[#0a0a0a]">
+                        <Link
+                          href={item.url}
+                          className={cn(
+                            isActive && "text-black dark:text-white"
+                          )}
+                        >
+                          <span className="text-xl">{item.icon}</span>
+                          <span className="pl-1">{item.name}</span>
+                        </Link>
+                      </SidebarMenuButton>
+                    </SidebarMenuItem>
+                  );
+                })}
+              </SidebarMenu>
+            </SidebarGroupContent>
+          </SidebarGroup>
+        </SidebarContent>
+      )}
+
+      <SidebarFooter className={cn("dark:bg-[#0a0a0a]", loading && "hidden")}>
         <SidebarMenu className="">
           <SidebarMenuItem className="text-sidebar-foreground/70">
             <SidebarMenuButton

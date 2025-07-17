@@ -115,6 +115,21 @@ export const TIPS = [
   "Create different resume versions for different job roles.",
   "Don’t leave your social links blank — add GitHub or portfolio links.",
   "Check your activity tab to track recent uploads and interviews.",
+  "Generate a new resume from scratch using AI — just describe your experience.",
+  "Improve your CV content instantly by applying AI-enhanced suggestions.",
+  "Highlight your achievements using action verbs for better impact.",
+  "Use voice interview feedback to refine your speaking clarity and confidence.",
+  "Export your resume in multiple formats after applying a template.",
+  "Choose a template that matches the job role you're applying for.",
+  "Your resume preview reflects your latest edits — double-check before exporting.",
+  "Structured resume data helps AI give better career advice — fill all fields.",
+  "Missing awards or certifications? Add them to make your resume stronger.",
+  "You can edit AI-generated resumes anytime — customize them to fit your goals.",
+  "Track your interview progress and resume changes in your dashboard.",
+  "Practice interviews regularly — feedback improves with every session.",
+  "Apply a clean design if you're applying for traditional roles; use modern ones for startups.",
+  "Don’t forget to add your phone and email — recruiters need a way to reach you.",
+  "Update your resume every time you finish a new project or earn a new skill.",
 ];
 
 // cropImage.ts

@@ -36,10 +36,6 @@ const UserInfoInputs = ({
     reader.readAsDataURL(file);
   };
 
-  const handleSaveCrop = (data: any) => {
-    console.log("✅ Cropped data:", data);
-    // upload cropped image or store it
-  };
   return (
     <>
       <div className="flex  gap-10 items-center">

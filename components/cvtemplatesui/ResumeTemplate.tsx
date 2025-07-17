@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useReactToPrint } from "react-to-print";
 import { toast } from "sonner";
 import { z } from "zod";
@@ -28,12 +28,21 @@ const ResumeTemplate = ({
   templateId,
   deleteResume,
 }: ResumeTemplateProps) => {
-  console.log("template", templateName);
-  console.log("content", content);
   const [showDelete, setShowDelete] = useState(false);
   const [selectedResume, setSelectedResume] = useState<number | null>(null);
-
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth < 1024);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   const reactToPrintFn = useReactToPrint({
     contentRef,
     documentTitle: `Resume-${Date.now()}`,
@@ -43,6 +52,7 @@ const ResumeTemplate = ({
         description: "If saved, check your downloads.",
       });
     },
+    preserveAfterPrint: true,
   });
   const showDeleteDialog = (resumeId: number) => {
     setShowDelete(true);
@@ -88,7 +98,18 @@ const ResumeTemplate = ({
         </div>
       </div>
       <div className="flex items-center gap-2 justify-end">
-        <Button onClick={reactToPrintFn} className="cursor-pointer ">
+        <Button
+          onClick={() => {
+            if (isSmallScreen) {
+              toast.info(
+                "Resume preview and download works best on a desktop. Try switching to a bigger screen."
+              );
+              return;
+            }
+            reactToPrintFn?.();
+          }}
+          className="cursor-pointer "
+        >
           <FaDownload />
         </Button>
         <Button onClick={() => showDeleteDialog(templateId)}>

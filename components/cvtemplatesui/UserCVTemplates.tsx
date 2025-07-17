@@ -1,7 +1,7 @@
 "use client";
 import { deleteUserTemplate, fetchResumeWithContent } from "@/lib/action";
 import { Resume } from "@/lib/generated/prisma";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Skeleton } from "../ui/skeleton";
 
 import { z } from "zod";
@@ -14,14 +14,10 @@ const UserCVTemplates = ({ userId }: { userId: string }) => {
   const [userTemplates, setUserTemplates] = useState<Resume[]>([]);
   const [deleteLoading, setDeleteLoading] = useState(false);
   const [loading, setLoading] = useState(false);
-  const contentRef = useRef<HTMLDivElement>(null);
-
-  console.log("contentRef", contentRef);
   const fetchUserTemplates = async () => {
     try {
       setLoading(true);
       const res = await fetchResumeWithContent(userId);
-      console.log("res", res);
       setUserTemplates(res);
     } catch (error) {
       toast.error("Error fetching resumes");

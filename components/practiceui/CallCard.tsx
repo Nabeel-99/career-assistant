@@ -39,6 +39,9 @@ const CallCard = ({
   const [starting, setStarting] = useState(false);
   const [lastMessage, setLastMessage] = useState<Transcript | null>(null);
   const [generatingFeedback, setGeneratingFeedback] = useState(false);
+  const [feedbackMessage, setFeedbackMessage] = useState<
+    "redirecting" | "generating"
+  >("generating");
   const fetchInterview = async () => {
     try {
       setLoading(true);
@@ -96,16 +99,18 @@ const CallCard = ({
       const runFeedback = async () => {
         try {
           setGeneratingFeedback(true);
+          setFeedbackMessage("generating");
           const res = await createFeedback(transcript, id);
           if (res.success) {
             toast.success(res.message);
+            setFeedbackMessage("redirecting");
             router.push(`/practice/feedback/${id}`);
           } else {
             toast.error(res.message);
+            setGeneratingFeedback(false);
           }
         } catch (error) {
           toast.error("Error creating feedback");
-        } finally {
           setGeneratingFeedback(false);
         }
       };
@@ -140,7 +145,7 @@ const CallCard = ({
     vapi.stop();
   };
   return (
-    <div className="flex flex-col xl:flex-row gap-10 h-full w-full">
+    <div className="flex flex-col justify-between xl:flex-row gap-10 h-full w-full">
       {loading ? (
         <CallCardSkeleton />
       ) : (
@@ -149,6 +154,7 @@ const CallCard = ({
             practice={practice}
             isSpeaking={isSpeaking}
             user={user}
+            feedbackMessage={feedbackMessage}
             isConnected={isConnected}
             lastMessage={lastMessage}
             transcript={transcript}

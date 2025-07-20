@@ -33,7 +33,7 @@ Your task is to return a JSON object with the following:
   - Marketer: ["google ads", "hubspot", "analytics"]
   and many more
 4. **role**: The likely role being applied for, like "Frontend Developer", "Software Engineer", "Product Desginer" etc.
-5. **questions**: Return **3 to 10 realistic interview questions** that simulate what a company might ask *during a real technical interview* for the given role and level. Prioritize questions based on:
+5. **questions**: Return **3 to 5 realistic interview questions** that simulate what a company might ask *during a real technical interview* for the given role and level. Prioritize questions based on:
     - Technologies mentioned in the job description.
     - Responsibilities or challenges outlined in the job post.
     - DO NOT assume what the user has done unless clearly visible in the resume.
@@ -76,7 +76,7 @@ ${level}
 
 export const generateFeedback = async (transcript: Transcript[]) => {
   const { text } = await generateText({
-    model: groq("llama-3.1-8b-instant"),
+    model: google("gemini-1.5-flash"),
 
     prompt: `You are an AI interview evaluator for a tech company.
 

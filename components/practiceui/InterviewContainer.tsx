@@ -14,6 +14,7 @@ import { Transcript } from "@/lib/types";
 
 type InterviewProps = {
   practice: any;
+  feedbackMessage: string;
   isSpeaking: boolean;
   user: User | null;
   isConnected: boolean;
@@ -33,6 +34,7 @@ const InterviewContainer = ({
   transcript,
   starting,
   generatingFeedback,
+  feedbackMessage,
   startCall,
   endCall,
 }: InterviewProps) => {
@@ -43,7 +45,11 @@ const InterviewContainer = ({
         <div className="absolute inset-0 bg-black/60 dark:bg-black/80 z-50 flex items-center  justify-center">
           <div className=" flex flex-col gap-2 items-center justify-center">
             <ImSpinner9 className="animate-spin text-white text-center text-4xl" />
-            <p className="animate-pulse">Generating Feedback</p>
+            <p className="animate-pulse">
+              {feedbackMessage === "generating"
+                ? "Generating Feedback"
+                : "Your Feedback is ready"}
+            </p>
           </div>
         </div>
       )}
@@ -72,13 +78,13 @@ const InterviewContainer = ({
           <p className="italic text-subheadline">{practice?.description}.</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <Card className="flex flex-col  gap-5 items-center dark:bg-[#111111] xl:p-20 justify-center">
+          <Card className="flex flex-col  gap-5 items-center dark:bg-[#111111] xl:p-10 justify-center">
             <div className={cn(isSpeaking && "text-sky-500 animate-pulse")}>
-              <RiSpeakAiFill className="size-24 xl:ml10 xl:size-44 " />
+              <RiSpeakAiFill className="size-24  xl:size-44 " />
             </div>
             <p className="lg:text-xl font-bold">AI Interviewer</p>
           </Card>
-          <Card className="flex items-center dark:bg-[#111111] xl:p-20 justify-center">
+          <Card className="flex items-center dark:bg-[#111111] xl:p-10 justify-center">
             <div className="flex items-center bg-black rounded-full">
               <Avatar className="size-24 xl:size-44">
                 <AvatarImage src={user?.image!} />
@@ -144,7 +150,7 @@ const InterviewContainer = ({
           </div>
         )}
       </Card>
-      <div className="flex  flex-col h-full items-center gap-6 justify-start">
+      <div className="flex  flex-col h-full items-center gap-6 justify-end lg:justify-start">
         {/* <div className="flex items-center justify-center border bg-[#1f1f1f]  p-6 rounded-full">
               <FaMicrophone className="size-10" />
             </div> */}

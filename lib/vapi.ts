@@ -10,7 +10,7 @@ export const assistant = (
 ): CreateAssistantDTO => ({
   name: "Interviewer",
   firstMessage: ` Hello, ${firstname}, Thanks for joining! I'm excited to learn more about you and your experience.  `,
-  maxDurationSeconds: 900,
+  maxDurationSeconds: 600,
   model: {
     provider: "groq",
     model: "llama-3.1-8b-instant",

@@ -116,12 +116,16 @@ const InterviewContainer = ({
                 className={cn(
                   "transition-opacity duration-500 opacity-0",
                   "fade-in opacity-100",
-                  lastMessage?.role === "user" ? "text-white" : "text-sky-300"
+                  lastMessage?.role === "user"
+                    ? "dark:text-white"
+                    : "text-sky-600"
                 )}
               >
                 <span
                   className={cn(
-                    lastMessage?.role === "user" ? "text-white" : "text-sky-300"
+                    lastMessage?.role === "user"
+                      ? "dark:text-white"
+                      : "text-sky-600"
                   )}
                 >
                   {lastMessage?.role === "user" ? "You: " : "AI: "}

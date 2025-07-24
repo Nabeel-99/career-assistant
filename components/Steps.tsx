@@ -118,7 +118,7 @@ const Steps = () => {
             icon={<FaMicrophoneAlt size={40} />}
             title={
               <>
-                <p>
+                <h2>
                   Get
                   <span className="pl-3  bg-gradient-to-r from-[#1ea572] from-40%  to-[#238aea]  bg-clip-text text-transparent">
                     Feedback
@@ -127,7 +127,7 @@ const Steps = () => {
                   <span className="bg-gradient-to-r from-[#1ea572] from-40%  to-[#238aea]  bg-clip-text text-transparent">
                     Progress
                   </span>{" "}
-                </p>
+                </h2>
               </>
             }
             description={

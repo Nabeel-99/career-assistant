@@ -69,18 +69,18 @@ const Features = () => {
       delay={0.2}
       className=" flex flex-col gap-6 items-center 2xl:container 2xl:mx-auto"
     >
-      <h1 className="shadow-sm shadow-[#b6b6b6] border-[#1f1f1f] px-4 py-2 border-2 rounded-4xl">
+      <h2 className="shadow-sm shadow-[#b6b6b6] border-[#1f1f1f] px-4 py-2 border-2 rounded-4xl">
         Features
-      </h1>
+      </h2>
       <FadeContent
         blur={true}
         easing="ease-out"
         initialOpacity={0}
         className="flex flex-col gap-3"
       >
-        <h1 className="text-4xl lg:text-6xl text-center">
+        <h3 className="text-4xl lg:text-6xl text-center">
           Everything you <br /> need to stand out
-        </h1>
+        </h3>
         <p className="text-base lg:text-lg max-w-lg text-center text-subheadline">
           From AI-powered CV creation to realistic interview prep &mdash; get
           fully prepared, build confidence, and stand out in your job hunt.

@@ -36,7 +36,7 @@ const FeatureCard = ({ title, description, icon, delay }: CardProps) => {
             </div>
 
             <div className="flex flex-col gap-1">
-              <h1>{title}</h1>
+              <h2>{title}</h2>
               <p className="text-subheadline">{description}</p>
             </div>
           </div>
@@ -62,7 +62,7 @@ const FeatureCard = ({ title, description, icon, delay }: CardProps) => {
           </div>
 
           <div className="flex flex-col gap-1">
-            <h1>{title}</h1>
+            <h2>{title}</h2>
             <p className="text-subheadline">{description}</p>
           </div>
         </div>

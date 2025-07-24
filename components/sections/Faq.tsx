@@ -54,10 +54,10 @@ const Faq = () => {
       delay={0}
       className=" flex flex-col gap-6 items-center"
     >
-      <h1 className="shadow-sm shadow-[#b6b6b6] border-[#1f1f1f] px-4 py-2 border-2 rounded-4xl">
+      <h2 className="shadow-sm shadow-[#b6b6b6] border-[#1f1f1f] px-4 py-2 border-2 rounded-4xl">
         FAQ
-      </h1>
-      <h2 className="text-3xl text-center">Everything you need to know</h2>
+      </h2>
+      <h3 className="text-3xl text-center">Everything you need to know</h3>
       <div className="w-full max-w-4xl">
         <Accordion
           type="single"

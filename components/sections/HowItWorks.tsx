@@ -20,9 +20,9 @@ const HowItWorks = () => {
       delay={0.3}
       className=" flex flex-col gap-6 items-center"
     >
-      <h1 className="shadow-sm shadow-[#b6b6b6] border-[#1f1f1f] px-4 py-2 border-2 rounded-4xl">
+      <h2 className="shadow-sm shadow-[#b6b6b6] border-[#1f1f1f] px-4 py-2 border-2 rounded-4xl">
         How it works
-      </h1>
+      </h2>
       <FadeContent
         blur={true}
         easing="ease-out"
@@ -30,10 +30,10 @@ const HowItWorks = () => {
         delay={0.5}
         className="flex flex-col gap-6 items-center"
       >
-        <h1 className="text-3xl lg:text-5xl text-center">
+        <h3 className="text-3xl lg:text-5xl text-center">
           Smarter career preparation powered <br className="max-lg:hidden" /> by
           AI, designed for success.
-        </h1>
+        </h3>
         <p className="text-base lg:text-lg max-w-lg text-center text-subheadline">
           From uploading your resume to mastering interviews,{" "}
           <br className="max-lg:hidden" /> every step is seamless and

@@ -56,6 +56,12 @@ export function formatDate(date: Date | string) {
     year: "numeric",
   });
 }
+
+export const formatTimer = (seconds: number) => {
+  const mins = Math.floor(seconds / 60);
+  const secs = String(seconds % 60).padStart(2, "0");
+  return `${mins}:${secs}`;
+};
 export function formatTemplateDate(date: string) {
   if (date === "Present") return "Present";
   try {

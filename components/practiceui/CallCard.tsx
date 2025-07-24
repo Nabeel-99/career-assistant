@@ -32,7 +32,7 @@ const CallCard = ({
   const formattedQuestions = practice?.questions
     .map((q, i) => `${i + 1}. ${q.question}`)
     .join("\n");
-
+  const [timeLeft, setTimeLeft] = useState(600);
   const [isConnected, setIsConnected] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [transcript, setTranscript] = useState<Transcript[]>([]);
@@ -117,6 +117,20 @@ const CallCard = ({
       runFeedback();
     }
   }, [isConnected, transcript.length]);
+
+  useEffect(() => {
+    if (!isConnected) return;
+    const interval = setInterval(() => {
+      setTimeLeft((prev) => {
+        if (prev <= 0) {
+          clearInterval(interval);
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [isConnected]);
   useEffect(() => {
     if (transcript.length > 0) {
       setLastMessage(transcript[transcript.length - 1]);
@@ -145,7 +159,7 @@ const CallCard = ({
     vapi.stop();
   };
   return (
-    <div className="flex flex-col justify-between xl:flex-row gap-10 h-full w-full">
+    <div className="flex flex-col  justify-between xl:flex-row gap-10 h-full w-full">
       {loading ? (
         <CallCardSkeleton />
       ) : (
@@ -162,6 +176,7 @@ const CallCard = ({
             generatingFeedback={generatingFeedback}
             startCall={startCall}
             endCall={endCall}
+            timeLeft={timeLeft}
           />
         </>
       )}

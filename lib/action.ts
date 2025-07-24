@@ -130,6 +130,22 @@ export const fetchPracticeById = async (id: string) => {
   return practice;
 };
 
+export const deletePractice = async (
+  id: number
+): Promise<{ success: boolean; message: string }> => {
+  const session = await auth();
+  if (!session?.user?.id) throw new Error("Unauthorized");
+  try {
+    await prisma.practice.deleteMany({
+      where: {
+        id: id,
+      },
+    });
+    return { success: true, message: "Deleted successfully" };
+  } catch (error) {
+    return { success: false, message: "Error deleting practice" };
+  }
+};
 export const createFeedback = async (
   transcript: Transcript[],
   practiceId: string

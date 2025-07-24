@@ -9,7 +9,7 @@ import { ImSpinner9 } from "react-icons/im";
 import { User } from "@/lib/generated/prisma";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 import { MdCallEnd } from "react-icons/md";
-import { cn, getDevIconUrl, mapLevel } from "@/lib/utils";
+import { cn, formatTimer, getDevIconUrl, mapLevel } from "@/lib/utils";
 import { Transcript } from "@/lib/types";
 
 type InterviewProps = {
@@ -24,6 +24,7 @@ type InterviewProps = {
   generatingFeedback: boolean;
   startCall: () => void;
   endCall: () => void;
+  timeLeft: number;
 };
 const InterviewContainer = ({
   practice,
@@ -37,12 +38,13 @@ const InterviewContainer = ({
   feedbackMessage,
   startCall,
   endCall,
+  timeLeft,
 }: InterviewProps) => {
   const level = practice?.level as keyof typeof mapLevel;
   return (
     <>
       {generatingFeedback && (
-        <div className="absolute inset-0 bg-black/60 dark:bg-black/80 z-50 flex items-center  justify-center">
+        <div className="absolute inset-0 bg-black/60 dark:bg-black/80 z-50 w-full flex items-center  justify-center">
           <div className=" flex flex-col gap-2 items-center justify-center">
             <ImSpinner9 className="animate-spin text-white text-center text-4xl" />
             <p className="animate-pulse">
@@ -54,7 +56,14 @@ const InterviewContainer = ({
         </div>
       )}
 
-      <Card className="w-full @container/card  dark:bg-[#0a0a0a] transition-all duraiton-300 ease-in-out p-6 lg:p-10 xl:w-[1050px] flex flex-col gap-10 2xl:container 2xl:mx-auto 2xl:max-h-[1000px]  h-full">
+      <Card className="w-full relative @container/card  dark:bg-[#0a0a0a] transition-all duraiton-300 ease-in-out p-6 lg:p-10 xl:w-[1050px] flex flex-col gap-10 2xl:container 2xl:mx-auto 2xl:max-h-[1000px]  h-full">
+        {isConnected && (
+          <div className="absolute  z-50 -top-3 left-1/2 ">
+            <p className=" border-2  bg-blue-600 text-white w-20 text-center rounded p-2">
+              {formatTimer(timeLeft)}
+            </p>
+          </div>
+        )}
         <div className="flex flex-col gap-2">
           <div className="flex flex-col gap-4 md:flex-row items-center md:justify-between">
             <h1 className="text-xl font-bold">{practice?.title}</h1>

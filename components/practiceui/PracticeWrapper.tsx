@@ -14,7 +14,6 @@ const PracticeWrapper = ({ userId }: { userId: string }) => {
     try {
       setLoading(true);
       const res = await fetchPractices(userId);
-
       setPractices(res);
     } catch (error) {
       toast.error("Error fetching practices");
@@ -28,7 +27,11 @@ const PracticeWrapper = ({ userId }: { userId: string }) => {
   return (
     <>
       <CreatePracticeBtn userId={userId} getUserPractices={getUserPractices} />
-      <PracticeCardGrid practices={practices} loading={loading} />
+      <PracticeCardGrid
+        practices={practices}
+        loading={loading}
+        getUserPractices={getUserPractices}
+      />
     </>
   );
 };

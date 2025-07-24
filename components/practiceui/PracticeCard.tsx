@@ -1,12 +1,21 @@
-import React from "react";
-import { FaRegCalendarAlt } from "react-icons/fa";
+"use client";
+
+import React, { useState } from "react";
+import { FaRegCalendarAlt, FaTrash } from "react-icons/fa";
 import { FaStar } from "react-icons/fa6";
 import { Button } from "../ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { formatDate, getDevIconUrl, mapLevel } from "@/lib/utils";
 import Link from "next/link";
 import { PracticeWithFeedback } from "@/lib/types";
+import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
+import { deletePractice } from "@/lib/action";
+import { toast } from "sonner";
+import { DeleteDialog } from "./DeleteDialog";
 
+type PracticeCardProps = PracticeWithFeedback & {
+  getUserPractices: () => void;
+};
 const PracticeCard = ({
   id,
   title,
@@ -16,9 +25,35 @@ const PracticeCard = ({
   createdAt,
   isTaken,
   feedback,
-}: PracticeWithFeedback) => {
+  getUserPractices,
+}: PracticeCardProps) => {
   const expLevel = level as keyof typeof mapLevel;
 
+  const [showDelete, setShowDelete] = useState(false);
+  const [deleteLoading, setDeleteLoading] = useState(false);
+
+  const handleDeletePractice = async () => {
+    try {
+      setDeleteLoading(true);
+      const res = await deletePractice(id);
+      if (res.success) {
+        getUserPractices();
+
+        toast.success("Deleted successfully");
+        setShowDelete(false);
+      } else {
+        toast.error("Error deleting practice");
+      }
+    } catch (error) {
+      console.log("error", error);
+      toast.error("Error deleting practice");
+    } finally {
+      setDeleteLoading(false);
+    }
+  };
+  const showDeleteDialog = () => {
+    setShowDelete(true);
+  };
   return (
     <div className="flex flex-col border rounded-lg p-4 xl:h-[400px] dark:bg-[#0a0a0a]/30">
       <div className="border rounded-lg p-4 overflow-clip flex items-center justify-center">
@@ -51,7 +86,7 @@ const PracticeCard = ({
           </div>
         </div>
         {!isTaken ? (
-          <div className="mt-2">
+          <div className="mt-2 mb-2">
             <p className="text-sm text-subheadline">
               {" "}
               You have not taken this practice yet
@@ -66,27 +101,44 @@ const PracticeCard = ({
           </div>
         )}
 
-        <div className="flex items-center mt-6 xl:mt-0 justify-between">
+        <div className="flex items-center   mt-6 xl:mt-0 justify-between">
           <p
             className={`border px-3 py-2 rounded-xl ${mapLevel[expLevel].bgColor}`}
           >
             {mapLevel[expLevel].title}
           </p>
-          {isTaken ? (
-            <Link href={`/practice/feedback/${id}`} className="  ">
-              {" "}
-              <Button>View Feedback</Button>
-            </Link>
-          ) : (
-            <Link href={`/practice/interview/${id}`} className="  ">
-              {" "}
-              <Button>Start Interview</Button>
-            </Link>
-          )}
+          <div className="flex items-center gap-1">
+            {isTaken ? (
+              <Link href={`/practice/feedback/${id}`} className="  ">
+                {" "}
+                <Button>View Feedback</Button>
+              </Link>
+            ) : (
+              <Link href={`/practice/interview/${id}`} className="  ">
+                {" "}
+                <Button>Start Interview</Button>
+              </Link>
+            )}
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button onClick={showDeleteDialog}>
+                  <FaTrash />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Delete Practice</p>
+              </TooltipContent>
+            </Tooltip>
+          </div>
         </div>
       </div>
-
-      {/* <p>8 Questions</p> */}
+      {/* show Delete Dialog */}
+      <DeleteDialog
+        deleteLoading={deleteLoading}
+        showDelete={showDelete}
+        setShowDelete={setShowDelete}
+        action={handleDeletePractice}
+      />
     </div>
   );
 };

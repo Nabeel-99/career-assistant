@@ -9,11 +9,14 @@ import { PracticeWithFeedback } from "@/lib/types";
 const PracticeCardGrid = ({
   loading,
   practices,
+  getUserPractices,
 }: {
   loading: boolean;
   practices: PracticeWithFeedback[];
+  getUserPractices: () => void;
 }) => {
   const { open } = useSidebar();
+
   return loading ? (
     <div className="grid gap-6 grid-cols-[repeat(auto-fill,minmax(300px,1fr))]">
       {Array.from({ length: 6 }).map((_, index) => (
@@ -24,7 +27,11 @@ const PracticeCardGrid = ({
     <>
       <div className="grid gap-6 grid-cols-[repeat(auto-fill,minmax(300px,1fr))]">
         {practices.map((practice) => (
-          <PracticeCard key={practice.id} {...practice} />
+          <PracticeCard
+            key={practice.id}
+            {...practice}
+            getUserPractices={getUserPractices}
+          />
         ))}
       </div>
       {practices.length === 0 && (

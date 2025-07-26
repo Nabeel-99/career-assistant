@@ -20,9 +20,9 @@ const HowItWorks = () => {
       delay={0.3}
       className=" flex flex-col gap-6 items-center"
     >
-      <h2 className="shadow-sm shadow-[#b6b6b6] border-[#1f1f1f] px-4 py-2 border-2 rounded-4xl">
+      <h3 className="shadow-sm shadow-[#b6b6b6] border-[#1f1f1f] px-4 py-2 border-2 rounded-4xl">
         How it works
-      </h2>
+      </h3>
       <FadeContent
         blur={true}
         easing="ease-out"

@@ -89,7 +89,7 @@ const Hero = () => {
               src={DashboardImage}
               width={1100}
               height={1100}
-              alt="ai"
+              alt="dashboard"
               className={`relative border  rounded-md transform-3d rotate-x-${rotateX} `}
             />
           </motion.div>
@@ -99,7 +99,7 @@ const Hero = () => {
           src={DashboardImage}
           width={1100}
           height={1100}
-          alt="ai"
+          alt="dashboard"
           className=" md:hidden relative border rounded-md "
         />
       </AnimatedContent>

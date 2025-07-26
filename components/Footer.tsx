@@ -26,9 +26,9 @@ const Footer = () => {
 
           {/* Contact / Social */}
           <div className="flex flex-col gap-3">
-            <h2 className="font-extrabold text-2xl lg:text-5xl md:text-center xl:text-left text-white ">
+            <h4 className="font-extrabold text-2xl lg:text-5xl md:text-center xl:text-left text-white ">
               Get In Touch{" "}
-            </h2>
+            </h4>
             <ul className="flex flex-col md:flex-row  gap-3 text-subheadline text-gray-400 w-full">
               <SocialIcon
                 icon={<FaGithub className="size-6" />}

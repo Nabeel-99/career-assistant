@@ -23,9 +23,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" data-theme="dark" className="dark" suppressHydrationWarning>
-      <head>
-        <link rel="icon" type="image/png" href="/logo.png" />
-      </head>
       <body className={`${manrope.variable}  antialiased`}>
         <Toaster />
         {children}

@@ -100,35 +100,31 @@ const SectionCards = () => {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          {fetching ? (
-            <div className="flex items-center gap-2">
-              <div className="flex items-center justify-center p-2 border dark:border-[#343333] dark:bg-[#1f1f1f] rounded-lg">
-                <Skeleton className="h-8 w-8 rounded" />
-              </div>
-
-              <div className="flex flex-col gap-1">
-                <Skeleton className="h-4 w-32" />
-                <Skeleton className="h-3 w-24" />
-              </div>
-            </div>
-          ) : (
-      {activity.name && activity.timestamp ? (
-          <div className="flex items-center gap-2">
-              <div className="flex items-center justify-center p-2 border dark:border-[#343333] dark:bg-[#1f1f1f] rounded-lg">
-                {getIcon(activity?.type!)}
-              </div>
-              <div className="flex flex-col">
-                <span>{activity?.name}</span>
-                <span className="text-subheadline">
-                  {formatTime(activity?.timestamp)}{" "}
-                </span>
-              </div>
-            </div>
-      ) : (
-        <p>No recent activity</p>
-
-          
-          )}
+     {fetching ? (
+  <div className="flex items-center gap-2">
+    <div className="flex items-center justify-center p-2 border dark:border-[#343333] dark:bg-[#1f1f1f] rounded-lg">
+      <Skeleton className="h-8 w-8 rounded" />
+    </div>
+    <div className="flex flex-col gap-1">
+      <Skeleton className="h-4 w-32" />
+      <Skeleton className="h-3 w-24" />
+    </div>
+  </div>
+) : activity?.name && activity?.timestamp ? (   {/* ✅ fixed */}
+  <div className="flex items-center gap-2">
+    <div className="flex items-center justify-center p-2 border dark:border-[#343333] dark:bg-[#1f1f1f] rounded-lg">
+      {getIcon(activity.type)}
+    </div>
+    <div className="flex flex-col">
+      <span>{activity.name}</span>
+      <span className="text-subheadline">
+        {formatTime(activity.timestamp)}
+      </span>
+    </div>
+  </div>
+) : (
+  <p>No recent activity</p>
+)}
         </CardContent>
       </Card>
     </>

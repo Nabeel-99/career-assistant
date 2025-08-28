@@ -110,7 +110,7 @@ const SectionCards = () => {
       <Skeleton className="h-3 w-24" />
     </div>
   </div>
-) : activity?.name && activity?.timestamp ? (   {/* ✅ fixed */}
+) : activity?.name && activity?.timestamp ? (   
   <div className="flex items-center gap-2">
     <div className="flex items-center justify-center p-2 border dark:border-[#343333] dark:bg-[#1f1f1f] rounded-lg">
       {getIcon(activity.type)}

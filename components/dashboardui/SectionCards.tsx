@@ -112,7 +112,8 @@ const SectionCards = () => {
               </div>
             </div>
           ) : (
-            <div className="flex items-center gap-2">
+      {activity.name && activity.timestamp ? (
+          <div className="flex items-center gap-2">
               <div className="flex items-center justify-center p-2 border dark:border-[#343333] dark:bg-[#1f1f1f] rounded-lg">
                 {getIcon(activity?.type!)}
               </div>
@@ -123,6 +124,10 @@ const SectionCards = () => {
                 </span>
               </div>
             </div>
+      ) : (
+        <p>No recent activity</p>
+
+          
           )}
         </CardContent>
       </Card>

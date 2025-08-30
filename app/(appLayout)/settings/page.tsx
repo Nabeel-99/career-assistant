@@ -74,7 +74,7 @@ const page = () => {
   };
   useEffect(() => {
     getUserDetails();
-  }, [user?.image]);
+  }, []);
 
   return (
     <Card className="border flex flex-col gap-10 p-4 md:p-10">

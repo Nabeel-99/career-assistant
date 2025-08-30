@@ -66,7 +66,13 @@ const UploadCard = ({ userId }: { userId: string | undefined }) => {
           .upload(filePath, file);
         if (error) {
           toast.error("Error uploading file");
+
+          return;
         }
+        setResumes((prev) => [
+          { name: file.name, createdAt: new Date().toISOString(), filePath },
+          ...prev,
+        ]);
         fetchResumes();
         toast.success("File uploaded successfully");
         setFilename("");
@@ -80,7 +86,7 @@ const UploadCard = ({ userId }: { userId: string | undefined }) => {
 
   useEffect(() => {
     fetchResumes();
-  }, [filename]);
+  }, []);
   return (
     <>
       <ResumeCard

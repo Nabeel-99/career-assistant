@@ -45,7 +45,6 @@ const PracticeCard = ({
         toast.error("Error deleting practice");
       }
     } catch (error) {
-      console.log("error", error);
       toast.error("Error deleting practice");
     } finally {
       setDeleteLoading(false);

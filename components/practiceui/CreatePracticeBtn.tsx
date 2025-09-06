@@ -45,9 +45,7 @@ const CreatePracticeBtn = ({
     <>
       <Sheet open={open} onOpenChange={setOpen}>
         <SheetTrigger asChild>
-          <div className="flex w-full justify-start items-center">
-            <Button className="">Create Practice</Button>
-          </div>
+          <Button className="max-w-44">Create Practice</Button>
         </SheetTrigger>
         <SheetContent
           side="left"

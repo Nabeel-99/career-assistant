@@ -1,9 +1,11 @@
+"use server";
+
 import { groq } from "@ai-sdk/groq";
 import { cleanJSONparse } from "./utils";
 import { google } from "@ai-sdk/google";
-import { generateText } from "ai";
+import { generateText, streamText } from "ai";
 import { Transcript } from "./types";
-
+import { createStreamableValue } from "@ai-sdk/rsc";
 export const generateQuestions = async (
   jobDescription: string,
   userResume: string,
@@ -264,4 +266,83 @@ ${rawText}`,
   } catch (error) {
     throw new Error("Error parsing JSON");
   }
+};
+
+export const generateCodingTask = async (stacks: string[], level: string) => {
+  const stream = createStreamableValue("");
+
+  (async () => {
+    const { textStream } = streamText({
+      model: google("gemini-2.5-flash"),
+      prompt: `You are an AI system for generating algorithmic coding challenges.
+
+  Your task is to create a coding problem that tests algorithmic thinking based on the following criteria:
+  Technology stack: ${stacks.join(", ")}  
+Experience level: ${level}  
+  
+  1. **title**: A descriptive title for the coding challenge (e.g., "Two Sum Problem", "Palindrome Checker")
+  2. **question**: A clear algorithmic problem with specific input/output requirements and examples
+  3. **expectedOutput**: The exact expected output for the given examples (e.g., "true", "[1, 2]", "5")
+  4. **hint**: A helpful hint about the algorithmic approach without giving away the solution
+  5. **description**: A one-sentence summary of what the algorithm should do
+  
+  **Guidelines:**
+  - Focus on ALGORITHMIC problems, not UI/framework tasks
+  - Create problems that test data structures, algorithms, and problem-solving skills
+  - Include specific examples with input and expected output
+  - Make problems appropriate for the experience level
+  - Use the technology stack to determine the programming language syntax only
+  
+  **Example format for question:**
+  "Write a function that takes an array of integers and returns the two numbers that add up to a target sum.
+  
+  Example:
+  Input: nums = [2, 7, 11, 15], target = 9
+  Output: [0, 1] (because nums[0] + nums[1] = 2 + 7 = 9)"
+  
+our task is to create a coding problem and return it in Markdown format.  
+⚠️ Do not add explanations, variations, or anything outside the required sections.  
+⚠️ End your response immediately after the "Hint" section.  
+
+### Required Sections:
+# Title
+(title of the problem)
+
+**Description**  
+(one-sentence summary of what the algorithm should do)
+
+**Problem Statement**  
+(question with clear input/output requirements and at least one example)
+
+**Expected Output**  
+\`\`\`txt
+(expected output here)
+\`\`\`
+
+**Hint**  
+(hint about the algorithmic approach)
+
+===END===
+  `,
+    });
+
+    for await (const delta of textStream) {
+      if (delta.includes("===END===")) break;
+      stream.update(delta);
+    }
+
+    stream.done();
+  })();
+  console.log("output", stream.value);
+  return { output: stream.value };
+
+  // try {
+  //   if (data) {
+  //     const parsed = cleanJSONparse(data);
+
+  //     return parsed;
+  //   }
+  // } catch (error) {
+  //   throw new Error("Error parsing JSON");
+  // }
 };

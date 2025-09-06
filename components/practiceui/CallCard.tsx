@@ -86,8 +86,24 @@ const CallCard = ({
       }
     });
 
-    vapi.on("error", (error) => {
-      toast.error(error.message);
+    vapi.on("error", (error: any) => {
+      console.log("VAPI Error:", error);
+      const resError = error?.error?.error;
+      if (resError.statusCode === 400) {
+        toast(
+          "Ops! Your AI credits has finished. Please purchase more credits or upgrade your plan.",
+          {
+            action: {
+              label: "Upgrade plan",
+              onClick: () => {
+                router.push("/");
+              },
+            },
+          }
+        );
+      } else {
+        toast.error("Something went wrong! Please try again later.");
+      }
     });
 
     return () => {
@@ -148,8 +164,8 @@ const CallCard = ({
           practice?.resumeText!
         )
       );
-    } catch (error) {
-      toast.error("Error starting call");
+    } catch (error: any) {
+      console.log("Start call error:", error);
     } finally {
       setStarting(false);
     }

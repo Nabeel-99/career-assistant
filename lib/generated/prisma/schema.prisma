@@ -27,20 +27,37 @@ model User {
   resumes   Resume[]
 }
 
+enum PracticeType {
+  THEORETICAL
+  PRACTICAL
+}
+
 model Practice {
-  id          Int        @id @default(autoincrement())
+  id          Int          @id @default(autoincrement())
   title       String?
   description String?
   stacks      String[]
   role        String?
   level       String?
   resumeText  String?
-  isTaken     Boolean?   @default(false)
+  type        PracticeType @default(THEORETICAL)
+  isTaken     Boolean?     @default(false)
   questions   Question[]
+  codingTask  CodingTask[]
   userId      String
-  users       User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  users       User         @relation(fields: [userId], references: [id], onDelete: Cascade)
   feedback    Feedback?
-  createdAt   DateTime   @default(now())
+  createdAt   DateTime     @default(now())
+}
+
+model CodingTask {
+  id             Int      @id @default(autoincrement())
+  question       String?
+  expectedOutput String?
+  hint           String?
+  description    String?
+  practiceId     Int
+  practice       Practice @relation(fields: [practiceId], references: [id], onDelete: Cascade)
 }
 
 model Question {

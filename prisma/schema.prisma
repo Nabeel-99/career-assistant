@@ -28,6 +28,10 @@ model User {
 
 }
 
+enum PracticeType{
+  THEORETICAL
+  PRACTICAL
+}
 model Practice{
   id Int @id @default(autoincrement())
   title String?
@@ -36,12 +40,24 @@ model Practice{
   role String?
   level String?
   resumeText String?
+  type PracticeType @default(THEORETICAL)
   isTaken Boolean? @default(false)
   questions Question[]
+  codingTask CodingTask[]
   userId String
   users User @relation(fields: [userId], references: [id], onDelete: Cascade)
   feedback Feedback?
   createdAt   DateTime  @default(now())
+}
+
+model CodingTask {
+  id Int @id @default(autoincrement())
+  question String?
+  expectedOutput String?
+  hint String?
+  description String?
+  practiceId Int
+  practice Practice @relation(fields: [practiceId], references: [id], onDelete: Cascade)
 }
 
 model Question {

@@ -24,6 +24,11 @@ export type User = $Result.DefaultSelection<Prisma.$UserPayload>
  */
 export type Practice = $Result.DefaultSelection<Prisma.$PracticePayload>
 /**
+ * Model CodingTask
+ * 
+ */
+export type CodingTask = $Result.DefaultSelection<Prisma.$CodingTaskPayload>
+/**
  * Model Question
  * 
  */
@@ -38,6 +43,23 @@ export type Resume = $Result.DefaultSelection<Prisma.$ResumePayload>
  * 
  */
 export type Feedback = $Result.DefaultSelection<Prisma.$FeedbackPayload>
+
+/**
+ * Enums
+ */
+export namespace $Enums {
+  export const PracticeType: {
+  THEORETICAL: 'THEORETICAL',
+  PRACTICAL: 'PRACTICAL'
+};
+
+export type PracticeType = (typeof PracticeType)[keyof typeof PracticeType]
+
+}
+
+export type PracticeType = $Enums.PracticeType
+
+export const PracticeType: typeof $Enums.PracticeType
 
 /**
  * ##  Prisma Client ʲˢ
@@ -185,6 +207,16 @@ export class PrismaClient<
   get practice(): Prisma.PracticeDelegate<ExtArgs, ClientOptions>;
 
   /**
+   * `prisma.codingTask`: Exposes CRUD operations for the **CodingTask** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more CodingTasks
+    * const codingTasks = await prisma.codingTask.findMany()
+    * ```
+    */
+  get codingTask(): Prisma.CodingTaskDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.question`: Exposes CRUD operations for the **Question** model.
     * Example usage:
     * ```ts
@@ -271,8 +303,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 6.9.0
-   * Query Engine version: 81e4af48011447c3cc503a190e86995b66d2a28e
+   * Prisma Client JS version: 6.12.0
+   * Query Engine version: 8047c96bbd92db98a2abc7c9323ce77c02c89dbc
    */
   export type PrismaVersion = {
     client: string
@@ -655,6 +687,7 @@ export namespace Prisma {
   export const ModelName: {
     User: 'User',
     Practice: 'Practice',
+    CodingTask: 'CodingTask',
     Question: 'Question',
     Resume: 'Resume',
     Feedback: 'Feedback'
@@ -676,7 +709,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "practice" | "question" | "resume" | "feedback"
+      modelProps: "user" | "practice" | "codingTask" | "question" | "resume" | "feedback"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -825,6 +858,80 @@ export namespace Prisma {
           count: {
             args: Prisma.PracticeCountArgs<ExtArgs>
             result: $Utils.Optional<PracticeCountAggregateOutputType> | number
+          }
+        }
+      }
+      CodingTask: {
+        payload: Prisma.$CodingTaskPayload<ExtArgs>
+        fields: Prisma.CodingTaskFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.CodingTaskFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CodingTaskPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.CodingTaskFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CodingTaskPayload>
+          }
+          findFirst: {
+            args: Prisma.CodingTaskFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CodingTaskPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.CodingTaskFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CodingTaskPayload>
+          }
+          findMany: {
+            args: Prisma.CodingTaskFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CodingTaskPayload>[]
+          }
+          create: {
+            args: Prisma.CodingTaskCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CodingTaskPayload>
+          }
+          createMany: {
+            args: Prisma.CodingTaskCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.CodingTaskCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CodingTaskPayload>[]
+          }
+          delete: {
+            args: Prisma.CodingTaskDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CodingTaskPayload>
+          }
+          update: {
+            args: Prisma.CodingTaskUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CodingTaskPayload>
+          }
+          deleteMany: {
+            args: Prisma.CodingTaskDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.CodingTaskUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.CodingTaskUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CodingTaskPayload>[]
+          }
+          upsert: {
+            args: Prisma.CodingTaskUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CodingTaskPayload>
+          }
+          aggregate: {
+            args: Prisma.CodingTaskAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateCodingTask>
+          }
+          groupBy: {
+            args: Prisma.CodingTaskGroupByArgs<ExtArgs>
+            result: $Utils.Optional<CodingTaskGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.CodingTaskCountArgs<ExtArgs>
+            result: $Utils.Optional<CodingTaskCountAggregateOutputType> | number
           }
         }
       }
@@ -1136,6 +1243,7 @@ export namespace Prisma {
   export type GlobalOmitConfig = {
     user?: UserOmit
     practice?: PracticeOmit
+    codingTask?: CodingTaskOmit
     question?: QuestionOmit
     resume?: ResumeOmit
     feedback?: FeedbackOmit
@@ -1274,10 +1382,12 @@ export namespace Prisma {
 
   export type PracticeCountOutputType = {
     questions: number
+    codingTask: number
   }
 
   export type PracticeCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     questions?: boolean | PracticeCountOutputTypeCountQuestionsArgs
+    codingTask?: boolean | PracticeCountOutputTypeCountCodingTaskArgs
   }
 
   // Custom InputTypes
@@ -1296,6 +1406,13 @@ export namespace Prisma {
    */
   export type PracticeCountOutputTypeCountQuestionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: QuestionWhereInput
+  }
+
+  /**
+   * PracticeCountOutputType without action
+   */
+  export type PracticeCountOutputTypeCountCodingTaskArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CodingTaskWhereInput
   }
 
 
@@ -2467,6 +2584,7 @@ export namespace Prisma {
     role: string | null
     level: string | null
     resumeText: string | null
+    type: $Enums.PracticeType | null
     isTaken: boolean | null
     userId: string | null
     createdAt: Date | null
@@ -2479,6 +2597,7 @@ export namespace Prisma {
     role: string | null
     level: string | null
     resumeText: string | null
+    type: $Enums.PracticeType | null
     isTaken: boolean | null
     userId: string | null
     createdAt: Date | null
@@ -2492,6 +2611,7 @@ export namespace Prisma {
     role: number
     level: number
     resumeText: number
+    type: number
     isTaken: number
     userId: number
     createdAt: number
@@ -2514,6 +2634,7 @@ export namespace Prisma {
     role?: true
     level?: true
     resumeText?: true
+    type?: true
     isTaken?: true
     userId?: true
     createdAt?: true
@@ -2526,6 +2647,7 @@ export namespace Prisma {
     role?: true
     level?: true
     resumeText?: true
+    type?: true
     isTaken?: true
     userId?: true
     createdAt?: true
@@ -2539,6 +2661,7 @@ export namespace Prisma {
     role?: true
     level?: true
     resumeText?: true
+    type?: true
     isTaken?: true
     userId?: true
     createdAt?: true
@@ -2639,6 +2762,7 @@ export namespace Prisma {
     role: string | null
     level: string | null
     resumeText: string | null
+    type: $Enums.PracticeType
     isTaken: boolean | null
     userId: string
     createdAt: Date
@@ -2671,10 +2795,12 @@ export namespace Prisma {
     role?: boolean
     level?: boolean
     resumeText?: boolean
+    type?: boolean
     isTaken?: boolean
     userId?: boolean
     createdAt?: boolean
     questions?: boolean | Practice$questionsArgs<ExtArgs>
+    codingTask?: boolean | Practice$codingTaskArgs<ExtArgs>
     users?: boolean | UserDefaultArgs<ExtArgs>
     feedback?: boolean | Practice$feedbackArgs<ExtArgs>
     _count?: boolean | PracticeCountOutputTypeDefaultArgs<ExtArgs>
@@ -2688,6 +2814,7 @@ export namespace Prisma {
     role?: boolean
     level?: boolean
     resumeText?: boolean
+    type?: boolean
     isTaken?: boolean
     userId?: boolean
     createdAt?: boolean
@@ -2702,6 +2829,7 @@ export namespace Prisma {
     role?: boolean
     level?: boolean
     resumeText?: boolean
+    type?: boolean
     isTaken?: boolean
     userId?: boolean
     createdAt?: boolean
@@ -2716,14 +2844,16 @@ export namespace Prisma {
     role?: boolean
     level?: boolean
     resumeText?: boolean
+    type?: boolean
     isTaken?: boolean
     userId?: boolean
     createdAt?: boolean
   }
 
-  export type PracticeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "stacks" | "role" | "level" | "resumeText" | "isTaken" | "userId" | "createdAt", ExtArgs["result"]["practice"]>
+  export type PracticeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "stacks" | "role" | "level" | "resumeText" | "type" | "isTaken" | "userId" | "createdAt", ExtArgs["result"]["practice"]>
   export type PracticeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     questions?: boolean | Practice$questionsArgs<ExtArgs>
+    codingTask?: boolean | Practice$codingTaskArgs<ExtArgs>
     users?: boolean | UserDefaultArgs<ExtArgs>
     feedback?: boolean | Practice$feedbackArgs<ExtArgs>
     _count?: boolean | PracticeCountOutputTypeDefaultArgs<ExtArgs>
@@ -2739,6 +2869,7 @@ export namespace Prisma {
     name: "Practice"
     objects: {
       questions: Prisma.$QuestionPayload<ExtArgs>[]
+      codingTask: Prisma.$CodingTaskPayload<ExtArgs>[]
       users: Prisma.$UserPayload<ExtArgs>
       feedback: Prisma.$FeedbackPayload<ExtArgs> | null
     }
@@ -2750,6 +2881,7 @@ export namespace Prisma {
       role: string | null
       level: string | null
       resumeText: string | null
+      type: $Enums.PracticeType
       isTaken: boolean | null
       userId: string
       createdAt: Date
@@ -3148,6 +3280,7 @@ export namespace Prisma {
   export interface Prisma__PracticeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     questions<T extends Practice$questionsArgs<ExtArgs> = {}>(args?: Subset<T, Practice$questionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$QuestionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    codingTask<T extends Practice$codingTaskArgs<ExtArgs> = {}>(args?: Subset<T, Practice$codingTaskArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CodingTaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     users<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     feedback<T extends Practice$feedbackArgs<ExtArgs> = {}>(args?: Subset<T, Practice$feedbackArgs<ExtArgs>>): Prisma__FeedbackClient<$Result.GetResult<Prisma.$FeedbackPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
@@ -3186,6 +3319,7 @@ export namespace Prisma {
     readonly role: FieldRef<"Practice", 'String'>
     readonly level: FieldRef<"Practice", 'String'>
     readonly resumeText: FieldRef<"Practice", 'String'>
+    readonly type: FieldRef<"Practice", 'PracticeType'>
     readonly isTaken: FieldRef<"Practice", 'Boolean'>
     readonly userId: FieldRef<"Practice", 'String'>
     readonly createdAt: FieldRef<"Practice", 'DateTime'>
@@ -3609,6 +3743,30 @@ export namespace Prisma {
   }
 
   /**
+   * Practice.codingTask
+   */
+  export type Practice$codingTaskArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CodingTask
+     */
+    select?: CodingTaskSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CodingTask
+     */
+    omit?: CodingTaskOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CodingTaskInclude<ExtArgs> | null
+    where?: CodingTaskWhereInput
+    orderBy?: CodingTaskOrderByWithRelationInput | CodingTaskOrderByWithRelationInput[]
+    cursor?: CodingTaskWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CodingTaskScalarFieldEnum | CodingTaskScalarFieldEnum[]
+  }
+
+  /**
    * Practice.feedback
    */
   export type Practice$feedbackArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3643,6 +3801,1115 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: PracticeInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model CodingTask
+   */
+
+  export type AggregateCodingTask = {
+    _count: CodingTaskCountAggregateOutputType | null
+    _avg: CodingTaskAvgAggregateOutputType | null
+    _sum: CodingTaskSumAggregateOutputType | null
+    _min: CodingTaskMinAggregateOutputType | null
+    _max: CodingTaskMaxAggregateOutputType | null
+  }
+
+  export type CodingTaskAvgAggregateOutputType = {
+    id: number | null
+    practiceId: number | null
+  }
+
+  export type CodingTaskSumAggregateOutputType = {
+    id: number | null
+    practiceId: number | null
+  }
+
+  export type CodingTaskMinAggregateOutputType = {
+    id: number | null
+    question: string | null
+    expectedOutput: string | null
+    hint: string | null
+    description: string | null
+    practiceId: number | null
+  }
+
+  export type CodingTaskMaxAggregateOutputType = {
+    id: number | null
+    question: string | null
+    expectedOutput: string | null
+    hint: string | null
+    description: string | null
+    practiceId: number | null
+  }
+
+  export type CodingTaskCountAggregateOutputType = {
+    id: number
+    question: number
+    expectedOutput: number
+    hint: number
+    description: number
+    practiceId: number
+    _all: number
+  }
+
+
+  export type CodingTaskAvgAggregateInputType = {
+    id?: true
+    practiceId?: true
+  }
+
+  export type CodingTaskSumAggregateInputType = {
+    id?: true
+    practiceId?: true
+  }
+
+  export type CodingTaskMinAggregateInputType = {
+    id?: true
+    question?: true
+    expectedOutput?: true
+    hint?: true
+    description?: true
+    practiceId?: true
+  }
+
+  export type CodingTaskMaxAggregateInputType = {
+    id?: true
+    question?: true
+    expectedOutput?: true
+    hint?: true
+    description?: true
+    practiceId?: true
+  }
+
+  export type CodingTaskCountAggregateInputType = {
+    id?: true
+    question?: true
+    expectedOutput?: true
+    hint?: true
+    description?: true
+    practiceId?: true
+    _all?: true
+  }
+
+  export type CodingTaskAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which CodingTask to aggregate.
+     */
+    where?: CodingTaskWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CodingTasks to fetch.
+     */
+    orderBy?: CodingTaskOrderByWithRelationInput | CodingTaskOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: CodingTaskWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CodingTasks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CodingTasks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned CodingTasks
+    **/
+    _count?: true | CodingTaskCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: CodingTaskAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: CodingTaskSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: CodingTaskMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: CodingTaskMaxAggregateInputType
+  }
+
+  export type GetCodingTaskAggregateType<T extends CodingTaskAggregateArgs> = {
+        [P in keyof T & keyof AggregateCodingTask]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateCodingTask[P]>
+      : GetScalarType<T[P], AggregateCodingTask[P]>
+  }
+
+
+
+
+  export type CodingTaskGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CodingTaskWhereInput
+    orderBy?: CodingTaskOrderByWithAggregationInput | CodingTaskOrderByWithAggregationInput[]
+    by: CodingTaskScalarFieldEnum[] | CodingTaskScalarFieldEnum
+    having?: CodingTaskScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: CodingTaskCountAggregateInputType | true
+    _avg?: CodingTaskAvgAggregateInputType
+    _sum?: CodingTaskSumAggregateInputType
+    _min?: CodingTaskMinAggregateInputType
+    _max?: CodingTaskMaxAggregateInputType
+  }
+
+  export type CodingTaskGroupByOutputType = {
+    id: number
+    question: string | null
+    expectedOutput: string | null
+    hint: string | null
+    description: string | null
+    practiceId: number
+    _count: CodingTaskCountAggregateOutputType | null
+    _avg: CodingTaskAvgAggregateOutputType | null
+    _sum: CodingTaskSumAggregateOutputType | null
+    _min: CodingTaskMinAggregateOutputType | null
+    _max: CodingTaskMaxAggregateOutputType | null
+  }
+
+  type GetCodingTaskGroupByPayload<T extends CodingTaskGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<CodingTaskGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof CodingTaskGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], CodingTaskGroupByOutputType[P]>
+            : GetScalarType<T[P], CodingTaskGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type CodingTaskSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    question?: boolean
+    expectedOutput?: boolean
+    hint?: boolean
+    description?: boolean
+    practiceId?: boolean
+    practice?: boolean | PracticeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["codingTask"]>
+
+  export type CodingTaskSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    question?: boolean
+    expectedOutput?: boolean
+    hint?: boolean
+    description?: boolean
+    practiceId?: boolean
+    practice?: boolean | PracticeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["codingTask"]>
+
+  export type CodingTaskSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    question?: boolean
+    expectedOutput?: boolean
+    hint?: boolean
+    description?: boolean
+    practiceId?: boolean
+    practice?: boolean | PracticeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["codingTask"]>
+
+  export type CodingTaskSelectScalar = {
+    id?: boolean
+    question?: boolean
+    expectedOutput?: boolean
+    hint?: boolean
+    description?: boolean
+    practiceId?: boolean
+  }
+
+  export type CodingTaskOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "question" | "expectedOutput" | "hint" | "description" | "practiceId", ExtArgs["result"]["codingTask"]>
+  export type CodingTaskInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    practice?: boolean | PracticeDefaultArgs<ExtArgs>
+  }
+  export type CodingTaskIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    practice?: boolean | PracticeDefaultArgs<ExtArgs>
+  }
+  export type CodingTaskIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    practice?: boolean | PracticeDefaultArgs<ExtArgs>
+  }
+
+  export type $CodingTaskPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "CodingTask"
+    objects: {
+      practice: Prisma.$PracticePayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      question: string | null
+      expectedOutput: string | null
+      hint: string | null
+      description: string | null
+      practiceId: number
+    }, ExtArgs["result"]["codingTask"]>
+    composites: {}
+  }
+
+  type CodingTaskGetPayload<S extends boolean | null | undefined | CodingTaskDefaultArgs> = $Result.GetResult<Prisma.$CodingTaskPayload, S>
+
+  type CodingTaskCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<CodingTaskFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: CodingTaskCountAggregateInputType | true
+    }
+
+  export interface CodingTaskDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['CodingTask'], meta: { name: 'CodingTask' } }
+    /**
+     * Find zero or one CodingTask that matches the filter.
+     * @param {CodingTaskFindUniqueArgs} args - Arguments to find a CodingTask
+     * @example
+     * // Get one CodingTask
+     * const codingTask = await prisma.codingTask.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends CodingTaskFindUniqueArgs>(args: SelectSubset<T, CodingTaskFindUniqueArgs<ExtArgs>>): Prisma__CodingTaskClient<$Result.GetResult<Prisma.$CodingTaskPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one CodingTask that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {CodingTaskFindUniqueOrThrowArgs} args - Arguments to find a CodingTask
+     * @example
+     * // Get one CodingTask
+     * const codingTask = await prisma.codingTask.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends CodingTaskFindUniqueOrThrowArgs>(args: SelectSubset<T, CodingTaskFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CodingTaskClient<$Result.GetResult<Prisma.$CodingTaskPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first CodingTask that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CodingTaskFindFirstArgs} args - Arguments to find a CodingTask
+     * @example
+     * // Get one CodingTask
+     * const codingTask = await prisma.codingTask.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends CodingTaskFindFirstArgs>(args?: SelectSubset<T, CodingTaskFindFirstArgs<ExtArgs>>): Prisma__CodingTaskClient<$Result.GetResult<Prisma.$CodingTaskPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first CodingTask that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CodingTaskFindFirstOrThrowArgs} args - Arguments to find a CodingTask
+     * @example
+     * // Get one CodingTask
+     * const codingTask = await prisma.codingTask.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends CodingTaskFindFirstOrThrowArgs>(args?: SelectSubset<T, CodingTaskFindFirstOrThrowArgs<ExtArgs>>): Prisma__CodingTaskClient<$Result.GetResult<Prisma.$CodingTaskPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more CodingTasks that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CodingTaskFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all CodingTasks
+     * const codingTasks = await prisma.codingTask.findMany()
+     * 
+     * // Get first 10 CodingTasks
+     * const codingTasks = await prisma.codingTask.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const codingTaskWithIdOnly = await prisma.codingTask.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends CodingTaskFindManyArgs>(args?: SelectSubset<T, CodingTaskFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CodingTaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a CodingTask.
+     * @param {CodingTaskCreateArgs} args - Arguments to create a CodingTask.
+     * @example
+     * // Create one CodingTask
+     * const CodingTask = await prisma.codingTask.create({
+     *   data: {
+     *     // ... data to create a CodingTask
+     *   }
+     * })
+     * 
+     */
+    create<T extends CodingTaskCreateArgs>(args: SelectSubset<T, CodingTaskCreateArgs<ExtArgs>>): Prisma__CodingTaskClient<$Result.GetResult<Prisma.$CodingTaskPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many CodingTasks.
+     * @param {CodingTaskCreateManyArgs} args - Arguments to create many CodingTasks.
+     * @example
+     * // Create many CodingTasks
+     * const codingTask = await prisma.codingTask.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends CodingTaskCreateManyArgs>(args?: SelectSubset<T, CodingTaskCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many CodingTasks and returns the data saved in the database.
+     * @param {CodingTaskCreateManyAndReturnArgs} args - Arguments to create many CodingTasks.
+     * @example
+     * // Create many CodingTasks
+     * const codingTask = await prisma.codingTask.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many CodingTasks and only return the `id`
+     * const codingTaskWithIdOnly = await prisma.codingTask.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends CodingTaskCreateManyAndReturnArgs>(args?: SelectSubset<T, CodingTaskCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CodingTaskPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a CodingTask.
+     * @param {CodingTaskDeleteArgs} args - Arguments to delete one CodingTask.
+     * @example
+     * // Delete one CodingTask
+     * const CodingTask = await prisma.codingTask.delete({
+     *   where: {
+     *     // ... filter to delete one CodingTask
+     *   }
+     * })
+     * 
+     */
+    delete<T extends CodingTaskDeleteArgs>(args: SelectSubset<T, CodingTaskDeleteArgs<ExtArgs>>): Prisma__CodingTaskClient<$Result.GetResult<Prisma.$CodingTaskPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one CodingTask.
+     * @param {CodingTaskUpdateArgs} args - Arguments to update one CodingTask.
+     * @example
+     * // Update one CodingTask
+     * const codingTask = await prisma.codingTask.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends CodingTaskUpdateArgs>(args: SelectSubset<T, CodingTaskUpdateArgs<ExtArgs>>): Prisma__CodingTaskClient<$Result.GetResult<Prisma.$CodingTaskPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more CodingTasks.
+     * @param {CodingTaskDeleteManyArgs} args - Arguments to filter CodingTasks to delete.
+     * @example
+     * // Delete a few CodingTasks
+     * const { count } = await prisma.codingTask.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends CodingTaskDeleteManyArgs>(args?: SelectSubset<T, CodingTaskDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more CodingTasks.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CodingTaskUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many CodingTasks
+     * const codingTask = await prisma.codingTask.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends CodingTaskUpdateManyArgs>(args: SelectSubset<T, CodingTaskUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more CodingTasks and returns the data updated in the database.
+     * @param {CodingTaskUpdateManyAndReturnArgs} args - Arguments to update many CodingTasks.
+     * @example
+     * // Update many CodingTasks
+     * const codingTask = await prisma.codingTask.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more CodingTasks and only return the `id`
+     * const codingTaskWithIdOnly = await prisma.codingTask.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends CodingTaskUpdateManyAndReturnArgs>(args: SelectSubset<T, CodingTaskUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CodingTaskPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one CodingTask.
+     * @param {CodingTaskUpsertArgs} args - Arguments to update or create a CodingTask.
+     * @example
+     * // Update or create a CodingTask
+     * const codingTask = await prisma.codingTask.upsert({
+     *   create: {
+     *     // ... data to create a CodingTask
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the CodingTask we want to update
+     *   }
+     * })
+     */
+    upsert<T extends CodingTaskUpsertArgs>(args: SelectSubset<T, CodingTaskUpsertArgs<ExtArgs>>): Prisma__CodingTaskClient<$Result.GetResult<Prisma.$CodingTaskPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of CodingTasks.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CodingTaskCountArgs} args - Arguments to filter CodingTasks to count.
+     * @example
+     * // Count the number of CodingTasks
+     * const count = await prisma.codingTask.count({
+     *   where: {
+     *     // ... the filter for the CodingTasks we want to count
+     *   }
+     * })
+    **/
+    count<T extends CodingTaskCountArgs>(
+      args?: Subset<T, CodingTaskCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], CodingTaskCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a CodingTask.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CodingTaskAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends CodingTaskAggregateArgs>(args: Subset<T, CodingTaskAggregateArgs>): Prisma.PrismaPromise<GetCodingTaskAggregateType<T>>
+
+    /**
+     * Group by CodingTask.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CodingTaskGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends CodingTaskGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: CodingTaskGroupByArgs['orderBy'] }
+        : { orderBy?: CodingTaskGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, CodingTaskGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCodingTaskGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the CodingTask model
+   */
+  readonly fields: CodingTaskFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for CodingTask.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__CodingTaskClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    practice<T extends PracticeDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PracticeDefaultArgs<ExtArgs>>): Prisma__PracticeClient<$Result.GetResult<Prisma.$PracticePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the CodingTask model
+   */
+  interface CodingTaskFieldRefs {
+    readonly id: FieldRef<"CodingTask", 'Int'>
+    readonly question: FieldRef<"CodingTask", 'String'>
+    readonly expectedOutput: FieldRef<"CodingTask", 'String'>
+    readonly hint: FieldRef<"CodingTask", 'String'>
+    readonly description: FieldRef<"CodingTask", 'String'>
+    readonly practiceId: FieldRef<"CodingTask", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * CodingTask findUnique
+   */
+  export type CodingTaskFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CodingTask
+     */
+    select?: CodingTaskSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CodingTask
+     */
+    omit?: CodingTaskOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CodingTaskInclude<ExtArgs> | null
+    /**
+     * Filter, which CodingTask to fetch.
+     */
+    where: CodingTaskWhereUniqueInput
+  }
+
+  /**
+   * CodingTask findUniqueOrThrow
+   */
+  export type CodingTaskFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CodingTask
+     */
+    select?: CodingTaskSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CodingTask
+     */
+    omit?: CodingTaskOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CodingTaskInclude<ExtArgs> | null
+    /**
+     * Filter, which CodingTask to fetch.
+     */
+    where: CodingTaskWhereUniqueInput
+  }
+
+  /**
+   * CodingTask findFirst
+   */
+  export type CodingTaskFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CodingTask
+     */
+    select?: CodingTaskSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CodingTask
+     */
+    omit?: CodingTaskOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CodingTaskInclude<ExtArgs> | null
+    /**
+     * Filter, which CodingTask to fetch.
+     */
+    where?: CodingTaskWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CodingTasks to fetch.
+     */
+    orderBy?: CodingTaskOrderByWithRelationInput | CodingTaskOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for CodingTasks.
+     */
+    cursor?: CodingTaskWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CodingTasks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CodingTasks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of CodingTasks.
+     */
+    distinct?: CodingTaskScalarFieldEnum | CodingTaskScalarFieldEnum[]
+  }
+
+  /**
+   * CodingTask findFirstOrThrow
+   */
+  export type CodingTaskFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CodingTask
+     */
+    select?: CodingTaskSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CodingTask
+     */
+    omit?: CodingTaskOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CodingTaskInclude<ExtArgs> | null
+    /**
+     * Filter, which CodingTask to fetch.
+     */
+    where?: CodingTaskWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CodingTasks to fetch.
+     */
+    orderBy?: CodingTaskOrderByWithRelationInput | CodingTaskOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for CodingTasks.
+     */
+    cursor?: CodingTaskWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CodingTasks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CodingTasks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of CodingTasks.
+     */
+    distinct?: CodingTaskScalarFieldEnum | CodingTaskScalarFieldEnum[]
+  }
+
+  /**
+   * CodingTask findMany
+   */
+  export type CodingTaskFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CodingTask
+     */
+    select?: CodingTaskSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CodingTask
+     */
+    omit?: CodingTaskOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CodingTaskInclude<ExtArgs> | null
+    /**
+     * Filter, which CodingTasks to fetch.
+     */
+    where?: CodingTaskWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CodingTasks to fetch.
+     */
+    orderBy?: CodingTaskOrderByWithRelationInput | CodingTaskOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing CodingTasks.
+     */
+    cursor?: CodingTaskWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CodingTasks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CodingTasks.
+     */
+    skip?: number
+    distinct?: CodingTaskScalarFieldEnum | CodingTaskScalarFieldEnum[]
+  }
+
+  /**
+   * CodingTask create
+   */
+  export type CodingTaskCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CodingTask
+     */
+    select?: CodingTaskSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CodingTask
+     */
+    omit?: CodingTaskOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CodingTaskInclude<ExtArgs> | null
+    /**
+     * The data needed to create a CodingTask.
+     */
+    data: XOR<CodingTaskCreateInput, CodingTaskUncheckedCreateInput>
+  }
+
+  /**
+   * CodingTask createMany
+   */
+  export type CodingTaskCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many CodingTasks.
+     */
+    data: CodingTaskCreateManyInput | CodingTaskCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * CodingTask createManyAndReturn
+   */
+  export type CodingTaskCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CodingTask
+     */
+    select?: CodingTaskSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the CodingTask
+     */
+    omit?: CodingTaskOmit<ExtArgs> | null
+    /**
+     * The data used to create many CodingTasks.
+     */
+    data: CodingTaskCreateManyInput | CodingTaskCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CodingTaskIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * CodingTask update
+   */
+  export type CodingTaskUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CodingTask
+     */
+    select?: CodingTaskSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CodingTask
+     */
+    omit?: CodingTaskOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CodingTaskInclude<ExtArgs> | null
+    /**
+     * The data needed to update a CodingTask.
+     */
+    data: XOR<CodingTaskUpdateInput, CodingTaskUncheckedUpdateInput>
+    /**
+     * Choose, which CodingTask to update.
+     */
+    where: CodingTaskWhereUniqueInput
+  }
+
+  /**
+   * CodingTask updateMany
+   */
+  export type CodingTaskUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update CodingTasks.
+     */
+    data: XOR<CodingTaskUpdateManyMutationInput, CodingTaskUncheckedUpdateManyInput>
+    /**
+     * Filter which CodingTasks to update
+     */
+    where?: CodingTaskWhereInput
+    /**
+     * Limit how many CodingTasks to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * CodingTask updateManyAndReturn
+   */
+  export type CodingTaskUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CodingTask
+     */
+    select?: CodingTaskSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the CodingTask
+     */
+    omit?: CodingTaskOmit<ExtArgs> | null
+    /**
+     * The data used to update CodingTasks.
+     */
+    data: XOR<CodingTaskUpdateManyMutationInput, CodingTaskUncheckedUpdateManyInput>
+    /**
+     * Filter which CodingTasks to update
+     */
+    where?: CodingTaskWhereInput
+    /**
+     * Limit how many CodingTasks to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CodingTaskIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * CodingTask upsert
+   */
+  export type CodingTaskUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CodingTask
+     */
+    select?: CodingTaskSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CodingTask
+     */
+    omit?: CodingTaskOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CodingTaskInclude<ExtArgs> | null
+    /**
+     * The filter to search for the CodingTask to update in case it exists.
+     */
+    where: CodingTaskWhereUniqueInput
+    /**
+     * In case the CodingTask found by the `where` argument doesn't exist, create a new CodingTask with this data.
+     */
+    create: XOR<CodingTaskCreateInput, CodingTaskUncheckedCreateInput>
+    /**
+     * In case the CodingTask was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<CodingTaskUpdateInput, CodingTaskUncheckedUpdateInput>
+  }
+
+  /**
+   * CodingTask delete
+   */
+  export type CodingTaskDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CodingTask
+     */
+    select?: CodingTaskSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CodingTask
+     */
+    omit?: CodingTaskOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CodingTaskInclude<ExtArgs> | null
+    /**
+     * Filter which CodingTask to delete.
+     */
+    where: CodingTaskWhereUniqueInput
+  }
+
+  /**
+   * CodingTask deleteMany
+   */
+  export type CodingTaskDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which CodingTasks to delete
+     */
+    where?: CodingTaskWhereInput
+    /**
+     * Limit how many CodingTasks to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * CodingTask without action
+   */
+  export type CodingTaskDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CodingTask
+     */
+    select?: CodingTaskSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CodingTask
+     */
+    omit?: CodingTaskOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CodingTaskInclude<ExtArgs> | null
   }
 
 
@@ -6992,12 +8259,25 @@ export namespace Prisma {
     role: 'role',
     level: 'level',
     resumeText: 'resumeText',
+    type: 'type',
     isTaken: 'isTaken',
     userId: 'userId',
     createdAt: 'createdAt'
   };
 
   export type PracticeScalarFieldEnum = (typeof PracticeScalarFieldEnum)[keyof typeof PracticeScalarFieldEnum]
+
+
+  export const CodingTaskScalarFieldEnum: {
+    id: 'id',
+    question: 'question',
+    expectedOutput: 'expectedOutput',
+    hint: 'hint',
+    description: 'description',
+    practiceId: 'practiceId'
+  };
+
+  export type CodingTaskScalarFieldEnum = (typeof CodingTaskScalarFieldEnum)[keyof typeof CodingTaskScalarFieldEnum]
 
 
   export const QuestionScalarFieldEnum: {
@@ -7113,6 +8393,20 @@ export namespace Prisma {
    * Reference to a field of type 'Int[]'
    */
   export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'PracticeType'
+   */
+  export type EnumPracticeTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PracticeType'>
+    
+
+
+  /**
+   * Reference to a field of type 'PracticeType[]'
+   */
+  export type ListEnumPracticeTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PracticeType[]'>
     
 
 
@@ -7245,10 +8539,12 @@ export namespace Prisma {
     role?: StringNullableFilter<"Practice"> | string | null
     level?: StringNullableFilter<"Practice"> | string | null
     resumeText?: StringNullableFilter<"Practice"> | string | null
+    type?: EnumPracticeTypeFilter<"Practice"> | $Enums.PracticeType
     isTaken?: BoolNullableFilter<"Practice"> | boolean | null
     userId?: StringFilter<"Practice"> | string
     createdAt?: DateTimeFilter<"Practice"> | Date | string
     questions?: QuestionListRelationFilter
+    codingTask?: CodingTaskListRelationFilter
     users?: XOR<UserScalarRelationFilter, UserWhereInput>
     feedback?: XOR<FeedbackNullableScalarRelationFilter, FeedbackWhereInput> | null
   }
@@ -7261,10 +8557,12 @@ export namespace Prisma {
     role?: SortOrderInput | SortOrder
     level?: SortOrderInput | SortOrder
     resumeText?: SortOrderInput | SortOrder
+    type?: SortOrder
     isTaken?: SortOrderInput | SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
     questions?: QuestionOrderByRelationAggregateInput
+    codingTask?: CodingTaskOrderByRelationAggregateInput
     users?: UserOrderByWithRelationInput
     feedback?: FeedbackOrderByWithRelationInput
   }
@@ -7280,10 +8578,12 @@ export namespace Prisma {
     role?: StringNullableFilter<"Practice"> | string | null
     level?: StringNullableFilter<"Practice"> | string | null
     resumeText?: StringNullableFilter<"Practice"> | string | null
+    type?: EnumPracticeTypeFilter<"Practice"> | $Enums.PracticeType
     isTaken?: BoolNullableFilter<"Practice"> | boolean | null
     userId?: StringFilter<"Practice"> | string
     createdAt?: DateTimeFilter<"Practice"> | Date | string
     questions?: QuestionListRelationFilter
+    codingTask?: CodingTaskListRelationFilter
     users?: XOR<UserScalarRelationFilter, UserWhereInput>
     feedback?: XOR<FeedbackNullableScalarRelationFilter, FeedbackWhereInput> | null
   }, "id">
@@ -7296,6 +8596,7 @@ export namespace Prisma {
     role?: SortOrderInput | SortOrder
     level?: SortOrderInput | SortOrder
     resumeText?: SortOrderInput | SortOrder
+    type?: SortOrder
     isTaken?: SortOrderInput | SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
@@ -7317,9 +8618,72 @@ export namespace Prisma {
     role?: StringNullableWithAggregatesFilter<"Practice"> | string | null
     level?: StringNullableWithAggregatesFilter<"Practice"> | string | null
     resumeText?: StringNullableWithAggregatesFilter<"Practice"> | string | null
+    type?: EnumPracticeTypeWithAggregatesFilter<"Practice"> | $Enums.PracticeType
     isTaken?: BoolNullableWithAggregatesFilter<"Practice"> | boolean | null
     userId?: StringWithAggregatesFilter<"Practice"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Practice"> | Date | string
+  }
+
+  export type CodingTaskWhereInput = {
+    AND?: CodingTaskWhereInput | CodingTaskWhereInput[]
+    OR?: CodingTaskWhereInput[]
+    NOT?: CodingTaskWhereInput | CodingTaskWhereInput[]
+    id?: IntFilter<"CodingTask"> | number
+    question?: StringNullableFilter<"CodingTask"> | string | null
+    expectedOutput?: StringNullableFilter<"CodingTask"> | string | null
+    hint?: StringNullableFilter<"CodingTask"> | string | null
+    description?: StringNullableFilter<"CodingTask"> | string | null
+    practiceId?: IntFilter<"CodingTask"> | number
+    practice?: XOR<PracticeScalarRelationFilter, PracticeWhereInput>
+  }
+
+  export type CodingTaskOrderByWithRelationInput = {
+    id?: SortOrder
+    question?: SortOrderInput | SortOrder
+    expectedOutput?: SortOrderInput | SortOrder
+    hint?: SortOrderInput | SortOrder
+    description?: SortOrderInput | SortOrder
+    practiceId?: SortOrder
+    practice?: PracticeOrderByWithRelationInput
+  }
+
+  export type CodingTaskWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: CodingTaskWhereInput | CodingTaskWhereInput[]
+    OR?: CodingTaskWhereInput[]
+    NOT?: CodingTaskWhereInput | CodingTaskWhereInput[]
+    question?: StringNullableFilter<"CodingTask"> | string | null
+    expectedOutput?: StringNullableFilter<"CodingTask"> | string | null
+    hint?: StringNullableFilter<"CodingTask"> | string | null
+    description?: StringNullableFilter<"CodingTask"> | string | null
+    practiceId?: IntFilter<"CodingTask"> | number
+    practice?: XOR<PracticeScalarRelationFilter, PracticeWhereInput>
+  }, "id">
+
+  export type CodingTaskOrderByWithAggregationInput = {
+    id?: SortOrder
+    question?: SortOrderInput | SortOrder
+    expectedOutput?: SortOrderInput | SortOrder
+    hint?: SortOrderInput | SortOrder
+    description?: SortOrderInput | SortOrder
+    practiceId?: SortOrder
+    _count?: CodingTaskCountOrderByAggregateInput
+    _avg?: CodingTaskAvgOrderByAggregateInput
+    _max?: CodingTaskMaxOrderByAggregateInput
+    _min?: CodingTaskMinOrderByAggregateInput
+    _sum?: CodingTaskSumOrderByAggregateInput
+  }
+
+  export type CodingTaskScalarWhereWithAggregatesInput = {
+    AND?: CodingTaskScalarWhereWithAggregatesInput | CodingTaskScalarWhereWithAggregatesInput[]
+    OR?: CodingTaskScalarWhereWithAggregatesInput[]
+    NOT?: CodingTaskScalarWhereWithAggregatesInput | CodingTaskScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"CodingTask"> | number
+    question?: StringNullableWithAggregatesFilter<"CodingTask"> | string | null
+    expectedOutput?: StringNullableWithAggregatesFilter<"CodingTask"> | string | null
+    hint?: StringNullableWithAggregatesFilter<"CodingTask"> | string | null
+    description?: StringNullableWithAggregatesFilter<"CodingTask"> | string | null
+    practiceId?: IntWithAggregatesFilter<"CodingTask"> | number
   }
 
   export type QuestionWhereInput = {
@@ -7595,9 +8959,11 @@ export namespace Prisma {
     role?: string | null
     level?: string | null
     resumeText?: string | null
+    type?: $Enums.PracticeType
     isTaken?: boolean | null
     createdAt?: Date | string
     questions?: QuestionCreateNestedManyWithoutPracticesInput
+    codingTask?: CodingTaskCreateNestedManyWithoutPracticeInput
     users: UserCreateNestedOneWithoutPracticesInput
     feedback?: FeedbackCreateNestedOneWithoutPracticeInput
   }
@@ -7610,10 +8976,12 @@ export namespace Prisma {
     role?: string | null
     level?: string | null
     resumeText?: string | null
+    type?: $Enums.PracticeType
     isTaken?: boolean | null
     userId: string
     createdAt?: Date | string
     questions?: QuestionUncheckedCreateNestedManyWithoutPracticesInput
+    codingTask?: CodingTaskUncheckedCreateNestedManyWithoutPracticeInput
     feedback?: FeedbackUncheckedCreateNestedOneWithoutPracticeInput
   }
 
@@ -7624,9 +8992,11 @@ export namespace Prisma {
     role?: NullableStringFieldUpdateOperationsInput | string | null
     level?: NullableStringFieldUpdateOperationsInput | string | null
     resumeText?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumPracticeTypeFieldUpdateOperationsInput | $Enums.PracticeType
     isTaken?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     questions?: QuestionUpdateManyWithoutPracticesNestedInput
+    codingTask?: CodingTaskUpdateManyWithoutPracticeNestedInput
     users?: UserUpdateOneRequiredWithoutPracticesNestedInput
     feedback?: FeedbackUpdateOneWithoutPracticeNestedInput
   }
@@ -7639,10 +9009,12 @@ export namespace Prisma {
     role?: NullableStringFieldUpdateOperationsInput | string | null
     level?: NullableStringFieldUpdateOperationsInput | string | null
     resumeText?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumPracticeTypeFieldUpdateOperationsInput | $Enums.PracticeType
     isTaken?: NullableBoolFieldUpdateOperationsInput | boolean | null
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     questions?: QuestionUncheckedUpdateManyWithoutPracticesNestedInput
+    codingTask?: CodingTaskUncheckedUpdateManyWithoutPracticeNestedInput
     feedback?: FeedbackUncheckedUpdateOneWithoutPracticeNestedInput
   }
 
@@ -7654,6 +9026,7 @@ export namespace Prisma {
     role?: string | null
     level?: string | null
     resumeText?: string | null
+    type?: $Enums.PracticeType
     isTaken?: boolean | null
     userId: string
     createdAt?: Date | string
@@ -7666,6 +9039,7 @@ export namespace Prisma {
     role?: NullableStringFieldUpdateOperationsInput | string | null
     level?: NullableStringFieldUpdateOperationsInput | string | null
     resumeText?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumPracticeTypeFieldUpdateOperationsInput | $Enums.PracticeType
     isTaken?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -7678,9 +9052,69 @@ export namespace Prisma {
     role?: NullableStringFieldUpdateOperationsInput | string | null
     level?: NullableStringFieldUpdateOperationsInput | string | null
     resumeText?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumPracticeTypeFieldUpdateOperationsInput | $Enums.PracticeType
     isTaken?: NullableBoolFieldUpdateOperationsInput | boolean | null
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CodingTaskCreateInput = {
+    question?: string | null
+    expectedOutput?: string | null
+    hint?: string | null
+    description?: string | null
+    practice: PracticeCreateNestedOneWithoutCodingTaskInput
+  }
+
+  export type CodingTaskUncheckedCreateInput = {
+    id?: number
+    question?: string | null
+    expectedOutput?: string | null
+    hint?: string | null
+    description?: string | null
+    practiceId: number
+  }
+
+  export type CodingTaskUpdateInput = {
+    question?: NullableStringFieldUpdateOperationsInput | string | null
+    expectedOutput?: NullableStringFieldUpdateOperationsInput | string | null
+    hint?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    practice?: PracticeUpdateOneRequiredWithoutCodingTaskNestedInput
+  }
+
+  export type CodingTaskUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    question?: NullableStringFieldUpdateOperationsInput | string | null
+    expectedOutput?: NullableStringFieldUpdateOperationsInput | string | null
+    hint?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    practiceId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type CodingTaskCreateManyInput = {
+    id?: number
+    question?: string | null
+    expectedOutput?: string | null
+    hint?: string | null
+    description?: string | null
+    practiceId: number
+  }
+
+  export type CodingTaskUpdateManyMutationInput = {
+    question?: NullableStringFieldUpdateOperationsInput | string | null
+    expectedOutput?: NullableStringFieldUpdateOperationsInput | string | null
+    hint?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type CodingTaskUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    question?: NullableStringFieldUpdateOperationsInput | string | null
+    expectedOutput?: NullableStringFieldUpdateOperationsInput | string | null
+    hint?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    practiceId?: IntFieldUpdateOperationsInput | number
   }
 
   export type QuestionCreateInput = {
@@ -8009,6 +9443,13 @@ export namespace Prisma {
     isEmpty?: boolean
   }
 
+  export type EnumPracticeTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.PracticeType | EnumPracticeTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.PracticeType[] | ListEnumPracticeTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PracticeType[] | ListEnumPracticeTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumPracticeTypeFilter<$PrismaModel> | $Enums.PracticeType
+  }
+
   export type DateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -8026,6 +9467,12 @@ export namespace Prisma {
     none?: QuestionWhereInput
   }
 
+  export type CodingTaskListRelationFilter = {
+    every?: CodingTaskWhereInput
+    some?: CodingTaskWhereInput
+    none?: CodingTaskWhereInput
+  }
+
   export type UserScalarRelationFilter = {
     is?: UserWhereInput
     isNot?: UserWhereInput
@@ -8040,6 +9487,10 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
+  export type CodingTaskOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type PracticeCountOrderByAggregateInput = {
     id?: SortOrder
     title?: SortOrder
@@ -8048,6 +9499,7 @@ export namespace Prisma {
     role?: SortOrder
     level?: SortOrder
     resumeText?: SortOrder
+    type?: SortOrder
     isTaken?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
@@ -8064,6 +9516,7 @@ export namespace Prisma {
     role?: SortOrder
     level?: SortOrder
     resumeText?: SortOrder
+    type?: SortOrder
     isTaken?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
@@ -8076,6 +9529,7 @@ export namespace Prisma {
     role?: SortOrder
     level?: SortOrder
     resumeText?: SortOrder
+    type?: SortOrder
     isTaken?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
@@ -8101,6 +9555,16 @@ export namespace Prisma {
     _max?: NestedIntFilter<$PrismaModel>
   }
 
+  export type EnumPracticeTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PracticeType | EnumPracticeTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.PracticeType[] | ListEnumPracticeTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PracticeType[] | ListEnumPracticeTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumPracticeTypeWithAggregatesFilter<$PrismaModel> | $Enums.PracticeType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumPracticeTypeFilter<$PrismaModel>
+    _max?: NestedEnumPracticeTypeFilter<$PrismaModel>
+  }
+
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -8118,6 +9582,43 @@ export namespace Prisma {
   export type PracticeScalarRelationFilter = {
     is?: PracticeWhereInput
     isNot?: PracticeWhereInput
+  }
+
+  export type CodingTaskCountOrderByAggregateInput = {
+    id?: SortOrder
+    question?: SortOrder
+    expectedOutput?: SortOrder
+    hint?: SortOrder
+    description?: SortOrder
+    practiceId?: SortOrder
+  }
+
+  export type CodingTaskAvgOrderByAggregateInput = {
+    id?: SortOrder
+    practiceId?: SortOrder
+  }
+
+  export type CodingTaskMaxOrderByAggregateInput = {
+    id?: SortOrder
+    question?: SortOrder
+    expectedOutput?: SortOrder
+    hint?: SortOrder
+    description?: SortOrder
+    practiceId?: SortOrder
+  }
+
+  export type CodingTaskMinOrderByAggregateInput = {
+    id?: SortOrder
+    question?: SortOrder
+    expectedOutput?: SortOrder
+    hint?: SortOrder
+    description?: SortOrder
+    practiceId?: SortOrder
+  }
+
+  export type CodingTaskSumOrderByAggregateInput = {
+    id?: SortOrder
+    practiceId?: SortOrder
   }
 
   export type QuestionCountOrderByAggregateInput = {
@@ -8382,6 +9883,13 @@ export namespace Prisma {
     connect?: QuestionWhereUniqueInput | QuestionWhereUniqueInput[]
   }
 
+  export type CodingTaskCreateNestedManyWithoutPracticeInput = {
+    create?: XOR<CodingTaskCreateWithoutPracticeInput, CodingTaskUncheckedCreateWithoutPracticeInput> | CodingTaskCreateWithoutPracticeInput[] | CodingTaskUncheckedCreateWithoutPracticeInput[]
+    connectOrCreate?: CodingTaskCreateOrConnectWithoutPracticeInput | CodingTaskCreateOrConnectWithoutPracticeInput[]
+    createMany?: CodingTaskCreateManyPracticeInputEnvelope
+    connect?: CodingTaskWhereUniqueInput | CodingTaskWhereUniqueInput[]
+  }
+
   export type UserCreateNestedOneWithoutPracticesInput = {
     create?: XOR<UserCreateWithoutPracticesInput, UserUncheckedCreateWithoutPracticesInput>
     connectOrCreate?: UserCreateOrConnectWithoutPracticesInput
@@ -8401,6 +9909,13 @@ export namespace Prisma {
     connect?: QuestionWhereUniqueInput | QuestionWhereUniqueInput[]
   }
 
+  export type CodingTaskUncheckedCreateNestedManyWithoutPracticeInput = {
+    create?: XOR<CodingTaskCreateWithoutPracticeInput, CodingTaskUncheckedCreateWithoutPracticeInput> | CodingTaskCreateWithoutPracticeInput[] | CodingTaskUncheckedCreateWithoutPracticeInput[]
+    connectOrCreate?: CodingTaskCreateOrConnectWithoutPracticeInput | CodingTaskCreateOrConnectWithoutPracticeInput[]
+    createMany?: CodingTaskCreateManyPracticeInputEnvelope
+    connect?: CodingTaskWhereUniqueInput | CodingTaskWhereUniqueInput[]
+  }
+
   export type FeedbackUncheckedCreateNestedOneWithoutPracticeInput = {
     create?: XOR<FeedbackCreateWithoutPracticeInput, FeedbackUncheckedCreateWithoutPracticeInput>
     connectOrCreate?: FeedbackCreateOrConnectWithoutPracticeInput
@@ -8410,6 +9925,10 @@ export namespace Prisma {
   export type PracticeUpdatestacksInput = {
     set?: string[]
     push?: string | string[]
+  }
+
+  export type EnumPracticeTypeFieldUpdateOperationsInput = {
+    set?: $Enums.PracticeType
   }
 
   export type DateTimeFieldUpdateOperationsInput = {
@@ -8428,6 +9947,20 @@ export namespace Prisma {
     update?: QuestionUpdateWithWhereUniqueWithoutPracticesInput | QuestionUpdateWithWhereUniqueWithoutPracticesInput[]
     updateMany?: QuestionUpdateManyWithWhereWithoutPracticesInput | QuestionUpdateManyWithWhereWithoutPracticesInput[]
     deleteMany?: QuestionScalarWhereInput | QuestionScalarWhereInput[]
+  }
+
+  export type CodingTaskUpdateManyWithoutPracticeNestedInput = {
+    create?: XOR<CodingTaskCreateWithoutPracticeInput, CodingTaskUncheckedCreateWithoutPracticeInput> | CodingTaskCreateWithoutPracticeInput[] | CodingTaskUncheckedCreateWithoutPracticeInput[]
+    connectOrCreate?: CodingTaskCreateOrConnectWithoutPracticeInput | CodingTaskCreateOrConnectWithoutPracticeInput[]
+    upsert?: CodingTaskUpsertWithWhereUniqueWithoutPracticeInput | CodingTaskUpsertWithWhereUniqueWithoutPracticeInput[]
+    createMany?: CodingTaskCreateManyPracticeInputEnvelope
+    set?: CodingTaskWhereUniqueInput | CodingTaskWhereUniqueInput[]
+    disconnect?: CodingTaskWhereUniqueInput | CodingTaskWhereUniqueInput[]
+    delete?: CodingTaskWhereUniqueInput | CodingTaskWhereUniqueInput[]
+    connect?: CodingTaskWhereUniqueInput | CodingTaskWhereUniqueInput[]
+    update?: CodingTaskUpdateWithWhereUniqueWithoutPracticeInput | CodingTaskUpdateWithWhereUniqueWithoutPracticeInput[]
+    updateMany?: CodingTaskUpdateManyWithWhereWithoutPracticeInput | CodingTaskUpdateManyWithWhereWithoutPracticeInput[]
+    deleteMany?: CodingTaskScalarWhereInput | CodingTaskScalarWhereInput[]
   }
 
   export type UserUpdateOneRequiredWithoutPracticesNestedInput = {
@@ -8470,6 +10003,20 @@ export namespace Prisma {
     deleteMany?: QuestionScalarWhereInput | QuestionScalarWhereInput[]
   }
 
+  export type CodingTaskUncheckedUpdateManyWithoutPracticeNestedInput = {
+    create?: XOR<CodingTaskCreateWithoutPracticeInput, CodingTaskUncheckedCreateWithoutPracticeInput> | CodingTaskCreateWithoutPracticeInput[] | CodingTaskUncheckedCreateWithoutPracticeInput[]
+    connectOrCreate?: CodingTaskCreateOrConnectWithoutPracticeInput | CodingTaskCreateOrConnectWithoutPracticeInput[]
+    upsert?: CodingTaskUpsertWithWhereUniqueWithoutPracticeInput | CodingTaskUpsertWithWhereUniqueWithoutPracticeInput[]
+    createMany?: CodingTaskCreateManyPracticeInputEnvelope
+    set?: CodingTaskWhereUniqueInput | CodingTaskWhereUniqueInput[]
+    disconnect?: CodingTaskWhereUniqueInput | CodingTaskWhereUniqueInput[]
+    delete?: CodingTaskWhereUniqueInput | CodingTaskWhereUniqueInput[]
+    connect?: CodingTaskWhereUniqueInput | CodingTaskWhereUniqueInput[]
+    update?: CodingTaskUpdateWithWhereUniqueWithoutPracticeInput | CodingTaskUpdateWithWhereUniqueWithoutPracticeInput[]
+    updateMany?: CodingTaskUpdateManyWithWhereWithoutPracticeInput | CodingTaskUpdateManyWithWhereWithoutPracticeInput[]
+    deleteMany?: CodingTaskScalarWhereInput | CodingTaskScalarWhereInput[]
+  }
+
   export type FeedbackUncheckedUpdateOneWithoutPracticeNestedInput = {
     create?: XOR<FeedbackCreateWithoutPracticeInput, FeedbackUncheckedCreateWithoutPracticeInput>
     connectOrCreate?: FeedbackCreateOrConnectWithoutPracticeInput
@@ -8478,6 +10025,20 @@ export namespace Prisma {
     delete?: FeedbackWhereInput | boolean
     connect?: FeedbackWhereUniqueInput
     update?: XOR<XOR<FeedbackUpdateToOneWithWhereWithoutPracticeInput, FeedbackUpdateWithoutPracticeInput>, FeedbackUncheckedUpdateWithoutPracticeInput>
+  }
+
+  export type PracticeCreateNestedOneWithoutCodingTaskInput = {
+    create?: XOR<PracticeCreateWithoutCodingTaskInput, PracticeUncheckedCreateWithoutCodingTaskInput>
+    connectOrCreate?: PracticeCreateOrConnectWithoutCodingTaskInput
+    connect?: PracticeWhereUniqueInput
+  }
+
+  export type PracticeUpdateOneRequiredWithoutCodingTaskNestedInput = {
+    create?: XOR<PracticeCreateWithoutCodingTaskInput, PracticeUncheckedCreateWithoutCodingTaskInput>
+    connectOrCreate?: PracticeCreateOrConnectWithoutCodingTaskInput
+    upsert?: PracticeUpsertWithoutCodingTaskInput
+    connect?: PracticeWhereUniqueInput
+    update?: XOR<XOR<PracticeUpdateToOneWithWhereWithoutCodingTaskInput, PracticeUpdateWithoutCodingTaskInput>, PracticeUncheckedUpdateWithoutCodingTaskInput>
   }
 
   export type PracticeCreateNestedOneWithoutQuestionsInput = {
@@ -8619,6 +10180,13 @@ export namespace Prisma {
     _max?: NestedBoolNullableFilter<$PrismaModel>
   }
 
+  export type NestedEnumPracticeTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.PracticeType | EnumPracticeTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.PracticeType[] | ListEnumPracticeTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PracticeType[] | ListEnumPracticeTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumPracticeTypeFilter<$PrismaModel> | $Enums.PracticeType
+  }
+
   export type NestedDateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -8655,6 +10223,16 @@ export namespace Prisma {
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type NestedEnumPracticeTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PracticeType | EnumPracticeTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.PracticeType[] | ListEnumPracticeTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PracticeType[] | ListEnumPracticeTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumPracticeTypeWithAggregatesFilter<$PrismaModel> | $Enums.PracticeType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumPracticeTypeFilter<$PrismaModel>
+    _max?: NestedEnumPracticeTypeFilter<$PrismaModel>
   }
 
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -8701,9 +10279,11 @@ export namespace Prisma {
     role?: string | null
     level?: string | null
     resumeText?: string | null
+    type?: $Enums.PracticeType
     isTaken?: boolean | null
     createdAt?: Date | string
     questions?: QuestionCreateNestedManyWithoutPracticesInput
+    codingTask?: CodingTaskCreateNestedManyWithoutPracticeInput
     feedback?: FeedbackCreateNestedOneWithoutPracticeInput
   }
 
@@ -8715,9 +10295,11 @@ export namespace Prisma {
     role?: string | null
     level?: string | null
     resumeText?: string | null
+    type?: $Enums.PracticeType
     isTaken?: boolean | null
     createdAt?: Date | string
     questions?: QuestionUncheckedCreateNestedManyWithoutPracticesInput
+    codingTask?: CodingTaskUncheckedCreateNestedManyWithoutPracticeInput
     feedback?: FeedbackUncheckedCreateNestedOneWithoutPracticeInput
   }
 
@@ -8787,6 +10369,7 @@ export namespace Prisma {
     role?: StringNullableFilter<"Practice"> | string | null
     level?: StringNullableFilter<"Practice"> | string | null
     resumeText?: StringNullableFilter<"Practice"> | string | null
+    type?: EnumPracticeTypeFilter<"Practice"> | $Enums.PracticeType
     isTaken?: BoolNullableFilter<"Practice"> | boolean | null
     userId?: StringFilter<"Practice"> | string
     createdAt?: DateTimeFilter<"Practice"> | Date | string
@@ -8840,6 +10423,31 @@ export namespace Prisma {
 
   export type QuestionCreateManyPracticesInputEnvelope = {
     data: QuestionCreateManyPracticesInput | QuestionCreateManyPracticesInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type CodingTaskCreateWithoutPracticeInput = {
+    question?: string | null
+    expectedOutput?: string | null
+    hint?: string | null
+    description?: string | null
+  }
+
+  export type CodingTaskUncheckedCreateWithoutPracticeInput = {
+    id?: number
+    question?: string | null
+    expectedOutput?: string | null
+    hint?: string | null
+    description?: string | null
+  }
+
+  export type CodingTaskCreateOrConnectWithoutPracticeInput = {
+    where: CodingTaskWhereUniqueInput
+    create: XOR<CodingTaskCreateWithoutPracticeInput, CodingTaskUncheckedCreateWithoutPracticeInput>
+  }
+
+  export type CodingTaskCreateManyPracticeInputEnvelope = {
+    data: CodingTaskCreateManyPracticeInput | CodingTaskCreateManyPracticeInput[]
     skipDuplicates?: boolean
   }
 
@@ -8916,6 +10524,34 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Question"> | Date | string
   }
 
+  export type CodingTaskUpsertWithWhereUniqueWithoutPracticeInput = {
+    where: CodingTaskWhereUniqueInput
+    update: XOR<CodingTaskUpdateWithoutPracticeInput, CodingTaskUncheckedUpdateWithoutPracticeInput>
+    create: XOR<CodingTaskCreateWithoutPracticeInput, CodingTaskUncheckedCreateWithoutPracticeInput>
+  }
+
+  export type CodingTaskUpdateWithWhereUniqueWithoutPracticeInput = {
+    where: CodingTaskWhereUniqueInput
+    data: XOR<CodingTaskUpdateWithoutPracticeInput, CodingTaskUncheckedUpdateWithoutPracticeInput>
+  }
+
+  export type CodingTaskUpdateManyWithWhereWithoutPracticeInput = {
+    where: CodingTaskScalarWhereInput
+    data: XOR<CodingTaskUpdateManyMutationInput, CodingTaskUncheckedUpdateManyWithoutPracticeInput>
+  }
+
+  export type CodingTaskScalarWhereInput = {
+    AND?: CodingTaskScalarWhereInput | CodingTaskScalarWhereInput[]
+    OR?: CodingTaskScalarWhereInput[]
+    NOT?: CodingTaskScalarWhereInput | CodingTaskScalarWhereInput[]
+    id?: IntFilter<"CodingTask"> | number
+    question?: StringNullableFilter<"CodingTask"> | string | null
+    expectedOutput?: StringNullableFilter<"CodingTask"> | string | null
+    hint?: StringNullableFilter<"CodingTask"> | string | null
+    description?: StringNullableFilter<"CodingTask"> | string | null
+    practiceId?: IntFilter<"CodingTask"> | number
+  }
+
   export type UserUpsertWithoutPracticesInput = {
     update: XOR<UserUpdateWithoutPracticesInput, UserUncheckedUpdateWithoutPracticesInput>
     create: XOR<UserCreateWithoutPracticesInput, UserUncheckedCreateWithoutPracticesInput>
@@ -8975,6 +10611,84 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type PracticeCreateWithoutCodingTaskInput = {
+    title?: string | null
+    description?: string | null
+    stacks?: PracticeCreatestacksInput | string[]
+    role?: string | null
+    level?: string | null
+    resumeText?: string | null
+    type?: $Enums.PracticeType
+    isTaken?: boolean | null
+    createdAt?: Date | string
+    questions?: QuestionCreateNestedManyWithoutPracticesInput
+    users: UserCreateNestedOneWithoutPracticesInput
+    feedback?: FeedbackCreateNestedOneWithoutPracticeInput
+  }
+
+  export type PracticeUncheckedCreateWithoutCodingTaskInput = {
+    id?: number
+    title?: string | null
+    description?: string | null
+    stacks?: PracticeCreatestacksInput | string[]
+    role?: string | null
+    level?: string | null
+    resumeText?: string | null
+    type?: $Enums.PracticeType
+    isTaken?: boolean | null
+    userId: string
+    createdAt?: Date | string
+    questions?: QuestionUncheckedCreateNestedManyWithoutPracticesInput
+    feedback?: FeedbackUncheckedCreateNestedOneWithoutPracticeInput
+  }
+
+  export type PracticeCreateOrConnectWithoutCodingTaskInput = {
+    where: PracticeWhereUniqueInput
+    create: XOR<PracticeCreateWithoutCodingTaskInput, PracticeUncheckedCreateWithoutCodingTaskInput>
+  }
+
+  export type PracticeUpsertWithoutCodingTaskInput = {
+    update: XOR<PracticeUpdateWithoutCodingTaskInput, PracticeUncheckedUpdateWithoutCodingTaskInput>
+    create: XOR<PracticeCreateWithoutCodingTaskInput, PracticeUncheckedCreateWithoutCodingTaskInput>
+    where?: PracticeWhereInput
+  }
+
+  export type PracticeUpdateToOneWithWhereWithoutCodingTaskInput = {
+    where?: PracticeWhereInput
+    data: XOR<PracticeUpdateWithoutCodingTaskInput, PracticeUncheckedUpdateWithoutCodingTaskInput>
+  }
+
+  export type PracticeUpdateWithoutCodingTaskInput = {
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    stacks?: PracticeUpdatestacksInput | string[]
+    role?: NullableStringFieldUpdateOperationsInput | string | null
+    level?: NullableStringFieldUpdateOperationsInput | string | null
+    resumeText?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumPracticeTypeFieldUpdateOperationsInput | $Enums.PracticeType
+    isTaken?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    questions?: QuestionUpdateManyWithoutPracticesNestedInput
+    users?: UserUpdateOneRequiredWithoutPracticesNestedInput
+    feedback?: FeedbackUpdateOneWithoutPracticeNestedInput
+  }
+
+  export type PracticeUncheckedUpdateWithoutCodingTaskInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    stacks?: PracticeUpdatestacksInput | string[]
+    role?: NullableStringFieldUpdateOperationsInput | string | null
+    level?: NullableStringFieldUpdateOperationsInput | string | null
+    resumeText?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumPracticeTypeFieldUpdateOperationsInput | $Enums.PracticeType
+    isTaken?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    questions?: QuestionUncheckedUpdateManyWithoutPracticesNestedInput
+    feedback?: FeedbackUncheckedUpdateOneWithoutPracticeNestedInput
+  }
+
   export type PracticeCreateWithoutQuestionsInput = {
     title?: string | null
     description?: string | null
@@ -8982,8 +10696,10 @@ export namespace Prisma {
     role?: string | null
     level?: string | null
     resumeText?: string | null
+    type?: $Enums.PracticeType
     isTaken?: boolean | null
     createdAt?: Date | string
+    codingTask?: CodingTaskCreateNestedManyWithoutPracticeInput
     users: UserCreateNestedOneWithoutPracticesInput
     feedback?: FeedbackCreateNestedOneWithoutPracticeInput
   }
@@ -8996,9 +10712,11 @@ export namespace Prisma {
     role?: string | null
     level?: string | null
     resumeText?: string | null
+    type?: $Enums.PracticeType
     isTaken?: boolean | null
     userId: string
     createdAt?: Date | string
+    codingTask?: CodingTaskUncheckedCreateNestedManyWithoutPracticeInput
     feedback?: FeedbackUncheckedCreateNestedOneWithoutPracticeInput
   }
 
@@ -9025,8 +10743,10 @@ export namespace Prisma {
     role?: NullableStringFieldUpdateOperationsInput | string | null
     level?: NullableStringFieldUpdateOperationsInput | string | null
     resumeText?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumPracticeTypeFieldUpdateOperationsInput | $Enums.PracticeType
     isTaken?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    codingTask?: CodingTaskUpdateManyWithoutPracticeNestedInput
     users?: UserUpdateOneRequiredWithoutPracticesNestedInput
     feedback?: FeedbackUpdateOneWithoutPracticeNestedInput
   }
@@ -9039,9 +10759,11 @@ export namespace Prisma {
     role?: NullableStringFieldUpdateOperationsInput | string | null
     level?: NullableStringFieldUpdateOperationsInput | string | null
     resumeText?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumPracticeTypeFieldUpdateOperationsInput | $Enums.PracticeType
     isTaken?: NullableBoolFieldUpdateOperationsInput | boolean | null
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    codingTask?: CodingTaskUncheckedUpdateManyWithoutPracticeNestedInput
     feedback?: FeedbackUncheckedUpdateOneWithoutPracticeNestedInput
   }
 
@@ -9116,9 +10838,11 @@ export namespace Prisma {
     role?: string | null
     level?: string | null
     resumeText?: string | null
+    type?: $Enums.PracticeType
     isTaken?: boolean | null
     createdAt?: Date | string
     questions?: QuestionCreateNestedManyWithoutPracticesInput
+    codingTask?: CodingTaskCreateNestedManyWithoutPracticeInput
     users: UserCreateNestedOneWithoutPracticesInput
   }
 
@@ -9130,10 +10854,12 @@ export namespace Prisma {
     role?: string | null
     level?: string | null
     resumeText?: string | null
+    type?: $Enums.PracticeType
     isTaken?: boolean | null
     userId: string
     createdAt?: Date | string
     questions?: QuestionUncheckedCreateNestedManyWithoutPracticesInput
+    codingTask?: CodingTaskUncheckedCreateNestedManyWithoutPracticeInput
   }
 
   export type PracticeCreateOrConnectWithoutFeedbackInput = {
@@ -9159,9 +10885,11 @@ export namespace Prisma {
     role?: NullableStringFieldUpdateOperationsInput | string | null
     level?: NullableStringFieldUpdateOperationsInput | string | null
     resumeText?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumPracticeTypeFieldUpdateOperationsInput | $Enums.PracticeType
     isTaken?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     questions?: QuestionUpdateManyWithoutPracticesNestedInput
+    codingTask?: CodingTaskUpdateManyWithoutPracticeNestedInput
     users?: UserUpdateOneRequiredWithoutPracticesNestedInput
   }
 
@@ -9173,10 +10901,12 @@ export namespace Prisma {
     role?: NullableStringFieldUpdateOperationsInput | string | null
     level?: NullableStringFieldUpdateOperationsInput | string | null
     resumeText?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumPracticeTypeFieldUpdateOperationsInput | $Enums.PracticeType
     isTaken?: NullableBoolFieldUpdateOperationsInput | boolean | null
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     questions?: QuestionUncheckedUpdateManyWithoutPracticesNestedInput
+    codingTask?: CodingTaskUncheckedUpdateManyWithoutPracticeNestedInput
   }
 
   export type PracticeCreateManyUsersInput = {
@@ -9187,6 +10917,7 @@ export namespace Prisma {
     role?: string | null
     level?: string | null
     resumeText?: string | null
+    type?: $Enums.PracticeType
     isTaken?: boolean | null
     createdAt?: Date | string
   }
@@ -9208,9 +10939,11 @@ export namespace Prisma {
     role?: NullableStringFieldUpdateOperationsInput | string | null
     level?: NullableStringFieldUpdateOperationsInput | string | null
     resumeText?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumPracticeTypeFieldUpdateOperationsInput | $Enums.PracticeType
     isTaken?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     questions?: QuestionUpdateManyWithoutPracticesNestedInput
+    codingTask?: CodingTaskUpdateManyWithoutPracticeNestedInput
     feedback?: FeedbackUpdateOneWithoutPracticeNestedInput
   }
 
@@ -9222,9 +10955,11 @@ export namespace Prisma {
     role?: NullableStringFieldUpdateOperationsInput | string | null
     level?: NullableStringFieldUpdateOperationsInput | string | null
     resumeText?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumPracticeTypeFieldUpdateOperationsInput | $Enums.PracticeType
     isTaken?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     questions?: QuestionUncheckedUpdateManyWithoutPracticesNestedInput
+    codingTask?: CodingTaskUncheckedUpdateManyWithoutPracticeNestedInput
     feedback?: FeedbackUncheckedUpdateOneWithoutPracticeNestedInput
   }
 
@@ -9236,6 +10971,7 @@ export namespace Prisma {
     role?: NullableStringFieldUpdateOperationsInput | string | null
     level?: NullableStringFieldUpdateOperationsInput | string | null
     resumeText?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumPracticeTypeFieldUpdateOperationsInput | $Enums.PracticeType
     isTaken?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -9275,6 +11011,14 @@ export namespace Prisma {
     createdAt?: Date | string
   }
 
+  export type CodingTaskCreateManyPracticeInput = {
+    id?: number
+    question?: string | null
+    expectedOutput?: string | null
+    hint?: string | null
+    description?: string | null
+  }
+
   export type QuestionUpdateWithoutPracticesInput = {
     question?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9290,6 +11034,29 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     question?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CodingTaskUpdateWithoutPracticeInput = {
+    question?: NullableStringFieldUpdateOperationsInput | string | null
+    expectedOutput?: NullableStringFieldUpdateOperationsInput | string | null
+    hint?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type CodingTaskUncheckedUpdateWithoutPracticeInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    question?: NullableStringFieldUpdateOperationsInput | string | null
+    expectedOutput?: NullableStringFieldUpdateOperationsInput | string | null
+    hint?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type CodingTaskUncheckedUpdateManyWithoutPracticeInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    question?: NullableStringFieldUpdateOperationsInput | string | null
+    expectedOutput?: NullableStringFieldUpdateOperationsInput | string | null
+    hint?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
 

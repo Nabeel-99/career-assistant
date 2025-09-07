@@ -3832,6 +3832,7 @@ export namespace Prisma {
     expectedOutput: string | null
     hint: string | null
     description: string | null
+    keyword: string | null
     practiceId: number | null
   }
 
@@ -3841,6 +3842,7 @@ export namespace Prisma {
     expectedOutput: string | null
     hint: string | null
     description: string | null
+    keyword: string | null
     practiceId: number | null
   }
 
@@ -3850,6 +3852,7 @@ export namespace Prisma {
     expectedOutput: number
     hint: number
     description: number
+    keyword: number
     practiceId: number
     _all: number
   }
@@ -3871,6 +3874,7 @@ export namespace Prisma {
     expectedOutput?: true
     hint?: true
     description?: true
+    keyword?: true
     practiceId?: true
   }
 
@@ -3880,6 +3884,7 @@ export namespace Prisma {
     expectedOutput?: true
     hint?: true
     description?: true
+    keyword?: true
     practiceId?: true
   }
 
@@ -3889,6 +3894,7 @@ export namespace Prisma {
     expectedOutput?: true
     hint?: true
     description?: true
+    keyword?: true
     practiceId?: true
     _all?: true
   }
@@ -3985,6 +3991,7 @@ export namespace Prisma {
     expectedOutput: string | null
     hint: string | null
     description: string | null
+    keyword: string | null
     practiceId: number
     _count: CodingTaskCountAggregateOutputType | null
     _avg: CodingTaskAvgAggregateOutputType | null
@@ -4013,6 +4020,7 @@ export namespace Prisma {
     expectedOutput?: boolean
     hint?: boolean
     description?: boolean
+    keyword?: boolean
     practiceId?: boolean
     practice?: boolean | PracticeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["codingTask"]>
@@ -4023,6 +4031,7 @@ export namespace Prisma {
     expectedOutput?: boolean
     hint?: boolean
     description?: boolean
+    keyword?: boolean
     practiceId?: boolean
     practice?: boolean | PracticeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["codingTask"]>
@@ -4033,6 +4042,7 @@ export namespace Prisma {
     expectedOutput?: boolean
     hint?: boolean
     description?: boolean
+    keyword?: boolean
     practiceId?: boolean
     practice?: boolean | PracticeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["codingTask"]>
@@ -4043,10 +4053,11 @@ export namespace Prisma {
     expectedOutput?: boolean
     hint?: boolean
     description?: boolean
+    keyword?: boolean
     practiceId?: boolean
   }
 
-  export type CodingTaskOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "question" | "expectedOutput" | "hint" | "description" | "practiceId", ExtArgs["result"]["codingTask"]>
+  export type CodingTaskOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "question" | "expectedOutput" | "hint" | "description" | "keyword" | "practiceId", ExtArgs["result"]["codingTask"]>
   export type CodingTaskInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     practice?: boolean | PracticeDefaultArgs<ExtArgs>
   }
@@ -4068,6 +4079,7 @@ export namespace Prisma {
       expectedOutput: string | null
       hint: string | null
       description: string | null
+      keyword: string | null
       practiceId: number
     }, ExtArgs["result"]["codingTask"]>
     composites: {}
@@ -4498,6 +4510,7 @@ export namespace Prisma {
     readonly expectedOutput: FieldRef<"CodingTask", 'String'>
     readonly hint: FieldRef<"CodingTask", 'String'>
     readonly description: FieldRef<"CodingTask", 'String'>
+    readonly keyword: FieldRef<"CodingTask", 'String'>
     readonly practiceId: FieldRef<"CodingTask", 'Int'>
   }
     
@@ -8274,6 +8287,7 @@ export namespace Prisma {
     expectedOutput: 'expectedOutput',
     hint: 'hint',
     description: 'description',
+    keyword: 'keyword',
     practiceId: 'practiceId'
   };
 
@@ -8633,6 +8647,7 @@ export namespace Prisma {
     expectedOutput?: StringNullableFilter<"CodingTask"> | string | null
     hint?: StringNullableFilter<"CodingTask"> | string | null
     description?: StringNullableFilter<"CodingTask"> | string | null
+    keyword?: StringNullableFilter<"CodingTask"> | string | null
     practiceId?: IntFilter<"CodingTask"> | number
     practice?: XOR<PracticeScalarRelationFilter, PracticeWhereInput>
   }
@@ -8643,6 +8658,7 @@ export namespace Prisma {
     expectedOutput?: SortOrderInput | SortOrder
     hint?: SortOrderInput | SortOrder
     description?: SortOrderInput | SortOrder
+    keyword?: SortOrderInput | SortOrder
     practiceId?: SortOrder
     practice?: PracticeOrderByWithRelationInput
   }
@@ -8656,6 +8672,7 @@ export namespace Prisma {
     expectedOutput?: StringNullableFilter<"CodingTask"> | string | null
     hint?: StringNullableFilter<"CodingTask"> | string | null
     description?: StringNullableFilter<"CodingTask"> | string | null
+    keyword?: StringNullableFilter<"CodingTask"> | string | null
     practiceId?: IntFilter<"CodingTask"> | number
     practice?: XOR<PracticeScalarRelationFilter, PracticeWhereInput>
   }, "id">
@@ -8666,6 +8683,7 @@ export namespace Prisma {
     expectedOutput?: SortOrderInput | SortOrder
     hint?: SortOrderInput | SortOrder
     description?: SortOrderInput | SortOrder
+    keyword?: SortOrderInput | SortOrder
     practiceId?: SortOrder
     _count?: CodingTaskCountOrderByAggregateInput
     _avg?: CodingTaskAvgOrderByAggregateInput
@@ -8683,6 +8701,7 @@ export namespace Prisma {
     expectedOutput?: StringNullableWithAggregatesFilter<"CodingTask"> | string | null
     hint?: StringNullableWithAggregatesFilter<"CodingTask"> | string | null
     description?: StringNullableWithAggregatesFilter<"CodingTask"> | string | null
+    keyword?: StringNullableWithAggregatesFilter<"CodingTask"> | string | null
     practiceId?: IntWithAggregatesFilter<"CodingTask"> | number
   }
 
@@ -9063,6 +9082,7 @@ export namespace Prisma {
     expectedOutput?: string | null
     hint?: string | null
     description?: string | null
+    keyword?: string | null
     practice: PracticeCreateNestedOneWithoutCodingTaskInput
   }
 
@@ -9072,6 +9092,7 @@ export namespace Prisma {
     expectedOutput?: string | null
     hint?: string | null
     description?: string | null
+    keyword?: string | null
     practiceId: number
   }
 
@@ -9080,6 +9101,7 @@ export namespace Prisma {
     expectedOutput?: NullableStringFieldUpdateOperationsInput | string | null
     hint?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    keyword?: NullableStringFieldUpdateOperationsInput | string | null
     practice?: PracticeUpdateOneRequiredWithoutCodingTaskNestedInput
   }
 
@@ -9089,6 +9111,7 @@ export namespace Prisma {
     expectedOutput?: NullableStringFieldUpdateOperationsInput | string | null
     hint?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    keyword?: NullableStringFieldUpdateOperationsInput | string | null
     practiceId?: IntFieldUpdateOperationsInput | number
   }
 
@@ -9098,6 +9121,7 @@ export namespace Prisma {
     expectedOutput?: string | null
     hint?: string | null
     description?: string | null
+    keyword?: string | null
     practiceId: number
   }
 
@@ -9106,6 +9130,7 @@ export namespace Prisma {
     expectedOutput?: NullableStringFieldUpdateOperationsInput | string | null
     hint?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    keyword?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type CodingTaskUncheckedUpdateManyInput = {
@@ -9114,6 +9139,7 @@ export namespace Prisma {
     expectedOutput?: NullableStringFieldUpdateOperationsInput | string | null
     hint?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    keyword?: NullableStringFieldUpdateOperationsInput | string | null
     practiceId?: IntFieldUpdateOperationsInput | number
   }
 
@@ -9590,6 +9616,7 @@ export namespace Prisma {
     expectedOutput?: SortOrder
     hint?: SortOrder
     description?: SortOrder
+    keyword?: SortOrder
     practiceId?: SortOrder
   }
 
@@ -9604,6 +9631,7 @@ export namespace Prisma {
     expectedOutput?: SortOrder
     hint?: SortOrder
     description?: SortOrder
+    keyword?: SortOrder
     practiceId?: SortOrder
   }
 
@@ -9613,6 +9641,7 @@ export namespace Prisma {
     expectedOutput?: SortOrder
     hint?: SortOrder
     description?: SortOrder
+    keyword?: SortOrder
     practiceId?: SortOrder
   }
 
@@ -10431,6 +10460,7 @@ export namespace Prisma {
     expectedOutput?: string | null
     hint?: string | null
     description?: string | null
+    keyword?: string | null
   }
 
   export type CodingTaskUncheckedCreateWithoutPracticeInput = {
@@ -10439,6 +10469,7 @@ export namespace Prisma {
     expectedOutput?: string | null
     hint?: string | null
     description?: string | null
+    keyword?: string | null
   }
 
   export type CodingTaskCreateOrConnectWithoutPracticeInput = {
@@ -10549,6 +10580,7 @@ export namespace Prisma {
     expectedOutput?: StringNullableFilter<"CodingTask"> | string | null
     hint?: StringNullableFilter<"CodingTask"> | string | null
     description?: StringNullableFilter<"CodingTask"> | string | null
+    keyword?: StringNullableFilter<"CodingTask"> | string | null
     practiceId?: IntFilter<"CodingTask"> | number
   }
 
@@ -11017,6 +11049,7 @@ export namespace Prisma {
     expectedOutput?: string | null
     hint?: string | null
     description?: string | null
+    keyword?: string | null
   }
 
   export type QuestionUpdateWithoutPracticesInput = {
@@ -11041,6 +11074,7 @@ export namespace Prisma {
     expectedOutput?: NullableStringFieldUpdateOperationsInput | string | null
     hint?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    keyword?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type CodingTaskUncheckedUpdateWithoutPracticeInput = {
@@ -11049,6 +11083,7 @@ export namespace Prisma {
     expectedOutput?: NullableStringFieldUpdateOperationsInput | string | null
     hint?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    keyword?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type CodingTaskUncheckedUpdateManyWithoutPracticeInput = {
@@ -11057,6 +11092,7 @@ export namespace Prisma {
     expectedOutput?: NullableStringFieldUpdateOperationsInput | string | null
     hint?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    keyword?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
 

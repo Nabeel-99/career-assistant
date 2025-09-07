@@ -11,12 +11,19 @@ import { Button } from "../ui/button";
 import { generateCodingTask } from "@/lib/ai";
 import { readStreamableValue } from "@ai-sdk/rsc";
 import ReactMarkdown from "react-markdown";
+import { Streamdown } from "streamdown";
+import { extractJSONFromText } from "@/lib/utils";
+import { Card } from "../ui/card";
+import Link from "next/link";
+import Image from "next/image";
+import Orb from "../Animations/AnimatedContent/Orb";
 
 const PracticeWrapper = ({ userId }: { userId: string }) => {
   const [practices, setPractices] = useState<PracticeWithFeedback[]>([]);
   const [loading, setLoading] = useState(false);
   const [generation, setGeneration] = useState("");
   const [isGenerating, setIsGenerating] = useState(false);
+  const [jsonData, setJsonData] = useState<any>(null);
 
   const getUserPractices = async () => {
     try {
@@ -30,18 +37,45 @@ const PracticeWrapper = ({ userId }: { userId: string }) => {
     }
   };
 
+  const generateTask = async () => {
+    try {
+      setIsGenerating(true);
+      setGeneration("");
+      setJsonData(null);
+
+      const { output } = await generateCodingTask(["golang"], "beginner", [
+        "GoLang, structs, slices, filtering, error handling, beginner",
+        "Maps, String Manipulation, Counting, Functions",
+      ]);
+
+      console.log("🔍 Generated output:", output);
+
+      let fullText = "";
+      for await (const chunk of readStreamableValue(output)) {
+        console.log("📝 Streaming chunk:", chunk);
+        fullText += chunk;
+        setGeneration((currentGeneration) => `${currentGeneration}${chunk}`);
+      }
+
+      const res = extractJSONFromText(fullText);
+      setJsonData(res?.clientJson);
+
+      setIsGenerating(false);
+    } catch (error) {}
+  };
+
   useEffect(() => {
     getUserPractices();
   }, [userId]);
   return (
     <>
-      <Tabs defaultValue="theoretical">
+      <Tabs defaultValue="coding">
         <TabsList>
           <TabsTrigger value="theoretical">Theoretical</TabsTrigger>
           <TabsTrigger value="coding">Coding</TabsTrigger>
         </TabsList>
         <TabsContent value="theoretical">
-          <div className="flex flex-col  gap-10">
+          <div className="flex flex-col gap-4 mt-4">
             <CreatePracticeBtn
               userId={userId}
               getUserPractices={getUserPractices}
@@ -54,69 +88,32 @@ const PracticeWrapper = ({ userId }: { userId: string }) => {
           </div>
         </TabsContent>
         <TabsContent value="coding">
-          <Button
-            onClick={async () => {
-              setIsGenerating(true);
-              setGeneration("");
-
-              const { output } = await generateCodingTask(
-                ["javascript"],
-                "intermediate"
-              );
-
-              for await (const chunk of readStreamableValue(output)) {
-                setGeneration(
-                  (currentGeneration) => `${currentGeneration}${chunk}`
-                );
-              }
-
-              setIsGenerating(false);
-            }}
-            disabled={isGenerating}
-          >
-            {isGenerating ? "Generating..." : "Generate Coding Challenge"}
-          </Button>
-
-          {/* Show streaming markdown */}
-          {generation && (
-            <div className="mt-6">
-              <div className="prose prose-lg max-w-none">
-                <ReactMarkdown
-                  components={{
-                    h1: ({ children }) => (
-                      <h1 className="text-2xl font-bold  mb-4">{children}</h1>
-                    ),
-                    h2: ({ children }) => (
-                      <h2 className="text-xl font-semibold  mb-3">
-                        {children}
-                      </h2>
-                    ),
-                    p: ({ children }) => (
-                      <p className=" mb-3 leading-relaxed">{children}</p>
-                    ),
-                    code: ({ children, className }) => {
-                      const isInline = !className;
-                      return isInline ? (
-                        <code className=" px-1 py-0.5 rounded text-sm font-mono">
-                          {children}
-                        </code>
-                      ) : (
-                        <pre className=" p-4 rounded-lg overflow-x-auto">
-                          <code className="text-sm">{children}</code>
-                        </pre>
-                      );
-                    },
-                    strong: ({ children }) => (
-                      <strong className="font-semibold ">{children}</strong>
-                    ),
-                  }}
-                >
-                  {generation}
-                </ReactMarkdown>
-                {isGenerating && <span className="animate-pulse ">|</span>}
-              </div>
+          <div className="dark-code-bg light-code-bg relative  border rounded-lg overflow-hidden min-h-[500px] md:min-h-[600px] md:max-h-[600px] h-full flex items-center w-full justify-center">
+            <Orb
+              hoverIntensity={0}
+              hue={0}
+              forceHoverState={true}
+              className="hidden md:flex items-center justify-center"
+            />
+            {/* <div className="absolute  top-1/2 left-0 w-[300px] h-[300px] rounded-full rotate-45 blur-[70px] bg-radial-[at_75%_25%] from-[#fcfcfc] dark:from-[#0a0a0a] from-0% to-[#d8c1f6] dark:to-[#5227FF] to-100%"></div>
+            <div className="absolute -top-10 -right-20 w-[300px] h-[300px] rounded-full rotate-45 blur-[100px] bg-radial-[at_75%_25%] from-[#fcfcfc] dark:from-[#0a0a0a] from-0% to-[#d8c1f6] dark:to-[#5227FF]  to-100%"></div> */}
+            <div className="md:absolute md:-translate-x-1/2 md:-translate-y-1/2 md:top-1/2 md:left-1/2 flex flex-col  gap-2 items-center">
+              <Image
+                src={"/codingicon.webp"}
+                width={200}
+                height={200}
+                alt="coding icon"
+              />
+              <h2 className="text-2xl font-bold">AI-Powered Coding Room</h2>
+              <p className="text-center">
+                Get challenges generated just for <br /> you and code in real
+                time.
+              </p>
+              <Link href={"/practice/coding"}>
+                <Button className="mt-4">Enter Room</Button>
+              </Link>
             </div>
-          )}
+          </div>
         </TabsContent>
       </Tabs>
     </>

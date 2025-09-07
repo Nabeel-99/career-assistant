@@ -110,12 +110,34 @@ html {
     animation: fade-in 1s ease-out forwards;
   }
 }
+.liquid-ether-container {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+}
 
+.light-code-bg {
+  background-color: #fbfbfb;
+  background-image: url("https://transparenttextures.com/patterns/asfalt-dark.png");
+}
+.dark .dark-code-bg {
+  background-color: #000000;
+  background-image: url("https://transparenttextures.com/patterns/asfalt-light.png");
+}
 .bg-hero {
   background-color: "#0d0f0f";
   background-image: url("../public/batthern.png");
   opacity: 0.3;
   z-index: -50;
+}
+.orb-container {
+  height: 100%;
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
 }
 
 .radial-glow {

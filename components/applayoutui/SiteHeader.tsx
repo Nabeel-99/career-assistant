@@ -22,6 +22,19 @@ const SiteHeader = () => {
           <span className="text-black dark:text-white">Interview Room</span>
         </nav>
       );
+    } else if (pathname.startsWith("/practice/coding")) {
+      return (
+        <nav className="text-base text-muted-foreground flex items-center gap-2  px-4">
+          <Link
+            href="/practice"
+            className="text-muted-foreground hover:text-accent-foreground dark:hover:text-white"
+          >
+            Practice
+          </Link>
+          <span className="mx-1">/</span>
+          <span className="text-black dark:text-white">Coding Room</span>
+        </nav>
+      );
     }
     switch (pathname) {
       case "/dashboard":

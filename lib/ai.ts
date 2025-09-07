@@ -268,81 +268,68 @@ ${rawText}`,
   }
 };
 
-export const generateCodingTask = async (stacks: string[], level: string) => {
+export const generateCodingTask = async (
+  stacks: string[],
+  level: string,
+  previousQuestions?: string[]
+) => {
   const stream = createStreamableValue("");
 
   (async () => {
     const { textStream } = streamText({
       model: google("gemini-2.5-flash"),
-      prompt: `You are an AI system for generating algorithmic coding challenges.
+      prompt: `Create ONE realistic coding interview question for a ${level} level ${stacks.join(
+        ", "
+      )} developer.
+     
+Do NOT repeat questions that you have generated previously. 
 
-  Your task is to create a coding problem that tests algorithmic thinking based on the following criteria:
-  Technology stack: ${stacks.join(", ")}  
-Experience level: ${level}  
-  
-  1. **title**: A descriptive title for the coding challenge (e.g., "Two Sum Problem", "Palindrome Checker")
-  2. **question**: A clear algorithmic problem with specific input/output requirements and examples
-  3. **expectedOutput**: The exact expected output for the given examples (e.g., "true", "[1, 2]", "5")
-  4. **hint**: A helpful hint about the algorithmic approach without giving away the solution
-  5. **description**: A one-sentence summary of what the algorithm should do
-  
-  **Guidelines:**
-  - Focus on ALGORITHMIC problems, not UI/framework tasks
-  - Create problems that test data structures, algorithms, and problem-solving skills
-  - Include specific examples with input and expected output
-  - Make problems appropriate for the experience level
-  - Use the technology stack to determine the programming language syntax only
-  
-  **Example format for question:**
-  "Write a function that takes an array of integers and returns the two numbers that add up to a target sum.
-  
-  Example:
-  Input: nums = [2, 7, 11, 15], target = 9
-  Output: [0, 1] (because nums[0] + nums[1] = 2 + 7 = 9)"
-  
-our task is to create a coding problem and return it in Markdown format.  
-⚠️ Do not add explanations, variations, or anything outside the required sections.  
-⚠️ End your response immediately after the "Hint" section.  
+ Previous questions: ${previousQuestions?.join("\n")}.
+ Make sure this question is unique and does not closely resemble any of the above previous questions IF PROVIDED.
+The question should focus ONLY on ${stacks.join(
+        ", "
+      )} skills appropriate for the selected level.
 
-### Required Sections:
+Format your output exactly like this:
+
 # Title
-(title of the problem)
+(A short descriptive title, e.g., "Two Sum" or "Filterable List")
 
 **Description**  
-(one-sentence summary of what the algorithm should do)
+(One sentence describing what the problem or task is)
 
 **Problem Statement**  
-(question with clear input/output requirements and at least one example)
+(Describe the task clearly. For algorithmic tasks, provide inputs/outputs. For styling/UI tasks, describe the required appearance/behavior. Include example data if needed.)
+
+Example:
+Input: [example input]
 
 **Expected Output**  
-\`\`\`txt
-(expected output here)
-\`\`\`
+- For algorithmic or SQL tasks: provide the exact result/output for the example, formatted as a proper Markdown table for SQL or a code block for JS.
+- For CSS/HTML tasks: show a simplified representation of what the output should look like for the question using dots and dashes (".", "|", "-").
+- For React/frontend components: show a simplified representation of the rendered DOM for the example inputs and user interaction.  
 
-**Hint**  
-(hint about the algorithmic approach)
-
-===END===
-  `,
+Ensure that tables are generated using Markdown table syntax ("|" and "-") so they render properly in Markdown and ReactMarkdown.
+===JSON===
+{
+  "title": "exact title from above",
+  "description": "exact description from above",
+  "question": "exact problem statement from above",
+  "expectedOutput": "expected output or visual description as above",
+  "hint": "a concise hint to guide the candidate",
+  "keyword": "keyword for this question or short one sentence summary of the question"
+}
+===END===`,
     });
 
+    let fullText = "";
     for await (const delta of textStream) {
-      if (delta.includes("===END===")) break;
+      fullText += delta;
       stream.update(delta);
     }
 
     stream.done();
   })();
-  console.log("output", stream.value);
+
   return { output: stream.value };
-
-  // try {
-  //   if (data) {
-  //     const parsed = cleanJSONparse(data);
-
-  //     return parsed;
-  //   }
-  // } catch (error) {
-  //   throw new Error("Error parsing JSON");
-  // }
 };

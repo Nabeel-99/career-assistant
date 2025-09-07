@@ -34,6 +34,22 @@ export const cleanJSONparse = (text: string) => {
   return JSON.parse(cleaned);
 };
 
+export const extractJSONFromText = (fullText: string) => {
+  try {
+    const jsonMatch = fullText.match(/===JSON===\s*(\{[\s\S]*?\})\s*===END===/);
+    if (jsonMatch) {
+      const jsonStr = jsonMatch[1];
+      const clientJson = JSON.parse(jsonStr);
+      console.log("Client-side JSON:", clientJson);
+      return { clientJson };
+    } else {
+      console.log(" No JSON found in text");
+    }
+  } catch (error) {
+    console.log("Client-side JSON parsing failed:", error);
+  }
+};
+
 export const mapLevel = {
   "entry-level": {
     title: "Entry Level",

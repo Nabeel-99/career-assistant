@@ -56,6 +56,7 @@ model CodingTask {
   expectedOutput String?
   hint           String?
   description    String?
+  keyword        String?
   practiceId     Int
   practice       Practice @relation(fields: [practiceId], references: [id], onDelete: Cascade)
 }

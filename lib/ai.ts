@@ -6,6 +6,7 @@ import { google } from "@ai-sdk/google";
 import { generateText, streamText } from "ai";
 import { Transcript } from "./types";
 import { createStreamableValue } from "@ai-sdk/rsc";
+import { openai } from "@ai-sdk/openai";
 export const generateQuestions = async (
   jobDescription: string,
   userResume: string,
@@ -277,7 +278,7 @@ export const generateCodingTask = async (
 
   (async () => {
     const { textStream } = streamText({
-      model: google("gemini-2.5-flash"),
+      model: google("gemma-3-27b-it"),
       prompt: `Create ONE realistic coding interview question for a ${level} level ${stacks.join(
         ", "
       )} developer.

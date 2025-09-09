@@ -11,7 +11,8 @@
   "dependencies": {
     "@ai-sdk/google": "^1.2.22",
     "@ai-sdk/groq": "^1.2.9",
-    "@ai-sdk/rsc": "^1.0.34",
+    "@ai-sdk/openai": "^2.0.27",
+    "@ai-sdk/rsc": "^1.0.39",
     "@google/genai": "^1.5.1",
     "@hookform/resolvers": "^5.1.1",
     "@monaco-editor/react": "^4.7.0",
@@ -60,6 +61,7 @@
     "react-markdown": "^10.1.0",
     "react-to-print": "^3.1.1",
     "recharts": "^2.15.3",
+    "shiki": "^3.12.2",
     "sonner": "^2.0.5",
     "streamdown": "^1.2.0",
     "tailwind-merge": "^3.3.0",

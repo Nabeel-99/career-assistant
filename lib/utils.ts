@@ -253,3 +253,23 @@ export const dataURLtoFile = (dataurl: string, filename: string): File => {
 
   return new File([u8arr], filename, { type: mime });
 };
+
+export const suggestedStacks = [
+  "JavaScript",
+  "TypeScript",
+  "Python",
+  "Java",
+  "C++",
+  "C#",
+  "Go",
+  "Rust",
+  "PHP",
+  "Ruby",
+  "Kotlin",
+  "Swift",
+  "SQL",
+  "R",
+  "Scala",
+];
+
+export const levels = ["Beginner", "Intermediate", "Advanced"];

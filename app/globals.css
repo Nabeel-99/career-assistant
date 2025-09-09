@@ -118,6 +118,21 @@ html {
   touch-action: none;
 }
 
+.text-type {
+  display: inline-block;
+  white-space: pre-wrap;
+}
+
+.text-type__cursor {
+  margin-left: 0.25rem;
+  display: inline-block;
+  opacity: 1;
+}
+
+.text-type__cursor--hidden {
+  display: none;
+}
+
 .light-code-bg {
   background-color: #fbfbfb;
   background-image: url("https://transparenttextures.com/patterns/asfalt-dark.png");

@@ -34,21 +34,21 @@ export const cleanJSONparse = (text: string) => {
   return JSON.parse(cleaned);
 };
 
-export const extractJSONFromText = (fullText: string) => {
-  try {
-    const jsonMatch = fullText.match(/===JSON===\s*(\{[\s\S]*?\})\s*===END===/);
-    if (jsonMatch) {
-      const jsonStr = jsonMatch[1];
-      const clientJson = JSON.parse(jsonStr);
-      console.log("Client-side JSON:", clientJson);
-      return { clientJson };
-    } else {
-      console.log(" No JSON found in text");
-    }
-  } catch (error) {
-    console.log("Client-side JSON parsing failed:", error);
-  }
-};
+// export const extractJSONFromText = (fullText: string) => {
+//   try {
+//     const jsonMatch = fullText.match(/===JSON===\s*(\{[\s\S]*?\})\s*===END===/);
+//     if (jsonMatch) {
+//       const jsonStr = jsonMatch[1];
+//       const clientJson = JSON.parse(jsonStr);
+//       console.log("Client-side JSON:", clientJson);
+//       return { clientJson };
+//     } else {
+//       console.log(" No JSON found in text");
+//     }
+//   } catch (error) {
+//     console.log("Client-side JSON parsing failed:", error);
+//   }
+// };
 
 export const mapLevel = {
   "entry-level": {
@@ -268,8 +268,24 @@ export const suggestedStacks = [
   "Kotlin",
   "Swift",
   "SQL",
-  "R",
   "Scala",
 ];
 
 export const levels = ["Beginner", "Intermediate", "Advanced"];
+
+export const LANGUAGE_VERSIONS = {
+  javascript: "18.15.0",
+  typescript: "5.0.3",
+  python: "3.10.0",
+  java: "15.0.2",
+  "c++": "10.2.0",
+  csharp: "8.2.3",
+  go: "1.16.2",
+  rust: "1.68.2",
+  php: "8.2.3",
+  ruby: "3.0.1",
+  kotlin: "1.8.20",
+  swift: "5.3.3",
+  sql: "3.36.0",
+  scala: "3.2.2",
+};

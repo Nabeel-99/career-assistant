@@ -6,7 +6,7 @@ import { google } from "@ai-sdk/google";
 import { generateText, streamText } from "ai";
 import { Transcript } from "./types";
 import { createStreamableValue } from "@ai-sdk/rsc";
-import { openai } from "@ai-sdk/openai";
+
 export const generateQuestions = async (
   jobDescription: string,
   userResume: string,
@@ -311,16 +311,7 @@ Input: [example input]
 - For React/frontend components: show a simplified representation of the rendered DOM for the example inputs and user interaction.  
 
 Ensure that tables are generated using Markdown table syntax ("|" and "-") so they render properly in Markdown and ReactMarkdown.
-===JSON===
-{
-  "title": "exact title from above",
-  "description": "exact description from above",
-  "question": "exact problem statement from above",
-  "expectedOutput": "expected output or visual description as above",
-  "hint": "a concise hint to guide the candidate",
-  "keyword": "keyword for this question or short one sentence summary of the question"
-}
-===END===`,
+`,
     });
 
     let fullText = "";
@@ -333,4 +324,32 @@ Ensure that tables are generated using Markdown table syntax ("|" and "-") so th
   })();
 
   return { output: stream.value };
+};
+
+export const extractJSONFromText = async (fullText: string) => {
+  const { text } = await generateText({
+    model: google("gemini-1.5-flash"),
+    prompt: `You are an AI system for extracting JSON from text.
+      From the following coding question, extract structured JSON:
+
+===QUESTION===
+${fullText}
+===END===
+
+Return only valid JSON like this:
+{
+  "hint": "short hint for solving",
+  "keywords": "keyword for this question or short one sentence summary of the question"
+}
+      `,
+  });
+  const data = text;
+  try {
+    if (data) {
+      const parsed = cleanJSONparse(data);
+      return parsed;
+    }
+  } catch (error) {
+    throw new Error("Error parsing JSON");
+  }
 };

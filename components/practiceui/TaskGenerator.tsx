@@ -63,7 +63,7 @@ const TaskGenerator = ({
             ),
           }}
         >
-          {generation.split("===JSON===")[0]}
+          {generation}
         </Streamdown>
         {isGenerating && <span className="animate-pulse">|</span>}
       </div>

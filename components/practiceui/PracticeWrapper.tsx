@@ -30,7 +30,7 @@ const PracticeWrapper = ({ userId }: { userId: string }) => {
   }, [userId]);
   return (
     <>
-      <Tabs defaultValue="coding">
+      <Tabs defaultValue="theoretical">
         <TabsList>
           <TabsTrigger value="theoretical">Theoretical</TabsTrigger>
           <TabsTrigger value="coding">Coding</TabsTrigger>

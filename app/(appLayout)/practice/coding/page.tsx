@@ -4,16 +4,14 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useSidebar } from "@/components/ui/sidebar";
 import React, { useEffect, useState } from "react";
-
 import { useTheme } from "next-themes";
 import { User } from "@/lib/generated/prisma";
 import { fetchUser } from "@/lib/action";
 import { toast } from "sonner";
 import { GiArtificialHive } from "react-icons/gi";
 import { animate, stagger } from "motion";
-import { generateCodingTask } from "@/lib/ai";
+import { extractJSONFromText, generateCodingTask } from "@/lib/ai";
 import { readStreamableValue } from "@ai-sdk/rsc";
-import { extractJSONFromText } from "@/lib/utils";
 import TaskGenerator from "@/components/practiceui/TaskGenerator";
 import PromptGenerator from "@/components/practiceui/PromptGenerator";
 import CodingEditor from "@/components/practiceui/CodingEditor";
@@ -32,11 +30,9 @@ const page = () => {
   const [levelTypingDone, setLevelTypingDone] = useState(false);
   const [generation, setGeneration] = useState("");
   const [isGenerating, setIsGenerating] = useState(false);
-  const [jsonData, setJsonData] = useState<any>(null);
+
   const beginPractice = () => {
-    // Clear previous generation and reset state for fresh start
     setGeneration("");
-    setJsonData(null);
     setIsGenerating(false);
     setStackSelected(null);
     setLevelSelected(null);
@@ -50,19 +46,18 @@ const page = () => {
 
   const generateTask = async (level: string) => {
     try {
+      const oldKeywords = JSON.parse(
+        sessionStorage.getItem("keywords") || "[]"
+      );
       setLevelSelected(level);
       setIsGenerating(true);
       setGeneration("");
       setIsStarted(false);
-      setJsonData(null);
 
       const { output } = await generateCodingTask(
         [`${stackSelected}`],
         `${levelSelected}`,
-        [
-          // "GoLang, structs, slices, filtering, error handling, beginner",
-          // "Maps, String Manipulation, Counting, Functions",
-        ]
+        oldKeywords
       );
 
       console.log("🔍 Generated output:", output);
@@ -73,13 +68,19 @@ const page = () => {
         fullText += chunk;
         setGeneration((currentGeneration) => `${currentGeneration}${chunk}`);
 
-        // Add a small delay to slow down the streaming
         await new Promise((resolve) => setTimeout(resolve, 50));
       }
-      const res = extractJSONFromText(fullText);
-      setJsonData(res?.clientJson);
 
+      console.log("full text", fullText);
+      sessionStorage.setItem("lastTask", fullText);
+      const jsonData = await extractJSONFromText(fullText);
+      console.log("json data", jsonData);
       setIsGenerating(false);
+      if (jsonData) {
+        const newKeyword = jsonData.keywords;
+        const updatedKeywords = [...oldKeywords, newKeyword];
+        sessionStorage.setItem("keywords", JSON.stringify(updatedKeywords));
+      }
     } catch (error) {
       console.log("error", error);
     } finally {
@@ -88,7 +89,14 @@ const page = () => {
   };
 
   useEffect(() => {
-    // sidebar.setOpen(false);
+    const lastTask = sessionStorage.getItem("lastTask");
+    if (lastTask) {
+      setGeneration(lastTask);
+    }
+  }, []);
+
+  useEffect(() => {
+    sidebar.setOpen(false);
     animate("button", { opacity: 1 }, { delay: stagger(0.2) });
     const getUserDetails = async () => {
       try {
@@ -107,7 +115,7 @@ const page = () => {
   useEffect(() => {
     if (typingDone) {
       console.log("typing Done", typingDone);
-      // Animate buttons with stagger effect
+
       animate(".stack", { opacity: 1, y: 0 }, { delay: stagger(0.1) });
     }
     if (levelTypingDone) {
@@ -116,11 +124,11 @@ const page = () => {
   }, [typingDone, levelTypingDone]);
 
   return (
-    <div className="flex gap-10 w-full">
-      <section className="flex flex-col w-1/2 gap-4">
+    <div className="flex flex-col md:flex-row gap-10 w-full">
+      <section className="flex flex-col lg:w-1/2 gap-4">
         <div className="flex justify-start">
           <Button disabled={isStarted} onClick={beginPractice}>
-            Begin Practice
+            Generate Task
           </Button>
         </div>
 
@@ -152,7 +160,7 @@ const page = () => {
           <TaskGenerator isGenerating={isGenerating} generation={generation} />
         </Card>
       </section>
-      <section className="w-1/2 flex flex-col gap-4">
+      <section className="lg:w-1/2 flex flex-col gap-4">
         <CodingEditor systemTheme={systemTheme} />
       </section>
     </div>

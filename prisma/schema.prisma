@@ -14,6 +14,11 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum UserType{
+  FREE
+  PREMIUM
+}
+
 model User {
   id String @id @default(uuid())
   email String? @unique
@@ -23,8 +28,10 @@ model User {
   image String?
   isUserNew Boolean? @default(true)
   hasResume Boolean? @default(false)
+  type UserType @default(FREE)
   practices Practice[]
   resumes Resume[]
+
 
 }
 

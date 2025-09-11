@@ -14,6 +14,7 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
       resumes: true,
     },
   });
+  if (!user) return null;
   return <CallCard user={user} id={id} />;
 };
 

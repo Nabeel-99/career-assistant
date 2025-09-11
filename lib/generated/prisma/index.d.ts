@@ -40,6 +40,23 @@ export type Resume = $Result.DefaultSelection<Prisma.$ResumePayload>
 export type Feedback = $Result.DefaultSelection<Prisma.$FeedbackPayload>
 
 /**
+ * Enums
+ */
+export namespace $Enums {
+  export const UserType: {
+  FREE: 'FREE',
+  PREMIUM: 'PREMIUM'
+};
+
+export type UserType = (typeof UserType)[keyof typeof UserType]
+
+}
+
+export type UserType = $Enums.UserType
+
+export const UserType: typeof $Enums.UserType
+
+/**
  * ##  Prisma Client ʲˢ
  *
  * Type-safe database client for TypeScript & Node.js
@@ -1322,6 +1339,7 @@ export namespace Prisma {
     image: string | null
     isUserNew: boolean | null
     hasResume: boolean | null
+    type: $Enums.UserType | null
   }
 
   export type UserMaxAggregateOutputType = {
@@ -1333,6 +1351,7 @@ export namespace Prisma {
     image: string | null
     isUserNew: boolean | null
     hasResume: boolean | null
+    type: $Enums.UserType | null
   }
 
   export type UserCountAggregateOutputType = {
@@ -1344,6 +1363,7 @@ export namespace Prisma {
     image: number
     isUserNew: number
     hasResume: number
+    type: number
     _all: number
   }
 
@@ -1357,6 +1377,7 @@ export namespace Prisma {
     image?: true
     isUserNew?: true
     hasResume?: true
+    type?: true
   }
 
   export type UserMaxAggregateInputType = {
@@ -1368,6 +1389,7 @@ export namespace Prisma {
     image?: true
     isUserNew?: true
     hasResume?: true
+    type?: true
   }
 
   export type UserCountAggregateInputType = {
@@ -1379,6 +1401,7 @@ export namespace Prisma {
     image?: true
     isUserNew?: true
     hasResume?: true
+    type?: true
     _all?: true
   }
 
@@ -1463,6 +1486,7 @@ export namespace Prisma {
     image: string | null
     isUserNew: boolean | null
     hasResume: boolean | null
+    type: $Enums.UserType
     _count: UserCountAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
@@ -1491,6 +1515,7 @@ export namespace Prisma {
     image?: boolean
     isUserNew?: boolean
     hasResume?: boolean
+    type?: boolean
     practices?: boolean | User$practicesArgs<ExtArgs>
     resumes?: boolean | User$resumesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -1505,6 +1530,7 @@ export namespace Prisma {
     image?: boolean
     isUserNew?: boolean
     hasResume?: boolean
+    type?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -1516,6 +1542,7 @@ export namespace Prisma {
     image?: boolean
     isUserNew?: boolean
     hasResume?: boolean
+    type?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectScalar = {
@@ -1527,9 +1554,10 @@ export namespace Prisma {
     image?: boolean
     isUserNew?: boolean
     hasResume?: boolean
+    type?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "firstname" | "lastname" | "password" | "image" | "isUserNew" | "hasResume", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "firstname" | "lastname" | "password" | "image" | "isUserNew" | "hasResume" | "type", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     practices?: boolean | User$practicesArgs<ExtArgs>
     resumes?: boolean | User$resumesArgs<ExtArgs>
@@ -1553,6 +1581,7 @@ export namespace Prisma {
       image: string | null
       isUserNew: boolean | null
       hasResume: boolean | null
+      type: $Enums.UserType
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -1986,6 +2015,7 @@ export namespace Prisma {
     readonly image: FieldRef<"User", 'String'>
     readonly isUserNew: FieldRef<"User", 'Boolean'>
     readonly hasResume: FieldRef<"User", 'Boolean'>
+    readonly type: FieldRef<"User", 'UserType'>
   }
     
 
@@ -6978,7 +7008,8 @@ export namespace Prisma {
     password: 'password',
     image: 'image',
     isUserNew: 'isUserNew',
-    hasResume: 'hasResume'
+    hasResume: 'hasResume',
+    type: 'type'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -7103,6 +7134,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'UserType'
+   */
+  export type EnumUserTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UserType'>
+    
+
+
+  /**
+   * Reference to a field of type 'UserType[]'
+   */
+  export type ListEnumUserTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UserType[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Int'
    */
   export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
@@ -7173,6 +7218,7 @@ export namespace Prisma {
     image?: StringNullableFilter<"User"> | string | null
     isUserNew?: BoolNullableFilter<"User"> | boolean | null
     hasResume?: BoolNullableFilter<"User"> | boolean | null
+    type?: EnumUserTypeFilter<"User"> | $Enums.UserType
     practices?: PracticeListRelationFilter
     resumes?: ResumeListRelationFilter
   }
@@ -7186,6 +7232,7 @@ export namespace Prisma {
     image?: SortOrderInput | SortOrder
     isUserNew?: SortOrderInput | SortOrder
     hasResume?: SortOrderInput | SortOrder
+    type?: SortOrder
     practices?: PracticeOrderByRelationAggregateInput
     resumes?: ResumeOrderByRelationAggregateInput
   }
@@ -7202,6 +7249,7 @@ export namespace Prisma {
     image?: StringNullableFilter<"User"> | string | null
     isUserNew?: BoolNullableFilter<"User"> | boolean | null
     hasResume?: BoolNullableFilter<"User"> | boolean | null
+    type?: EnumUserTypeFilter<"User"> | $Enums.UserType
     practices?: PracticeListRelationFilter
     resumes?: ResumeListRelationFilter
   }, "id" | "email">
@@ -7215,6 +7263,7 @@ export namespace Prisma {
     image?: SortOrderInput | SortOrder
     isUserNew?: SortOrderInput | SortOrder
     hasResume?: SortOrderInput | SortOrder
+    type?: SortOrder
     _count?: UserCountOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
     _min?: UserMinOrderByAggregateInput
@@ -7232,6 +7281,7 @@ export namespace Prisma {
     image?: StringNullableWithAggregatesFilter<"User"> | string | null
     isUserNew?: BoolNullableWithAggregatesFilter<"User"> | boolean | null
     hasResume?: BoolNullableWithAggregatesFilter<"User"> | boolean | null
+    type?: EnumUserTypeWithAggregatesFilter<"User"> | $Enums.UserType
   }
 
   export type PracticeWhereInput = {
@@ -7512,6 +7562,7 @@ export namespace Prisma {
     image?: string | null
     isUserNew?: boolean | null
     hasResume?: boolean | null
+    type?: $Enums.UserType
     practices?: PracticeCreateNestedManyWithoutUsersInput
     resumes?: ResumeCreateNestedManyWithoutUsersInput
   }
@@ -7525,6 +7576,7 @@ export namespace Prisma {
     image?: string | null
     isUserNew?: boolean | null
     hasResume?: boolean | null
+    type?: $Enums.UserType
     practices?: PracticeUncheckedCreateNestedManyWithoutUsersInput
     resumes?: ResumeUncheckedCreateNestedManyWithoutUsersInput
   }
@@ -7538,6 +7590,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     isUserNew?: NullableBoolFieldUpdateOperationsInput | boolean | null
     hasResume?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    type?: EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
     practices?: PracticeUpdateManyWithoutUsersNestedInput
     resumes?: ResumeUpdateManyWithoutUsersNestedInput
   }
@@ -7551,6 +7604,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     isUserNew?: NullableBoolFieldUpdateOperationsInput | boolean | null
     hasResume?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    type?: EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
     practices?: PracticeUncheckedUpdateManyWithoutUsersNestedInput
     resumes?: ResumeUncheckedUpdateManyWithoutUsersNestedInput
   }
@@ -7564,6 +7618,7 @@ export namespace Prisma {
     image?: string | null
     isUserNew?: boolean | null
     hasResume?: boolean | null
+    type?: $Enums.UserType
   }
 
   export type UserUpdateManyMutationInput = {
@@ -7575,6 +7630,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     isUserNew?: NullableBoolFieldUpdateOperationsInput | boolean | null
     hasResume?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    type?: EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
   }
 
   export type UserUncheckedUpdateManyInput = {
@@ -7586,6 +7642,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     isUserNew?: NullableBoolFieldUpdateOperationsInput | boolean | null
     hasResume?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    type?: EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
   }
 
   export type PracticeCreateInput = {
@@ -7888,6 +7945,13 @@ export namespace Prisma {
     not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
   }
 
+  export type EnumUserTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.UserType | EnumUserTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.UserType[] | ListEnumUserTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.UserType[] | ListEnumUserTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumUserTypeFilter<$PrismaModel> | $Enums.UserType
+  }
+
   export type PracticeListRelationFilter = {
     every?: PracticeWhereInput
     some?: PracticeWhereInput
@@ -7922,6 +7986,7 @@ export namespace Prisma {
     image?: SortOrder
     isUserNew?: SortOrder
     hasResume?: SortOrder
+    type?: SortOrder
   }
 
   export type UserMaxOrderByAggregateInput = {
@@ -7933,6 +7998,7 @@ export namespace Prisma {
     image?: SortOrder
     isUserNew?: SortOrder
     hasResume?: SortOrder
+    type?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
@@ -7944,6 +8010,7 @@ export namespace Prisma {
     image?: SortOrder
     isUserNew?: SortOrder
     hasResume?: SortOrder
+    type?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -7988,6 +8055,16 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedBoolNullableFilter<$PrismaModel>
     _max?: NestedBoolNullableFilter<$PrismaModel>
+  }
+
+  export type EnumUserTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.UserType | EnumUserTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.UserType[] | ListEnumUserTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.UserType[] | ListEnumUserTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumUserTypeWithAggregatesFilter<$PrismaModel> | $Enums.UserType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumUserTypeFilter<$PrismaModel>
+    _max?: NestedEnumUserTypeFilter<$PrismaModel>
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -8315,6 +8392,10 @@ export namespace Prisma {
     set?: boolean | null
   }
 
+  export type EnumUserTypeFieldUpdateOperationsInput = {
+    set?: $Enums.UserType
+  }
+
   export type PracticeUpdateManyWithoutUsersNestedInput = {
     create?: XOR<PracticeCreateWithoutUsersInput, PracticeUncheckedCreateWithoutUsersInput> | PracticeCreateWithoutUsersInput[] | PracticeUncheckedCreateWithoutUsersInput[]
     connectOrCreate?: PracticeCreateOrConnectWithoutUsersInput | PracticeCreateOrConnectWithoutUsersInput[]
@@ -8555,6 +8636,13 @@ export namespace Prisma {
     not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
   }
 
+  export type NestedEnumUserTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.UserType | EnumUserTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.UserType[] | ListEnumUserTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.UserType[] | ListEnumUserTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumUserTypeFilter<$PrismaModel> | $Enums.UserType
+  }
+
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -8617,6 +8705,16 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedBoolNullableFilter<$PrismaModel>
     _max?: NestedBoolNullableFilter<$PrismaModel>
+  }
+
+  export type NestedEnumUserTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.UserType | EnumUserTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.UserType[] | ListEnumUserTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.UserType[] | ListEnumUserTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumUserTypeWithAggregatesFilter<$PrismaModel> | $Enums.UserType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumUserTypeFilter<$PrismaModel>
+    _max?: NestedEnumUserTypeFilter<$PrismaModel>
   }
 
   export type NestedDateTimeFilter<$PrismaModel = never> = {
@@ -8852,6 +8950,7 @@ export namespace Prisma {
     image?: string | null
     isUserNew?: boolean | null
     hasResume?: boolean | null
+    type?: $Enums.UserType
     resumes?: ResumeCreateNestedManyWithoutUsersInput
   }
 
@@ -8864,6 +8963,7 @@ export namespace Prisma {
     image?: string | null
     isUserNew?: boolean | null
     hasResume?: boolean | null
+    type?: $Enums.UserType
     resumes?: ResumeUncheckedCreateNestedManyWithoutUsersInput
   }
 
@@ -8936,6 +9036,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     isUserNew?: NullableBoolFieldUpdateOperationsInput | boolean | null
     hasResume?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    type?: EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
     resumes?: ResumeUpdateManyWithoutUsersNestedInput
   }
 
@@ -8948,6 +9049,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     isUserNew?: NullableBoolFieldUpdateOperationsInput | boolean | null
     hasResume?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    type?: EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
     resumes?: ResumeUncheckedUpdateManyWithoutUsersNestedInput
   }
 
@@ -9054,6 +9156,7 @@ export namespace Prisma {
     image?: string | null
     isUserNew?: boolean | null
     hasResume?: boolean | null
+    type?: $Enums.UserType
     practices?: PracticeCreateNestedManyWithoutUsersInput
   }
 
@@ -9066,6 +9169,7 @@ export namespace Prisma {
     image?: string | null
     isUserNew?: boolean | null
     hasResume?: boolean | null
+    type?: $Enums.UserType
     practices?: PracticeUncheckedCreateNestedManyWithoutUsersInput
   }
 
@@ -9094,6 +9198,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     isUserNew?: NullableBoolFieldUpdateOperationsInput | boolean | null
     hasResume?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    type?: EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
     practices?: PracticeUpdateManyWithoutUsersNestedInput
   }
 
@@ -9106,6 +9211,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     isUserNew?: NullableBoolFieldUpdateOperationsInput | boolean | null
     hasResume?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    type?: EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
     practices?: PracticeUncheckedUpdateManyWithoutUsersNestedInput
   }
 

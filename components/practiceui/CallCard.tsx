@@ -9,6 +9,10 @@ import { Transcript } from "@/lib/types";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import CallCardSkeleton from "../skeletons/CallCardSkeleton";
+import { Dialog } from "../ui/dialog";
+import { Card } from "../ui/card";
+import { ImSpinner9 } from "react-icons/im";
+import UpgradeModal from "./UpgradeModal";
 
 type UserWithResume = Prisma.UserGetPayload<{
   include: {
@@ -26,6 +30,7 @@ const CallCard = ({
   user: UserWithResume | null;
   id: string;
 }) => {
+  const [showModal, setShowModal] = useState(false);
   const [practice, setPractice] = useState<PracticeWithQuestions | null>(null);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
@@ -96,7 +101,7 @@ const CallCard = ({
             action: {
               label: "Upgrade plan",
               onClick: () => {
-                router.push("/");
+                setShowModal(true);
               },
             },
           }
@@ -110,6 +115,7 @@ const CallCard = ({
       vapi.stop();
     };
   }, []);
+
   useEffect(() => {
     if (!isConnected && transcript.length >= 4 && !generatingFeedback) {
       const runFeedback = async () => {
@@ -147,6 +153,7 @@ const CallCard = ({
     }, 1000);
     return () => clearInterval(interval);
   }, [isConnected]);
+
   useEffect(() => {
     if (transcript.length > 0) {
       setLastMessage(transcript[transcript.length - 1]);
@@ -194,6 +201,22 @@ const CallCard = ({
             endCall={endCall}
             timeLeft={timeLeft}
           />
+          {!user ? (
+            <Dialog open={showModal} onOpenChange={setShowModal}>
+              <Card>
+                <ImSpinner9 className="animate-spin" />
+              </Card>
+            </Dialog>
+          ) : (
+            showModal &&
+            user && (
+              <UpgradeModal
+                showModal={showModal}
+                setShowModal={setShowModal}
+                user={user}
+              />
+            )
+          )}
         </>
       )}
     </div>

@@ -28,11 +28,10 @@ model User {
   image String?
   isUserNew Boolean? @default(true)
   hasResume Boolean? @default(false)
+  credits Int? @default(0)
   type UserType @default(FREE)
   practices Practice[]
   resumes Resume[]
-
-
 }
 
 

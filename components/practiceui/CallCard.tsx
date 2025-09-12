@@ -47,16 +47,27 @@ const CallCard = ({
   const [feedbackMessage, setFeedbackMessage] = useState<
     "redirecting" | "generating"
   >("generating");
+  const [callDetails, setCallDetails] = useState<any>(null);
   const fetchInterview = async () => {
     try {
       setLoading(true);
       const res = await fetchPracticeById(id);
-
       setPractice(res);
     } catch (error) {
       toast.error("Error fetching interview");
     } finally {
       setLoading(false);
+    }
+  };
+
+  const fetchCallDetails = async () => {
+    try {
+      // For now, we'll just log that we would fetch call details
+      // In a real implementation, you'd have an API endpoint to fetch call details by practice ID
+      console.log("Would fetch call details for practice:", practice?.id);
+      // You could implement an API call here to get the latest call details
+    } catch (error) {
+      console.error("Error fetching call details:", error);
     }
   };
 
@@ -71,6 +82,12 @@ const CallCard = ({
     vapi.on("call-end", () => {
       setIsConnected(false);
       setIsSpeaking(false);
+
+      // The call details will come from the webhook
+      // We'll fetch them after a short delay to allow webhook to process
+      setTimeout(() => {
+        fetchCallDetails();
+      }, 2000);
     });
     vapi.on("speech-start", () => {
       setIsSpeaking(true);
@@ -168,7 +185,8 @@ const CallCard = ({
           user?.firstname!,
           formattedQuestions!,
           practice?.role!,
-          practice?.resumeText!
+          practice?.resumeText!,
+          user?.id
         )
       );
     } catch (error: any) {

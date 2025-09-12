@@ -3,7 +3,8 @@ import { NextRequest, NextResponse } from "next/server";
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    console.log("VAPI Webhook received:", JSON.stringify(body, null, 2));
+    console.log("🎉 VAPI Webhook received!");
+    console.log("📊 Full webhook data:", JSON.stringify(body, null, 2));
 
     // Handle end-of-call-report event
     if (body.message?.type === "end-of-call-report") {
@@ -26,21 +27,46 @@ export async function POST(request: NextRequest) {
         userId: callData.assistant?.metadata?.userId, // This comes from your metadata
       };
 
-      console.log("Call Details:", callDetails);
+      console.log("💰 Call Details:", {
+        duration: callDetails.duration + " seconds",
+        cost: "$" + callDetails.cost,
+        transcript: callDetails.transcript?.substring(0, 100) + "...",
+        endedReason: callDetails.endedReason,
+        userId: callDetails.userId,
+      });
 
-      // Store call details in database
-      // We'll create a simple calls table or add to existing schema
+      // Store call details in our API
       try {
-        // For now, just log it - you can store in database later
-        console.log("Would store call details:", {
-          vapiCallId: callDetails.vapiCallId,
-          duration: callDetails.duration,
-          cost: callDetails.cost,
-          userId: callDetails.userId,
-          transcript: callDetails.transcript?.substring(0, 100) + "...",
-        });
-      } catch (dbError) {
-        console.error("Database error:", dbError);
+        const callDataToStore = {
+          vapiCallId: callData.id,
+          practiceId: callData.assistant?.metadata?.userId, // Using userId as practiceId for now
+          duration: callData.duration,
+          cost: callData.cost,
+          startedAt: callData.startedAt,
+          endedAt: callData.endedAt,
+          endedReason: callData.endedReason,
+          transcript: transcript,
+          summary: summary,
+          recordingUrl: recordingUrl,
+          timestamp: new Date().toISOString(),
+        };
+
+        // Store in our call details API
+        await fetch(
+          `${
+            process.env.NEXT_PUBLIC_APP_URL ||
+            "https://career-assistant-beta.vercel.app"
+          }/api/call-details`,
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(callDataToStore),
+          }
+        );
+
+        console.log("✅ Call details stored successfully");
+      } catch (storeError) {
+        console.error("❌ Error storing call details:", storeError);
       }
 
       return NextResponse.json({

@@ -15,7 +15,18 @@ export const assistant = (
     userId,
   },
   maxDurationSeconds: 600,
-  clientMessages: "status-update",
+  // @ts-ignore
+  clientMessages: [
+    "status-update",
+    "tool-calls-result",
+    "tool.completed",
+    "metadata",
+  ],
+  server: {
+    url: "https://career-assistant-beta.vercel.app/api/vapi/webhook",
+  },
+  // @ts-ignore
+  serverMessages: ["end-of-call-report"],
   model: {
     provider: "groq",
     model: "llama-3.1-8b-instant",

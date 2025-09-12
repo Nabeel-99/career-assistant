@@ -47,12 +47,22 @@ const CallCard = ({
   const [feedbackMessage, setFeedbackMessage] = useState<
     "redirecting" | "generating"
   >("generating");
-  const [callDetails, setCallDetails] = useState<any>(null);
+  const [callDetails, setCallDetails] = useState<any[]>([]);
   const fetchInterview = async () => {
     try {
       setLoading(true);
       const res = await fetchPracticeById(id);
       setPractice(res);
+
+      // Fetch call details for this practice
+      if (res) {
+        const response = await fetch(`/api/call-details?practiceId=${res.id}`);
+        const data = await response.json();
+        if (data.success) {
+          setCallDetails(data.calls);
+          console.log("📞 Call details loaded:", data.calls);
+        }
+      }
     } catch (error) {
       toast.error("Error fetching interview");
     } finally {
@@ -62,10 +72,16 @@ const CallCard = ({
 
   const fetchCallDetails = async () => {
     try {
-      // For now, we'll just log that we would fetch call details
-      // In a real implementation, you'd have an API endpoint to fetch call details by practice ID
-      console.log("Would fetch call details for practice:", practice?.id);
-      // You could implement an API call here to get the latest call details
+      if (practice?.id) {
+        const response = await fetch(
+          `/api/call-details?practiceId=${practice.id}`
+        );
+        const data = await response.json();
+        if (data.success) {
+          setCallDetails(data.calls);
+          console.log("📞 Call details refreshed:", data.calls);
+        }
+      }
     } catch (error) {
       console.error("Error fetching call details:", error);
     }
@@ -83,11 +99,10 @@ const CallCard = ({
       setIsConnected(false);
       setIsSpeaking(false);
 
-      // The call details will come from the webhook
-      // We'll fetch them after a short delay to allow webhook to process
+      // Refresh call details after call ends
       setTimeout(() => {
         fetchCallDetails();
-      }, 2000);
+      }, 3000); // Wait for webhook to process
     });
     vapi.on("speech-start", () => {
       setIsSpeaking(true);
@@ -185,8 +200,7 @@ const CallCard = ({
           user?.firstname!,
           formattedQuestions!,
           practice?.role!,
-          practice?.resumeText!,
-          user?.id
+          practice?.resumeText!
         )
       );
     } catch (error: any) {
@@ -219,6 +233,48 @@ const CallCard = ({
             endCall={endCall}
             timeLeft={timeLeft}
           />
+
+          {/* Call Details Display */}
+          {callDetails.length > 0 && (
+            <div className="bg-gray-100 p-4 rounded-lg">
+              <h3 className="font-semibold mb-2">📞 Call History</h3>
+              {callDetails.map((call, index) => (
+                <div
+                  key={call.vapiCallId || index}
+                  className="text-sm space-y-1 mb-3 p-2 bg-white rounded"
+                >
+                  <p>
+                    <strong>Duration:</strong>{" "}
+                    {call.duration
+                      ? `${Math.floor(call.duration / 60)}m ${
+                          call.duration % 60
+                        }s`
+                      : "N/A"}
+                  </p>
+                  <p>
+                    <strong>Cost:</strong>{" "}
+                    {call.cost ? `$${call.cost.toFixed(4)}` : "N/A"}
+                  </p>
+                  <p>
+                    <strong>Ended:</strong> {call.endedReason || "N/A"}
+                  </p>
+                  {call.startedAt && (
+                    <p>
+                      <strong>Started:</strong>{" "}
+                      {new Date(call.startedAt).toLocaleString()}
+                    </p>
+                  )}
+                  {call.transcript && (
+                    <p>
+                      <strong>Transcript:</strong>{" "}
+                      {call.transcript.substring(0, 100)}...
+                    </p>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
+
           {!user ? (
             <Dialog open={showModal} onOpenChange={setShowModal}>
               <Card>

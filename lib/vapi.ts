@@ -2,7 +2,6 @@ import Vapi from "@vapi-ai/web";
 import { CreateAssistantDTO } from "@vapi-ai/web/dist/api";
 
 export const vapi = new Vapi(process.env.NEXT_PUBLIC_VAPI_API_KEY!);
-console.log("porocess", process.env.NEXT_PUBLIC_APP_URL);
 export const assistant = (
   firstname: string,
   questions: string,
@@ -14,17 +13,14 @@ export const assistant = (
   firstMessage: ` Hello, ${firstname}, Thanks for joining! I'm excited to learn more about you and your experience.  `,
   metadata: {
     userId,
-    practiceId: role, // We'll use role field to pass practiceId for now
   },
   maxDurationSeconds: 600,
-  server: {
-    url: "https://career-assistant-beta.vercel.app/api/vapi/webhook",
-  },
-  serverMessages: "end-of-call-report",
+  clientMessages: "status-update",
   model: {
     provider: "groq",
     model: "llama-3.1-8b-instant",
     temperature: 0.7,
+
     messages: [
       {
         role: "system",

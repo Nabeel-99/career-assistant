@@ -22,11 +22,13 @@ export const assistant = (
     "tool.completed",
     "metadata",
   ],
-  server: {
-    url: "https://career-assistant-beta.vercel.app/api/vapi/webhook",
-  },
-  // @ts-ignore
-  serverMessages: ["end-of-call-report"],
+  // server: {
+  //   url:
+  //     (http://localhost:3000 ||
+  //       "https://career-assistant-beta.vercel.app") + "/api/vapi/webhook",
+  // },
+  // // @ts-ignore
+  // serverMessages: ["end-of-call-report"],
   model: {
     provider: "groq",
     model: "llama-3.1-8b-instant",

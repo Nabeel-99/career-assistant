@@ -16,12 +16,13 @@ export const assistant = (
   },
   maxDurationSeconds: 600,
   // @ts-ignore
-  clientMessages: [
-    "status-update",
-    "tool-calls-result",
-    "tool.completed",
-    "metadata",
-  ],
+  // clientMessages: [
+  //   "status-update",
+  //   "transcript",
+  //   "tool-calls-result",
+  //   "tool.completed",
+  //   "metadata",
+  // ],
   // server: {
   //   url:
   //     (http://localhost:3000 ||

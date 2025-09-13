@@ -1,3 +1,5 @@
+import axios from "axios";
+import { getToken } from "next-auth/jwt";
 import { NextRequest, NextResponse } from "next/server";
 
 // export async function POST(request: NextRequest) {
@@ -105,15 +107,21 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
   try {
-    const { message } = await req.json();
-    switch (message.type) {
-      case "status-update":
-        console.log("call ID", message.call.id);
+    const isProduction = process.env.NODE_ENV === "production";
+    const token = await getToken({
+      req,
+      secret: process.env.AUTH_SECRET,
+      secureCookie: isProduction,
+    });
+    if (!token) {
+      return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
     }
-    return NextResponse.json(
-      { success: true, message: "Webhook received" },
-      { status: 200 }
-    );
+    const { callId } = await req.json();
+    const res = await axios.get(`https://api.vapi.ai/call/${callId}`);
+    if (res.status === 200) {
+      const call = res.data;
+      const cost = call.cost;
+    }
   } catch (error) {
     console.log("VAPI Webhook error:", error);
   }

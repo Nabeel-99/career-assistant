@@ -156,7 +156,7 @@ const CallCard = ({
   const startCall = async () => {
     try {
       setStarting(true);
-      await vapi.start(
+      const call = await vapi.start(
         assistant(
           user?.firstname!,
           formattedQuestions!,
@@ -164,6 +164,12 @@ const CallCard = ({
           practice?.resumeText!
         )
       );
+      if (call) {
+        toast.success("Call started");
+        console.log("call", call.id);
+        console.log("cost", call.cost);
+        console.log("costs", call.costs);
+      }
     } catch (error: any) {
       console.log("Start call error:", error);
     } finally {

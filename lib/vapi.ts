@@ -6,14 +6,14 @@ export const assistant = (
   firstname: string,
   questions: string,
   role: string,
-  resume?: string,
-  userId?: string
+  resume?: string
+  // userId?: string
 ): CreateAssistantDTO => ({
   name: "Interviewer",
   firstMessage: ` Hello, ${firstname}, Thanks for joining! I'm excited to learn more about you and your experience.  `,
-  metadata: {
-    userId,
-  },
+  // metadata: {
+  //   userId,
+  // },
   maxDurationSeconds: 600,
   // @ts-ignore
   // clientMessages: [

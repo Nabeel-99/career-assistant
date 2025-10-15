@@ -20,9 +20,11 @@ import { toast } from "sonner";
 const CreatePracticeBtn = ({
   userId,
   getUserPractices,
+  betaUser,
 }: {
   userId: string;
   getUserPractices: () => void;
+  betaUser?: boolean;
 }) => {
   const [open, setOpen] = useState(false);
   const [resumes, setResumes] = useState<Resume[]>([]);
@@ -41,11 +43,17 @@ const CreatePracticeBtn = ({
   useEffect(() => {
     getUserResumes();
   }, [userId]);
+
+  if (betaUser === false) {
+    toast.info("You need to be a beta user to create a practice");
+  }
   return (
     <>
       <Sheet open={open} onOpenChange={setOpen}>
         <SheetTrigger asChild>
-          <Button className="max-w-44">Create Practice</Button>
+          <Button disabled={betaUser === false} className="max-w-44">
+            Create Practice
+          </Button>
         </SheetTrigger>
         <SheetContent
           side="left"

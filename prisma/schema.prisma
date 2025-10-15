@@ -26,12 +26,14 @@ model User {
   lastname String?
   password String?
   image String?
+  cloudinaryAvatarId String?
   isUserNew Boolean? @default(true)
   hasResume Boolean? @default(false)
   // credits Int? @default(0)
   type UserType @default(FREE)
   practices Practice[]
   resumes Resume[]
+  betaUser Boolean? @default(false)
 }
 
 
@@ -52,7 +54,6 @@ model Practice{
 }
 
 
-
 model Question {
   id Int @id @default(autoincrement())
   question String?
@@ -68,6 +69,7 @@ model Resume {
   content Json?
   template String?
   filePath String?
+  cloudinaryId String?
   userId String
   users User @relation(fields: [userId], references: [id], onDelete: Cascade)
   createdAt   DateTime  @default(now())

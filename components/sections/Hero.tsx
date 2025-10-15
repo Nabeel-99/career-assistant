@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useRef } from "react";
 
-import DashboardImage from "../../public/dashboard.svg";
+import DashboardImage from "../../public/dashboard.png";
 import AnimatedContent from "../Animations/AnimatedContent/AnimatedContent";
 import { motion, useScroll, useTransform } from "motion/react";
 const Hero = () => {

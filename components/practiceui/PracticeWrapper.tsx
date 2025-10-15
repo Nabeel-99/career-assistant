@@ -3,15 +3,18 @@
 import React, { useEffect, useState } from "react";
 import CreatePracticeBtn from "./CreatePracticeBtn";
 import PracticeCardGrid from "./PracticeCardGrid";
-import { fetchPractices } from "@/lib/action";
+import { fetchPractices, fetchUser } from "@/lib/action";
 import { PracticeWithFeedback } from "@/lib/types";
 import { toast } from "sonner";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "../ui/tabs";
 import CodingTab from "./CodingTab";
+import { User } from "@/lib/generated/prisma";
 
 const PracticeWrapper = ({ userId }: { userId: string }) => {
   const [practices, setPractices] = useState<PracticeWithFeedback[]>([]);
   const [loading, setLoading] = useState(false);
+  const [fetchingUser, setFetchingUser] = useState(true);
+  const [user, setUser] = useState<User | null>(null);
 
   const getUserPractices = async () => {
     try {
@@ -25,6 +28,21 @@ const PracticeWrapper = ({ userId }: { userId: string }) => {
     }
   };
 
+  const fetchUserData = async () => {
+    try {
+      setFetchingUser(true);
+      const res = await fetchUser();
+      console.log("res", res);
+      setUser(res);
+    } catch (error) {
+      toast.error("Error fetching practices");
+    } finally {
+      setFetchingUser(false);
+    }
+  };
+  useEffect(() => {
+    fetchUserData();
+  }, []);
   useEffect(() => {
     getUserPractices();
   }, [userId]);
@@ -37,9 +55,18 @@ const PracticeWrapper = ({ userId }: { userId: string }) => {
         </TabsList>
         <TabsContent value="theoretical">
           <div className="flex flex-col gap-4 mt-4">
+            {fetchingUser ? (
+              <span>Loading...</span>
+            ) : user && user?.betaUser ? (
+              <span>You can proceed</span>
+            ) : (
+              <span>only for beta users</span>
+            )}
+
             <CreatePracticeBtn
               userId={userId}
               getUserPractices={getUserPractices}
+              betaUser={user?.betaUser!}
             />
             <PracticeCardGrid
               practices={practices}

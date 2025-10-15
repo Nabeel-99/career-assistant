@@ -12,8 +12,7 @@ const Faq = () => {
     {
       id: 1,
       question: "What file formats can I upload for my CV?",
-      answer:
-        "You can upload your CV in PDF or DOCX format. We recommend a clean, professional layout for best results.",
+      answer: "You can upload your CV in PDF format. ",
     },
     {
       id: 2,

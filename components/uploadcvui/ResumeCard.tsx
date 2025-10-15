@@ -28,31 +28,32 @@ const ResumeCard = ({
   const [showDelete, setShowDelete] = useState(false);
   const [publicUrl, setPublicUrl] = useState<string | null>(null);
   const [deleteLoading, setDeleteLoading] = useState(false);
-  const [selectedFile, setSelectedFile] = useState<string | null>(null);
-
-  const openPreview = async (filePath: string) => {
-    if (!filePath) return;
-    const { data } = supabase.storage.from("resumes").getPublicUrl(filePath);
-    if (data.publicUrl) {
-      setPublicUrl(data.publicUrl);
+  const [selectedResumeId, setSelectedResumeId] = useState<number | null>(null);
+  const [selectedResumeFilePath, setSelectedResumeFilePath] = useState<
+    string | null
+  >(null);
+  const openPreview = async (publicUrl: string) => {
+    if (publicUrl) {
+      setPublicUrl(publicUrl);
       setShowResume(true);
     }
   };
 
-  const showDeleteDialog = (filePath: string) => {
+  const showDeleteDialog = (id: number, filePath: string) => {
+    setSelectedResumeId(id);
+    setSelectedResumeFilePath(filePath);
     setShowDelete(true);
-
-    setSelectedFile(filePath);
   };
 
-  const deleteResume = async (filePath: string) => {
+  const deleteResume = async (id: number, filePath: string) => {
     try {
       setDeleteLoading(true);
       const res = await axios.delete("/api/parse-cv", {
         data: {
-          filePath,
+          id,
         },
       });
+      console.log("res", res.data);
       if (res.status === 200) {
         const { data, error } = await supabase.storage
           .from("resumes")
@@ -112,7 +113,10 @@ const ResumeCard = ({
                     <FaEye />
                   </Button>
                   <Button
-                    onClick={() => showDeleteDialog(resume.filePath!)}
+                    onClick={() => {
+                      showDeleteDialog(resume.id!, resume.filePath!),
+                        console.log("resume", resume);
+                    }}
                     className="bg-black/10 hover:bg-black/20 text-black dark:bg-[#1f1f1f] dark:hover:bg-[#343333] cursor-pointer rounded-xl dark:text-white"
                   >
                     <FaTrash />
@@ -146,7 +150,7 @@ const ResumeCard = ({
         deleteLoading={deleteLoading}
         showDelete={showDelete}
         setShowDelete={setShowDelete}
-        action={() => deleteResume(selectedFile!)}
+        action={() => deleteResume(selectedResumeId!, selectedResumeFilePath!)}
       />
     </>
   );

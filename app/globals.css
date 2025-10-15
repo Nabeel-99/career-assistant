@@ -134,12 +134,12 @@ html {
 }
 
 .light-code-bg {
-  background-color: #fbfbfb;
-  background-image: url("https://transparenttextures.com/patterns/asfalt-dark.png");
+  background-color: #fcfcfc;
+  background-image: url("../public/asfalt-dark.png");
 }
 .dark .dark-code-bg {
   background-color: #000000;
-  background-image: url("https://transparenttextures.com/patterns/asfalt-light.png");
+  background-image: url("../public/asfalt-light.png");
 }
 .bg-hero {
   background-color: "#0d0f0f";

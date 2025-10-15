@@ -50,7 +50,7 @@ const Footer = () => {
               <SocialIcon
                 icon={<FaXTwitter className="size-6" />}
                 title="Twitter"
-                href={"https://x.com/Nabeel_umarr"}
+                href={"https://x.com/ndev_99"}
               />
             </ul>
           </div>

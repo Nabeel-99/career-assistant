@@ -1,7 +1,7 @@
 import React from "react";
-import CVupload from "../public/cvupload.svg";
-import Practice from "../public/practice.svg";
-import Feedback from "../public/feedback.svg";
+import CVupload from "../public/cvupload.png";
+import Practice from "../public/practice.png";
+import Feedback from "../public/feedback.png";
 import { MdOutlineFileUpload } from "react-icons/md";
 import { FaMicrophoneAlt } from "react-icons/fa";
 import { motion } from "motion/react";

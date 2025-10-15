@@ -1,9 +1,11 @@
 import { Prisma } from "./generated/prisma";
 
 export type ResumeProps = {
+  id?: number;
   name: string;
   createdAt?: string;
   filePath?: string;
+  rawText?: string;
 };
 
 export type Transcript = {

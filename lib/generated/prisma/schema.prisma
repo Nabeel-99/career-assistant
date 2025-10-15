@@ -20,18 +20,20 @@ enum UserType {
 }
 
 model User {
-  id        String     @id @default(uuid())
-  email     String?    @unique
-  firstname String?
-  lastname  String?
-  password  String?
-  image     String?
-  isUserNew Boolean?   @default(true)
-  hasResume Boolean?   @default(false)
+  id                 String     @id @default(uuid())
+  email              String?    @unique
+  firstname          String?
+  lastname           String?
+  password           String?
+  image              String?
+  cloudinaryAvatarId String?
+  isUserNew          Boolean?   @default(true)
+  hasResume          Boolean?   @default(false)
   // credits Int? @default(0)
-  type      UserType   @default(FREE)
-  practices Practice[]
-  resumes   Resume[]
+  type               UserType   @default(FREE)
+  practices          Practice[]
+  resumes            Resume[]
+  betaUser           Boolean?   @default(false)
 }
 
 model Practice {
@@ -59,15 +61,16 @@ model Question {
 }
 
 model Resume {
-  id        Int      @id @default(autoincrement())
-  name      String?
-  rawText   String?
-  content   Json?
-  template  String?
-  filePath  String?
-  userId    String
-  users     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  createdAt DateTime @default(now())
+  id           Int      @id @default(autoincrement())
+  name         String?
+  rawText      String?
+  content      Json?
+  template     String?
+  filePath     String?
+  cloudinaryId String?
+  userId       String
+  users        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt    DateTime @default(now())
 }
 
 model Feedback {

@@ -16,32 +16,17 @@ const UploadCard = ({ userId }: { userId: string | undefined }) => {
   const [uploading, setUploading] = useState(false);
   const [fetching, setFetching] = useState(false);
   const [resumes, setResumes] = useState<ResumeProps[]>([]);
+  const [isDragging, setIsDragging] = useState(false);
 
   const fetchResumes = async () => {
     try {
       setFetching(true);
-      const { data, error } = await supabase.storage
-        .from("resumes")
-        .list(`${userId}`, {
-          sortBy: { column: "name", order: "desc" },
-          //   sortBy: { column: "name", order: "desc" },
-        });
-      if (error) {
-        toast.error("Error fetching resumes");
-        setFetching(false);
-        return [];
+      // Fetch from your database instead of just Supabase storage
+      const res = await axios.get(`/api/resumes`);
+
+      if (res.status === 200) {
+        setResumes(res.data.resumes);
       }
-
-      const formatted = data
-        .filter((file) => file.name && file.metadata)
-        .map((file) => ({
-          name: file.name.split("_")[1],
-          createdAt: file.created_at,
-          filePath: `${userId}/${file.name}`,
-        }))
-        .filter((file) => file.name !== null);
-
-      setResumes(formatted);
     } catch (error) {
       toast.error("Error fetching resumes");
     } finally {
@@ -49,30 +34,16 @@ const UploadCard = ({ userId }: { userId: string | undefined }) => {
     }
   };
 
-  const handleFileUpload = async (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
+  const uploadFile = async (file: File) => {
     if (!file) return;
     setFilename(file.name);
-    const filePath = `${userId}/${Date.now()}_${file.name}`;
+
     try {
       setUploading(true);
       const formData = new FormData();
       formData.append("file", file);
-      formData.append("filePath", filePath);
       const res = await axios.post("/api/parse-cv", formData);
       if (res.status === 200) {
-        const { data, error } = await supabase.storage
-          .from("resumes")
-          .upload(filePath, file);
-        if (error) {
-          toast.error("Error uploading file");
-
-          return;
-        }
-        setResumes((prev) => [
-          { name: file.name, createdAt: new Date().toISOString(), filePath },
-          ...prev,
-        ]);
         fetchResumes();
         toast.success("File uploaded successfully");
         setFilename("");
@@ -84,9 +55,59 @@ const UploadCard = ({ userId }: { userId: string | undefined }) => {
     }
   };
 
+  const handleFileUpload = async (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      if (!file.type.includes("pdf")) {
+        toast.error("Please upload a PDF file");
+        return;
+      }
+
+      const maxSize = 10 * 1024 * 1024;
+      if (file.size > maxSize) {
+        toast.error("File size must be less than 10MB");
+        return;
+      }
+      await uploadFile(file);
+    }
+  };
+
+  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(true);
+  };
+
+  const handleDragLeave = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(false);
+  };
+
+  const handleDrop = async (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(false);
+
+    const droppedFile = e.dataTransfer.files[0];
+    if (droppedFile) {
+      if (!droppedFile.type.includes("pdf")) {
+        toast.error("Please upload a PDF file");
+        return;
+      }
+      const maxSize = 10 * 1024 * 1024;
+      if (droppedFile.size > maxSize) {
+        toast.error("File size must be less than 10MB");
+        return;
+      }
+      await uploadFile(droppedFile);
+    }
+  };
+
   useEffect(() => {
     fetchResumes();
   }, []);
+
   return (
     <>
       <ResumeCard
@@ -94,12 +115,27 @@ const UploadCard = ({ userId }: { userId: string | undefined }) => {
         resumes={resumes}
         fetchResumes={fetchResumes}
       />
-      <Card className="flex items-center justify-center  w-full xl:w-3/4">
+      <Card className="flex items-center justify-center w-full xl:w-3/4">
         <CardContent className="flex flex-col gap-10">
-          <div className="border border-dashed p-10 rounded-xl flex flex-col items-center justify-center gap-2 ">
+          <div
+            onDragOver={handleDragOver}
+            onDragLeave={handleDragLeave}
+            onDrop={handleDrop}
+            className={`
+              border-2 border-dashed p-10 rounded-xl flex flex-col items-center justify-center gap-2 
+              transition-all duration-200
+              ${
+                isDragging
+                  ? "border-blue-500 bg-blue-50 dark:bg-blue-950/20"
+                  : "border-gray-300 dark:border-gray-700"
+              }
+            `}
+          >
             <RiFileUploadFill className="size-14 text-subheadline" />
             <p className="text-base lg:text-xl text-center">
-              Drag and drop your file here
+              {isDragging
+                ? "Drop your file here"
+                : "Drag and drop your file here"}
             </p>
             <span>or</span>
             <Label
@@ -111,22 +147,21 @@ const UploadCard = ({ userId }: { userId: string | undefined }) => {
             <Input
               id="file"
               type="file"
-              accept=".pdf, .docx"
+              accept=".pdf"
               hidden
               onChange={handleFileUpload}
+              disabled={uploading}
             />
-            {filename && <span>{filename}</span>}
+            {filename && (
+              <span className="text-sm text-green-600 dark:text-green-400">
+                ✓ {filename}
+              </span>
+            )}
           </div>
           <div className="flex flex-col items-center gap-2">
-            <span className="text-sm text-subheadline">Supported Formats</span>
-            <div className="flex items-center gap-2">
-              <span className="bg-black/20 dark:bg-[#252424] p-2 rounded-md text-sm">
-                PDF
-              </span>
-              <span className="bg-black/20 dark:bg-[#252424] p-2 rounded-md text-sm">
-                DOCX
-              </span>
-            </div>
+            <span className="text-sm text-subheadline">
+              Supported Format: .pdf (max 10MB)
+            </span>
           </div>
         </CardContent>
       </Card>

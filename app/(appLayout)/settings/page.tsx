@@ -22,22 +22,25 @@ const page = () => {
     setUploading(true);
     const file = e.target.files?.[0];
     if (!file) return;
+    if (!file.type.startsWith("image/")) {
+      toast.error("Please upload an image file");
+      setUploading(false);
+      return;
+    }
 
-    const filePath = `${user?.id}/avatar.jpg`;
+    const maxSize = 5 * 1024 * 1024;
+    if (file.size > maxSize) {
+      toast.error("File size must be less than 5MB");
+      setUploading(false);
+      return;
+    }
     try {
       const formData = new FormData();
       formData.append("file", file);
-      formData.append("filePath", filePath);
+
       const res = await axios.put("/api/account/avatar", formData);
       if (res.status === 200) {
-        const { data, error } = await supabase.storage
-          .from("avatars")
-          .upload(filePath, file, {
-            upsert: true,
-          });
-        if (error) {
-          toast.error("Error uploading file");
-        }
+        setAvatarUrl(res.data.avatarUrl);
         getUserDetails();
         toast.success("Profile picture updated successfully");
       }
@@ -55,16 +58,7 @@ const page = () => {
 
       setUser(res);
       if (res?.image) {
-        if (!res.image.startsWith("http")) {
-          const { data } = supabase.storage
-            .from("avatars")
-            .getPublicUrl(res.image);
-          if (data.publicUrl) {
-            setAvatarUrl(`${data.publicUrl}?t=${Date.now()}`);
-          }
-        } else {
-          setAvatarUrl(res.image);
-        }
+        setAvatarUrl(res.image);
       }
     } catch (error) {
       toast.error("Error fetching user details");

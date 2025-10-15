@@ -60,21 +60,16 @@ const page = () => {
         oldKeywords
       );
 
-      console.log("🔍 Generated output:", output);
-
       let fullText = "";
       for await (const chunk of readStreamableValue(output)) {
-        console.log("📝 Streaming chunk:", chunk);
         fullText += chunk;
         setGeneration((currentGeneration) => `${currentGeneration}${chunk}`);
 
         await new Promise((resolve) => setTimeout(resolve, 50));
       }
 
-      console.log("full text", fullText);
       sessionStorage.setItem("lastTask", fullText);
       const jsonData = await extractJSONFromText(fullText);
-      console.log("json data", jsonData);
       setIsGenerating(false);
       if (jsonData) {
         const newKeyword = jsonData.keywords;
@@ -82,7 +77,7 @@ const page = () => {
         sessionStorage.setItem("keywords", JSON.stringify(updatedKeywords));
       }
     } catch (error) {
-      console.log("error", error);
+      toast.error("Error generating task");
     } finally {
       setIsGenerating(false);
     }
@@ -114,8 +109,6 @@ const page = () => {
 
   useEffect(() => {
     if (typingDone) {
-      console.log("typing Done", typingDone);
-
       animate(".stack", { opacity: 1, y: 0 }, { delay: stagger(0.1) });
     }
     if (levelTypingDone) {

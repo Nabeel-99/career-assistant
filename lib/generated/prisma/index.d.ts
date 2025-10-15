@@ -1337,9 +1337,11 @@ export namespace Prisma {
     lastname: string | null
     password: string | null
     image: string | null
+    cloudinaryAvatarId: string | null
     isUserNew: boolean | null
     hasResume: boolean | null
     type: $Enums.UserType | null
+    betaUser: boolean | null
   }
 
   export type UserMaxAggregateOutputType = {
@@ -1349,9 +1351,11 @@ export namespace Prisma {
     lastname: string | null
     password: string | null
     image: string | null
+    cloudinaryAvatarId: string | null
     isUserNew: boolean | null
     hasResume: boolean | null
     type: $Enums.UserType | null
+    betaUser: boolean | null
   }
 
   export type UserCountAggregateOutputType = {
@@ -1361,9 +1365,11 @@ export namespace Prisma {
     lastname: number
     password: number
     image: number
+    cloudinaryAvatarId: number
     isUserNew: number
     hasResume: number
     type: number
+    betaUser: number
     _all: number
   }
 
@@ -1375,9 +1381,11 @@ export namespace Prisma {
     lastname?: true
     password?: true
     image?: true
+    cloudinaryAvatarId?: true
     isUserNew?: true
     hasResume?: true
     type?: true
+    betaUser?: true
   }
 
   export type UserMaxAggregateInputType = {
@@ -1387,9 +1395,11 @@ export namespace Prisma {
     lastname?: true
     password?: true
     image?: true
+    cloudinaryAvatarId?: true
     isUserNew?: true
     hasResume?: true
     type?: true
+    betaUser?: true
   }
 
   export type UserCountAggregateInputType = {
@@ -1399,9 +1409,11 @@ export namespace Prisma {
     lastname?: true
     password?: true
     image?: true
+    cloudinaryAvatarId?: true
     isUserNew?: true
     hasResume?: true
     type?: true
+    betaUser?: true
     _all?: true
   }
 
@@ -1484,9 +1496,11 @@ export namespace Prisma {
     lastname: string | null
     password: string | null
     image: string | null
+    cloudinaryAvatarId: string | null
     isUserNew: boolean | null
     hasResume: boolean | null
     type: $Enums.UserType
+    betaUser: boolean | null
     _count: UserCountAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
@@ -1513,9 +1527,11 @@ export namespace Prisma {
     lastname?: boolean
     password?: boolean
     image?: boolean
+    cloudinaryAvatarId?: boolean
     isUserNew?: boolean
     hasResume?: boolean
     type?: boolean
+    betaUser?: boolean
     practices?: boolean | User$practicesArgs<ExtArgs>
     resumes?: boolean | User$resumesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -1528,9 +1544,11 @@ export namespace Prisma {
     lastname?: boolean
     password?: boolean
     image?: boolean
+    cloudinaryAvatarId?: boolean
     isUserNew?: boolean
     hasResume?: boolean
     type?: boolean
+    betaUser?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -1540,9 +1558,11 @@ export namespace Prisma {
     lastname?: boolean
     password?: boolean
     image?: boolean
+    cloudinaryAvatarId?: boolean
     isUserNew?: boolean
     hasResume?: boolean
     type?: boolean
+    betaUser?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectScalar = {
@@ -1552,12 +1572,14 @@ export namespace Prisma {
     lastname?: boolean
     password?: boolean
     image?: boolean
+    cloudinaryAvatarId?: boolean
     isUserNew?: boolean
     hasResume?: boolean
     type?: boolean
+    betaUser?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "firstname" | "lastname" | "password" | "image" | "isUserNew" | "hasResume" | "type", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "firstname" | "lastname" | "password" | "image" | "cloudinaryAvatarId" | "isUserNew" | "hasResume" | "type" | "betaUser", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     practices?: boolean | User$practicesArgs<ExtArgs>
     resumes?: boolean | User$resumesArgs<ExtArgs>
@@ -1579,9 +1601,11 @@ export namespace Prisma {
       lastname: string | null
       password: string | null
       image: string | null
+      cloudinaryAvatarId: string | null
       isUserNew: boolean | null
       hasResume: boolean | null
       type: $Enums.UserType
+      betaUser: boolean | null
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -2013,9 +2037,11 @@ export namespace Prisma {
     readonly lastname: FieldRef<"User", 'String'>
     readonly password: FieldRef<"User", 'String'>
     readonly image: FieldRef<"User", 'String'>
+    readonly cloudinaryAvatarId: FieldRef<"User", 'String'>
     readonly isUserNew: FieldRef<"User", 'Boolean'>
     readonly hasResume: FieldRef<"User", 'Boolean'>
     readonly type: FieldRef<"User", 'UserType'>
+    readonly betaUser: FieldRef<"User", 'Boolean'>
   }
     
 
@@ -4785,6 +4811,7 @@ export namespace Prisma {
     rawText: string | null
     template: string | null
     filePath: string | null
+    cloudinaryId: string | null
     userId: string | null
     createdAt: Date | null
   }
@@ -4795,6 +4822,7 @@ export namespace Prisma {
     rawText: string | null
     template: string | null
     filePath: string | null
+    cloudinaryId: string | null
     userId: string | null
     createdAt: Date | null
   }
@@ -4806,6 +4834,7 @@ export namespace Prisma {
     content: number
     template: number
     filePath: number
+    cloudinaryId: number
     userId: number
     createdAt: number
     _all: number
@@ -4826,6 +4855,7 @@ export namespace Prisma {
     rawText?: true
     template?: true
     filePath?: true
+    cloudinaryId?: true
     userId?: true
     createdAt?: true
   }
@@ -4836,6 +4866,7 @@ export namespace Prisma {
     rawText?: true
     template?: true
     filePath?: true
+    cloudinaryId?: true
     userId?: true
     createdAt?: true
   }
@@ -4847,6 +4878,7 @@ export namespace Prisma {
     content?: true
     template?: true
     filePath?: true
+    cloudinaryId?: true
     userId?: true
     createdAt?: true
     _all?: true
@@ -4945,6 +4977,7 @@ export namespace Prisma {
     content: JsonValue | null
     template: string | null
     filePath: string | null
+    cloudinaryId: string | null
     userId: string
     createdAt: Date
     _count: ResumeCountAggregateOutputType | null
@@ -4975,6 +5008,7 @@ export namespace Prisma {
     content?: boolean
     template?: boolean
     filePath?: boolean
+    cloudinaryId?: boolean
     userId?: boolean
     createdAt?: boolean
     users?: boolean | UserDefaultArgs<ExtArgs>
@@ -4987,6 +5021,7 @@ export namespace Prisma {
     content?: boolean
     template?: boolean
     filePath?: boolean
+    cloudinaryId?: boolean
     userId?: boolean
     createdAt?: boolean
     users?: boolean | UserDefaultArgs<ExtArgs>
@@ -4999,6 +5034,7 @@ export namespace Prisma {
     content?: boolean
     template?: boolean
     filePath?: boolean
+    cloudinaryId?: boolean
     userId?: boolean
     createdAt?: boolean
     users?: boolean | UserDefaultArgs<ExtArgs>
@@ -5011,11 +5047,12 @@ export namespace Prisma {
     content?: boolean
     template?: boolean
     filePath?: boolean
+    cloudinaryId?: boolean
     userId?: boolean
     createdAt?: boolean
   }
 
-  export type ResumeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "rawText" | "content" | "template" | "filePath" | "userId" | "createdAt", ExtArgs["result"]["resume"]>
+  export type ResumeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "rawText" | "content" | "template" | "filePath" | "cloudinaryId" | "userId" | "createdAt", ExtArgs["result"]["resume"]>
   export type ResumeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     users?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -5038,6 +5075,7 @@ export namespace Prisma {
       content: Prisma.JsonValue | null
       template: string | null
       filePath: string | null
+      cloudinaryId: string | null
       userId: string
       createdAt: Date
     }, ExtArgs["result"]["resume"]>
@@ -5470,6 +5508,7 @@ export namespace Prisma {
     readonly content: FieldRef<"Resume", 'Json'>
     readonly template: FieldRef<"Resume", 'String'>
     readonly filePath: FieldRef<"Resume", 'String'>
+    readonly cloudinaryId: FieldRef<"Resume", 'String'>
     readonly userId: FieldRef<"Resume", 'String'>
     readonly createdAt: FieldRef<"Resume", 'DateTime'>
   }
@@ -7007,9 +7046,11 @@ export namespace Prisma {
     lastname: 'lastname',
     password: 'password',
     image: 'image',
+    cloudinaryAvatarId: 'cloudinaryAvatarId',
     isUserNew: 'isUserNew',
     hasResume: 'hasResume',
-    type: 'type'
+    type: 'type',
+    betaUser: 'betaUser'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -7048,6 +7089,7 @@ export namespace Prisma {
     content: 'content',
     template: 'template',
     filePath: 'filePath',
+    cloudinaryId: 'cloudinaryId',
     userId: 'userId',
     createdAt: 'createdAt'
   };
@@ -7216,9 +7258,11 @@ export namespace Prisma {
     lastname?: StringNullableFilter<"User"> | string | null
     password?: StringNullableFilter<"User"> | string | null
     image?: StringNullableFilter<"User"> | string | null
+    cloudinaryAvatarId?: StringNullableFilter<"User"> | string | null
     isUserNew?: BoolNullableFilter<"User"> | boolean | null
     hasResume?: BoolNullableFilter<"User"> | boolean | null
     type?: EnumUserTypeFilter<"User"> | $Enums.UserType
+    betaUser?: BoolNullableFilter<"User"> | boolean | null
     practices?: PracticeListRelationFilter
     resumes?: ResumeListRelationFilter
   }
@@ -7230,9 +7274,11 @@ export namespace Prisma {
     lastname?: SortOrderInput | SortOrder
     password?: SortOrderInput | SortOrder
     image?: SortOrderInput | SortOrder
+    cloudinaryAvatarId?: SortOrderInput | SortOrder
     isUserNew?: SortOrderInput | SortOrder
     hasResume?: SortOrderInput | SortOrder
     type?: SortOrder
+    betaUser?: SortOrderInput | SortOrder
     practices?: PracticeOrderByRelationAggregateInput
     resumes?: ResumeOrderByRelationAggregateInput
   }
@@ -7247,9 +7293,11 @@ export namespace Prisma {
     lastname?: StringNullableFilter<"User"> | string | null
     password?: StringNullableFilter<"User"> | string | null
     image?: StringNullableFilter<"User"> | string | null
+    cloudinaryAvatarId?: StringNullableFilter<"User"> | string | null
     isUserNew?: BoolNullableFilter<"User"> | boolean | null
     hasResume?: BoolNullableFilter<"User"> | boolean | null
     type?: EnumUserTypeFilter<"User"> | $Enums.UserType
+    betaUser?: BoolNullableFilter<"User"> | boolean | null
     practices?: PracticeListRelationFilter
     resumes?: ResumeListRelationFilter
   }, "id" | "email">
@@ -7261,9 +7309,11 @@ export namespace Prisma {
     lastname?: SortOrderInput | SortOrder
     password?: SortOrderInput | SortOrder
     image?: SortOrderInput | SortOrder
+    cloudinaryAvatarId?: SortOrderInput | SortOrder
     isUserNew?: SortOrderInput | SortOrder
     hasResume?: SortOrderInput | SortOrder
     type?: SortOrder
+    betaUser?: SortOrderInput | SortOrder
     _count?: UserCountOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
     _min?: UserMinOrderByAggregateInput
@@ -7279,9 +7329,11 @@ export namespace Prisma {
     lastname?: StringNullableWithAggregatesFilter<"User"> | string | null
     password?: StringNullableWithAggregatesFilter<"User"> | string | null
     image?: StringNullableWithAggregatesFilter<"User"> | string | null
+    cloudinaryAvatarId?: StringNullableWithAggregatesFilter<"User"> | string | null
     isUserNew?: BoolNullableWithAggregatesFilter<"User"> | boolean | null
     hasResume?: BoolNullableWithAggregatesFilter<"User"> | boolean | null
     type?: EnumUserTypeWithAggregatesFilter<"User"> | $Enums.UserType
+    betaUser?: BoolNullableWithAggregatesFilter<"User"> | boolean | null
   }
 
   export type PracticeWhereInput = {
@@ -7434,6 +7486,7 @@ export namespace Prisma {
     content?: JsonNullableFilter<"Resume">
     template?: StringNullableFilter<"Resume"> | string | null
     filePath?: StringNullableFilter<"Resume"> | string | null
+    cloudinaryId?: StringNullableFilter<"Resume"> | string | null
     userId?: StringFilter<"Resume"> | string
     createdAt?: DateTimeFilter<"Resume"> | Date | string
     users?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -7446,6 +7499,7 @@ export namespace Prisma {
     content?: SortOrderInput | SortOrder
     template?: SortOrderInput | SortOrder
     filePath?: SortOrderInput | SortOrder
+    cloudinaryId?: SortOrderInput | SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
     users?: UserOrderByWithRelationInput
@@ -7461,6 +7515,7 @@ export namespace Prisma {
     content?: JsonNullableFilter<"Resume">
     template?: StringNullableFilter<"Resume"> | string | null
     filePath?: StringNullableFilter<"Resume"> | string | null
+    cloudinaryId?: StringNullableFilter<"Resume"> | string | null
     userId?: StringFilter<"Resume"> | string
     createdAt?: DateTimeFilter<"Resume"> | Date | string
     users?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -7473,6 +7528,7 @@ export namespace Prisma {
     content?: SortOrderInput | SortOrder
     template?: SortOrderInput | SortOrder
     filePath?: SortOrderInput | SortOrder
+    cloudinaryId?: SortOrderInput | SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
     _count?: ResumeCountOrderByAggregateInput
@@ -7492,6 +7548,7 @@ export namespace Prisma {
     content?: JsonNullableWithAggregatesFilter<"Resume">
     template?: StringNullableWithAggregatesFilter<"Resume"> | string | null
     filePath?: StringNullableWithAggregatesFilter<"Resume"> | string | null
+    cloudinaryId?: StringNullableWithAggregatesFilter<"Resume"> | string | null
     userId?: StringWithAggregatesFilter<"Resume"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Resume"> | Date | string
   }
@@ -7560,9 +7617,11 @@ export namespace Prisma {
     lastname?: string | null
     password?: string | null
     image?: string | null
+    cloudinaryAvatarId?: string | null
     isUserNew?: boolean | null
     hasResume?: boolean | null
     type?: $Enums.UserType
+    betaUser?: boolean | null
     practices?: PracticeCreateNestedManyWithoutUsersInput
     resumes?: ResumeCreateNestedManyWithoutUsersInput
   }
@@ -7574,9 +7633,11 @@ export namespace Prisma {
     lastname?: string | null
     password?: string | null
     image?: string | null
+    cloudinaryAvatarId?: string | null
     isUserNew?: boolean | null
     hasResume?: boolean | null
     type?: $Enums.UserType
+    betaUser?: boolean | null
     practices?: PracticeUncheckedCreateNestedManyWithoutUsersInput
     resumes?: ResumeUncheckedCreateNestedManyWithoutUsersInput
   }
@@ -7588,9 +7649,11 @@ export namespace Prisma {
     lastname?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    cloudinaryAvatarId?: NullableStringFieldUpdateOperationsInput | string | null
     isUserNew?: NullableBoolFieldUpdateOperationsInput | boolean | null
     hasResume?: NullableBoolFieldUpdateOperationsInput | boolean | null
     type?: EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
+    betaUser?: NullableBoolFieldUpdateOperationsInput | boolean | null
     practices?: PracticeUpdateManyWithoutUsersNestedInput
     resumes?: ResumeUpdateManyWithoutUsersNestedInput
   }
@@ -7602,9 +7665,11 @@ export namespace Prisma {
     lastname?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    cloudinaryAvatarId?: NullableStringFieldUpdateOperationsInput | string | null
     isUserNew?: NullableBoolFieldUpdateOperationsInput | boolean | null
     hasResume?: NullableBoolFieldUpdateOperationsInput | boolean | null
     type?: EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
+    betaUser?: NullableBoolFieldUpdateOperationsInput | boolean | null
     practices?: PracticeUncheckedUpdateManyWithoutUsersNestedInput
     resumes?: ResumeUncheckedUpdateManyWithoutUsersNestedInput
   }
@@ -7616,9 +7681,11 @@ export namespace Prisma {
     lastname?: string | null
     password?: string | null
     image?: string | null
+    cloudinaryAvatarId?: string | null
     isUserNew?: boolean | null
     hasResume?: boolean | null
     type?: $Enums.UserType
+    betaUser?: boolean | null
   }
 
   export type UserUpdateManyMutationInput = {
@@ -7628,9 +7695,11 @@ export namespace Prisma {
     lastname?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    cloudinaryAvatarId?: NullableStringFieldUpdateOperationsInput | string | null
     isUserNew?: NullableBoolFieldUpdateOperationsInput | boolean | null
     hasResume?: NullableBoolFieldUpdateOperationsInput | boolean | null
     type?: EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
+    betaUser?: NullableBoolFieldUpdateOperationsInput | boolean | null
   }
 
   export type UserUncheckedUpdateManyInput = {
@@ -7640,9 +7709,11 @@ export namespace Prisma {
     lastname?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    cloudinaryAvatarId?: NullableStringFieldUpdateOperationsInput | string | null
     isUserNew?: NullableBoolFieldUpdateOperationsInput | boolean | null
     hasResume?: NullableBoolFieldUpdateOperationsInput | boolean | null
     type?: EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
+    betaUser?: NullableBoolFieldUpdateOperationsInput | boolean | null
   }
 
   export type PracticeCreateInput = {
@@ -7791,6 +7862,7 @@ export namespace Prisma {
     content?: NullableJsonNullValueInput | InputJsonValue
     template?: string | null
     filePath?: string | null
+    cloudinaryId?: string | null
     createdAt?: Date | string
     users: UserCreateNestedOneWithoutResumesInput
   }
@@ -7802,6 +7874,7 @@ export namespace Prisma {
     content?: NullableJsonNullValueInput | InputJsonValue
     template?: string | null
     filePath?: string | null
+    cloudinaryId?: string | null
     userId: string
     createdAt?: Date | string
   }
@@ -7812,6 +7885,7 @@ export namespace Prisma {
     content?: NullableJsonNullValueInput | InputJsonValue
     template?: NullableStringFieldUpdateOperationsInput | string | null
     filePath?: NullableStringFieldUpdateOperationsInput | string | null
+    cloudinaryId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateOneRequiredWithoutResumesNestedInput
   }
@@ -7823,6 +7897,7 @@ export namespace Prisma {
     content?: NullableJsonNullValueInput | InputJsonValue
     template?: NullableStringFieldUpdateOperationsInput | string | null
     filePath?: NullableStringFieldUpdateOperationsInput | string | null
+    cloudinaryId?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -7834,6 +7909,7 @@ export namespace Prisma {
     content?: NullableJsonNullValueInput | InputJsonValue
     template?: string | null
     filePath?: string | null
+    cloudinaryId?: string | null
     userId: string
     createdAt?: Date | string
   }
@@ -7844,6 +7920,7 @@ export namespace Prisma {
     content?: NullableJsonNullValueInput | InputJsonValue
     template?: NullableStringFieldUpdateOperationsInput | string | null
     filePath?: NullableStringFieldUpdateOperationsInput | string | null
+    cloudinaryId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -7854,6 +7931,7 @@ export namespace Prisma {
     content?: NullableJsonNullValueInput | InputJsonValue
     template?: NullableStringFieldUpdateOperationsInput | string | null
     filePath?: NullableStringFieldUpdateOperationsInput | string | null
+    cloudinaryId?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -7984,9 +8062,11 @@ export namespace Prisma {
     lastname?: SortOrder
     password?: SortOrder
     image?: SortOrder
+    cloudinaryAvatarId?: SortOrder
     isUserNew?: SortOrder
     hasResume?: SortOrder
     type?: SortOrder
+    betaUser?: SortOrder
   }
 
   export type UserMaxOrderByAggregateInput = {
@@ -7996,9 +8076,11 @@ export namespace Prisma {
     lastname?: SortOrder
     password?: SortOrder
     image?: SortOrder
+    cloudinaryAvatarId?: SortOrder
     isUserNew?: SortOrder
     hasResume?: SortOrder
     type?: SortOrder
+    betaUser?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
@@ -8008,9 +8090,11 @@ export namespace Prisma {
     lastname?: SortOrder
     password?: SortOrder
     image?: SortOrder
+    cloudinaryAvatarId?: SortOrder
     isUserNew?: SortOrder
     hasResume?: SortOrder
     type?: SortOrder
+    betaUser?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -8258,6 +8342,7 @@ export namespace Prisma {
     content?: SortOrder
     template?: SortOrder
     filePath?: SortOrder
+    cloudinaryId?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
   }
@@ -8272,6 +8357,7 @@ export namespace Prisma {
     rawText?: SortOrder
     template?: SortOrder
     filePath?: SortOrder
+    cloudinaryId?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
   }
@@ -8282,6 +8368,7 @@ export namespace Prisma {
     rawText?: SortOrder
     template?: SortOrder
     filePath?: SortOrder
+    cloudinaryId?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
   }
@@ -8835,6 +8922,7 @@ export namespace Prisma {
     content?: NullableJsonNullValueInput | InputJsonValue
     template?: string | null
     filePath?: string | null
+    cloudinaryId?: string | null
     createdAt?: Date | string
   }
 
@@ -8845,6 +8933,7 @@ export namespace Prisma {
     content?: NullableJsonNullValueInput | InputJsonValue
     template?: string | null
     filePath?: string | null
+    cloudinaryId?: string | null
     createdAt?: Date | string
   }
 
@@ -8916,6 +9005,7 @@ export namespace Prisma {
     content?: JsonNullableFilter<"Resume">
     template?: StringNullableFilter<"Resume"> | string | null
     filePath?: StringNullableFilter<"Resume"> | string | null
+    cloudinaryId?: StringNullableFilter<"Resume"> | string | null
     userId?: StringFilter<"Resume"> | string
     createdAt?: DateTimeFilter<"Resume"> | Date | string
   }
@@ -8948,9 +9038,11 @@ export namespace Prisma {
     lastname?: string | null
     password?: string | null
     image?: string | null
+    cloudinaryAvatarId?: string | null
     isUserNew?: boolean | null
     hasResume?: boolean | null
     type?: $Enums.UserType
+    betaUser?: boolean | null
     resumes?: ResumeCreateNestedManyWithoutUsersInput
   }
 
@@ -8961,9 +9053,11 @@ export namespace Prisma {
     lastname?: string | null
     password?: string | null
     image?: string | null
+    cloudinaryAvatarId?: string | null
     isUserNew?: boolean | null
     hasResume?: boolean | null
     type?: $Enums.UserType
+    betaUser?: boolean | null
     resumes?: ResumeUncheckedCreateNestedManyWithoutUsersInput
   }
 
@@ -9034,9 +9128,11 @@ export namespace Prisma {
     lastname?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    cloudinaryAvatarId?: NullableStringFieldUpdateOperationsInput | string | null
     isUserNew?: NullableBoolFieldUpdateOperationsInput | boolean | null
     hasResume?: NullableBoolFieldUpdateOperationsInput | boolean | null
     type?: EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
+    betaUser?: NullableBoolFieldUpdateOperationsInput | boolean | null
     resumes?: ResumeUpdateManyWithoutUsersNestedInput
   }
 
@@ -9047,9 +9143,11 @@ export namespace Prisma {
     lastname?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    cloudinaryAvatarId?: NullableStringFieldUpdateOperationsInput | string | null
     isUserNew?: NullableBoolFieldUpdateOperationsInput | boolean | null
     hasResume?: NullableBoolFieldUpdateOperationsInput | boolean | null
     type?: EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
+    betaUser?: NullableBoolFieldUpdateOperationsInput | boolean | null
     resumes?: ResumeUncheckedUpdateManyWithoutUsersNestedInput
   }
 
@@ -9154,9 +9252,11 @@ export namespace Prisma {
     lastname?: string | null
     password?: string | null
     image?: string | null
+    cloudinaryAvatarId?: string | null
     isUserNew?: boolean | null
     hasResume?: boolean | null
     type?: $Enums.UserType
+    betaUser?: boolean | null
     practices?: PracticeCreateNestedManyWithoutUsersInput
   }
 
@@ -9167,9 +9267,11 @@ export namespace Prisma {
     lastname?: string | null
     password?: string | null
     image?: string | null
+    cloudinaryAvatarId?: string | null
     isUserNew?: boolean | null
     hasResume?: boolean | null
     type?: $Enums.UserType
+    betaUser?: boolean | null
     practices?: PracticeUncheckedCreateNestedManyWithoutUsersInput
   }
 
@@ -9196,9 +9298,11 @@ export namespace Prisma {
     lastname?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    cloudinaryAvatarId?: NullableStringFieldUpdateOperationsInput | string | null
     isUserNew?: NullableBoolFieldUpdateOperationsInput | boolean | null
     hasResume?: NullableBoolFieldUpdateOperationsInput | boolean | null
     type?: EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
+    betaUser?: NullableBoolFieldUpdateOperationsInput | boolean | null
     practices?: PracticeUpdateManyWithoutUsersNestedInput
   }
 
@@ -9209,9 +9313,11 @@ export namespace Prisma {
     lastname?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    cloudinaryAvatarId?: NullableStringFieldUpdateOperationsInput | string | null
     isUserNew?: NullableBoolFieldUpdateOperationsInput | boolean | null
     hasResume?: NullableBoolFieldUpdateOperationsInput | boolean | null
     type?: EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
+    betaUser?: NullableBoolFieldUpdateOperationsInput | boolean | null
     practices?: PracticeUncheckedUpdateManyWithoutUsersNestedInput
   }
 
@@ -9304,6 +9410,7 @@ export namespace Prisma {
     content?: NullableJsonNullValueInput | InputJsonValue
     template?: string | null
     filePath?: string | null
+    cloudinaryId?: string | null
     createdAt?: Date | string
   }
 
@@ -9352,6 +9459,7 @@ export namespace Prisma {
     content?: NullableJsonNullValueInput | InputJsonValue
     template?: NullableStringFieldUpdateOperationsInput | string | null
     filePath?: NullableStringFieldUpdateOperationsInput | string | null
+    cloudinaryId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -9362,6 +9470,7 @@ export namespace Prisma {
     content?: NullableJsonNullValueInput | InputJsonValue
     template?: NullableStringFieldUpdateOperationsInput | string | null
     filePath?: NullableStringFieldUpdateOperationsInput | string | null
+    cloudinaryId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -9372,6 +9481,7 @@ export namespace Prisma {
     content?: NullableJsonNullValueInput | InputJsonValue
     template?: NullableStringFieldUpdateOperationsInput | string | null
     filePath?: NullableStringFieldUpdateOperationsInput | string | null
+    cloudinaryId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 

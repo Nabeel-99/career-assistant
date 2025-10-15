@@ -19,20 +19,6 @@ type PracticeWithQuestions = Prisma.PracticeGetPayload<{
   include: { questions: true };
 }>;
 
-/*************  ✨ Windsurf Command ⭐  *************/
-/**
- * A component that renders a call card for a practice session.
- *
- * It fetches the practice session and its questions, and renders an
- * interview container with the practice session and user information.
- *
- * It also handles the start and end of the call, and displays the
- * transcript of the call.
- *
- * @param {Object} user - The user object with their resume.
- * @param {string} id - The ID of the practice session.
- */
-/*******  111cc29a-542a-424f-be2d-f890dd6fbbd7  *******/
 const CallCard = ({
   user,
   id,

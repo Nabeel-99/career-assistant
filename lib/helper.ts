@@ -45,6 +45,7 @@ export const devIconsMappings = {
   ts: "typescript",
   javascript: "javascript",
   js: "javascript",
+  java: "java",
   "angular.js": "angular",
   angularjs: "angular",
   angular: "angular",

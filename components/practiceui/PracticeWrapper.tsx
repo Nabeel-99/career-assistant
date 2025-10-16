@@ -12,7 +12,7 @@ import { User } from "@/lib/generated/prisma";
 
 const PracticeWrapper = ({ userId }: { userId: string }) => {
   const [practices, setPractices] = useState<PracticeWithFeedback[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [fetchingUser, setFetchingUser] = useState(true);
   const [user, setUser] = useState<User | null>(null);
 
@@ -55,18 +55,9 @@ const PracticeWrapper = ({ userId }: { userId: string }) => {
         </TabsList>
         <TabsContent value="theoretical">
           <div className="flex flex-col gap-4 mt-4">
-            {fetchingUser ? (
-              <span>Loading...</span>
-            ) : user && user?.betaUser ? (
-              <span>You can proceed</span>
-            ) : (
-              <span>only for beta users</span>
-            )}
-
             <CreatePracticeBtn
               userId={userId}
               getUserPractices={getUserPractices}
-              betaUser={user?.betaUser!}
             />
             <PracticeCardGrid
               practices={practices}

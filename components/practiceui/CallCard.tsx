@@ -178,7 +178,7 @@ const CallCard = ({
     vapi.stop();
   };
   return (
-    <div className="flex flex-col  justify-between xl:flex-row gap-10 h-full w-full">
+    <div className="flex gap-10 justify-center mx-auto container ">
       {loading ? (
         <CallCardSkeleton />
       ) : (

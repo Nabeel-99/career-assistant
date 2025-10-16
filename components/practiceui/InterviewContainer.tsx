@@ -56,7 +56,7 @@ const InterviewContainer = ({
         </div>
       )}
 
-      <Card className="w-full relative @container/card  dark:bg-[#0a0a0a] transition-all duraiton-300 ease-in-out p-6 lg:p-10 xl:w-[1050px] flex flex-col gap-10 2xl:container 2xl:mx-auto 2xl:max-h-[1000px]  h-full">
+      <Card className="w-full relative @container/card  dark:bg-[#0a0a0a] transition-all duraiton-300 ease-in-out p-6 lg:p-10 xl:w-[1050px] flex flex-col gap-10 2xl:container mx-auto 2xl:max-h-[1000px]  h-full">
         {isConnected && (
           <div className="absolute  z-50 -top-3 left-1/2 ">
             <p className=" border-2  bg-blue-600 text-white w-20 text-center rounded p-2">

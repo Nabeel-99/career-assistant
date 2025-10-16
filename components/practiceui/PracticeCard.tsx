@@ -12,7 +12,8 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 import { deletePractice } from "@/lib/action";
 import { toast } from "sonner";
 import { DeleteDialog } from "./DeleteDialog";
-
+import { SiGooglegemini } from "react-icons/si";
+import { RiChatVoiceAiLine } from "react-icons/ri";
 type PracticeCardProps = PracticeWithFeedback & {
   getUserPractices: () => void;
 };
@@ -83,7 +84,15 @@ const PracticeCard = ({
               <p className="">{feedback ? feedback.score : 0}/100</p>
             </div>
           </div>
+          <div className="flex items-start">
+            <p
+              className={`border  text-sm px-2 rounded-md ${mapLevel[expLevel].bgColor}`}
+            >
+              {mapLevel[expLevel].title}
+            </p>
+          </div>
         </div>
+
         {!isTaken ? (
           <div className="mt-2 mb-2">
             <p className="text-sm text-subheadline">
@@ -101,11 +110,19 @@ const PracticeCard = ({
         )}
 
         <div className="flex items-center   mt-6 xl:mt-0 justify-between">
-          <p
-            className={`border px-3 py-2 rounded-xl ${mapLevel[expLevel].bgColor}`}
-          >
-            {mapLevel[expLevel].title}
-          </p>
+          <Link href={`/practice/chat/${id}`}>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button className="flex items-center gap-2">
+                  Chat AI <RiChatVoiceAiLine />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Talk with AI in real time.</p>
+              </TooltipContent>
+            </Tooltip>
+          </Link>
+
           <div className="flex items-center gap-1">
             {isTaken ? (
               <Link href={`/practice/feedback/${id}`} className="  ">
@@ -115,20 +132,29 @@ const PracticeCard = ({
             ) : (
               <Link href={`/practice/interview/${id}`} className="  ">
                 {" "}
-                <Button>Start Interview</Button>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button className="flex items-center text-white gap-2 bg-blue-700 hover:bg-blue-600">
+                      Voice AI <SiGooglegemini /> (Beta)
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Talk with AI in real time.</p>
+                  </TooltipContent>
+                </Tooltip>
               </Link>
             )}
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button onClick={showDeleteDialog}>
-                  <FaTrash />
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>Delete Practice</p>
-              </TooltipContent>
-            </Tooltip>
           </div>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button onClick={showDeleteDialog}>
+                <FaTrash />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>Delete Practice</p>
+            </TooltipContent>
+          </Tooltip>
         </div>
       </div>
       {/* show Delete Dialog */}

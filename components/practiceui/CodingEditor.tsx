@@ -46,7 +46,6 @@ const CodingEditor = ({ systemTheme }: { systemTheme: any }) => {
           },
         ],
       });
-      console.log("res", res.data);
 
       setOutput(res.data.run.stdout.split("\n"));
       setError(res.data.run.stderr.split("\n"));

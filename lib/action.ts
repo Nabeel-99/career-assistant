@@ -4,9 +4,10 @@ import bcrypt from "bcrypt";
 import prisma from "./prisma";
 import { auth, signIn, signOut } from "@/auth";
 import { redirect } from "next/navigation";
-import { generateFeedback } from "./ai";
+
 import { Transcript } from "./types";
 import { Prisma } from "./generated/prisma";
+import { generateFeedback } from "./ai/interview";
 export const signup = async (data: {
   firstname: string;
   lastname: string;

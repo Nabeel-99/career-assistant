@@ -1,4 +1,4 @@
-import { generateCV } from "@/lib/ai";
+import { generateCV } from "@/lib/ai/resume";
 import prisma from "@/lib/prisma";
 import { getToken } from "next-auth/jwt";
 import { NextRequest, NextResponse } from "next/server";

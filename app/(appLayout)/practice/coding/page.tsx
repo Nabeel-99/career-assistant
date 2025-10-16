@@ -10,11 +10,11 @@ import { fetchUser } from "@/lib/action";
 import { toast } from "sonner";
 import { GiArtificialHive } from "react-icons/gi";
 import { animate, stagger } from "motion";
-import { extractJSONFromText, generateCodingTask } from "@/lib/ai";
 import { readStreamableValue } from "@ai-sdk/rsc";
 import TaskGenerator from "@/components/practiceui/TaskGenerator";
 import PromptGenerator from "@/components/practiceui/PromptGenerator";
 import CodingEditor from "@/components/practiceui/CodingEditor";
+import { extractJSONFromText, generateCodingTask } from "@/lib/ai/coding";
 
 const page = () => {
   const sidebar = useSidebar();

@@ -1,5 +1,4 @@
 import prisma from "@/lib/prisma";
-import supabase from "@/lib/supabase";
 import { getToken } from "next-auth/jwt";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -59,18 +58,6 @@ export const DELETE = async (req: NextRequest) => {
     if (!user) {
       return NextResponse.json({ message: "User not found" }, { status: 404 });
     }
-    const resumes = user.resumes
-      .map((resume) => resume.filePath)
-      .filter((path) => path !== null);
-    if (resumes.length > 0) {
-      const { error: resumeDeleteError } = await supabase.storage
-        .from("resumes")
-        .remove(resumes);
-    }
-
-    const { error: avatarDeleteError } = await supabase.storage
-      .from("avatars")
-      .remove([user.image!]);
 
     await prisma.user.deleteMany({
       where: {

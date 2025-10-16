@@ -25,7 +25,7 @@ import { User } from "@/lib/generated/prisma";
 import { IoMdSettings } from "react-icons/io";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-import supabase from "@/lib/supabase";
+
 import { Skeleton } from "../ui/skeleton";
 const SideNavWrapper = ({
   user,
@@ -63,16 +63,7 @@ const SideNavWrapper = ({
 
   useEffect(() => {
     const loadAvatar = async () => {
-      if (!user?.image?.startsWith("http")) {
-        const { data } = supabase.storage
-          .from("avatars")
-          .getPublicUrl(user?.image!);
-        if (data.publicUrl) {
-          setAvatarUrl(`${data.publicUrl}?t=${Date.now()}`);
-        }
-      } else {
-        setAvatarUrl(user?.image);
-      }
+      setAvatarUrl(user?.image!);
     };
     loadAvatar();
   }, [user?.image]);

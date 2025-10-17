@@ -164,22 +164,10 @@ const CVForm = ({
       if (data.image instanceof File) {
         formData.append("image", croppedFile!);
       }
-      const imageFilePath = `${userId}/profile-images/${Date.now()}_${
-        croppedFile?.name
-      }`;
 
-      formData.append("imageFilePath", JSON.stringify(imageFilePath));
       formData.append("templateName", JSON.stringify(templateName));
       const res = await axios.post("/api/cv/create-cv", formData);
       if (res.status === 200) {
-        if (data.image) {
-          const { data: resume, error } = await supabase.storage
-            .from("resumes")
-            .upload(imageFilePath, croppedFile!);
-          if (error) {
-            toast.error("Error uploading image");
-          }
-        }
         toast.success("Resume created successfully");
         setOpenForm(false);
         setOpenPreviewCard(false);
@@ -258,11 +246,14 @@ const CVForm = ({
         />
 
         <div className="flex justify-end mt-3 z-50">
-          <Button type="submit">
+          <Button disabled={loading} type="submit">
             {loading ? (
-              <span className="animate-spin">
-                <ImSpinner9 />
-              </span>
+              <div className="flex items-center gap-2">
+                <span>Creating cv</span>
+                <span className="animate-spin">
+                  <ImSpinner9 />
+                </span>
+              </div>
             ) : (
               "Submit"
             )}

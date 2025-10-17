@@ -57,7 +57,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
               image,
               firstname: name?.split(" ")[0],
               lastname: name?.split(" ")[1],
-              isUserNew: false,
+              // isUserNew: false,
             },
           });
         }
@@ -77,7 +77,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           token.email = dbUser.email as string;
           token.firstname = dbUser.firstname as string;
           token.lastname = dbUser.lastname as string;
-          token.isUserNew = dbUser.isUserNew as boolean;
+          // token.isUserNew = dbUser.isUserNew as boolean;
         }
       }
       return token;
@@ -88,7 +88,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         firstname: token.firstname,
         lastname: token.lastname,
         email: token.email,
-        isUserNew: token.isUserNew,
+        // isUserNew: token.isUserNew,
       });
       return session;
     },

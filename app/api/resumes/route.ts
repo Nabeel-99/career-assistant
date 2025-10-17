@@ -16,6 +16,7 @@ export const GET = async (req: NextRequest) => {
     const resumes = await prisma.resume.findMany({
       where: {
         userId: token.id,
+        filePath: { not: null },
       },
       orderBy: {
         createdAt: "desc",

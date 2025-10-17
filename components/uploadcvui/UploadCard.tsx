@@ -5,7 +5,6 @@ import { Card, CardContent } from "@/components/ui/card";
 import { RiFileUploadFill } from "react-icons/ri";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
-import supabase from "@/lib/supabase";
 import { toast } from "sonner";
 import ResumeCard from "./ResumeCard";
 import axios from "axios";
@@ -14,17 +13,20 @@ import { ResumeProps } from "@/lib/types";
 const UploadCard = ({ userId }: { userId: string | undefined }) => {
   const [filename, setFilename] = useState("");
   const [uploading, setUploading] = useState(false);
-  const [fetching, setFetching] = useState(false);
+  const [fetching, setFetching] = useState(true);
   const [resumes, setResumes] = useState<ResumeProps[]>([]);
   const [isDragging, setIsDragging] = useState(false);
 
   const fetchResumes = async () => {
     try {
       setFetching(true);
-      // Fetch from your database instead of just Supabase storage
       const res = await axios.get(`/api/resumes`);
-
+      console.log("res", res.data);
       if (res.status === 200) {
+        // const data = res.data.resumes;
+        // const filteredResumes = data.filter(
+        //   (res: ResumeProps) => res.filePath !== null
+        // );
         setResumes(res.data.resumes);
       }
     } catch (error) {

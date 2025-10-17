@@ -1,5 +1,5 @@
 import { auth } from "@/auth";
-import ChatInterface from "@/components/ChatInterface";
+import ChatInterface from "@/components/practiceui/ChatInterface";
 import { Card } from "@/components/ui/card";
 import prisma from "@/lib/prisma";
 import React from "react";

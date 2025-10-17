@@ -4,7 +4,7 @@ import React from "react";
 import { Skeleton } from "../ui/skeleton";
 import { Avatar, AvatarFallback } from "../ui/avatar";
 
-const ChatSkeleton = () => {
+const PracticeHeaderSkeleton = () => {
   return (
     <div className="flex flex-col absolute bg-white dark:bg-[#0a0a0a] mask-b-from-80% z-20 pb-10 border-none top-10 right-10 left-10 gap-2">
       <div className="flex flex-col gap-4 md:flex-row items-start md:justify-between">
@@ -34,4 +34,4 @@ const ChatSkeleton = () => {
   );
 };
 
-export default ChatSkeleton;
+export default PracticeHeaderSkeleton;

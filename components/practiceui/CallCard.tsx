@@ -62,10 +62,12 @@ const CallCard = ({
   useEffect(() => {
     vapi.on("call-start", () => {
       setIsConnected(true);
+      setTimeLeft(600);
     });
     vapi.on("call-end", () => {
       setIsConnected(false);
       setIsSpeaking(false);
+      setTimeLeft(600);
     });
     vapi.on("speech-start", () => {
       setIsSpeaking(true);
@@ -84,6 +86,7 @@ const CallCard = ({
           },
         ]);
       }
+      console.log("message", message);
     });
 
     vapi.on("error", (error: any) => {
@@ -111,7 +114,7 @@ const CallCard = ({
     };
   }, []);
   useEffect(() => {
-    if (!isConnected && transcript.length >= 4 && !generatingFeedback) {
+    if (!isConnected && transcript.length >= 6 && !generatingFeedback) {
       const runFeedback = async () => {
         try {
           setGeneratingFeedback(true);
@@ -156,6 +159,7 @@ const CallCard = ({
   const startCall = async () => {
     try {
       setStarting(true);
+      setTimeLeft(600);
       const call = await vapi.start(
         assistant(
           user?.firstname!,
@@ -176,6 +180,7 @@ const CallCard = ({
 
   const endCall = () => {
     vapi.stop();
+    setTimeLeft(600);
   };
   return (
     <div className="flex gap-10 justify-center mx-auto container ">

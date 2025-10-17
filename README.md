@@ -62,7 +62,7 @@ Career Assistant is a comprehensive web application that leverages cutting-edge 
    - Database URL (PostgreSQL)
    - NextAuth.js secret
    - OAuth provider credentials (Google, GitHub)
-   - Supabase credentials
+   - Cloudinary credentials
    - VAPI AI API key
    - Email configuration for password reset
 

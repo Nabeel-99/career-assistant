@@ -23,7 +23,7 @@ export const signup = async (data: {
         lastname,
         email,
         password: hashedPassword,
-        isUserNew: false,
+        // isUserNew: false,
       },
     });
     return user;
@@ -154,14 +154,37 @@ export const createFeedback = async (
   const session = await auth();
   if (!session?.user?.id) throw new Error("Unauthorized");
   if (!transcript || transcript.length === 0) {
-    return { success: false, message: "Transcript is empty" };
+    return { success: false, message: "No conversation recorded" };
   }
+
+  const userResponses = transcript.filter((t) => t.role === "user");
+
+  if (userResponses.length < 2) {
+    return {
+      success: false,
+      message:
+        "Not enough responses to generate feedback. Please answer at least 2 questions.",
+    };
+  }
+
+  const hasSubstantialContent = userResponses.some(
+    (response) => response.text.trim().split(" ").length >= 5
+  );
+
+  if (!hasSubstantialContent) {
+    return {
+      success: false,
+      message: "Your responses are too short to generate meaningful feedback.",
+    };
+  }
+
   try {
     const aiFeedback = await generateFeedback(transcript);
     if (!aiFeedback || !aiFeedback.comment?.trim()) {
       return {
         success: false,
-        message: "Feedback was empty or could not be generated",
+        message:
+          "Unable to generate feedback from the conversation. Please try answering more questions.",
       };
     }
     if (aiFeedback) {
@@ -185,7 +208,12 @@ export const createFeedback = async (
     }
     return { success: true, message: "Feedback created successfully" };
   } catch (error) {
-    return { success: false, message: "Error creating feedback" };
+    console.error("Feedback generation error:", error);
+    return {
+      success: false,
+      message:
+        "There wasn't enough conversation to provide meaningful feedback.",
+    };
   }
 };
 
@@ -245,4 +273,23 @@ export const fetchRecentActivity = async () => {
     (a, b) => b.timestamp.getTime() - a.timestamp.getTime()
   );
   return sorted[0];
+};
+
+export const makeUserNewFalse = async (): Promise<{ success: boolean }> => {
+  const session = await auth();
+  if (!session?.user?.id) throw new Error("Unauthorized");
+  const userId = session.user.id;
+  try {
+    await prisma.user.update({
+      where: {
+        id: userId,
+      },
+      data: {
+        isUserNew: false,
+      },
+    });
+    return { success: true };
+  } catch (error) {
+    return { success: false };
+  }
 };

@@ -57,13 +57,6 @@ const InterviewContainer = ({
       )}
 
       <Card className="w-full relative @container/card  dark:bg-[#0a0a0a] transition-all duraiton-300 ease-in-out p-6 lg:p-10 xl:w-[1050px] flex flex-col gap-10 2xl:container mx-auto 2xl:max-h-[1000px]  h-full">
-        {isConnected && (
-          <div className="absolute  z-50 -top-3 left-1/2 ">
-            <p className=" border-2  bg-blue-600 text-white w-20 text-center rounded p-2">
-              {formatTimer(timeLeft)}
-            </p>
-          </div>
-        )}
         <div className="flex flex-col gap-2">
           <div className="flex flex-col gap-4 md:flex-row items-center md:justify-between">
             <h1 className="text-xl font-bold">{practice?.title}</h1>
@@ -99,10 +92,10 @@ const InterviewContainer = ({
                 <AvatarImage src={user?.image!} />
                 <AvatarFallback className="flex items-center">
                   <span className="text-[100px]">
-                    {user?.firstname?.charAt(0)}{" "}
+                    {user?.firstname?.charAt(0).toUpperCase()}{" "}
                   </span>
                   <span className="text-[100px]">
-                    {user?.lastname?.charAt(0)}
+                    {user?.lastname?.charAt(0).toUpperCase()}
                   </span>
                 </AvatarFallback>
               </Avatar>
@@ -167,7 +160,14 @@ const InterviewContainer = ({
         {/* <div className="flex items-center justify-center border bg-[#1f1f1f]  p-6 rounded-full">
               <FaMicrophone className="size-10" />
             </div> */}
-
+        {isConnected && (
+          <div className=" flex flex-col items-center gap-4">
+            <p className="text-center text-sm">Time remaining</p>
+            <p className=" border border-green-900 bg-[#f4f4f4] dark:bg-[#171717] rounded-md text-white w-20 text-center p-2">
+              {formatTimer(timeLeft)}
+            </p>
+          </div>
+        )}
         <Tooltip>
           <TooltipTrigger asChild>
             <div

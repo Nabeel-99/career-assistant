@@ -1,7 +1,13 @@
 import prisma from "@/lib/prisma";
 import { getToken } from "next-auth/jwt";
 import { NextRequest, NextResponse } from "next/server";
+import { v2 as cloudinary } from "cloudinary";
 
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 export const POST = async (req: NextRequest) => {
   try {
     const isProduction = process.env.NODE_ENV === "production";
@@ -29,9 +35,40 @@ export const POST = async (req: NextRequest) => {
     const languages = JSON.parse(formData.get("languages") as string);
     const awards = JSON.parse(formData.get("awards") as string);
     const templateName = JSON.parse(formData.get("templateName") as string);
-    const imageFilePath = JSON.parse(formData.get("imageFilePath") as string);
+    const imageFile = formData.get("image") as File | null;
+
+    let imageUrl = "";
+
+    if (imageFile) {
+      const arrayBuffer = await imageFile.arrayBuffer();
+      const buffer = Buffer.from(arrayBuffer);
+
+      // Upload new avatar to Cloudinary
+      const uploadResult: any = await new Promise((resolve, reject) => {
+        cloudinary.uploader
+          .upload_stream(
+            {
+              folder: `${process.env.NEXT_PUBLIC_CLOUDINARY_FOLDER_NAME}/avatars`,
+              public_id: `${token.id}-${Date.now()}`,
+              resource_type: "image",
+              transformation: [
+                { width: 500, height: 500, crop: "fill", gravity: "face" },
+                { quality: "auto" },
+                { fetch_format: "auto" },
+              ],
+            },
+            (err, result) => {
+              err ? reject(err) : resolve(result);
+            }
+          )
+          .end(buffer);
+      });
+
+      imageUrl = uploadResult.secure_url;
+    }
+
     const data = {
-      image: imageFilePath,
+      image: imageUrl,
       fullname,
       title,
       summary,
@@ -65,3 +102,48 @@ export const POST = async (req: NextRequest) => {
     );
   }
 };
+
+// export const DELETE = async (req: NextRequest) => {
+//   try {
+//     const isProduction = process.env.NODE_ENV === "production";
+//     const token = await getToken({
+//       req,
+//       secret: process.env.AUTH_SECRET,
+//       secureCookie: isProduction,
+//     });
+
+//     if (!token) {
+//       return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+//     }
+
+//     const { resumeId } = await req.json();
+
+//     const resume = await prisma.resume.findUnique({
+//       where: { id: resumeId },
+//     });
+
+//     if (!resume || resume.userId !== token.id) {
+//       return NextResponse.json({ message: "Resume not found" }, { status: 404 });
+//     }
+
+//     if (resume.cloudinaryId) {
+//       await cloudinary.uploader.destroy(resume.cloudinaryId);
+//     }
+
+//     // Delete from database
+//     await prisma.resume.delete({
+//       where: { id: resumeId },
+//     });
+
+//     return NextResponse.json(
+//       { message: "Resume deleted successfully" },
+//       { status: 200 }
+//     );
+//   } catch (error) {
+//     console.error("Error deleting resume:", error);
+//     return NextResponse.json(
+//       { message: "Something went wrong" },
+//       { status: 500 }
+//     );
+//   }
+// };

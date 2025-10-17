@@ -7,7 +7,6 @@ import ThemeCard from "@/components/settingsui/ThemeCard";
 import { Card } from "@/components/ui/card";
 import { fetchUser } from "@/lib/action";
 import { User } from "@/lib/generated/prisma";
-import supabase from "@/lib/supabase";
 import axios from "axios";
 import React, { ChangeEvent, useEffect, useState } from "react";
 import { toast } from "sonner";

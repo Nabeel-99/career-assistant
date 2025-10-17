@@ -18,6 +18,7 @@ const UserCVTemplates = ({ userId }: { userId: string }) => {
     try {
       setLoading(true);
       const res = await fetchResumeWithContent(userId);
+      console.log("resume content", res);
       setUserTemplates(res);
     } catch (error) {
       toast.error("Error fetching resumes");

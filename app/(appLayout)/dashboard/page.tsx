@@ -8,10 +8,22 @@ import React from "react";
 import { FaMicrophone } from "react-icons/fa";
 import { HiTemplate } from "react-icons/hi";
 import { RiFileUploadFill } from "react-icons/ri";
+import prisma from "@/lib/prisma";
+import OnboardingModal from "@/components/dashboardui/OnboardingModal";
 
 const page = async () => {
   const session = await auth();
   if (!session) redirect("/");
+  const user = await prisma.user.findUnique({
+    where: {
+      id: session?.user?.id,
+    },
+    include: {
+      resumes: true,
+    },
+  });
+  if (!user) return null;
+  console.log("user", user);
   const navbtnItems = [
     {
       title: "Start Interview",
@@ -55,6 +67,7 @@ const page = async () => {
           <SectionCards />
         </div>
       </div>
+      {user && user.isUserNew && <OnboardingModal />}
     </div>
   );
 };

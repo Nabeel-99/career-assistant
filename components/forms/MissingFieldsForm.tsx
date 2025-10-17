@@ -20,6 +20,7 @@ import { ImSpinner9 } from "react-icons/im";
 import { toast } from "sonner";
 
 import supabase from "@/lib/supabase";
+import CropImage from "./CropImage";
 
 type ResumeSchema = z.infer<typeof resumeSchema>;
 const socialLinks = ["github", "linkedin", "portfolio"] as const;
@@ -55,7 +56,9 @@ const MissingFieldsForm = ({
     incompleteResume?.projects?.filter((project) => !project?.link) || [];
   const [loading, setLoading] = useState(false);
   const [preview, setPreview] = useState<string | null>(null);
-
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [showCropModal, setShowCropModal] = useState(false);
+  const [croppedFile, setCroppedFile] = useState<File | null>(null);
   const form = useForm<MissingLinksFormType>({
     // resolver: zodResolver(MissingLinksSchema),
     defaultValues: {
@@ -80,62 +83,89 @@ const MissingFieldsForm = ({
       }
       return project;
     });
-    const imageFilePath = `${userId}/profile-images/${Date.now()}_${
-      data.image.name
-    }`;
+
     try {
-      setLoading(true);
-      const res = await axios.patch("/api/cv/generate-cv", {
-        resumeId: selectedResume,
-        content: {
+      const formData = new FormData();
+
+      if (croppedFile) {
+        formData.append("image", croppedFile);
+      }
+      formData.append("resumeId", JSON.stringify(selectedResume!));
+      formData.append("templateName", JSON.stringify(templateName));
+      formData.append(
+        "content",
+        JSON.stringify({
           ...incompleteResume,
-          image: imageFilePath,
           links: {
             github: data.github,
             linkedin: data.linkedin,
             portfolio: data.portfolio,
           },
           projects: updatedProjects,
-        },
-        templateName: templateName,
-      });
+        })
+      );
+
+      setLoading(true);
+      const res = await axios.patch("/api/cv/generate-cv", formData);
 
       if (res.status === 200) {
-        if (data.image) {
-          const { data: resume, error } = await supabase.storage
-            .from("resumes")
-            .upload(imageFilePath, data.image);
-          if (error) {
-            toast.error("Error uploading image");
-          }
-        }
         toast.success("Resume generated successfully");
         setOpenPreviewCard(true);
         setShowMissingLinksModal(false);
         setResumeModal(false);
       }
     } catch (error) {
+      console.log(error);
       toast.error("Error generating resume");
     } finally {
       setLoading(false);
     }
   };
+
+  const ALLOWED_IMAGE_TYPES = [
+    "image/jpeg",
+    "image/jpg",
+    "image/png",
+    "image/webp",
+  ];
+  const MAX_FILE_SIZE = 5 * 1024 * 1024;
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    if (!ALLOWED_IMAGE_TYPES.includes(file.type)) {
+      toast.error("Please upload a valid image format (JPEG, JPG, PNG, WebP)");
+      e.target.value = "";
+      return;
+    }
+    if (file.size > MAX_FILE_SIZE) {
+      toast.error("Image size must be less than 5MB");
+      e.target.value = "";
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = () => {
+      setSelectedImage(reader.result as string);
+      setShowCropModal(true);
+    };
+    reader.readAsDataURL(file);
+  };
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
         {missingFields.includes("image") && (
-          <div className="flex gap-10 items-center">
+          <div className="flex  gap-10 items-center">
             <FormField
               control={form.control}
               name="image"
               render={() => (
                 <FormItem className="w-full">
-                  <FormLabel>Image (optional)</FormLabel>
+                  <FormLabel>Image</FormLabel>
                   <FormControl>
                     <Input
                       type="file"
                       accept="image/*"
                       onChange={(e) => {
+                        handleImageChange(e);
                         const file = e.target.files?.[0];
                         if (file) {
                           const previewUrl = URL.createObjectURL(file);
@@ -151,13 +181,34 @@ const MissingFieldsForm = ({
             />
             {/* preview image */}
             {preview && (
-              <div className="max-w-40  border rounded overflow-hidden">
-                <img
-                  src={preview!}
-                  alt="preview"
-                  className="w-full h-full object-cover"
+              <>
+                <div className="flex flex-col gap-2">
+                  <div className="max-w-40  border rounded overflow-hidden">
+                    <img
+                      src={preview!}
+                      alt="preview"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div className="">
+                    <Button
+                      type="button"
+                      onClick={() => setShowCropModal(true)}
+                    >
+                      Resize
+                    </Button>
+                  </div>
+                </div>
+
+                <CropImage
+                  form={form}
+                  setPreview={setPreview}
+                  setCroppedFile={setCroppedFile}
+                  image={selectedImage!}
+                  open={showCropModal}
+                  closeModal={() => setShowCropModal(false)}
                 />
-              </div>
+              </>
             )}
           </div>
         )}

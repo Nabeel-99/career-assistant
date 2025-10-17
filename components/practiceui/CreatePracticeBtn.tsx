@@ -72,11 +72,21 @@ const CreatePracticeBtn = ({
             fetchingResumes={fetchingResumes}
             closeSheet={() => setOpen(false)}
           />
-          <SheetFooter>
+          <div className="px-4 w-full pb-4">
+            <Button
+              onClick={() => setOpen(false)}
+              variant="outline"
+              className="w-full"
+            >
+              Close
+            </Button>
+          </div>
+
+          {/* <SheetFooter>
             <SheetClose asChild>
               <Button variant="outline">Close</Button>
             </SheetClose>
-          </SheetFooter>
+          </SheetFooter> */}
         </SheetContent>
       </Sheet>
     </>

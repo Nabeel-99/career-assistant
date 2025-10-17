@@ -24,7 +24,6 @@ export const POST = async (req: NextRequest) => {
 
     const formData = await req.formData();
     const file = formData.get("file") as File;
-    const filePath = formData.get("filePath") as string;
     if (!file) {
       return NextResponse.json(
         { message: "No file uploaded" },
@@ -62,6 +61,7 @@ export const POST = async (req: NextRequest) => {
         },
         data: {
           hasResume: true,
+          isUserNew: false,
         },
       });
       await prisma.resume.create({

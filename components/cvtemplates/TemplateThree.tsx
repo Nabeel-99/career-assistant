@@ -27,12 +27,7 @@ const TemplateThree = ({
   const [imageUrl, setImageUrl] = useState<string | null>(null);
   const renderImage = async () => {
     try {
-      const { data } = supabase.storage
-        .from("resumes")
-        .getPublicUrl(content.image);
-      if (data.publicUrl) {
-        setImageUrl(data.publicUrl);
-      }
+      setImageUrl(content.image);
     } catch (error) {
       toast.error("Error fetching image");
     }
@@ -50,7 +45,7 @@ const TemplateThree = ({
       <div className="text-center mb-5">
         {content.image && (
           <img
-            src={imageUrl!}
+            src={`${imageUrl}?v=${Date.now()}`}
             alt="Profile"
             className="w-32 h-32 rounded-full mx-auto mb-3 object-cover"
           />

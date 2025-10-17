@@ -8,7 +8,6 @@ import { Button } from "../ui/button";
 import { FaEye, FaTrash } from "react-icons/fa";
 import { formatTime } from "@/lib/utils";
 import { ResumeProps } from "@/lib/types";
-import supabase from "@/lib/supabase";
 import { Dialog, DialogContent, DialogHeader } from "../ui/dialog";
 import { DialogDescription, DialogTitle } from "@radix-ui/react-dialog";
 import axios from "axios";
@@ -53,19 +52,10 @@ const ResumeCard = ({
           id,
         },
       });
-      console.log("res", res.data);
       if (res.status === 200) {
-        const { data, error } = await supabase.storage
-          .from("resumes")
-          .remove([filePath]);
-        if (error) {
-          toast.error("Error deleting file");
-        }
-        if (data) {
-          setShowDelete(false);
-          toast.success("File deleted successfully");
-          fetchResumes();
-        }
+        setShowDelete(false);
+        toast.success("File deleted successfully");
+        fetchResumes();
       }
     } catch (error) {
       toast.error("Error deleting file");
@@ -114,8 +104,7 @@ const ResumeCard = ({
                   </Button>
                   <Button
                     onClick={() => {
-                      showDeleteDialog(resume.id!, resume.filePath!),
-                        console.log("resume", resume);
+                      showDeleteDialog(resume.id!, resume.filePath!);
                     }}
                     className="bg-black/10 hover:bg-black/20 text-black dark:bg-[#1f1f1f] dark:hover:bg-[#343333] cursor-pointer rounded-xl dark:text-white"
                   >

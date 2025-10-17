@@ -90,8 +90,8 @@ const SideNavWrapper = ({
               <Avatar className="border">
                 <AvatarImage src={avatarUrl!} className="object-cover" />
                 <AvatarFallback className="flex items-center">
-                  <span>{user?.firstname?.charAt(0)} </span>
-                  <span>{user?.lastname?.charAt(0)}</span>
+                  <span>{user?.firstname?.charAt(0).toUpperCase()} </span>
+                  <span>{user?.lastname?.charAt(0).toUpperCase()}</span>
                 </AvatarFallback>
               </Avatar>
               <span className="text-[16px] pl-1">

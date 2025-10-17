@@ -12,6 +12,7 @@ import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 import CropImage from "./CropImage";
 import { Button } from "../ui/button";
+import { toast } from "sonner";
 
 const UserInfoInputs = ({
   form,
@@ -24,14 +25,35 @@ const UserInfoInputs = ({
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [showCropModal, setShowCropModal] = useState(false);
 
+  const ALLOWED_IMAGE_TYPES = [
+    "image/jpeg",
+    "image/jpg",
+    "image/png",
+    "image/webp",
+  ];
+  const MAX_FILE_SIZE = 5 * 1024 * 1024;
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
-
+    if (!ALLOWED_IMAGE_TYPES.includes(file.type)) {
+      toast.error("Please upload a valid image format (JPEG, JPG, PNG, WebP)");
+      e.target.value = "";
+      return;
+    }
+    if (file.size > MAX_FILE_SIZE) {
+      toast.error("Image size must be less than 5MB");
+      e.target.value = "";
+      return;
+    }
     const reader = new FileReader();
     reader.onload = () => {
       setSelectedImage(reader.result as string);
       setShowCropModal(true);
+    };
+    reader.onerror = (error) => {
+      toast.error("Error reading file");
+      e.target.value = "";
+      console.log("error", error);
     };
     reader.readAsDataURL(file);
   };

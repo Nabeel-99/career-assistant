@@ -182,9 +182,12 @@ const ApplyDialog = ({
               <div className="flex justify-end mt-3">
                 <Button disabled={submitting}>
                   {submitting ? (
-                    <span className="animate-spin">
-                      <ImSpinner9 />
-                    </span>
+                    <div className="flex items-center gap-2">
+                      <span>Applying template</span>
+                      <span className="animate-spin">
+                        <ImSpinner9 />
+                      </span>
+                    </div>
                   ) : (
                     "Submit"
                   )}
@@ -200,7 +203,7 @@ const ApplyDialog = ({
         open={showMissingLinksModal}
         onOpenChange={setShowMissingLinksModal}
       >
-        <DialogContent className="w-full md:w-2/4">
+        <DialogContent className="w-full h-full overflow-y-scroll md:w-2/4">
           <DialogHeader>
             <DialogTitle>Missing links</DialogTitle>
             <DialogDescription>

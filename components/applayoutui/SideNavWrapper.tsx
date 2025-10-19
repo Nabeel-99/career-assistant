@@ -88,7 +88,10 @@ const SideNavWrapper = ({
           <SidebarGroup>
             <SidebarGroupLabel className="flex items-center  mb-5">
               <Avatar className="border">
-                <AvatarImage src={avatarUrl!} className="object-cover" />
+                <AvatarImage
+                  src={`${avatarUrl}?v=${Date.now()}`}
+                  className="object-cover"
+                />
                 <AvatarFallback className="flex items-center">
                   <span>{user?.firstname?.charAt(0).toUpperCase()} </span>
                   <span>{user?.lastname?.charAt(0).toUpperCase()}</span>

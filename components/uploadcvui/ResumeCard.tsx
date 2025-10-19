@@ -44,10 +44,10 @@ const ResumeCard = ({
     setShowDelete(true);
   };
 
-  const deleteResume = async (id: number, filePath: string) => {
+  const deleteResume = async (id: number) => {
     try {
       setDeleteLoading(true);
-      const res = await axios.delete("/api/parse-cv", {
+      const res = await axios.delete("/api/resumes", {
         data: {
           id,
         },
@@ -139,7 +139,7 @@ const ResumeCard = ({
         deleteLoading={deleteLoading}
         showDelete={showDelete}
         setShowDelete={setShowDelete}
-        action={() => deleteResume(selectedResumeId!, selectedResumeFilePath!)}
+        action={() => deleteResume(selectedResumeId!)}
       />
     </>
   );

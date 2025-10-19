@@ -12,11 +12,13 @@ import { toast } from "sonner";
 const PreviewCard = ({
   userId,
   template,
-  setOpenPreviewCard,
+  closeParentDialog,
+  isOpen,
 }: {
   userId: string | null;
   template: Template;
-  setOpenPreviewCard: (openPreviewCard: boolean) => void;
+  closeParentDialog: () => void;
+  isOpen: boolean;
 }) => {
   const [loading, setLoading] = useState(false);
   const [resumes, setResumes] = useState<Resume[]>([]);
@@ -36,8 +38,10 @@ const PreviewCard = ({
   };
 
   useEffect(() => {
-    getUserResumes();
-  }, []);
+    if (isOpen) {
+      getUserResumes();
+    }
+  }, [isOpen]);
 
   return (
     <>
@@ -56,12 +60,14 @@ const PreviewCard = ({
               resumes={resumes}
               loading={loading}
               templateName={template.name}
-              setOpenPreviewCard={setOpenPreviewCard}
+              closeParentDialog={closeParentDialog}
+              refetchResumes={getUserResumes}
             />
             <CreateCVDialog
               userId={userId!}
               templateName={template.name}
-              setOpenPreviewCard={setOpenPreviewCard}
+              closeParentDialog={closeParentDialog}
+              refetchResumes={getUserResumes}
             />
           </div>
         </div>

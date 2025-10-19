@@ -1,6 +1,6 @@
 "use client";
 import { deleteUserTemplate, fetchResumeWithContent } from "@/lib/action";
-import { Resume } from "@/lib/generated/prisma";
+import { CVBuilder } from "@/lib/generated/prisma";
 import React, { useEffect, useState } from "react";
 import { Skeleton } from "../ui/skeleton";
 
@@ -8,10 +8,11 @@ import { z } from "zod";
 import { resumeSchema } from "@/lib/validation";
 import { toast } from "sonner";
 import ResumeTemplate from "./ResumeTemplate";
+import axios from "axios";
 
 type Content = z.infer<typeof resumeSchema>;
 const UserCVTemplates = ({ userId }: { userId: string }) => {
-  const [userTemplates, setUserTemplates] = useState<Resume[]>([]);
+  const [userTemplates, setUserTemplates] = useState<CVBuilder[]>([]);
   const [deleteLoading, setDeleteLoading] = useState(false);
   const [loading, setLoading] = useState(false);
   const fetchUserTemplates = async () => {
@@ -29,8 +30,8 @@ const UserCVTemplates = ({ userId }: { userId: string }) => {
   const deleteResume = async (resumeId: number) => {
     try {
       setDeleteLoading(true);
-      const res = await deleteUserTemplate(resumeId);
-      if (res.success) {
+      const res = await axios.delete(`/api/cv/${resumeId}`);
+      if (res.status === 200) {
         toast.success("Template deleted successfully");
         fetchUserTemplates();
       }

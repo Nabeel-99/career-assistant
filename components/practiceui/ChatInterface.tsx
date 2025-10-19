@@ -20,6 +20,7 @@ import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport } from "ai";
 import { FaStop } from "react-icons/fa";
 import PracticeHeaderSkeleton from "../skeletons/PracticeHeaderSkeleton";
+import { ms } from "zod/v4/locales";
 
 type PracticeWithQuestions = Prisma.PracticeGetPayload<{
   include: { questions: true };
@@ -167,8 +168,6 @@ const ChatInterface = ({ id, user }: { id: string; user: User }) => {
         )}
 
         <div className="mt-60 pt-10 md:mt-40 pb-20 ">
-          {status === "submitted" && <span>Ai is typing</span>}
-          {/* {status === "streaming" && <span>Ai is typing</span>} */}
           {messages.map((msg) => (
             <div
               key={msg.id}
@@ -186,13 +185,19 @@ const ChatInterface = ({ id, user }: { id: string; user: User }) => {
                 {msg.parts.map((part, i) => {
                   if (part.type === "text") {
                     const cleanText = part.text.replace(/\n{2,}/g, "\n\n");
-                    return <span key={i}>{cleanText}</span>;
+                    return <span key={i}> {cleanText}</span>;
                   }
                   return null;
                 })}
               </div>
             </div>
           ))}
+
+          {status === "submitted" && (
+            <div className="flex items-center gap-2 justify-start mb-4">
+              <div className="w-4 h-4 bg-gray-500 dark:bg-gray-300 rounded-full animate-pulse"></div>
+            </div>
+          )}
           <div ref={messagesEndRef} />
         </div>
       </div>

@@ -38,9 +38,10 @@ type MissingFieldsFormProps = {
   incompleteResume: ResumeSchema | null;
   selectedResume: string | null;
   templateName: string;
-  setOpenPreviewCard: (openPreviewCard: boolean) => void;
+  closeParentDialog: () => void;
   setShowMissingLinksModal: (showMissingLinksModal: boolean) => void;
   setResumeModal: (resumeModal: boolean) => void;
+  refetchResumes: () => Promise<void>;
 };
 const MissingFieldsForm = ({
   userId,
@@ -48,9 +49,10 @@ const MissingFieldsForm = ({
   incompleteResume,
   selectedResume,
   templateName,
-  setOpenPreviewCard,
+  closeParentDialog,
   setShowMissingLinksModal,
   setResumeModal,
+  refetchResumes,
 }: MissingFieldsFormProps) => {
   const missingProjectLinks =
     incompleteResume?.projects?.filter((project) => !project?.link) || [];
@@ -106,13 +108,14 @@ const MissingFieldsForm = ({
       );
 
       setLoading(true);
-      const res = await axios.patch("/api/cv/generate-cv", formData);
+      const res = await axios.post("/api/cv/generate-cv", formData);
 
       if (res.status === 200) {
         toast.success("Resume generated successfully");
-        setOpenPreviewCard(true);
+        await refetchResumes();
         setShowMissingLinksModal(false);
         setResumeModal(false);
+        closeParentDialog();
       }
     } catch (error) {
       console.log(error);

@@ -10,10 +10,12 @@ const PracticeCardGrid = ({
   loading,
   practices,
   getUserPractices,
+  betaUser,
 }: {
   loading: boolean;
   practices: PracticeWithFeedback[];
   getUserPractices: () => void;
+  betaUser?: boolean;
 }) => {
   const { open } = useSidebar();
 
@@ -31,6 +33,7 @@ const PracticeCardGrid = ({
             key={practice.id}
             {...practice}
             getUserPractices={getUserPractices}
+            betaUser={betaUser}
           />
         ))}
       </div>

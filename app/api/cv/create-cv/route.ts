@@ -83,7 +83,7 @@ export const POST = async (req: NextRequest) => {
       languages,
       awards,
     };
-    await prisma.resume.create({
+    await prisma.cVBuilder.create({
       data: {
         userId: token.id,
         template: templateName,
@@ -102,48 +102,3 @@ export const POST = async (req: NextRequest) => {
     );
   }
 };
-
-// export const DELETE = async (req: NextRequest) => {
-//   try {
-//     const isProduction = process.env.NODE_ENV === "production";
-//     const token = await getToken({
-//       req,
-//       secret: process.env.AUTH_SECRET,
-//       secureCookie: isProduction,
-//     });
-
-//     if (!token) {
-//       return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
-//     }
-
-//     const { resumeId } = await req.json();
-
-//     const resume = await prisma.resume.findUnique({
-//       where: { id: resumeId },
-//     });
-
-//     if (!resume || resume.userId !== token.id) {
-//       return NextResponse.json({ message: "Resume not found" }, { status: 404 });
-//     }
-
-//     if (resume.cloudinaryId) {
-//       await cloudinary.uploader.destroy(resume.cloudinaryId);
-//     }
-
-//     // Delete from database
-//     await prisma.resume.delete({
-//       where: { id: resumeId },
-//     });
-
-//     return NextResponse.json(
-//       { message: "Resume deleted successfully" },
-//       { status: 200 }
-//     );
-//   } catch (error) {
-//     console.error("Error deleting resume:", error);
-//     return NextResponse.json(
-//       { message: "Something went wrong" },
-//       { status: 500 }
-//     );
-//   }
-// };

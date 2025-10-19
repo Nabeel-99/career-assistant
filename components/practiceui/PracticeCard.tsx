@@ -14,8 +14,11 @@ import { toast } from "sonner";
 import { DeleteDialog } from "./DeleteDialog";
 import { SiGooglegemini } from "react-icons/si";
 import { RiChatVoiceAiLine } from "react-icons/ri";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
+import { DialogDescription } from "@radix-ui/react-dialog";
 type PracticeCardProps = PracticeWithFeedback & {
   getUserPractices: () => void;
+  betaUser?: boolean;
 };
 const PracticeCard = ({
   id,
@@ -27,12 +30,13 @@ const PracticeCard = ({
   isTaken,
   feedback,
   getUserPractices,
+  betaUser,
 }: PracticeCardProps) => {
   const expLevel = level as keyof typeof mapLevel;
 
   const [showDelete, setShowDelete] = useState(false);
   const [deleteLoading, setDeleteLoading] = useState(false);
-
+  const [showBetaModal, setShowBetaModal] = useState(false);
   const handleDeletePractice = async () => {
     try {
       setDeleteLoading(true);
@@ -129,9 +133,8 @@ const PracticeCard = ({
                 {" "}
                 <Button>View Feedback</Button>
               </Link>
-            ) : (
-              <Link href={`/practice/interview/${id}`} className="  ">
-                {" "}
+            ) : betaUser ? (
+              <Link href={`/practice/interview/${id}`}>
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <Button className="flex items-center text-white gap-2 bg-blue-700 hover:bg-blue-600">
@@ -143,6 +146,48 @@ const PracticeCard = ({
                   </TooltipContent>
                 </Tooltip>
               </Link>
+            ) : (
+              <>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      onClick={() => setShowBetaModal(true)}
+                      className="flex items-center text-white gap-2 bg-blue-700 hover:bg-blue-600"
+                    >
+                      Voice AI <SiGooglegemini /> (Beta)
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Request beta access</p>
+                  </TooltipContent>
+                </Tooltip>
+
+                <Dialog open={showBetaModal} onOpenChange={setShowBetaModal}>
+                  <DialogContent className="max-w-md">
+                    <DialogHeader>
+                      <DialogTitle>Beta Access Required</DialogTitle>
+                      <DialogDescription>
+                        Voice AI is currently in beta testing. Want early
+                        access?
+                      </DialogDescription>
+                    </DialogHeader>
+                    <div className="flex flex-col gap-4">
+                      <p className="text-sm text-muted-foreground">
+                        DM or comment on Twitter/X to request beta access and be
+                        among the first to try our AI voice interview feature.
+                      </p>
+                      <Button
+                        onClick={() =>
+                          window.open("https://x.com/ndev_99", "_blank")
+                        }
+                        className="w-full"
+                      >
+                        Request Beta Access on Twitter
+                      </Button>
+                    </div>
+                  </DialogContent>
+                </Dialog>
+              </>
             )}
           </div>
           <Tooltip>

@@ -63,6 +63,7 @@ const PracticeWrapper = ({ userId }: { userId: string }) => {
               practices={practices}
               loading={loading}
               getUserPractices={getUserPractices}
+              betaUser={user?.betaUser!}
             />
           </div>
         </TabsContent>

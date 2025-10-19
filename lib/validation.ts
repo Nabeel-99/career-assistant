@@ -9,12 +9,12 @@ export const strongPassword = z.string().regex(passwordRegex, {
 export const SignUpSchema = z.object({
   firstname: z.string().min(1),
   lastname: z.string().min(1),
-  email: z.string().email(),
+  email: z.email(),
   password: strongPassword,
 });
 
 export const LoginSchema = z.object({
-  email: z.string().email(),
+  email: z.email(),
   password: strongPassword,
 });
 
@@ -22,7 +22,7 @@ export const PracticeSchema = z.object({
   jobDescription: z.string().min(1),
   resume: z.string().optional(),
   experienceLevel: z.enum(["entry-level", "mid-level", "senior-level"], {
-    required_error: "Please select an experience level",
+    message: "Please select an experience level",
   }),
 });
 
@@ -41,7 +41,7 @@ export const resumeSchema = z.object({
   title: z.string().optional(),
   summary: z.string().optional(),
 
-  email: z.string().email().optional(),
+  email: z.email().optional(),
   phone: z.string().optional(),
   location: z.string().optional(),
 

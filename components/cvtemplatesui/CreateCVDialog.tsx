@@ -16,11 +16,13 @@ import { Button } from "../ui/button";
 const CreateCVDialog = ({
   templateName,
   userId,
-  setOpenPreviewCard,
+  closeParentDialog,
+  refetchResumes,
 }: {
   templateName: string;
   userId: string;
-  setOpenPreviewCard: (openPreviewCard: boolean) => void;
+  closeParentDialog: () => void;
+  refetchResumes: () => Promise<void>;
 }) => {
   const [openForm, setOpenForm] = useState(false);
 
@@ -44,7 +46,8 @@ const CreateCVDialog = ({
           userId={userId}
           templateName={templateName}
           setOpenForm={setOpenForm}
-          setOpenPreviewCard={setOpenPreviewCard}
+          closeParentDialog={closeParentDialog}
+          refetchResumes={refetchResumes}
         />
       </DialogContent>
     </Dialog>

@@ -81,12 +81,9 @@ export const fetchResumes = async (userId: string) => {
 export const fetchResumeWithContent = async (userId: string) => {
   const session = await auth();
   if (!session?.user?.id) throw new Error("Unauthorized");
-  const resumes = await prisma.resume.findMany({
+  const resumes = await prisma.cVBuilder.findMany({
     where: {
       userId,
-      content: {
-        not: Prisma.JsonNull,
-      },
     },
     orderBy: {
       createdAt: "desc",
@@ -238,7 +235,7 @@ export const fetchRecentActivity = async () => {
   const session = await auth();
   if (!session?.user?.id) throw new Error("Unauthorized");
   const userId = session.user.id;
-  const resumes = await prisma.resume.findMany({
+  const resumes = await prisma.cVBuilder.findMany({
     where: { userId },
     select: {
       id: true,

@@ -33,6 +33,7 @@ model User {
   type UserType @default(FREE)
   practices Practice[]
   resumes Resume[]
+  cv CVBuilder[]
   betaUser Boolean? @default(false)
 }
 
@@ -61,19 +62,27 @@ model Question {
   practices Practice @relation(fields: [practiceId], references: [id], onDelete: Cascade)
   createdAt   DateTime  @default(now())
 }
-
+model CVBuilder {
+  id           Int       @id @default(autoincrement())
+  name         String?
+  content      Json      
+  template String?
+  userId       String
+  user         User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt    DateTime  @default(now())
+}
 model Resume {
   id Int @id @default(autoincrement())
   name String?
   rawText String?
-  content Json?
-  template String?
   filePath String?
   cloudinaryId String?
   userId String
   users User @relation(fields: [userId], references: [id], onDelete: Cascade)
   createdAt   DateTime  @default(now())
 }
+
+
 model Feedback {
   id Int @id @default(autoincrement())
   practiceId Int @unique
@@ -82,3 +91,4 @@ model Feedback {
   score Int
   createdAt   DateTime  @default(now())
 }
+

@@ -22,7 +22,7 @@ const ProfilePictureCard = ({
       ) : (
         <Avatar className="size-20 xl:size-28">
           <AvatarImage
-            src={avatarUrl!}
+            src={`${avatarUrl}?v=${Date.now()}`}
             alt={user?.firstname!}
             className="backdrop-blur-lg rounded-full object-cover bg-white/40"
           />

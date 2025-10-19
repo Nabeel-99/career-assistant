@@ -33,12 +33,14 @@ const CVForm = ({
   templateName,
   userId,
   setOpenForm,
-  setOpenPreviewCard,
+  closeParentDialog,
+  refetchResumes,
 }: {
   templateName: string;
   userId: string;
   setOpenForm: (openForm: boolean) => void;
-  setOpenPreviewCard: (openPreviewCard: boolean) => void;
+  closeParentDialog: () => void;
+  refetchResumes: () => Promise<void>;
 }) => {
   const [loading, setLoading] = useState(false);
   const [croppedFile, setCroppedFile] = useState<File | null>(null);
@@ -169,8 +171,9 @@ const CVForm = ({
       const res = await axios.post("/api/cv/create-cv", formData);
       if (res.status === 200) {
         toast.success("Resume created successfully");
+        await refetchResumes();
         setOpenForm(false);
-        setOpenPreviewCard(false);
+        closeParentDialog();
         if (userId) {
           await fetchResumeWithContent(userId);
         }

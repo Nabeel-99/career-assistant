@@ -30,6 +30,7 @@ const page = () => {
   const [levelTypingDone, setLevelTypingDone] = useState(false);
   const [generation, setGeneration] = useState("");
   const [isGenerating, setIsGenerating] = useState(false);
+  const [isSetupComplete, setIsSetupComplete] = useState(false);
 
   const beginPractice = () => {
     setGeneration("");
@@ -40,10 +41,47 @@ const page = () => {
     setIsLevel(false);
     setLevelTypingDone(false);
     setTypingDone(false);
+    setIsSetupComplete(false);
     setIsStarted(true);
   };
   const showLevel = () => setIsLevel(true);
 
+  const generateAnotherTask = async () => {
+    try {
+      const oldKeywords = JSON.parse(
+        sessionStorage.getItem("keywords") || "[]"
+      );
+      setIsGenerating(true);
+      setGeneration("");
+
+      const { output } = await generateCodingTask(
+        [`${stackSelected}`],
+        `${levelSelected}`,
+        oldKeywords
+      );
+
+      let fullText = "";
+      for await (const chunk of readStreamableValue(output)) {
+        fullText += chunk;
+        setGeneration((currentGeneration) => `${currentGeneration}${chunk}`);
+
+        await new Promise((resolve) => setTimeout(resolve, 50));
+      }
+
+      sessionStorage.setItem("lastTask", fullText);
+      const jsonData = await extractJSONFromText(fullText);
+
+      if (jsonData) {
+        const newKeyword = jsonData.keywords;
+        const updatedKeywords = [...oldKeywords, newKeyword];
+        sessionStorage.setItem("keywords", JSON.stringify(updatedKeywords));
+      }
+    } catch (error) {
+      toast.error("Error generating task");
+    } finally {
+      setIsGenerating(false);
+    }
+  };
   const generateTask = async (level: string) => {
     try {
       const oldKeywords = JSON.parse(
@@ -51,6 +89,7 @@ const page = () => {
       );
       setLevelSelected(level);
       setIsGenerating(true);
+      setIsSetupComplete(true);
       setGeneration("");
       setIsStarted(false);
 
@@ -70,7 +109,7 @@ const page = () => {
 
       sessionStorage.setItem("lastTask", fullText);
       const jsonData = await extractJSONFromText(fullText);
-      setIsGenerating(false);
+
       if (jsonData) {
         const newKeyword = jsonData.keywords;
         const updatedKeywords = [...oldKeywords, newKeyword];
@@ -120,9 +159,28 @@ const page = () => {
     <div className="flex flex-col md:flex-row gap-10 w-full">
       <section className="flex flex-col lg:w-1/2 gap-4">
         <div className="flex justify-start">
-          <Button disabled={isStarted} onClick={beginPractice}>
-            Generate Task
-          </Button>
+          {!isSetupComplete ? (
+            <Button disabled={isStarted} onClick={beginPractice}>
+              Start Practice
+            </Button>
+          ) : (
+            <div className="flex items-center gap-2">
+              <Button
+                disabled={isGenerating}
+                onClick={generateAnotherTask}
+                variant="default"
+              >
+                Next Challenge
+              </Button>
+              <Button
+                disabled={isGenerating}
+                onClick={beginPractice}
+                variant="outline"
+              >
+                Reset
+              </Button>
+            </div>
+          )}
         </div>
 
         <Card className="w-full min-h-[620px] max-h-[620px] overflow-scroll hide-scrollbar px-4 ">

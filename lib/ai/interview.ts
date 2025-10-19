@@ -78,7 +78,7 @@ export const generateQuestions = async (
 
 export const generateFeedback = async (transcript: Transcript[]) => {
   const { text } = await generateText({
-    model: google("gemini-1.5-flash"),
+    model: google("gemini-2.5-pro"),
 
     prompt: `You are an AI interview evaluator for a tech company.
   

@@ -33,9 +33,8 @@ const CvTemplatesContainer = ({
               <PreviewCard
                 userId={userId!}
                 template={template}
-                setOpenPreviewCard={(open) =>
-                  setOpenDialogIndex(open ? index : null)
-                }
+                closeParentDialog={() => setOpenDialogIndex(null)}
+                isOpen={openDialogIndex === index}
               />
             </DialogContent>
           </Dialog>

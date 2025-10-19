@@ -39,15 +39,17 @@ type ApplyDialogProps = {
   resumes: Resume[];
   loading: boolean;
   templateName?: string;
-  setOpenPreviewCard: (openPreviewCard: boolean) => void;
+  closeParentDialog: () => void;
+  refetchResumes: () => Promise<void>;
 };
 
-type ResumeSchema = z.infer<typeof resumeSchema>;
+type CVSchema = z.infer<typeof resumeSchema>;
 const ApplyDialog = ({
   resumes,
   loading,
   templateName,
-  setOpenPreviewCard,
+  closeParentDialog,
+  refetchResumes,
   userId,
 }: ApplyDialogProps) => {
   const [submitting, setSubmitting] = useState(false);
@@ -55,7 +57,7 @@ const ApplyDialog = ({
   const [missingfields, setMissingFields] = useState<string[]>([]);
   const [selectedResume, setSelectedResume] = useState<string | null>(null);
   const [resumeModal, setResumeModal] = useState(false);
-  const [incompleteResume, setIncompleteResume] = useState<ResumeSchema | null>(
+  const [incompleteResume, setIncompleteResume] = useState<CVSchema | null>(
     null
   );
 
@@ -73,13 +75,14 @@ const ApplyDialog = ({
     setSelectedResume(data.resumeId);
     try {
       setSubmitting(true);
-      const res = await axios.post("/api/cv/generate-cv", {
+      const res = await axios.post("/api/cv", {
         resumeId: data.resumeId,
       });
 
       if (res.status === 200) {
         toast.success("Resume generated successfully");
-        setOpenPreviewCard(false);
+        await refetchResumes();
+        closeParentDialog();
         if (userId) {
           await fetchResumeWithContent(userId);
         }
@@ -216,7 +219,8 @@ const ApplyDialog = ({
             missingFields={missingfields}
             incompleteResume={incompleteResume}
             templateName={templateName || ""}
-            setOpenPreviewCard={setOpenPreviewCard}
+            closeParentDialog={closeParentDialog}
+            refetchResumes={refetchResumes}
             setShowMissingLinksModal={setShowMissingLinksModal}
             setResumeModal={setResumeModal}
           />

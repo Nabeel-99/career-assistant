@@ -71,7 +71,7 @@ const PromptGenerator = ({
       )}
       {stackSelected && (
         <div className="flex items-center gap-3">
-          <p className="">Ready to proceed with {stackSelected}?</p>
+          <p className="">Continue with {stackSelected}?</p>
           <Button
             onClick={() => {
               showLevel();

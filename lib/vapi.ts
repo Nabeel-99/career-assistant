@@ -31,8 +31,8 @@ export const assistant = (
   // // @ts-ignore
   // serverMessages: ["end-of-call-report"],
   model: {
-    provider: "groq",
-    model: "llama-3.1-8b-instant",
+    provider: "anthropic",
+    model: "claude-3-5-haiku-20241022",
     temperature: 0.7,
 
     messages: [
@@ -67,6 +67,7 @@ End the interview properly:
 - Thank them for their time.
 - Let them know the company will follow up soon.
 - End the conversation politely and confidently.
+- Do not mention any feedback or scores,
 
 Remember:
 - This is a real-time voice conversation.

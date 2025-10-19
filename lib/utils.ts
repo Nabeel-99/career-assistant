@@ -19,6 +19,8 @@ export const getDevIconUrl = (name: string) => {
   const icon = name as keyof typeof devIconsMappings;
   if (icon === "aws") {
     return "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg";
+  } else if (icon === "tailwind css") {
+    return "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg";
   }
   return `https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${devIconsMappings[icon]}/${devIconsMappings[icon]}-original.svg`;
 };

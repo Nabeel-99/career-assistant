@@ -11,6 +11,7 @@ import { FaDownload, FaTrash } from "react-icons/fa";
 import { resumeSchema } from "@/lib/validation";
 import { DeleteDialog } from "../practiceui/DeleteDialog";
 import TemplateThree from "../cvtemplates/TemplateThree";
+import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 type Content = z.infer<typeof resumeSchema>;
 type ResumeTemplateProps = {
   templateId: number;
@@ -98,23 +99,37 @@ const ResumeTemplate = ({
         </div>
       </div>
       <div className="flex items-center gap-2 justify-end">
-        <Button
-          onClick={() => {
-            if (isSmallScreen) {
-              toast.info(
-                "Resume preview and download works best on a desktop. Try switching to a bigger screen."
-              );
-              return;
-            }
-            reactToPrintFn?.();
-          }}
-          className="cursor-pointer "
-        >
-          <FaDownload />
-        </Button>
-        <Button onClick={() => showDeleteDialog(templateId)}>
-          <FaTrash />
-        </Button>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button
+              onClick={() => {
+                if (isSmallScreen) {
+                  toast.info(
+                    "Resume preview and download works best on a desktop. Try switching to a bigger screen."
+                  );
+                  return;
+                }
+                reactToPrintFn?.();
+              }}
+              className="cursor-pointer "
+            >
+              <FaDownload />
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>Export as PDF</p>
+          </TooltipContent>
+        </Tooltip>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button onClick={() => showDeleteDialog(templateId)}>
+              <FaTrash />
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>Delete</p>
+          </TooltipContent>
+        </Tooltip>
       </div>
       <DeleteDialog
         deleteLoading={deleteLoading}

@@ -48,9 +48,11 @@ const InterviewContainer = ({
           <div className=" flex flex-col gap-2 items-center justify-center">
             <ImSpinner9 className="animate-spin text-white text-center text-4xl" />
             <p className="animate-pulse">
-              {feedbackMessage === "generating"
-                ? "Generating Feedback"
-                : "Your Feedback is ready"}
+              {feedbackMessage === "generating" ? (
+                <span className="text-white">Generating Feedback</span>
+              ) : (
+                <span className="text-white">Your Feedback is ready</span>
+              )}
             </p>
           </div>
         </div>
@@ -163,7 +165,7 @@ const InterviewContainer = ({
         {isConnected && (
           <div className=" flex flex-col items-center gap-4">
             <p className="text-center text-sm">Time remaining</p>
-            <p className=" border border-green-900 bg-[#f4f4f4] dark:bg-[#171717] rounded-md text-white w-20 text-center p-2">
+            <p className=" border dark:border-green-900 bg-[#f4f4f4] dark:bg-[#171717] rounded-md dark:text-white w-20 text-center p-2">
               {formatTimer(timeLeft)}
             </p>
           </div>

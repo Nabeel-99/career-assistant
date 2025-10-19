@@ -13,6 +13,7 @@ import { DialogDescription, DialogTitle } from "@radix-ui/react-dialog";
 import axios from "axios";
 import { DeleteDialog } from "../practiceui/DeleteDialog";
 import { toast } from "sonner";
+import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 
 const ResumeCard = ({
   loading,
@@ -96,20 +97,34 @@ const ResumeCard = ({
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Button
-                    onClick={() => openPreview(resume.filePath!)}
-                    className="bg-black/10 hover:bg-black/20 text-black dark:bg-[#1f1f1f] dark:hover:bg-[#343333] cursor-pointer rounded-xl dark:text-white"
-                  >
-                    <FaEye />
-                  </Button>
-                  <Button
-                    onClick={() => {
-                      showDeleteDialog(resume.id!, resume.filePath!);
-                    }}
-                    className="bg-black/10 hover:bg-black/20 text-black dark:bg-[#1f1f1f] dark:hover:bg-[#343333] cursor-pointer rounded-xl dark:text-white"
-                  >
-                    <FaTrash />
-                  </Button>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Button
+                        onClick={() => openPreview(resume.filePath!)}
+                        className="bg-black/10 hover:bg-black/20 text-black dark:bg-[#1f1f1f] dark:hover:bg-[#343333] cursor-pointer rounded-xl dark:text-white"
+                      >
+                        <FaEye />
+                      </Button>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>Preview</p>
+                    </TooltipContent>
+                  </Tooltip>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Button
+                        onClick={() => {
+                          showDeleteDialog(resume.id!, resume.filePath!);
+                        }}
+                        className="bg-black/10 hover:bg-black/20 text-black dark:bg-[#1f1f1f] dark:hover:bg-[#343333] cursor-pointer rounded-xl dark:text-white"
+                      >
+                        <FaTrash />
+                      </Button>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>Delete</p>
+                    </TooltipContent>
+                  </Tooltip>
                 </div>
               </div>
             ))

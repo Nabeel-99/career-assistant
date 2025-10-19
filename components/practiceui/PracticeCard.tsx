@@ -122,7 +122,7 @@ const PracticeCard = ({
                 </Button>
               </TooltipTrigger>
               <TooltipContent>
-                <p>Talk with AI in real time.</p>
+                <p>Chat with AI in real time.</p>
               </TooltipContent>
             </Tooltip>
           </Link>
@@ -142,7 +142,7 @@ const PracticeCard = ({
                     </Button>
                   </TooltipTrigger>
                   <TooltipContent>
-                    <p>Talk with AI in real time.</p>
+                    <p>Practice with real-time voice conversation.</p>
                   </TooltipContent>
                 </Tooltip>
               </Link>

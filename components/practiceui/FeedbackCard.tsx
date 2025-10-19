@@ -17,15 +17,16 @@ import Link from "next/link";
 import { FaStar } from "react-icons/fa";
 import FeedbackSkeleton from "../skeletons/FeedbackSkeleton";
 import { toast } from "sonner";
-
+import { SiGooglegemini } from "react-icons/si";
+import ReactMarkdown from "react-markdown";
 const FeedbackCard = ({ id }: { id: string }) => {
   const [feedback, setFeedback] = useState<PracticeWithFeedback | null>(null);
-  const [fetching, setFetching] = useState(false);
+  const [fetching, setFetching] = useState(true);
   const fetchFeedback = async () => {
     try {
       setFetching(true);
       const res = await fetchPracticeById(id);
-
+      console.log("feedback", res);
       setFeedback(res);
     } catch (error) {
       toast.error("Error fetching feedback");
@@ -70,8 +71,15 @@ const FeedbackCard = ({ id }: { id: string }) => {
         <CardContent className="leading-relaxed">
           {feedback?.feedback?.comment?.length! > 0 ? (
             <>
-              <p>{feedback?.feedback?.comment}</p>
-
+              <div
+                className="prose prose-slate max-w-none dark:prose-invert 
+                      prose-headings:font-bold prose-headings:text-lg
+                      prose-strong:text-primary prose-strong:font-semibold
+                      prose-ul:list-disc prose-ul:ml-4
+                      prose-p:mb-3"
+              >
+                <ReactMarkdown>{feedback?.feedback?.comment}</ReactMarkdown>
+              </div>
               <div className="flex items-center gap-1 mt-10">
                 <p>Overall score: </p>
 
@@ -89,7 +97,9 @@ const FeedbackCard = ({ id }: { id: string }) => {
       <div className="flex justify-end">
         <Link href={`/practice/interview/${id}`} className=" ">
           {" "}
-          <Button>Retake Interview</Button>
+          <Button className="flex items-center text-white gap-2 bg-blue-700 hover:bg-blue-600">
+            Retake Interview <SiGooglegemini />
+          </Button>
         </Link>
       </div>
     </div>

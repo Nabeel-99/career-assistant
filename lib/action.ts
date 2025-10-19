@@ -177,32 +177,36 @@ export const createFeedback = async (
 
   try {
     const aiFeedback = await generateFeedback(transcript);
-    if (!aiFeedback || !aiFeedback.comment?.trim()) {
+
+    console.log("AI Feedback:", JSON.stringify(aiFeedback, null, 2));
+    console.log("Comment type:", typeof aiFeedback?.comment);
+    console.log("Comment value:", aiFeedback?.comment);
+    if (!aiFeedback.comment || aiFeedback.comment.trim().length === 0) {
       return {
         success: false,
         message:
           "Unable to generate feedback from the conversation. Please try answering more questions.",
       };
     }
-    if (aiFeedback) {
-      await prisma.practice.update({
-        where: { id: Number(practiceId) },
-        data: { isTaken: true },
-      });
 
-      await prisma.feedback.upsert({
-        where: { practiceId: Number(practiceId) },
-        update: {
-          comment: aiFeedback.comment,
-          score: aiFeedback.totalScore,
-        },
-        create: {
-          practiceId: Number(practiceId),
-          comment: aiFeedback.comment,
-          score: aiFeedback.totalScore,
-        },
-      });
-    }
+    await prisma.practice.update({
+      where: { id: Number(practiceId) },
+      data: { isTaken: true },
+    });
+
+    await prisma.feedback.upsert({
+      where: { practiceId: Number(practiceId) },
+      update: {
+        comment: aiFeedback.comment,
+        score: aiFeedback.totalScore,
+      },
+      create: {
+        practiceId: Number(practiceId),
+        comment: aiFeedback.comment,
+        score: aiFeedback.totalScore,
+      },
+    });
+
     return { success: true, message: "Feedback created successfully" };
   } catch (error) {
     console.error("Feedback generation error:", error);

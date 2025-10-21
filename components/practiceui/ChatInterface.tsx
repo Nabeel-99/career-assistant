@@ -4,20 +4,14 @@ import { Prisma, User } from "@/lib/generated/prisma";
 import React, { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 import { Card } from "../ui/card";
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import { getDevIconUrl, mapLevel } from "@/lib/utils";
-import { Textarea } from "../ui/textarea";
-import { FaArrowUp } from "react-icons/fa6";
-import { IoMicOutline } from "react-icons/io5";
-
-import { Button } from "../ui/button";
-import { SiGooglegemini } from "react-icons/si";
+import { mapLevel } from "@/lib/utils";
 import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport } from "ai";
-import { FaStop } from "react-icons/fa";
 import PracticeHeaderSkeleton from "../skeletons/PracticeHeaderSkeleton";
 import { fetchPracticeById } from "@/lib/actions/practice";
-import { Streamdown } from "streamdown";
+import PracticeHeader from "../PracticeHeader";
+import ChatMessages from "./ChatMessages";
+import ChatInput from "./ChatInput";
 
 type PracticeWithQuestions = Prisma.PracticeGetPayload<{
   include: { questions: true };
@@ -27,7 +21,6 @@ const ChatInterface = ({ id, user }: { id: string; user: User }) => {
   const [practice, setPractice] = useState<PracticeWithQuestions | null>(null);
   const [hasStarted, setHasStarted] = useState(false);
   const [input, setInput] = useState("");
-
   const [isAtBottom, setIsAtBottom] = useState(true);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const messagesContainerRef = useRef<HTMLDivElement>(null);
@@ -116,186 +109,29 @@ const ChatInterface = ({ id, user }: { id: string; user: User }) => {
           <PracticeHeaderSkeleton />
         ) : (
           practice && (
-            <div className="flex flex-col absolute bg-white dark:bg-[#0a0a0a] mask-b-from-90% z-20  pt-10 rounded-t-xl pb-10 border-none  top-0 right-0 left-0 gap-2">
-              <div className="flex  flex-col gap-4 md:flex-row items-start  md:justify-between px-4 lg:px-10">
-                <div className="flex flex-col gap-2">
-                  <h1 className="text-xl font-bold">{practice?.title}</h1>
-                  {practice?.level && (
-                    <p className="font-medium">
-                      Level: <span>{mapLevel[level]?.title}</span>
-                    </p>
-                  )}
-                </div>
-                <div className="*:data-[slot=avatar]:ring-[#c3c3c3] dark:*:data-[slot=avatar]:ring-[#4b4b4b] order-first md:order-last flex -space-x-1 *:data-[slot=avatar]:ring-2 ">
-                  {practice?.stacks.map((stack: string, index: any) => (
-                    <Avatar className="size-6" key={index}>
-                      <AvatarImage
-                        src={getDevIconUrl(stack)}
-                        alt={stack}
-                        className="backdrop-blur-lg rounded-full bg-white/40"
-                      />
-                      <AvatarFallback>{stack}</AvatarFallback>
-                    </Avatar>
-                  ))}
-                </div>
-              </div>
-              <p className="italic text-subheadline px-4 lg:px-10">
-                {practice?.description}.
-              </p>
-              {!hasStarted && (
-                <div className="px-4 lg:px-10">
-                  {" "}
-                  <Button
-                    onClick={handleStart}
-                    className="flex items-center gap-2 bg-blue-800 hover:bg-blue-600 text-white"
-                  >
-                    Start <SiGooglegemini />
-                  </Button>
-                </div>
-              )}
-            </div>
+            <PracticeHeader
+              practice={practice}
+              hasStarted={hasStarted}
+              handleStart={handleStart}
+              level={level}
+            />
           )
         )}
-
-        <div className="mt-60 pt-10 md:mt-40 pb-[50vh] lg:pb-[40vh] ">
-          {messages.map((msg) => (
-            <div
-              key={msg.id}
-              className={`mb-4 flex ${
-                msg.role === "user" ? "justify-end" : "justify-start"
-              }`}
-            >
-              <div
-                className={`inline-block max-w-[80%] h-full p-3 rounded-lg whitespace-pre-wrap ${
-                  msg.role === "user"
-                    ? "bg-black dark:bg-[#171717]  text-white"
-                    : "bg-gray-100 dark:bg-zinc-800"
-                }`}
-              >
-                {msg.parts.map((part, i) => {
-                  if (part.type === "text") {
-                    const cleanText = part.text.replace(/\n{2,}/g, "\n\n");
-                    return (
-                      <Streamdown
-                        key={i}
-                        components={{
-                          h1: ({ children }) => (
-                            <h1 className="text-2xl font-bold mb-4">
-                              {children}
-                            </h1>
-                          ),
-                          h2: ({ children }) => (
-                            <h2 className="text-xl font-semibold mb-4">
-                              {children}
-                            </h2>
-                          ),
-                          p: ({ children }) => (
-                            <p className="leading-relaxed mb-3">{children}</p>
-                          ),
-                          li: ({ children }) => (
-                            <ul>
-                              <li className="mb-2">{children}</li>
-                            </ul>
-                          ),
-                          table: ({ children }) => (
-                            <table className="border-collapse border border-gray-300 my-4">
-                              {children}
-                            </table>
-                          ),
-                          th: ({ children }) => (
-                            <th className="border border-gray-300 px-3 py-1 bg-gray-100">
-                              {children}
-                            </th>
-                          ),
-                          td: ({ children }) => (
-                            <td className="border border-gray-300 px-3 py-1">
-                              {children}
-                            </td>
-                          ),
-                          code: ({ children, className }) => {
-                            const isInline = !className;
-                            return isInline ? (
-                              <code className="bg-[#eeeeee]  mb-3 dark:bg-[#151515] border px-1 py-0.5 rounded text-sm font-mono">
-                                {children}
-                              </code>
-                            ) : (
-                              <pre className="bg-[#eeeeee] mb-3 dark:bg-[#151515] border p-4 rounded-lg overflow-x-auto">
-                                <code className="text-sm">{children}</code>
-                              </pre>
-                            );
-                          },
-                          strong: ({ children }) => (
-                            <strong className="font-semibold mb-3">
-                              {children}
-                            </strong>
-                          ),
-                        }}
-                      >
-                        {cleanText}
-                      </Streamdown>
-                    );
-                  }
-                  return null;
-                })}
-              </div>
-            </div>
-          ))}
-
-          {status === "submitted" && (
-            <div className="flex items-center gap-2 justify-start mb-4">
-              <div className="w-4 h-4 bg-gray-500 dark:bg-gray-300 rounded-full animate-pulse"></div>
-            </div>
-          )}
-          <div ref={messagesEndRef} />
-        </div>
+        <ChatMessages
+          messages={messages}
+          status={status}
+          messagesEndRef={messagesEndRef}
+        />
       </div>
       <div className=" absolute rounded-b-xl   bg-white dark:bg-[#0a0a0a] bottom-0 left-0 right-0 px-4 lg:px-10">
-        <form
-          onSubmit={handleSubmit}
-          className="border mb-4 p-2 rounded-xl bg-white/90   dark:bg-[#171717]  backdrop-blur-md w-full  flex  gap-4 items-end "
-        >
-          <Textarea
-            placeholder="type here..."
-            value={input}
-            disabled={!hasStarted}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" && !e.shiftKey) {
-                e.preventDefault();
-                handleSubmit(e);
-              }
-            }}
-            className="max-h-60 bg-transparent dark:bg-[#171717] border-none border-0 w-full min-h-0 flex items-center focus-visible:ring-0 resize-none shadow-none"
-          />
-          <div className="flex items-center gap-1">
-            <button type="button" className="p-2 rounded-full">
-              <IoMicOutline className="size-5" />
-              <span className="sr-only">mic</span>
-            </button>
-            {status === "streaming" ? (
-              <button
-                type="button"
-                onClick={stop}
-                disabled={
-                  !hasStarted || (!input.trim() && status !== "streaming")
-                }
-                className="p-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed hover:bg-black/60 rounded-full bg-black"
-              >
-                <FaStop className="size-3 text-white" />
-                <span className="sr-only">stop</span>
-              </button>
-            ) : (
-              <button
-                type="submit"
-                disabled={!hasStarted || !input.trim()}
-                className="p-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed hover:bg-black/60 rounded-full bg-black"
-              >
-                <FaArrowUp className="size-3 text-white" />
-                <span className="sr-only">send</span>
-              </button>
-            )}
-          </div>
-        </form>
+        <ChatInput
+          input={input}
+          setInput={setInput}
+          handleSubmit={handleSubmit}
+          stop={stop}
+          hasStarted={hasStarted}
+          status={status}
+        />
       </div>
     </Card>
   );

@@ -56,7 +56,7 @@ const PromptGenerator = ({
               disabled={isYes}
               onClick={() => {
                 if (isYes) return;
-                console.log("stack", stack);
+
                 setStackSelected(stack);
               }}
               className={`${

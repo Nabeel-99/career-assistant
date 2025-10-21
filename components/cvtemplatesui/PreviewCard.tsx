@@ -2,12 +2,13 @@
 
 import React, { useEffect, useState } from "react";
 import { DialogDescription, DialogHeader, DialogTitle } from "../ui/dialog";
-import { fetchResumes } from "@/lib/action";
+
 import { Resume } from "@/lib/generated/prisma";
 import ApplyDialog from "./ApplyDialog";
 import { Template } from "@/lib/types";
 import CreateCVDialog from "./CreateCVDialog";
 import { toast } from "sonner";
+import { fetchResumes } from "@/lib/actions/resumeHelpers";
 
 const PreviewCard = ({
   userId,

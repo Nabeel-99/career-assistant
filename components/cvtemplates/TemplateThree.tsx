@@ -1,6 +1,5 @@
 "use client";
 
-import supabase from "@/lib/supabase";
 import { formatTemplateDate } from "@/lib/utils";
 import { resumeSchema } from "@/lib/validation";
 import React, { useEffect, useState } from "react";

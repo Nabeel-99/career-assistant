@@ -1,5 +1,5 @@
 "use client";
-import { fetchPracticeById } from "@/lib/action";
+
 import React, { useEffect, useState } from "react";
 import {
   Card,
@@ -19,6 +19,7 @@ import FeedbackSkeleton from "../skeletons/FeedbackSkeleton";
 import { toast } from "sonner";
 import { SiGooglegemini } from "react-icons/si";
 import ReactMarkdown from "react-markdown";
+import { fetchPracticeById } from "@/lib/actions/practice";
 const FeedbackCard = ({ id }: { id: string }) => {
   const [feedback, setFeedback] = useState<PracticeWithFeedback | null>(null);
   const [fetching, setFetching] = useState(true);

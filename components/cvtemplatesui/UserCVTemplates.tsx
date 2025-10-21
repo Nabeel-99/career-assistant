@@ -1,5 +1,5 @@
 "use client";
-import { deleteUserTemplate, fetchResumeWithContent } from "@/lib/action";
+
 import { CVBuilder } from "@/lib/generated/prisma";
 import React, { useEffect, useState } from "react";
 import { Skeleton } from "../ui/skeleton";
@@ -9,6 +9,7 @@ import { resumeSchema } from "@/lib/validation";
 import { toast } from "sonner";
 import ResumeTemplate from "./ResumeTemplate";
 import axios from "axios";
+import { fetchResumeWithContent } from "@/lib/actions/resumeHelpers";
 
 type Content = z.infer<typeof resumeSchema>;
 const UserCVTemplates = ({ userId }: { userId: string }) => {
@@ -19,7 +20,7 @@ const UserCVTemplates = ({ userId }: { userId: string }) => {
     try {
       setLoading(true);
       const res = await fetchResumeWithContent(userId);
-      console.log("resume content", res);
+
       setUserTemplates(res);
     } catch (error) {
       toast.error("Error fetching resumes");

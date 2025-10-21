@@ -2,13 +2,14 @@
 
 import React, { useEffect, useState } from "react";
 import { Prisma } from "@/lib/generated/prisma";
-import { createFeedback, fetchPracticeById } from "@/lib/action";
 import { assistant, vapi } from "@/lib/vapi";
 import InterviewContainer from "./InterviewContainer";
 import { Transcript } from "@/lib/types";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import CallCardSkeleton from "../skeletons/CallCardSkeleton";
+import { fetchPracticeById } from "@/lib/actions/practice";
+import { createFeedback } from "@/lib/actions/feedback";
 
 type UserWithResume = Prisma.UserGetPayload<{
   include: {
@@ -86,7 +87,6 @@ const CallCard = ({
           },
         ]);
       }
-      console.log("message", message);
     });
 
     vapi.on("error", (error: any) => {

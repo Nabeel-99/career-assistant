@@ -1433,6 +1433,8 @@ export namespace Prisma {
     hasResume: boolean | null
     type: $Enums.UserType | null
     betaUser: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type UserMaxAggregateOutputType = {
@@ -1447,6 +1449,8 @@ export namespace Prisma {
     hasResume: boolean | null
     type: $Enums.UserType | null
     betaUser: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type UserCountAggregateOutputType = {
@@ -1461,6 +1465,8 @@ export namespace Prisma {
     hasResume: number
     type: number
     betaUser: number
+    createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -1477,6 +1483,8 @@ export namespace Prisma {
     hasResume?: true
     type?: true
     betaUser?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type UserMaxAggregateInputType = {
@@ -1491,6 +1499,8 @@ export namespace Prisma {
     hasResume?: true
     type?: true
     betaUser?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type UserCountAggregateInputType = {
@@ -1505,6 +1515,8 @@ export namespace Prisma {
     hasResume?: true
     type?: true
     betaUser?: true
+    createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -1592,6 +1604,8 @@ export namespace Prisma {
     hasResume: boolean | null
     type: $Enums.UserType
     betaUser: boolean | null
+    createdAt: Date
+    updatedAt: Date
     _count: UserCountAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
@@ -1623,6 +1637,8 @@ export namespace Prisma {
     hasResume?: boolean
     type?: boolean
     betaUser?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     practices?: boolean | User$practicesArgs<ExtArgs>
     resumes?: boolean | User$resumesArgs<ExtArgs>
     cv?: boolean | User$cvArgs<ExtArgs>
@@ -1641,6 +1657,8 @@ export namespace Prisma {
     hasResume?: boolean
     type?: boolean
     betaUser?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -1655,6 +1673,8 @@ export namespace Prisma {
     hasResume?: boolean
     type?: boolean
     betaUser?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectScalar = {
@@ -1669,9 +1689,11 @@ export namespace Prisma {
     hasResume?: boolean
     type?: boolean
     betaUser?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "firstname" | "lastname" | "password" | "image" | "cloudinaryAvatarId" | "isUserNew" | "hasResume" | "type" | "betaUser", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "firstname" | "lastname" | "password" | "image" | "cloudinaryAvatarId" | "isUserNew" | "hasResume" | "type" | "betaUser" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     practices?: boolean | User$practicesArgs<ExtArgs>
     resumes?: boolean | User$resumesArgs<ExtArgs>
@@ -1700,6 +1722,8 @@ export namespace Prisma {
       hasResume: boolean | null
       type: $Enums.UserType
       betaUser: boolean | null
+      createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -2137,6 +2161,8 @@ export namespace Prisma {
     readonly hasResume: FieldRef<"User", 'Boolean'>
     readonly type: FieldRef<"User", 'UserType'>
     readonly betaUser: FieldRef<"User", 'Boolean'>
+    readonly createdAt: FieldRef<"User", 'DateTime'>
+    readonly updatedAt: FieldRef<"User", 'DateTime'>
   }
     
 
@@ -2645,6 +2671,7 @@ export namespace Prisma {
     isTaken: boolean | null
     userId: string | null
     createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type PracticeMaxAggregateOutputType = {
@@ -2657,6 +2684,7 @@ export namespace Prisma {
     isTaken: boolean | null
     userId: string | null
     createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type PracticeCountAggregateOutputType = {
@@ -2670,6 +2698,7 @@ export namespace Prisma {
     isTaken: number
     userId: number
     createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -2692,6 +2721,7 @@ export namespace Prisma {
     isTaken?: true
     userId?: true
     createdAt?: true
+    updatedAt?: true
   }
 
   export type PracticeMaxAggregateInputType = {
@@ -2704,6 +2734,7 @@ export namespace Prisma {
     isTaken?: true
     userId?: true
     createdAt?: true
+    updatedAt?: true
   }
 
   export type PracticeCountAggregateInputType = {
@@ -2717,6 +2748,7 @@ export namespace Prisma {
     isTaken?: true
     userId?: true
     createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -2817,6 +2849,7 @@ export namespace Prisma {
     isTaken: boolean | null
     userId: string
     createdAt: Date
+    updatedAt: Date
     _count: PracticeCountAggregateOutputType | null
     _avg: PracticeAvgAggregateOutputType | null
     _sum: PracticeSumAggregateOutputType | null
@@ -2849,6 +2882,7 @@ export namespace Prisma {
     isTaken?: boolean
     userId?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
     questions?: boolean | Practice$questionsArgs<ExtArgs>
     users?: boolean | UserDefaultArgs<ExtArgs>
     feedback?: boolean | Practice$feedbackArgs<ExtArgs>
@@ -2866,6 +2900,7 @@ export namespace Prisma {
     isTaken?: boolean
     userId?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
     users?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["practice"]>
 
@@ -2880,6 +2915,7 @@ export namespace Prisma {
     isTaken?: boolean
     userId?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
     users?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["practice"]>
 
@@ -2894,9 +2930,10 @@ export namespace Prisma {
     isTaken?: boolean
     userId?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type PracticeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "stacks" | "role" | "level" | "resumeText" | "isTaken" | "userId" | "createdAt", ExtArgs["result"]["practice"]>
+  export type PracticeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "stacks" | "role" | "level" | "resumeText" | "isTaken" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["practice"]>
   export type PracticeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     questions?: boolean | Practice$questionsArgs<ExtArgs>
     users?: boolean | UserDefaultArgs<ExtArgs>
@@ -2928,6 +2965,7 @@ export namespace Prisma {
       isTaken: boolean | null
       userId: string
       createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["practice"]>
     composites: {}
   }
@@ -3364,6 +3402,7 @@ export namespace Prisma {
     readonly isTaken: FieldRef<"Practice", 'Boolean'>
     readonly userId: FieldRef<"Practice", 'String'>
     readonly createdAt: FieldRef<"Practice", 'DateTime'>
+    readonly updatedAt: FieldRef<"Practice", 'DateTime'>
   }
     
 
@@ -3848,6 +3887,7 @@ export namespace Prisma {
     question: string | null
     practiceId: number | null
     createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type QuestionMaxAggregateOutputType = {
@@ -3855,6 +3895,7 @@ export namespace Prisma {
     question: string | null
     practiceId: number | null
     createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type QuestionCountAggregateOutputType = {
@@ -3862,6 +3903,7 @@ export namespace Prisma {
     question: number
     practiceId: number
     createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -3881,6 +3923,7 @@ export namespace Prisma {
     question?: true
     practiceId?: true
     createdAt?: true
+    updatedAt?: true
   }
 
   export type QuestionMaxAggregateInputType = {
@@ -3888,6 +3931,7 @@ export namespace Prisma {
     question?: true
     practiceId?: true
     createdAt?: true
+    updatedAt?: true
   }
 
   export type QuestionCountAggregateInputType = {
@@ -3895,6 +3939,7 @@ export namespace Prisma {
     question?: true
     practiceId?: true
     createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -3989,6 +4034,7 @@ export namespace Prisma {
     question: string | null
     practiceId: number
     createdAt: Date
+    updatedAt: Date
     _count: QuestionCountAggregateOutputType | null
     _avg: QuestionAvgAggregateOutputType | null
     _sum: QuestionSumAggregateOutputType | null
@@ -4015,6 +4061,7 @@ export namespace Prisma {
     question?: boolean
     practiceId?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
     practices?: boolean | PracticeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["question"]>
 
@@ -4023,6 +4070,7 @@ export namespace Prisma {
     question?: boolean
     practiceId?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
     practices?: boolean | PracticeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["question"]>
 
@@ -4031,6 +4079,7 @@ export namespace Prisma {
     question?: boolean
     practiceId?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
     practices?: boolean | PracticeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["question"]>
 
@@ -4039,9 +4088,10 @@ export namespace Prisma {
     question?: boolean
     practiceId?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type QuestionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "question" | "practiceId" | "createdAt", ExtArgs["result"]["question"]>
+  export type QuestionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "question" | "practiceId" | "createdAt" | "updatedAt", ExtArgs["result"]["question"]>
   export type QuestionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     practices?: boolean | PracticeDefaultArgs<ExtArgs>
   }
@@ -4062,6 +4112,7 @@ export namespace Prisma {
       question: string | null
       practiceId: number
       createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["question"]>
     composites: {}
   }
@@ -4490,6 +4541,7 @@ export namespace Prisma {
     readonly question: FieldRef<"Question", 'String'>
     readonly practiceId: FieldRef<"Question", 'Int'>
     readonly createdAt: FieldRef<"Question", 'DateTime'>
+    readonly updatedAt: FieldRef<"Question", 'DateTime'>
   }
     
 
@@ -4930,6 +4982,7 @@ export namespace Prisma {
     template: string | null
     userId: string | null
     createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type CVBuilderMaxAggregateOutputType = {
@@ -4938,6 +4991,7 @@ export namespace Prisma {
     template: string | null
     userId: string | null
     createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type CVBuilderCountAggregateOutputType = {
@@ -4947,6 +5001,7 @@ export namespace Prisma {
     template: number
     userId: number
     createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -4965,6 +5020,7 @@ export namespace Prisma {
     template?: true
     userId?: true
     createdAt?: true
+    updatedAt?: true
   }
 
   export type CVBuilderMaxAggregateInputType = {
@@ -4973,6 +5029,7 @@ export namespace Prisma {
     template?: true
     userId?: true
     createdAt?: true
+    updatedAt?: true
   }
 
   export type CVBuilderCountAggregateInputType = {
@@ -4982,6 +5039,7 @@ export namespace Prisma {
     template?: true
     userId?: true
     createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -5078,6 +5136,7 @@ export namespace Prisma {
     template: string | null
     userId: string
     createdAt: Date
+    updatedAt: Date
     _count: CVBuilderCountAggregateOutputType | null
     _avg: CVBuilderAvgAggregateOutputType | null
     _sum: CVBuilderSumAggregateOutputType | null
@@ -5106,6 +5165,7 @@ export namespace Prisma {
     template?: boolean
     userId?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["cVBuilder"]>
 
@@ -5116,6 +5176,7 @@ export namespace Prisma {
     template?: boolean
     userId?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["cVBuilder"]>
 
@@ -5126,6 +5187,7 @@ export namespace Prisma {
     template?: boolean
     userId?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["cVBuilder"]>
 
@@ -5136,9 +5198,10 @@ export namespace Prisma {
     template?: boolean
     userId?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type CVBuilderOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "content" | "template" | "userId" | "createdAt", ExtArgs["result"]["cVBuilder"]>
+  export type CVBuilderOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "content" | "template" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["cVBuilder"]>
   export type CVBuilderInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -5161,6 +5224,7 @@ export namespace Prisma {
       template: string | null
       userId: string
       createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["cVBuilder"]>
     composites: {}
   }
@@ -5591,6 +5655,7 @@ export namespace Prisma {
     readonly template: FieldRef<"CVBuilder", 'String'>
     readonly userId: FieldRef<"CVBuilder", 'String'>
     readonly createdAt: FieldRef<"CVBuilder", 'DateTime'>
+    readonly updatedAt: FieldRef<"CVBuilder", 'DateTime'>
   }
     
 
@@ -6033,6 +6098,7 @@ export namespace Prisma {
     cloudinaryId: string | null
     userId: string | null
     createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type ResumeMaxAggregateOutputType = {
@@ -6043,6 +6109,7 @@ export namespace Prisma {
     cloudinaryId: string | null
     userId: string | null
     createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type ResumeCountAggregateOutputType = {
@@ -6053,6 +6120,7 @@ export namespace Prisma {
     cloudinaryId: number
     userId: number
     createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -6073,6 +6141,7 @@ export namespace Prisma {
     cloudinaryId?: true
     userId?: true
     createdAt?: true
+    updatedAt?: true
   }
 
   export type ResumeMaxAggregateInputType = {
@@ -6083,6 +6152,7 @@ export namespace Prisma {
     cloudinaryId?: true
     userId?: true
     createdAt?: true
+    updatedAt?: true
   }
 
   export type ResumeCountAggregateInputType = {
@@ -6093,6 +6163,7 @@ export namespace Prisma {
     cloudinaryId?: true
     userId?: true
     createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -6190,6 +6261,7 @@ export namespace Prisma {
     cloudinaryId: string | null
     userId: string
     createdAt: Date
+    updatedAt: Date
     _count: ResumeCountAggregateOutputType | null
     _avg: ResumeAvgAggregateOutputType | null
     _sum: ResumeSumAggregateOutputType | null
@@ -6219,6 +6291,7 @@ export namespace Prisma {
     cloudinaryId?: boolean
     userId?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
     users?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["resume"]>
 
@@ -6230,6 +6303,7 @@ export namespace Prisma {
     cloudinaryId?: boolean
     userId?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
     users?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["resume"]>
 
@@ -6241,6 +6315,7 @@ export namespace Prisma {
     cloudinaryId?: boolean
     userId?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
     users?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["resume"]>
 
@@ -6252,9 +6327,10 @@ export namespace Prisma {
     cloudinaryId?: boolean
     userId?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type ResumeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "rawText" | "filePath" | "cloudinaryId" | "userId" | "createdAt", ExtArgs["result"]["resume"]>
+  export type ResumeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "rawText" | "filePath" | "cloudinaryId" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["resume"]>
   export type ResumeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     users?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -6278,6 +6354,7 @@ export namespace Prisma {
       cloudinaryId: string | null
       userId: string
       createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["resume"]>
     composites: {}
   }
@@ -6709,6 +6786,7 @@ export namespace Prisma {
     readonly cloudinaryId: FieldRef<"Resume", 'String'>
     readonly userId: FieldRef<"Resume", 'String'>
     readonly createdAt: FieldRef<"Resume", 'DateTime'>
+    readonly updatedAt: FieldRef<"Resume", 'DateTime'>
   }
     
 
@@ -7153,6 +7231,7 @@ export namespace Prisma {
     comment: string | null
     score: number | null
     createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type FeedbackMaxAggregateOutputType = {
@@ -7161,6 +7240,7 @@ export namespace Prisma {
     comment: string | null
     score: number | null
     createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type FeedbackCountAggregateOutputType = {
@@ -7169,6 +7249,7 @@ export namespace Prisma {
     comment: number
     score: number
     createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -7191,6 +7272,7 @@ export namespace Prisma {
     comment?: true
     score?: true
     createdAt?: true
+    updatedAt?: true
   }
 
   export type FeedbackMaxAggregateInputType = {
@@ -7199,6 +7281,7 @@ export namespace Prisma {
     comment?: true
     score?: true
     createdAt?: true
+    updatedAt?: true
   }
 
   export type FeedbackCountAggregateInputType = {
@@ -7207,6 +7290,7 @@ export namespace Prisma {
     comment?: true
     score?: true
     createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -7302,6 +7386,7 @@ export namespace Prisma {
     comment: string
     score: number
     createdAt: Date
+    updatedAt: Date
     _count: FeedbackCountAggregateOutputType | null
     _avg: FeedbackAvgAggregateOutputType | null
     _sum: FeedbackSumAggregateOutputType | null
@@ -7329,6 +7414,7 @@ export namespace Prisma {
     comment?: boolean
     score?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
     practice?: boolean | PracticeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["feedback"]>
 
@@ -7338,6 +7424,7 @@ export namespace Prisma {
     comment?: boolean
     score?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
     practice?: boolean | PracticeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["feedback"]>
 
@@ -7347,6 +7434,7 @@ export namespace Prisma {
     comment?: boolean
     score?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
     practice?: boolean | PracticeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["feedback"]>
 
@@ -7356,9 +7444,10 @@ export namespace Prisma {
     comment?: boolean
     score?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type FeedbackOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "practiceId" | "comment" | "score" | "createdAt", ExtArgs["result"]["feedback"]>
+  export type FeedbackOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "practiceId" | "comment" | "score" | "createdAt" | "updatedAt", ExtArgs["result"]["feedback"]>
   export type FeedbackInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     practice?: boolean | PracticeDefaultArgs<ExtArgs>
   }
@@ -7380,6 +7469,7 @@ export namespace Prisma {
       comment: string
       score: number
       createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["feedback"]>
     composites: {}
   }
@@ -7809,6 +7899,7 @@ export namespace Prisma {
     readonly comment: FieldRef<"Feedback", 'String'>
     readonly score: FieldRef<"Feedback", 'Int'>
     readonly createdAt: FieldRef<"Feedback", 'DateTime'>
+    readonly updatedAt: FieldRef<"Feedback", 'DateTime'>
   }
     
 
@@ -8248,7 +8339,9 @@ export namespace Prisma {
     isUserNew: 'isUserNew',
     hasResume: 'hasResume',
     type: 'type',
-    betaUser: 'betaUser'
+    betaUser: 'betaUser',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -8264,7 +8357,8 @@ export namespace Prisma {
     resumeText: 'resumeText',
     isTaken: 'isTaken',
     userId: 'userId',
-    createdAt: 'createdAt'
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type PracticeScalarFieldEnum = (typeof PracticeScalarFieldEnum)[keyof typeof PracticeScalarFieldEnum]
@@ -8274,7 +8368,8 @@ export namespace Prisma {
     id: 'id',
     question: 'question',
     practiceId: 'practiceId',
-    createdAt: 'createdAt'
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type QuestionScalarFieldEnum = (typeof QuestionScalarFieldEnum)[keyof typeof QuestionScalarFieldEnum]
@@ -8286,7 +8381,8 @@ export namespace Prisma {
     content: 'content',
     template: 'template',
     userId: 'userId',
-    createdAt: 'createdAt'
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type CVBuilderScalarFieldEnum = (typeof CVBuilderScalarFieldEnum)[keyof typeof CVBuilderScalarFieldEnum]
@@ -8299,7 +8395,8 @@ export namespace Prisma {
     filePath: 'filePath',
     cloudinaryId: 'cloudinaryId',
     userId: 'userId',
-    createdAt: 'createdAt'
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type ResumeScalarFieldEnum = (typeof ResumeScalarFieldEnum)[keyof typeof ResumeScalarFieldEnum]
@@ -8310,7 +8407,8 @@ export namespace Prisma {
     practiceId: 'practiceId',
     comment: 'comment',
     score: 'score',
-    createdAt: 'createdAt'
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type FeedbackScalarFieldEnum = (typeof FeedbackScalarFieldEnum)[keyof typeof FeedbackScalarFieldEnum]
@@ -8397,20 +8495,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Int'
-   */
-  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
-    
-
-
-  /**
-   * Reference to a field of type 'Int[]'
-   */
-  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
-    
-
-
-  /**
    * Reference to a field of type 'DateTime'
    */
   export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
@@ -8421,6 +8505,20 @@ export namespace Prisma {
    * Reference to a field of type 'DateTime[]'
    */
   export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Int'
+   */
+  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+    
+
+
+  /**
+   * Reference to a field of type 'Int[]'
+   */
+  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
     
 
 
@@ -8470,6 +8568,8 @@ export namespace Prisma {
     hasResume?: BoolNullableFilter<"User"> | boolean | null
     type?: EnumUserTypeFilter<"User"> | $Enums.UserType
     betaUser?: BoolNullableFilter<"User"> | boolean | null
+    createdAt?: DateTimeFilter<"User"> | Date | string
+    updatedAt?: DateTimeFilter<"User"> | Date | string
     practices?: PracticeListRelationFilter
     resumes?: ResumeListRelationFilter
     cv?: CVBuilderListRelationFilter
@@ -8487,6 +8587,8 @@ export namespace Prisma {
     hasResume?: SortOrderInput | SortOrder
     type?: SortOrder
     betaUser?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     practices?: PracticeOrderByRelationAggregateInput
     resumes?: ResumeOrderByRelationAggregateInput
     cv?: CVBuilderOrderByRelationAggregateInput
@@ -8507,6 +8609,8 @@ export namespace Prisma {
     hasResume?: BoolNullableFilter<"User"> | boolean | null
     type?: EnumUserTypeFilter<"User"> | $Enums.UserType
     betaUser?: BoolNullableFilter<"User"> | boolean | null
+    createdAt?: DateTimeFilter<"User"> | Date | string
+    updatedAt?: DateTimeFilter<"User"> | Date | string
     practices?: PracticeListRelationFilter
     resumes?: ResumeListRelationFilter
     cv?: CVBuilderListRelationFilter
@@ -8524,6 +8628,8 @@ export namespace Prisma {
     hasResume?: SortOrderInput | SortOrder
     type?: SortOrder
     betaUser?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: UserCountOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
     _min?: UserMinOrderByAggregateInput
@@ -8544,6 +8650,8 @@ export namespace Prisma {
     hasResume?: BoolNullableWithAggregatesFilter<"User"> | boolean | null
     type?: EnumUserTypeWithAggregatesFilter<"User"> | $Enums.UserType
     betaUser?: BoolNullableWithAggregatesFilter<"User"> | boolean | null
+    createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
   }
 
   export type PracticeWhereInput = {
@@ -8560,6 +8668,7 @@ export namespace Prisma {
     isTaken?: BoolNullableFilter<"Practice"> | boolean | null
     userId?: StringFilter<"Practice"> | string
     createdAt?: DateTimeFilter<"Practice"> | Date | string
+    updatedAt?: DateTimeFilter<"Practice"> | Date | string
     questions?: QuestionListRelationFilter
     users?: XOR<UserScalarRelationFilter, UserWhereInput>
     feedback?: XOR<FeedbackNullableScalarRelationFilter, FeedbackWhereInput> | null
@@ -8576,6 +8685,7 @@ export namespace Prisma {
     isTaken?: SortOrderInput | SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
     questions?: QuestionOrderByRelationAggregateInput
     users?: UserOrderByWithRelationInput
     feedback?: FeedbackOrderByWithRelationInput
@@ -8595,6 +8705,7 @@ export namespace Prisma {
     isTaken?: BoolNullableFilter<"Practice"> | boolean | null
     userId?: StringFilter<"Practice"> | string
     createdAt?: DateTimeFilter<"Practice"> | Date | string
+    updatedAt?: DateTimeFilter<"Practice"> | Date | string
     questions?: QuestionListRelationFilter
     users?: XOR<UserScalarRelationFilter, UserWhereInput>
     feedback?: XOR<FeedbackNullableScalarRelationFilter, FeedbackWhereInput> | null
@@ -8611,6 +8722,7 @@ export namespace Prisma {
     isTaken?: SortOrderInput | SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: PracticeCountOrderByAggregateInput
     _avg?: PracticeAvgOrderByAggregateInput
     _max?: PracticeMaxOrderByAggregateInput
@@ -8632,6 +8744,7 @@ export namespace Prisma {
     isTaken?: BoolNullableWithAggregatesFilter<"Practice"> | boolean | null
     userId?: StringWithAggregatesFilter<"Practice"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Practice"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Practice"> | Date | string
   }
 
   export type QuestionWhereInput = {
@@ -8642,6 +8755,7 @@ export namespace Prisma {
     question?: StringNullableFilter<"Question"> | string | null
     practiceId?: IntFilter<"Question"> | number
     createdAt?: DateTimeFilter<"Question"> | Date | string
+    updatedAt?: DateTimeFilter<"Question"> | Date | string
     practices?: XOR<PracticeScalarRelationFilter, PracticeWhereInput>
   }
 
@@ -8650,6 +8764,7 @@ export namespace Prisma {
     question?: SortOrderInput | SortOrder
     practiceId?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
     practices?: PracticeOrderByWithRelationInput
   }
 
@@ -8661,6 +8776,7 @@ export namespace Prisma {
     question?: StringNullableFilter<"Question"> | string | null
     practiceId?: IntFilter<"Question"> | number
     createdAt?: DateTimeFilter<"Question"> | Date | string
+    updatedAt?: DateTimeFilter<"Question"> | Date | string
     practices?: XOR<PracticeScalarRelationFilter, PracticeWhereInput>
   }, "id">
 
@@ -8669,6 +8785,7 @@ export namespace Prisma {
     question?: SortOrderInput | SortOrder
     practiceId?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: QuestionCountOrderByAggregateInput
     _avg?: QuestionAvgOrderByAggregateInput
     _max?: QuestionMaxOrderByAggregateInput
@@ -8684,6 +8801,7 @@ export namespace Prisma {
     question?: StringNullableWithAggregatesFilter<"Question"> | string | null
     practiceId?: IntWithAggregatesFilter<"Question"> | number
     createdAt?: DateTimeWithAggregatesFilter<"Question"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Question"> | Date | string
   }
 
   export type CVBuilderWhereInput = {
@@ -8696,6 +8814,7 @@ export namespace Prisma {
     template?: StringNullableFilter<"CVBuilder"> | string | null
     userId?: StringFilter<"CVBuilder"> | string
     createdAt?: DateTimeFilter<"CVBuilder"> | Date | string
+    updatedAt?: DateTimeFilter<"CVBuilder"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
@@ -8706,6 +8825,7 @@ export namespace Prisma {
     template?: SortOrderInput | SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
     user?: UserOrderByWithRelationInput
   }
 
@@ -8719,6 +8839,7 @@ export namespace Prisma {
     template?: StringNullableFilter<"CVBuilder"> | string | null
     userId?: StringFilter<"CVBuilder"> | string
     createdAt?: DateTimeFilter<"CVBuilder"> | Date | string
+    updatedAt?: DateTimeFilter<"CVBuilder"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id">
 
@@ -8729,6 +8850,7 @@ export namespace Prisma {
     template?: SortOrderInput | SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: CVBuilderCountOrderByAggregateInput
     _avg?: CVBuilderAvgOrderByAggregateInput
     _max?: CVBuilderMaxOrderByAggregateInput
@@ -8746,6 +8868,7 @@ export namespace Prisma {
     template?: StringNullableWithAggregatesFilter<"CVBuilder"> | string | null
     userId?: StringWithAggregatesFilter<"CVBuilder"> | string
     createdAt?: DateTimeWithAggregatesFilter<"CVBuilder"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"CVBuilder"> | Date | string
   }
 
   export type ResumeWhereInput = {
@@ -8759,6 +8882,7 @@ export namespace Prisma {
     cloudinaryId?: StringNullableFilter<"Resume"> | string | null
     userId?: StringFilter<"Resume"> | string
     createdAt?: DateTimeFilter<"Resume"> | Date | string
+    updatedAt?: DateTimeFilter<"Resume"> | Date | string
     users?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
@@ -8770,6 +8894,7 @@ export namespace Prisma {
     cloudinaryId?: SortOrderInput | SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
     users?: UserOrderByWithRelationInput
   }
 
@@ -8784,6 +8909,7 @@ export namespace Prisma {
     cloudinaryId?: StringNullableFilter<"Resume"> | string | null
     userId?: StringFilter<"Resume"> | string
     createdAt?: DateTimeFilter<"Resume"> | Date | string
+    updatedAt?: DateTimeFilter<"Resume"> | Date | string
     users?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id">
 
@@ -8795,6 +8921,7 @@ export namespace Prisma {
     cloudinaryId?: SortOrderInput | SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: ResumeCountOrderByAggregateInput
     _avg?: ResumeAvgOrderByAggregateInput
     _max?: ResumeMaxOrderByAggregateInput
@@ -8813,6 +8940,7 @@ export namespace Prisma {
     cloudinaryId?: StringNullableWithAggregatesFilter<"Resume"> | string | null
     userId?: StringWithAggregatesFilter<"Resume"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Resume"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Resume"> | Date | string
   }
 
   export type FeedbackWhereInput = {
@@ -8824,6 +8952,7 @@ export namespace Prisma {
     comment?: StringFilter<"Feedback"> | string
     score?: IntFilter<"Feedback"> | number
     createdAt?: DateTimeFilter<"Feedback"> | Date | string
+    updatedAt?: DateTimeFilter<"Feedback"> | Date | string
     practice?: XOR<PracticeScalarRelationFilter, PracticeWhereInput>
   }
 
@@ -8833,6 +8962,7 @@ export namespace Prisma {
     comment?: SortOrder
     score?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
     practice?: PracticeOrderByWithRelationInput
   }
 
@@ -8845,6 +8975,7 @@ export namespace Prisma {
     comment?: StringFilter<"Feedback"> | string
     score?: IntFilter<"Feedback"> | number
     createdAt?: DateTimeFilter<"Feedback"> | Date | string
+    updatedAt?: DateTimeFilter<"Feedback"> | Date | string
     practice?: XOR<PracticeScalarRelationFilter, PracticeWhereInput>
   }, "id" | "practiceId">
 
@@ -8854,6 +8985,7 @@ export namespace Prisma {
     comment?: SortOrder
     score?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: FeedbackCountOrderByAggregateInput
     _avg?: FeedbackAvgOrderByAggregateInput
     _max?: FeedbackMaxOrderByAggregateInput
@@ -8870,6 +9002,7 @@ export namespace Prisma {
     comment?: StringWithAggregatesFilter<"Feedback"> | string
     score?: IntWithAggregatesFilter<"Feedback"> | number
     createdAt?: DateTimeWithAggregatesFilter<"Feedback"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Feedback"> | Date | string
   }
 
   export type UserCreateInput = {
@@ -8884,6 +9017,8 @@ export namespace Prisma {
     hasResume?: boolean | null
     type?: $Enums.UserType
     betaUser?: boolean | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     practices?: PracticeCreateNestedManyWithoutUsersInput
     resumes?: ResumeCreateNestedManyWithoutUsersInput
     cv?: CVBuilderCreateNestedManyWithoutUserInput
@@ -8901,6 +9036,8 @@ export namespace Prisma {
     hasResume?: boolean | null
     type?: $Enums.UserType
     betaUser?: boolean | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     practices?: PracticeUncheckedCreateNestedManyWithoutUsersInput
     resumes?: ResumeUncheckedCreateNestedManyWithoutUsersInput
     cv?: CVBuilderUncheckedCreateNestedManyWithoutUserInput
@@ -8918,6 +9055,8 @@ export namespace Prisma {
     hasResume?: NullableBoolFieldUpdateOperationsInput | boolean | null
     type?: EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
     betaUser?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     practices?: PracticeUpdateManyWithoutUsersNestedInput
     resumes?: ResumeUpdateManyWithoutUsersNestedInput
     cv?: CVBuilderUpdateManyWithoutUserNestedInput
@@ -8935,6 +9074,8 @@ export namespace Prisma {
     hasResume?: NullableBoolFieldUpdateOperationsInput | boolean | null
     type?: EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
     betaUser?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     practices?: PracticeUncheckedUpdateManyWithoutUsersNestedInput
     resumes?: ResumeUncheckedUpdateManyWithoutUsersNestedInput
     cv?: CVBuilderUncheckedUpdateManyWithoutUserNestedInput
@@ -8952,6 +9093,8 @@ export namespace Prisma {
     hasResume?: boolean | null
     type?: $Enums.UserType
     betaUser?: boolean | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type UserUpdateManyMutationInput = {
@@ -8966,6 +9109,8 @@ export namespace Prisma {
     hasResume?: NullableBoolFieldUpdateOperationsInput | boolean | null
     type?: EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
     betaUser?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type UserUncheckedUpdateManyInput = {
@@ -8980,6 +9125,8 @@ export namespace Prisma {
     hasResume?: NullableBoolFieldUpdateOperationsInput | boolean | null
     type?: EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
     betaUser?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PracticeCreateInput = {
@@ -8991,6 +9138,7 @@ export namespace Prisma {
     resumeText?: string | null
     isTaken?: boolean | null
     createdAt?: Date | string
+    updatedAt?: Date | string
     questions?: QuestionCreateNestedManyWithoutPracticesInput
     users: UserCreateNestedOneWithoutPracticesInput
     feedback?: FeedbackCreateNestedOneWithoutPracticeInput
@@ -9007,6 +9155,7 @@ export namespace Prisma {
     isTaken?: boolean | null
     userId: string
     createdAt?: Date | string
+    updatedAt?: Date | string
     questions?: QuestionUncheckedCreateNestedManyWithoutPracticesInput
     feedback?: FeedbackUncheckedCreateNestedOneWithoutPracticeInput
   }
@@ -9020,6 +9169,7 @@ export namespace Prisma {
     resumeText?: NullableStringFieldUpdateOperationsInput | string | null
     isTaken?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     questions?: QuestionUpdateManyWithoutPracticesNestedInput
     users?: UserUpdateOneRequiredWithoutPracticesNestedInput
     feedback?: FeedbackUpdateOneWithoutPracticeNestedInput
@@ -9036,6 +9186,7 @@ export namespace Prisma {
     isTaken?: NullableBoolFieldUpdateOperationsInput | boolean | null
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     questions?: QuestionUncheckedUpdateManyWithoutPracticesNestedInput
     feedback?: FeedbackUncheckedUpdateOneWithoutPracticeNestedInput
   }
@@ -9051,6 +9202,7 @@ export namespace Prisma {
     isTaken?: boolean | null
     userId: string
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type PracticeUpdateManyMutationInput = {
@@ -9062,6 +9214,7 @@ export namespace Prisma {
     resumeText?: NullableStringFieldUpdateOperationsInput | string | null
     isTaken?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PracticeUncheckedUpdateManyInput = {
@@ -9075,11 +9228,13 @@ export namespace Prisma {
     isTaken?: NullableBoolFieldUpdateOperationsInput | boolean | null
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type QuestionCreateInput = {
     question?: string | null
     createdAt?: Date | string
+    updatedAt?: Date | string
     practices: PracticeCreateNestedOneWithoutQuestionsInput
   }
 
@@ -9088,11 +9243,13 @@ export namespace Prisma {
     question?: string | null
     practiceId: number
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type QuestionUpdateInput = {
     question?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     practices?: PracticeUpdateOneRequiredWithoutQuestionsNestedInput
   }
 
@@ -9101,6 +9258,7 @@ export namespace Prisma {
     question?: NullableStringFieldUpdateOperationsInput | string | null
     practiceId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type QuestionCreateManyInput = {
@@ -9108,11 +9266,13 @@ export namespace Prisma {
     question?: string | null
     practiceId: number
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type QuestionUpdateManyMutationInput = {
     question?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type QuestionUncheckedUpdateManyInput = {
@@ -9120,6 +9280,7 @@ export namespace Prisma {
     question?: NullableStringFieldUpdateOperationsInput | string | null
     practiceId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CVBuilderCreateInput = {
@@ -9127,6 +9288,7 @@ export namespace Prisma {
     content: JsonNullValueInput | InputJsonValue
     template?: string | null
     createdAt?: Date | string
+    updatedAt?: Date | string
     user: UserCreateNestedOneWithoutCvInput
   }
 
@@ -9137,6 +9299,7 @@ export namespace Prisma {
     template?: string | null
     userId: string
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type CVBuilderUpdateInput = {
@@ -9144,6 +9307,7 @@ export namespace Prisma {
     content?: JsonNullValueInput | InputJsonValue
     template?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutCvNestedInput
   }
 
@@ -9154,6 +9318,7 @@ export namespace Prisma {
     template?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CVBuilderCreateManyInput = {
@@ -9163,6 +9328,7 @@ export namespace Prisma {
     template?: string | null
     userId: string
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type CVBuilderUpdateManyMutationInput = {
@@ -9170,6 +9336,7 @@ export namespace Prisma {
     content?: JsonNullValueInput | InputJsonValue
     template?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CVBuilderUncheckedUpdateManyInput = {
@@ -9179,6 +9346,7 @@ export namespace Prisma {
     template?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ResumeCreateInput = {
@@ -9187,6 +9355,7 @@ export namespace Prisma {
     filePath?: string | null
     cloudinaryId?: string | null
     createdAt?: Date | string
+    updatedAt?: Date | string
     users: UserCreateNestedOneWithoutResumesInput
   }
 
@@ -9198,6 +9367,7 @@ export namespace Prisma {
     cloudinaryId?: string | null
     userId: string
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type ResumeUpdateInput = {
@@ -9206,6 +9376,7 @@ export namespace Prisma {
     filePath?: NullableStringFieldUpdateOperationsInput | string | null
     cloudinaryId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateOneRequiredWithoutResumesNestedInput
   }
 
@@ -9217,6 +9388,7 @@ export namespace Prisma {
     cloudinaryId?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ResumeCreateManyInput = {
@@ -9227,6 +9399,7 @@ export namespace Prisma {
     cloudinaryId?: string | null
     userId: string
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type ResumeUpdateManyMutationInput = {
@@ -9235,6 +9408,7 @@ export namespace Prisma {
     filePath?: NullableStringFieldUpdateOperationsInput | string | null
     cloudinaryId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ResumeUncheckedUpdateManyInput = {
@@ -9245,12 +9419,14 @@ export namespace Prisma {
     cloudinaryId?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type FeedbackCreateInput = {
     comment: string
     score: number
     createdAt?: Date | string
+    updatedAt?: Date | string
     practice: PracticeCreateNestedOneWithoutFeedbackInput
   }
 
@@ -9260,12 +9436,14 @@ export namespace Prisma {
     comment: string
     score: number
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type FeedbackUpdateInput = {
     comment?: StringFieldUpdateOperationsInput | string
     score?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     practice?: PracticeUpdateOneRequiredWithoutFeedbackNestedInput
   }
 
@@ -9275,6 +9453,7 @@ export namespace Prisma {
     comment?: StringFieldUpdateOperationsInput | string
     score?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type FeedbackCreateManyInput = {
@@ -9283,12 +9462,14 @@ export namespace Prisma {
     comment: string
     score: number
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type FeedbackUpdateManyMutationInput = {
     comment?: StringFieldUpdateOperationsInput | string
     score?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type FeedbackUncheckedUpdateManyInput = {
@@ -9297,6 +9478,7 @@ export namespace Prisma {
     comment?: StringFieldUpdateOperationsInput | string
     score?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -9339,6 +9521,17 @@ export namespace Prisma {
     in?: $Enums.UserType[] | ListEnumUserTypeFieldRefInput<$PrismaModel>
     notIn?: $Enums.UserType[] | ListEnumUserTypeFieldRefInput<$PrismaModel>
     not?: NestedEnumUserTypeFilter<$PrismaModel> | $Enums.UserType
+  }
+
+  export type DateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
   export type PracticeListRelationFilter = {
@@ -9388,6 +9581,8 @@ export namespace Prisma {
     hasResume?: SortOrder
     type?: SortOrder
     betaUser?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type UserMaxOrderByAggregateInput = {
@@ -9402,6 +9597,8 @@ export namespace Prisma {
     hasResume?: SortOrder
     type?: SortOrder
     betaUser?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
@@ -9416,6 +9613,8 @@ export namespace Prisma {
     hasResume?: SortOrder
     type?: SortOrder
     betaUser?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -9472,6 +9671,20 @@ export namespace Prisma {
     _max?: NestedEnumUserTypeFilter<$PrismaModel>
   }
 
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
   export type IntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -9489,17 +9702,6 @@ export namespace Prisma {
     hasEvery?: string[] | ListStringFieldRefInput<$PrismaModel>
     hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>
     isEmpty?: boolean
-  }
-
-  export type DateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
   export type QuestionListRelationFilter = {
@@ -9533,6 +9735,7 @@ export namespace Prisma {
     isTaken?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type PracticeAvgOrderByAggregateInput = {
@@ -9549,6 +9752,7 @@ export namespace Prisma {
     isTaken?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type PracticeMinOrderByAggregateInput = {
@@ -9561,6 +9765,7 @@ export namespace Prisma {
     isTaken?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type PracticeSumOrderByAggregateInput = {
@@ -9583,20 +9788,6 @@ export namespace Prisma {
     _max?: NestedIntFilter<$PrismaModel>
   }
 
-  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
-  }
-
   export type PracticeScalarRelationFilter = {
     is?: PracticeWhereInput
     isNot?: PracticeWhereInput
@@ -9607,6 +9798,7 @@ export namespace Prisma {
     question?: SortOrder
     practiceId?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type QuestionAvgOrderByAggregateInput = {
@@ -9619,6 +9811,7 @@ export namespace Prisma {
     question?: SortOrder
     practiceId?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type QuestionMinOrderByAggregateInput = {
@@ -9626,6 +9819,7 @@ export namespace Prisma {
     question?: SortOrder
     practiceId?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type QuestionSumOrderByAggregateInput = {
@@ -9663,6 +9857,7 @@ export namespace Prisma {
     template?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type CVBuilderAvgOrderByAggregateInput = {
@@ -9675,6 +9870,7 @@ export namespace Prisma {
     template?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type CVBuilderMinOrderByAggregateInput = {
@@ -9683,6 +9879,7 @@ export namespace Prisma {
     template?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type CVBuilderSumOrderByAggregateInput = {
@@ -9723,6 +9920,7 @@ export namespace Prisma {
     cloudinaryId?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type ResumeAvgOrderByAggregateInput = {
@@ -9737,6 +9935,7 @@ export namespace Prisma {
     cloudinaryId?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type ResumeMinOrderByAggregateInput = {
@@ -9747,6 +9946,7 @@ export namespace Prisma {
     cloudinaryId?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type ResumeSumOrderByAggregateInput = {
@@ -9759,6 +9959,7 @@ export namespace Prisma {
     comment?: SortOrder
     score?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type FeedbackAvgOrderByAggregateInput = {
@@ -9773,6 +9974,7 @@ export namespace Prisma {
     comment?: SortOrder
     score?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type FeedbackMinOrderByAggregateInput = {
@@ -9781,6 +9983,7 @@ export namespace Prisma {
     comment?: SortOrder
     score?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type FeedbackSumOrderByAggregateInput = {
@@ -9845,6 +10048,10 @@ export namespace Prisma {
 
   export type EnumUserTypeFieldUpdateOperationsInput = {
     set?: $Enums.UserType
+  }
+
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
   }
 
   export type PracticeUpdateManyWithoutUsersNestedInput = {
@@ -9970,10 +10177,6 @@ export namespace Prisma {
   export type PracticeUpdatestacksInput = {
     set?: string[]
     push?: string | string[]
-  }
-
-  export type DateTimeFieldUpdateOperationsInput = {
-    set?: Date | string
   }
 
   export type QuestionUpdateManyWithoutPracticesNestedInput = {
@@ -10136,6 +10339,17 @@ export namespace Prisma {
     not?: NestedEnumUserTypeFilter<$PrismaModel> | $Enums.UserType
   }
 
+  export type NestedDateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -10210,7 +10424,7 @@ export namespace Prisma {
     _max?: NestedEnumUserTypeFilter<$PrismaModel>
   }
 
-  export type NestedDateTimeFilter<$PrismaModel = never> = {
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
     notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -10218,7 +10432,10 @@ export namespace Prisma {
     lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
@@ -10246,20 +10463,6 @@ export namespace Prisma {
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatFilter<$PrismaModel> | number
-  }
-
-  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
   }
   export type NestedJsonFilter<$PrismaModel = never> =
     | PatchUndefined<
@@ -10294,6 +10497,7 @@ export namespace Prisma {
     resumeText?: string | null
     isTaken?: boolean | null
     createdAt?: Date | string
+    updatedAt?: Date | string
     questions?: QuestionCreateNestedManyWithoutPracticesInput
     feedback?: FeedbackCreateNestedOneWithoutPracticeInput
   }
@@ -10308,6 +10512,7 @@ export namespace Prisma {
     resumeText?: string | null
     isTaken?: boolean | null
     createdAt?: Date | string
+    updatedAt?: Date | string
     questions?: QuestionUncheckedCreateNestedManyWithoutPracticesInput
     feedback?: FeedbackUncheckedCreateNestedOneWithoutPracticeInput
   }
@@ -10328,6 +10533,7 @@ export namespace Prisma {
     filePath?: string | null
     cloudinaryId?: string | null
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type ResumeUncheckedCreateWithoutUsersInput = {
@@ -10337,6 +10543,7 @@ export namespace Prisma {
     filePath?: string | null
     cloudinaryId?: string | null
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type ResumeCreateOrConnectWithoutUsersInput = {
@@ -10354,6 +10561,7 @@ export namespace Prisma {
     content: JsonNullValueInput | InputJsonValue
     template?: string | null
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type CVBuilderUncheckedCreateWithoutUserInput = {
@@ -10362,6 +10570,7 @@ export namespace Prisma {
     content: JsonNullValueInput | InputJsonValue
     template?: string | null
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type CVBuilderCreateOrConnectWithoutUserInput = {
@@ -10404,6 +10613,7 @@ export namespace Prisma {
     isTaken?: BoolNullableFilter<"Practice"> | boolean | null
     userId?: StringFilter<"Practice"> | string
     createdAt?: DateTimeFilter<"Practice"> | Date | string
+    updatedAt?: DateTimeFilter<"Practice"> | Date | string
   }
 
   export type ResumeUpsertWithWhereUniqueWithoutUsersInput = {
@@ -10433,6 +10643,7 @@ export namespace Prisma {
     cloudinaryId?: StringNullableFilter<"Resume"> | string | null
     userId?: StringFilter<"Resume"> | string
     createdAt?: DateTimeFilter<"Resume"> | Date | string
+    updatedAt?: DateTimeFilter<"Resume"> | Date | string
   }
 
   export type CVBuilderUpsertWithWhereUniqueWithoutUserInput = {
@@ -10461,17 +10672,20 @@ export namespace Prisma {
     template?: StringNullableFilter<"CVBuilder"> | string | null
     userId?: StringFilter<"CVBuilder"> | string
     createdAt?: DateTimeFilter<"CVBuilder"> | Date | string
+    updatedAt?: DateTimeFilter<"CVBuilder"> | Date | string
   }
 
   export type QuestionCreateWithoutPracticesInput = {
     question?: string | null
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type QuestionUncheckedCreateWithoutPracticesInput = {
     id?: number
     question?: string | null
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type QuestionCreateOrConnectWithoutPracticesInput = {
@@ -10496,6 +10710,8 @@ export namespace Prisma {
     hasResume?: boolean | null
     type?: $Enums.UserType
     betaUser?: boolean | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     resumes?: ResumeCreateNestedManyWithoutUsersInput
     cv?: CVBuilderCreateNestedManyWithoutUserInput
   }
@@ -10512,6 +10728,8 @@ export namespace Prisma {
     hasResume?: boolean | null
     type?: $Enums.UserType
     betaUser?: boolean | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     resumes?: ResumeUncheckedCreateNestedManyWithoutUsersInput
     cv?: CVBuilderUncheckedCreateNestedManyWithoutUserInput
   }
@@ -10525,6 +10743,7 @@ export namespace Prisma {
     comment: string
     score: number
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type FeedbackUncheckedCreateWithoutPracticeInput = {
@@ -10532,6 +10751,7 @@ export namespace Prisma {
     comment: string
     score: number
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type FeedbackCreateOrConnectWithoutPracticeInput = {
@@ -10563,6 +10783,7 @@ export namespace Prisma {
     question?: StringNullableFilter<"Question"> | string | null
     practiceId?: IntFilter<"Question"> | number
     createdAt?: DateTimeFilter<"Question"> | Date | string
+    updatedAt?: DateTimeFilter<"Question"> | Date | string
   }
 
   export type UserUpsertWithoutPracticesInput = {
@@ -10588,6 +10809,8 @@ export namespace Prisma {
     hasResume?: NullableBoolFieldUpdateOperationsInput | boolean | null
     type?: EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
     betaUser?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     resumes?: ResumeUpdateManyWithoutUsersNestedInput
     cv?: CVBuilderUpdateManyWithoutUserNestedInput
   }
@@ -10604,6 +10827,8 @@ export namespace Prisma {
     hasResume?: NullableBoolFieldUpdateOperationsInput | boolean | null
     type?: EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
     betaUser?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     resumes?: ResumeUncheckedUpdateManyWithoutUsersNestedInput
     cv?: CVBuilderUncheckedUpdateManyWithoutUserNestedInput
   }
@@ -10623,6 +10848,7 @@ export namespace Prisma {
     comment?: StringFieldUpdateOperationsInput | string
     score?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type FeedbackUncheckedUpdateWithoutPracticeInput = {
@@ -10630,6 +10856,7 @@ export namespace Prisma {
     comment?: StringFieldUpdateOperationsInput | string
     score?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PracticeCreateWithoutQuestionsInput = {
@@ -10641,6 +10868,7 @@ export namespace Prisma {
     resumeText?: string | null
     isTaken?: boolean | null
     createdAt?: Date | string
+    updatedAt?: Date | string
     users: UserCreateNestedOneWithoutPracticesInput
     feedback?: FeedbackCreateNestedOneWithoutPracticeInput
   }
@@ -10656,6 +10884,7 @@ export namespace Prisma {
     isTaken?: boolean | null
     userId: string
     createdAt?: Date | string
+    updatedAt?: Date | string
     feedback?: FeedbackUncheckedCreateNestedOneWithoutPracticeInput
   }
 
@@ -10684,6 +10913,7 @@ export namespace Prisma {
     resumeText?: NullableStringFieldUpdateOperationsInput | string | null
     isTaken?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     users?: UserUpdateOneRequiredWithoutPracticesNestedInput
     feedback?: FeedbackUpdateOneWithoutPracticeNestedInput
   }
@@ -10699,6 +10929,7 @@ export namespace Prisma {
     isTaken?: NullableBoolFieldUpdateOperationsInput | boolean | null
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     feedback?: FeedbackUncheckedUpdateOneWithoutPracticeNestedInput
   }
 
@@ -10714,6 +10945,8 @@ export namespace Prisma {
     hasResume?: boolean | null
     type?: $Enums.UserType
     betaUser?: boolean | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     practices?: PracticeCreateNestedManyWithoutUsersInput
     resumes?: ResumeCreateNestedManyWithoutUsersInput
   }
@@ -10730,6 +10963,8 @@ export namespace Prisma {
     hasResume?: boolean | null
     type?: $Enums.UserType
     betaUser?: boolean | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     practices?: PracticeUncheckedCreateNestedManyWithoutUsersInput
     resumes?: ResumeUncheckedCreateNestedManyWithoutUsersInput
   }
@@ -10762,6 +10997,8 @@ export namespace Prisma {
     hasResume?: NullableBoolFieldUpdateOperationsInput | boolean | null
     type?: EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
     betaUser?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     practices?: PracticeUpdateManyWithoutUsersNestedInput
     resumes?: ResumeUpdateManyWithoutUsersNestedInput
   }
@@ -10778,6 +11015,8 @@ export namespace Prisma {
     hasResume?: NullableBoolFieldUpdateOperationsInput | boolean | null
     type?: EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
     betaUser?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     practices?: PracticeUncheckedUpdateManyWithoutUsersNestedInput
     resumes?: ResumeUncheckedUpdateManyWithoutUsersNestedInput
   }
@@ -10794,6 +11033,8 @@ export namespace Prisma {
     hasResume?: boolean | null
     type?: $Enums.UserType
     betaUser?: boolean | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     practices?: PracticeCreateNestedManyWithoutUsersInput
     cv?: CVBuilderCreateNestedManyWithoutUserInput
   }
@@ -10810,6 +11051,8 @@ export namespace Prisma {
     hasResume?: boolean | null
     type?: $Enums.UserType
     betaUser?: boolean | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     practices?: PracticeUncheckedCreateNestedManyWithoutUsersInput
     cv?: CVBuilderUncheckedCreateNestedManyWithoutUserInput
   }
@@ -10842,6 +11085,8 @@ export namespace Prisma {
     hasResume?: NullableBoolFieldUpdateOperationsInput | boolean | null
     type?: EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
     betaUser?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     practices?: PracticeUpdateManyWithoutUsersNestedInput
     cv?: CVBuilderUpdateManyWithoutUserNestedInput
   }
@@ -10858,6 +11103,8 @@ export namespace Prisma {
     hasResume?: NullableBoolFieldUpdateOperationsInput | boolean | null
     type?: EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
     betaUser?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     practices?: PracticeUncheckedUpdateManyWithoutUsersNestedInput
     cv?: CVBuilderUncheckedUpdateManyWithoutUserNestedInput
   }
@@ -10871,6 +11118,7 @@ export namespace Prisma {
     resumeText?: string | null
     isTaken?: boolean | null
     createdAt?: Date | string
+    updatedAt?: Date | string
     questions?: QuestionCreateNestedManyWithoutPracticesInput
     users: UserCreateNestedOneWithoutPracticesInput
   }
@@ -10886,6 +11134,7 @@ export namespace Prisma {
     isTaken?: boolean | null
     userId: string
     createdAt?: Date | string
+    updatedAt?: Date | string
     questions?: QuestionUncheckedCreateNestedManyWithoutPracticesInput
   }
 
@@ -10914,6 +11163,7 @@ export namespace Prisma {
     resumeText?: NullableStringFieldUpdateOperationsInput | string | null
     isTaken?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     questions?: QuestionUpdateManyWithoutPracticesNestedInput
     users?: UserUpdateOneRequiredWithoutPracticesNestedInput
   }
@@ -10929,6 +11179,7 @@ export namespace Prisma {
     isTaken?: NullableBoolFieldUpdateOperationsInput | boolean | null
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     questions?: QuestionUncheckedUpdateManyWithoutPracticesNestedInput
   }
 
@@ -10942,6 +11193,7 @@ export namespace Prisma {
     resumeText?: string | null
     isTaken?: boolean | null
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type ResumeCreateManyUsersInput = {
@@ -10951,6 +11203,7 @@ export namespace Prisma {
     filePath?: string | null
     cloudinaryId?: string | null
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type CVBuilderCreateManyUserInput = {
@@ -10959,6 +11212,7 @@ export namespace Prisma {
     content: JsonNullValueInput | InputJsonValue
     template?: string | null
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type PracticeUpdateWithoutUsersInput = {
@@ -10970,6 +11224,7 @@ export namespace Prisma {
     resumeText?: NullableStringFieldUpdateOperationsInput | string | null
     isTaken?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     questions?: QuestionUpdateManyWithoutPracticesNestedInput
     feedback?: FeedbackUpdateOneWithoutPracticeNestedInput
   }
@@ -10984,6 +11239,7 @@ export namespace Prisma {
     resumeText?: NullableStringFieldUpdateOperationsInput | string | null
     isTaken?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     questions?: QuestionUncheckedUpdateManyWithoutPracticesNestedInput
     feedback?: FeedbackUncheckedUpdateOneWithoutPracticeNestedInput
   }
@@ -10998,6 +11254,7 @@ export namespace Prisma {
     resumeText?: NullableStringFieldUpdateOperationsInput | string | null
     isTaken?: NullableBoolFieldUpdateOperationsInput | boolean | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ResumeUpdateWithoutUsersInput = {
@@ -11006,6 +11263,7 @@ export namespace Prisma {
     filePath?: NullableStringFieldUpdateOperationsInput | string | null
     cloudinaryId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ResumeUncheckedUpdateWithoutUsersInput = {
@@ -11015,6 +11273,7 @@ export namespace Prisma {
     filePath?: NullableStringFieldUpdateOperationsInput | string | null
     cloudinaryId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ResumeUncheckedUpdateManyWithoutUsersInput = {
@@ -11024,6 +11283,7 @@ export namespace Prisma {
     filePath?: NullableStringFieldUpdateOperationsInput | string | null
     cloudinaryId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CVBuilderUpdateWithoutUserInput = {
@@ -11031,6 +11291,7 @@ export namespace Prisma {
     content?: JsonNullValueInput | InputJsonValue
     template?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CVBuilderUncheckedUpdateWithoutUserInput = {
@@ -11039,6 +11300,7 @@ export namespace Prisma {
     content?: JsonNullValueInput | InputJsonValue
     template?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CVBuilderUncheckedUpdateManyWithoutUserInput = {
@@ -11047,29 +11309,34 @@ export namespace Prisma {
     content?: JsonNullValueInput | InputJsonValue
     template?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type QuestionCreateManyPracticesInput = {
     id?: number
     question?: string | null
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type QuestionUpdateWithoutPracticesInput = {
     question?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type QuestionUncheckedUpdateWithoutPracticesInput = {
     id?: IntFieldUpdateOperationsInput | number
     question?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type QuestionUncheckedUpdateManyWithoutPracticesInput = {
     id?: IntFieldUpdateOperationsInput | number
     question?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

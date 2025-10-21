@@ -23,11 +23,11 @@ import LanguageInputs from "./LanguageInputs";
 import AwardsInputs from "./AwardsInputs";
 import UserInfoInputs from "./UserInfoInputs";
 import axios from "axios";
-import supabase from "@/lib/supabase";
 import { toast } from "sonner";
 import { ImSpinner9 } from "react-icons/im";
-import { fetchResumeWithContent } from "@/lib/action";
+
 import { useRouter } from "next/navigation";
+import { fetchResumeWithContent } from "@/lib/actions/resumeHelpers";
 
 const CVForm = ({
   templateName,

@@ -6,7 +6,6 @@ import { useSidebar } from "@/components/ui/sidebar";
 import React, { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 import { User } from "@/lib/generated/prisma";
-import { fetchUser } from "@/lib/action";
 import { toast } from "sonner";
 import { GiArtificialHive } from "react-icons/gi";
 import { animate, stagger } from "motion";
@@ -15,10 +14,13 @@ import TaskGenerator from "@/components/practiceui/TaskGenerator";
 import PromptGenerator from "@/components/practiceui/PromptGenerator";
 import CodingEditor from "@/components/practiceui/CodingEditor";
 import { extractJSONFromText, generateCodingTask } from "@/lib/ai/coding";
+import { fetchUser } from "@/lib/actions/user";
+import { ImSpinner9 } from "react-icons/im";
+import { cn } from "@/lib/utils";
 
 const page = () => {
   const sidebar = useSidebar();
-  const { systemTheme } = useTheme();
+  const { resolvedTheme } = useTheme();
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(false);
   const [isStarted, setIsStarted] = useState(false);
@@ -31,7 +33,7 @@ const page = () => {
   const [generation, setGeneration] = useState("");
   const [isGenerating, setIsGenerating] = useState(false);
   const [isSetupComplete, setIsSetupComplete] = useState(false);
-
+  const [fetchingLastTask, setFetchingLastTask] = useState(true);
   const beginPractice = () => {
     setGeneration("");
     setIsGenerating(false);
@@ -72,12 +74,14 @@ const page = () => {
       const jsonData = await extractJSONFromText(fullText);
 
       if (jsonData) {
+        console.log("json data", jsonData);
         const newKeyword = jsonData.keywords;
         const updatedKeywords = [...oldKeywords, newKeyword];
         sessionStorage.setItem("keywords", JSON.stringify(updatedKeywords));
       }
     } catch (error) {
       toast.error("Error generating task");
+      console.log("error", error);
     } finally {
       setIsGenerating(false);
     }
@@ -117,15 +121,23 @@ const page = () => {
       }
     } catch (error) {
       toast.error("Error generating task");
+      console.log("error", error);
     } finally {
       setIsGenerating(false);
     }
   };
 
   useEffect(() => {
-    const lastTask = sessionStorage.getItem("lastTask");
-    if (lastTask) {
-      setGeneration(lastTask);
+    try {
+      setFetchingLastTask(true);
+      const lastTask = sessionStorage.getItem("lastTask");
+      if (lastTask) {
+        setGeneration(lastTask);
+      }
+    } catch (error) {
+      console.log("error", error);
+    } finally {
+      setFetchingLastTask(false);
     }
   }, []);
 
@@ -159,7 +171,7 @@ const page = () => {
     <div className="flex flex-col md:flex-row gap-10 w-full">
       <section className="flex flex-col lg:w-1/2 gap-4">
         <div className="flex justify-start">
-          {!isSetupComplete ? (
+          {!isSetupComplete && generation.length === 0 ? (
             <Button disabled={isStarted} onClick={beginPractice}>
               Start Practice
             </Button>
@@ -205,14 +217,17 @@ const page = () => {
                 generation || isGenerating ? "hidden" : ""
               } flex items-center h-full justify-center`}
             >
-              <GiArtificialHive className="text-8xl " />
+              <GiArtificialHive
+                className={cn("text-8xl", fetchingLastTask && "animate-spin")}
+              />
             </div>
           )}
+
           <TaskGenerator isGenerating={isGenerating} generation={generation} />
         </Card>
       </section>
       <section className="lg:w-1/2 flex flex-col gap-4">
-        <CodingEditor systemTheme={systemTheme} />
+        <CodingEditor theme={resolvedTheme} />
       </section>
     </div>
   );

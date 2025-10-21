@@ -21,7 +21,7 @@ const UploadCard = ({ userId }: { userId: string | undefined }) => {
     try {
       setFetching(true);
       const res = await axios.get(`/api/resumes`);
-      console.log("res", res.data);
+
       if (res.status === 200) {
         // const data = res.data.resumes;
         // const filteredResumes = data.filter(

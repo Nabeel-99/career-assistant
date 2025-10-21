@@ -12,7 +12,7 @@ import { useTheme } from "next-themes";
 import { cn } from "@/lib/utils";
 
 const ThemeCard = () => {
-  const { setTheme, theme } = useTheme();
+  const { setTheme, theme, systemTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {

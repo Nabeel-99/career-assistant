@@ -14,8 +14,8 @@ import {
 } from "../ui/sheet";
 import { Resume } from "@/lib/generated/prisma";
 import PracticeForm from "../forms/PracticeForm";
-import { fetchResumes } from "@/lib/action";
 import { toast } from "sonner";
+import { fetchResumes } from "@/lib/actions/resumeHelpers";
 
 const CreatePracticeBtn = ({
   userId,

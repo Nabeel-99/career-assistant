@@ -5,7 +5,8 @@ import DeleteAccountCard from "@/components/settingsui/DeleteAccountCard";
 import ProfilePictureCard from "@/components/settingsui/ProfilePictureCard";
 import ThemeCard from "@/components/settingsui/ThemeCard";
 import { Card } from "@/components/ui/card";
-import { fetchUser } from "@/lib/action";
+import { fetchUser } from "@/lib/actions/user";
+
 import { User } from "@/lib/generated/prisma";
 import axios from "axios";
 import React, { ChangeEvent, useEffect, useState } from "react";

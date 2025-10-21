@@ -18,9 +18,10 @@ import { toast } from "sonner";
 import axios from "axios";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
-import { makeUserNewFalse } from "@/lib/action";
+
 import { ImSpinner9 } from "react-icons/im";
 import { cn } from "@/lib/utils";
+import { makeUserNewFalse } from "@/lib/actions/user";
 const OnboardingModal = () => {
   const [open, setOpen] = useState(true);
   const [filename, setFilename] = useState("");

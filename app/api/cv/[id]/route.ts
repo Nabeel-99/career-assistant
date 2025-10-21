@@ -2,7 +2,6 @@ import prisma from "@/lib/prisma";
 import { getToken } from "next-auth/jwt";
 import { NextRequest, NextResponse } from "next/server";
 import { v2 as cloudinary } from "cloudinary";
-import { Prisma } from "@/lib/generated/prisma";
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
@@ -25,7 +24,7 @@ export const DELETE = async (
     }
 
     const { id } = await params;
-    console.log("cv id", id);
+
     if (id) {
       const cv = await prisma.cVBuilder.findUnique({
         where: { id: Number(id) },

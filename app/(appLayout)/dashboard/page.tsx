@@ -23,7 +23,7 @@ const page = async () => {
     },
   });
   if (!user) return null;
-  console.log("user", user);
+
   const navbtnItems = [
     {
       title: "Start Interview",

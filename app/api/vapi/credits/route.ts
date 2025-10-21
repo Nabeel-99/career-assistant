@@ -5,8 +5,8 @@ import { NextRequest, NextResponse } from "next/server";
 // export async function POST(request: NextRequest) {
 //   try {
 //     const body = await request.json();
-//     console.log("🎉 VAPI Webhook received!");
-//     console.log("📊 Full webhook data:", JSON.stringify(body, null, 2));
+//     console.log("VAPI Webhook received!");
+//     console.log("Full webhook data:", JSON.stringify(body, null, 2));
 
 //     // Handle end-of-call-report event
 //     if (body.message?.type === "end-of-call-report") {
@@ -29,7 +29,7 @@ import { NextRequest, NextResponse } from "next/server";
 //         userId: callData.assistant?.metadata?.userId, // This comes from your metadata
 //       };
 
-//       console.log("💰 Call Details:", {
+//       console.log("Call Details:", {
 //         duration: callDetails.duration
 //           ? callDetails.duration + " seconds"
 //           : "Not provided",
@@ -79,9 +79,9 @@ import { NextRequest, NextResponse } from "next/server";
 //           }
 //         );
 
-//         console.log("✅ Call details stored successfully");
+//         console.log("Call details stored successfully");
 //       } catch (storeError) {
-//         console.error("❌ Error storing call details:", storeError);
+//         console.error("Error storing call details:", storeError);
 //       }
 
 //       return NextResponse.json({

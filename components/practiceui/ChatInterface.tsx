@@ -1,5 +1,5 @@
 "use client";
-import { fetchPracticeById } from "@/lib/action";
+
 import { Prisma, User } from "@/lib/generated/prisma";
 import React, { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
@@ -12,15 +12,12 @@ import { IoMicOutline } from "react-icons/io5";
 
 import { Button } from "../ui/button";
 import { SiGooglegemini } from "react-icons/si";
-import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
-import TextType from "../Animations/TextType";
-import { TextAI } from "@/lib/ai/textBased";
-import { readStreamableValue } from "@ai-sdk/rsc";
 import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport } from "ai";
 import { FaStop } from "react-icons/fa";
 import PracticeHeaderSkeleton from "../skeletons/PracticeHeaderSkeleton";
-import { ms } from "zod/v4/locales";
+import { fetchPracticeById } from "@/lib/actions/practice";
+import { Streamdown } from "streamdown";
 
 type PracticeWithQuestions = Prisma.PracticeGetPayload<{
   include: { questions: true };
@@ -34,13 +31,12 @@ const ChatInterface = ({ id, user }: { id: string; user: User }) => {
   const [isAtBottom, setIsAtBottom] = useState(true);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const messagesContainerRef = useRef<HTMLDivElement>(null);
-  const [shouldAutoScroll, setShouldAutoScroll] = useState(true);
 
   const fetchInterview = async () => {
     try {
       setLoading(true);
       const res = await fetchPracticeById(id);
-      console.log("res", res);
+
       setPractice(res);
     } catch (error) {
       toast.error("Error fetching interview");
@@ -48,16 +44,10 @@ const ChatInterface = ({ id, user }: { id: string; user: User }) => {
       setLoading(false);
     }
   };
-  const { messages, sendMessage, status, error, stop } = useChat({
+  const { messages, sendMessage, status, stop } = useChat({
     transport: new DefaultChatTransport({
       api: "/api/chat",
     }),
-    onFinish: (options) => {
-      console.log("messages", options.message);
-    },
-    onError: (error) => {
-      console.log("error", error);
-    },
   });
 
   const handleStart = async () => {
@@ -167,7 +157,7 @@ const ChatInterface = ({ id, user }: { id: string; user: User }) => {
           )
         )}
 
-        <div className="mt-60 pt-10 md:mt-40 pb-20 ">
+        <div className="mt-60 pt-10 md:mt-40 pb-[50vh] lg:pb-[40vh] ">
           {messages.map((msg) => (
             <div
               key={msg.id}
@@ -185,7 +175,65 @@ const ChatInterface = ({ id, user }: { id: string; user: User }) => {
                 {msg.parts.map((part, i) => {
                   if (part.type === "text") {
                     const cleanText = part.text.replace(/\n{2,}/g, "\n\n");
-                    return <span key={i}> {cleanText}</span>;
+                    return (
+                      <Streamdown
+                        key={i}
+                        components={{
+                          h1: ({ children }) => (
+                            <h1 className="text-2xl font-bold mb-4">
+                              {children}
+                            </h1>
+                          ),
+                          h2: ({ children }) => (
+                            <h2 className="text-xl font-semibold mb-4">
+                              {children}
+                            </h2>
+                          ),
+                          p: ({ children }) => (
+                            <p className="leading-relaxed mb-3">{children}</p>
+                          ),
+                          li: ({ children }) => (
+                            <ul>
+                              <li className="mb-2">{children}</li>
+                            </ul>
+                          ),
+                          table: ({ children }) => (
+                            <table className="border-collapse border border-gray-300 my-4">
+                              {children}
+                            </table>
+                          ),
+                          th: ({ children }) => (
+                            <th className="border border-gray-300 px-3 py-1 bg-gray-100">
+                              {children}
+                            </th>
+                          ),
+                          td: ({ children }) => (
+                            <td className="border border-gray-300 px-3 py-1">
+                              {children}
+                            </td>
+                          ),
+                          code: ({ children, className }) => {
+                            const isInline = !className;
+                            return isInline ? (
+                              <code className="bg-[#eeeeee]  mb-3 dark:bg-[#151515] border px-1 py-0.5 rounded text-sm font-mono">
+                                {children}
+                              </code>
+                            ) : (
+                              <pre className="bg-[#eeeeee] mb-3 dark:bg-[#151515] border p-4 rounded-lg overflow-x-auto">
+                                <code className="text-sm">{children}</code>
+                              </pre>
+                            );
+                          },
+                          strong: ({ children }) => (
+                            <strong className="font-semibold mb-3">
+                              {children}
+                            </strong>
+                          ),
+                        }}
+                      >
+                        {cleanText}
+                      </Streamdown>
+                    );
                   }
                   return null;
                 })}

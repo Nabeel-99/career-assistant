@@ -28,7 +28,7 @@ import { Skeleton } from "../ui/skeleton";
 import { Resume } from "@/lib/generated/prisma";
 import { resumeSchema } from "@/lib/validation";
 import MissingFieldsForm from "../forms/MissingFieldsForm";
-import { fetchResumeWithContent } from "@/lib/action";
+import { fetchResumeWithContent } from "@/lib/actions/resumeHelpers";
 
 const mockSchema = z.object({
   resumeId: z.string(),

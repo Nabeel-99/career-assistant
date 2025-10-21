@@ -16,12 +16,12 @@ import {
 } from "../ui/chart";
 import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { fetchPractices } from "@/lib/action";
 
 import { ActivityData } from "@/lib/types";
 import { Skeleton } from "../ui/skeleton";
 import { toast } from "sonner";
 import { generateChartData } from "@/lib/utils";
+import { fetchPractices } from "@/lib/actions/practice";
 
 const ChartCard = ({ userId }: { userId: string }) => {
   const isMobile = useIsMobile();

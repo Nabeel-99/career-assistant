@@ -15,10 +15,11 @@ import { Card } from "../ui/card";
 import axios from "axios";
 import { LANGUAGE_VERSIONS } from "@/lib/utils";
 import { Button } from "../ui/button";
+import { toast } from "sonner";
 
 type Language = keyof typeof LANGUAGE_VERSIONS;
 const languages = Object.entries(LANGUAGE_VERSIONS);
-const CodingEditor = ({ systemTheme }: { systemTheme: any }) => {
+const CodingEditor = ({ theme }: { theme: any }) => {
   const [value, setValue] = useState("");
   const [showEditor, setShowEditor] = useState(true);
   const [showOutput, setShowOutput] = useState(false);
@@ -27,6 +28,7 @@ const CodingEditor = ({ systemTheme }: { systemTheme: any }) => {
   const [language, setLanguage] = useState<Language>("javascript");
   const [executing, setExecuting] = useState(false);
   const editorRef = useRef<null>(null);
+
   const onMount = (editor: any) => {
     editorRef.current = editor;
     editor.focus();
@@ -51,6 +53,7 @@ const CodingEditor = ({ systemTheme }: { systemTheme: any }) => {
       setError(res.data.run.stderr.split("\n"));
     } catch (error) {
       console.log("err", error);
+      toast.error("Error running code");
     } finally {
       setShowOutput(true);
       setExecuting(false);
@@ -64,7 +67,6 @@ const CodingEditor = ({ systemTheme }: { systemTheme: any }) => {
           // defaultValue="javascript"
           value={language}
           onValueChange={(selectedLanguage) => {
-            console.log("selectedLanguage", selectedLanguage);
             setLanguage(selectedLanguage as Language);
           }}
         >
@@ -108,7 +110,7 @@ const CodingEditor = ({ systemTheme }: { systemTheme: any }) => {
           language={language}
           defaultValue="//start coding here"
           className=" border h-full min-h-[620px]"
-          theme={`${systemTheme === "dark" ? "vs-dark" : "light"}`}
+          theme={`${theme === "dark" ? "vs-dark" : "light"}`}
         />
       )}
       {/* {executing && (

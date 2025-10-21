@@ -4,7 +4,6 @@ import { User } from "@/lib/generated/prisma";
 import { toast } from "sonner";
 import axios from "axios";
 const PaymentButton = ({ user }: { user: User | null }) => {
-  console.log("user", user);
   const config = {
     public_key: "FLWPUBK_TEST-a4afdff8027882794a525f2ad6d1b494-X",
     tx_ref: `careerassistant-${Date.now()}`,
@@ -29,7 +28,7 @@ const PaymentButton = ({ user }: { user: User | null }) => {
         tx_ref,
         transaction_id,
       });
-      console.log("response", res.data);
+
       if (res.status === 200) {
         toast.success(
           "Payment confirmed — you now have full access to all Premium features."
@@ -44,7 +43,6 @@ const PaymentButton = ({ user }: { user: User | null }) => {
     ...config,
     text: "Pay with Flutterwave!",
     callback: async (response: any) => {
-      console.log(response);
       if (response.status === "successful") {
         await verifyPayment(response.tx_ref, response.transaction_id);
       }

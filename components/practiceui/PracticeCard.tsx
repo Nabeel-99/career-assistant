@@ -9,13 +9,14 @@ import { formatDate, getDevIconUrl, mapLevel } from "@/lib/utils";
 import Link from "next/link";
 import { PracticeWithFeedback } from "@/lib/types";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
-import { deletePractice } from "@/lib/action";
+
 import { toast } from "sonner";
 import { DeleteDialog } from "./DeleteDialog";
 import { SiGooglegemini } from "react-icons/si";
 import { RiChatVoiceAiLine } from "react-icons/ri";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
 import { DialogDescription } from "@radix-ui/react-dialog";
+import { deletePractice } from "@/lib/actions/practice";
 type PracticeCardProps = PracticeWithFeedback & {
   getUserPractices: () => void;
   betaUser?: boolean;

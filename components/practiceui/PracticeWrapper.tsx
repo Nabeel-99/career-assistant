@@ -3,12 +3,14 @@
 import React, { useEffect, useState } from "react";
 import CreatePracticeBtn from "./CreatePracticeBtn";
 import PracticeCardGrid from "./PracticeCardGrid";
-import { fetchPractices, fetchUser } from "@/lib/action";
+
 import { PracticeWithFeedback } from "@/lib/types";
 import { toast } from "sonner";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "../ui/tabs";
 import CodingTab from "./CodingTab";
 import { User } from "@/lib/generated/prisma";
+import { fetchPractices } from "@/lib/actions/practice";
+import { fetchUser } from "@/lib/actions/user";
 
 const PracticeWrapper = ({ userId }: { userId: string }) => {
   const [practices, setPractices] = useState<PracticeWithFeedback[]>([]);
@@ -32,7 +34,7 @@ const PracticeWrapper = ({ userId }: { userId: string }) => {
     try {
       setFetchingUser(true);
       const res = await fetchUser();
-      console.log("res", res);
+
       setUser(res);
     } catch (error) {
       toast.error("Error fetching practices");

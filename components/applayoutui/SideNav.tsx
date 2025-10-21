@@ -2,8 +2,9 @@
 import { useState, useEffect } from "react";
 import SideNavWrapper from "./SideNavWrapper";
 import { User } from "@/lib/generated/prisma";
-import { fetchUser } from "@/lib/action";
+
 import { toast } from "sonner";
+import { fetchUser } from "@/lib/actions/user";
 
 const SideNav = () => {
   const [user, setUser] = useState<User | null>(null);

@@ -1,4 +1,4 @@
-import { signOutAction } from "@/lib/action";
+import { signOutAction } from "@/lib/actions/authHelpers";
 import React from "react";
 import { IoMdLogOut } from "react-icons/io";
 

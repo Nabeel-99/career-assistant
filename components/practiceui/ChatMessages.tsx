@@ -46,7 +46,7 @@ const ChatMessages = ({
                         </h2>
                       ),
                       p: ({ children }) => (
-                        <p className="leading-relaxed mb-3">{children}</p>
+                        <p className="leading-relaxed">{children}</p>
                       ),
                       li: ({ children }) => (
                         <ul>

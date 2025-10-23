@@ -8,6 +8,7 @@ import { FaStop } from "react-icons/fa";
 import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
+import { RiVoiceprintLine } from "react-icons/ri";
 type ChatInputProps = {
   input: string;
   setInput: (input: string) => void;
@@ -79,7 +80,12 @@ const ChatInput = ({
             type="button"
             className="p-2 rounded-full cursor-pointer"
           >
-            <IoMicOutline className="size-5" />
+            {listening ? (
+              <RiVoiceprintLine className="size-5 animate-pulse" />
+            ) : (
+              <IoMicOutline className="size-5" />
+            )}
+
             <span className="sr-only">mic</span>
           </button>
         )}
@@ -97,6 +103,7 @@ const ChatInput = ({
         ) : (
           <button
             type="submit"
+            onClick={() => SpeechRecognition.abortListening()}
             disabled={!hasStarted || !input.trim()}
             className="p-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed hover:bg-black/60 rounded-full bg-black"
           >

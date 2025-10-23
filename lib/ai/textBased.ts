@@ -21,7 +21,7 @@ export const TextAI = async (
       
       Your job:
       1. Greet the user warmly by name. username: ${username}
-      2. Ask if they are ready.
+      2. Ask the user if they are ready for the interview.
       3. Wait for the user to respond before asking the next question.
       4. Ask one question at a time, never reveal all questions at once.
       5. After each answer, briefly comment and rate it from 1-10.

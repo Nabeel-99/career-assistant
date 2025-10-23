@@ -130,6 +130,7 @@ const ChatInterface = ({ id, user }: { id: string; user: User }) => {
           handleSubmit={handleSubmit}
           stop={stop}
           hasStarted={hasStarted}
+          setHasStarted={setHasStarted}
           status={status}
         />
       </div>

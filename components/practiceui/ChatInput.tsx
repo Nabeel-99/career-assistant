@@ -77,8 +77,9 @@ const ChatInput = ({
         {mounted && (
           <button
             onClick={handleMicClick}
+            disabled={!hasStarted}
             type="button"
-            className="p-2 rounded-full cursor-pointer"
+            className="p-2 rounded-full cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
           >
             {listening ? (
               <RiVoiceprintLine className="size-5 animate-pulse text-blue-300" />
@@ -103,7 +104,10 @@ const ChatInput = ({
         ) : (
           <button
             type="submit"
-            onClick={() => SpeechRecognition.stopListening()}
+            onClick={() => {
+              SpeechRecognition.stopListening();
+              resetTranscript();
+            }}
             disabled={!hasStarted || !input.trim()}
             className="p-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed hover:bg-black/60 rounded-full bg-black"
           >

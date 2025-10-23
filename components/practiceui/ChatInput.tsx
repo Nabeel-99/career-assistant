@@ -103,7 +103,7 @@ const ChatInput = ({
         ) : (
           <button
             type="submit"
-            onClick={() => SpeechRecognition.abortListening()}
+            onClick={() => SpeechRecognition.stopListening()}
             disabled={!hasStarted || !input.trim()}
             className="p-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed hover:bg-black/60 rounded-full bg-black"
           >

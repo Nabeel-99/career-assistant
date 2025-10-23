@@ -49,8 +49,8 @@ const ChatInput = ({
     if (listening) {
       SpeechRecognition.stopListening();
     } else {
-      resetTranscript();
-      setInput("");
+      // resetTranscript();
+      // setInput("");
       //   setHasStarted(true);
       SpeechRecognition.startListening({ continuous: true });
     }
@@ -81,7 +81,7 @@ const ChatInput = ({
             className="p-2 rounded-full cursor-pointer"
           >
             {listening ? (
-              <RiVoiceprintLine className="size-5 animate-pulse" />
+              <RiVoiceprintLine className="size-5 animate-pulse text-blue-300" />
             ) : (
               <IoMicOutline className="size-5" />
             )}

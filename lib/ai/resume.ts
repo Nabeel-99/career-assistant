@@ -93,3 +93,86 @@ export const generateCV = async (rawText: string) => {
     throw new Error("Error parsing JSON");
   }
 };
+
+export const analyzeATS = async (
+  resumeText: string,
+  jobDescription: string
+) => {
+  const { text } = await generateText({
+    model: google("gemini-2.5-flash"),
+    prompt: `You are an expert ATS (Applicant Tracking System) analyzer. Your job is to compare a resume against a job description and provide detailed compatibility feedback.
+
+    **INPUTS:**
+    Resume Text:
+    ${resumeText}
+    
+    Job Description:
+    ${jobDescription}
+    
+    **YOUR TASK:**
+    Analyze how well this resume matches the job description for ATS compatibility. Focus on:
+    
+    1. KEYWORD MATCH (30% weight):
+       - Extract key technical skills, tools, frameworks from JD
+       - Identify which are present vs missing in resume
+       - Categorize missing keywords as "critical" (required) vs "nice-to-have" (preferred)
+    
+    2. FORMATTING (15% weight):
+       - Check for ATS-unfriendly elements (tables, columns, images, text boxes)
+       - Verify clear section headers (Education, Experience, Skills, etc.)
+       - Check for standard date formats
+    
+    3. EXPERIENCE RELEVANCE (25% weight):
+       - Compare years of experience required vs present
+       - Check industry/domain alignment
+       - Count quantifiable achievements (numbers, %, $, etc.)
+       - Identify where metrics are missing
+    
+    4. SKILLS MATCH (20% weight):
+       - Count matched technical skills
+       - Identify soft skills present
+       - Note missing required skills
+    
+    5. EDUCATION MATCH (10% weight):
+       - Check if education requirement is met
+    
+    **OUTPUT FORMAT:**
+   Return ONLY valid JSON:
+
+{
+  "overallScore": <0-100>,
+  "estimatedPassRate": <0-100>,
+  
+  "categoryScores": {
+    "keywords": {
+      "score": <0-100>,
+      "missing": [<top 5 missing critical keywords>]
+    },
+    "experience": {
+      "score": <0-100>,
+      "metricsCount": <number of quantifiable achievements found>
+    },
+    "skills": {
+      "score": <0-100>,
+      "missing": [<top 5 missing skills>]
+    }
+  },
+  
+  "topImprovements": [
+    {
+      "priority": "critical" | "high" | "medium",
+      "title": <short title>,
+      "description": <specific action to take>,
+    }
+  ],
+  
+}
+
+RULES:
+- overallScore = weighted average of category scores
+- estimatedPassRate = realistic % (if score < 60, passRate should be < 50%)
+- topImprovements = max 5 items, sorted by impact
+- Be specific: Instead of "add keywords", say "add TypeScript, AWS, Docker"
+`,
+  });
+};

@@ -291,3 +291,27 @@ export const LANGUAGE_VERSIONS = {
   sql: "3.36.0",
   scala: "3.2.2",
 };
+
+export const templates = [
+  {
+    image: "/templateone.png",
+    name: "Template One",
+    title: "Plain Classic",
+    description:
+      " A clean, no-frills single-column resume template that keeps the focus on your content. Perfect for professionals who value simplicity and clarity.",
+  },
+  {
+    image: "/templatetwo.png",
+    name: "Template Two",
+    title: "Modern Two-Column Resume",
+    description:
+      "A clean and modern resume template with a two-column layout, perfect for showcasing skills and experience side by side.",
+  },
+  {
+    image: "/templatethree.png",
+    name: "Template Three",
+    title: "Modern Professional with Portrait",
+    description:
+      " A clean, modern CV template featuring a prominent portrait image, designed to showcase a professional's credentials with a visually appealing and structured layout.",
+  },
+];

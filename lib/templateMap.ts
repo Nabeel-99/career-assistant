@@ -1,5 +1,5 @@
-import TemplateOne from "@/components/cvtemplates/TemplateOne";
-import TemplateTwo from "@/components/cvtemplates/TemplateTwo";
+import TemplateOne from "@/components/templatescv/TemplateOne";
+import TemplateTwo from "@/components/templatescv/TemplateTwo";
 // 10 templates
 export const templateMap: Record<
   string,

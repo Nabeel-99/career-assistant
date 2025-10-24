@@ -36,7 +36,7 @@ model User {
   cv                 CVBuilder[]
   betaUser           Boolean?    @default(false)
   createdAt          DateTime    @default(now())
-  updatedAt          DateTime    @default(now()) @updatedAt
+  updatedAt          DateTime    @updatedAt
 }
 
 model Practice {
@@ -53,7 +53,7 @@ model Practice {
   users       User       @relation(fields: [userId], references: [id], onDelete: Cascade)
   feedback    Feedback?
   createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @default(now()) @updatedAt
+  updatedAt   DateTime   @updatedAt
 }
 
 model Question {
@@ -62,7 +62,7 @@ model Question {
   practiceId Int
   practices  Practice @relation(fields: [practiceId], references: [id], onDelete: Cascade)
   createdAt  DateTime @default(now())
-  updatedAt  DateTime @default(now()) @updatedAt
+  updatedAt  DateTime @updatedAt
 }
 
 model CVBuilder {
@@ -73,7 +73,7 @@ model CVBuilder {
   userId    String
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
-  updatedAt DateTime @default(now()) @updatedAt
+  updatedAt DateTime @updatedAt
 }
 
 model Resume {
@@ -85,7 +85,7 @@ model Resume {
   userId       String
   users        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   createdAt    DateTime @default(now())
-  updatedAt    DateTime @default(now()) @updatedAt
+  updatedAt    DateTime @updatedAt
 }
 
 model Feedback {
@@ -95,5 +95,5 @@ model Feedback {
   comment    String
   score      Int
   createdAt  DateTime @default(now())
-  updatedAt  DateTime @default(now()) @updatedAt
+  updatedAt  DateTime @updatedAt
 }

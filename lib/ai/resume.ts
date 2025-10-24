@@ -168,11 +168,184 @@ export const analyzeATS = async (
   
 }
 
-RULES:
-- overallScore = weighted average of category scores
-- estimatedPassRate = realistic % (if score < 60, passRate should be < 50%)
-- topImprovements = max 5 items, sorted by impact
-- Be specific: Instead of "add keywords", say "add TypeScript, AWS, Docker"
+**IMPORTANT RULES:**
+- overallScore = weighted average: (keywords×0.30 + formatting×0.15 + experience×0.25 + skills×0.20 + education×0.10)
+- estimatedPassRate should be realistic: if overallScore < 60, passRate should be < 50%; if overallScore > 80, passRate should be > 75%
+- topImprovements = maximum 5 items, sorted by priority (critical > high > medium)
+- Be specific in descriptions: Never say "add keywords" - instead say "add TypeScript, AWS, Docker"
+- missing arrays should contain ONLY the top 5 most critical items
+- Do not wrap JSON in markdown code blocks
+- Do not include any text before or after the JSON object
 `,
   });
+  const data = text;
+  try {
+    if (data) {
+      const parsed = cleanJSONparse(data);
+      return parsed;
+    }
+  } catch (error) {
+    throw new Error("Error parsing JSON");
+  }
+};
+
+export const optimizeCV = async (
+  resumeText: string,
+  jobDescription: string,
+  atsResponse: any
+) => {
+  const { text } = await generateText({
+    model: google("gemini-2.5-flash"),
+    prompt: `You are an expert resume writer specializing in ATS optimization. Your job is to optimize a resume for a specific job description while maintaining COMPLETE TRUTHFULNESS.
+
+**INPUTS:**
+- Original Resume: ${resumeText}
+- Job Description: ${jobDescription}
+- ATS Analysis Feedback: ${JSON.stringify(atsResponse)}
+
+**YOUR TASK:**
+Optimize the resume content to improve ATS score while keeping it 100% truthful. You can ONLY:
+1. Rephrase existing experience to better match JD language
+2. Suggest where to add metrics with [METRIC_NEEDED] placeholders
+3. Reorganize content for better ATS compatibility
+4. Suggest improvements the user should make themselves
+
+**CRITICAL RULES - WHAT YOU CANNOT DO:**
+ NEVER add skills the user doesn't have
+ NEVER fabricate experience, projects, or achievements
+ NEVER add certifications or education that don't exist
+ NEVER create fake links or contact information
+ NEVER add technologies the user hasn't mentioned
+
+**WHAT YOU CAN DO:**
+Rephrase "Built web apps" → "Developed and deployed web applications"
+Add metric placeholders: "Improved performance [ADD_PERCENTAGE]%"
+Reorder skills to prioritize JD matches
+Suggest: "Consider adding quantifiable metrics here: [METRIC_NEEDED: team size/users/performance improvement]"
+Flag skill gaps: "Missing required skill: AWS - consider learning or removing this JD from targets"
+
+**OPTIMIZATION PRIORITIES:**
+1. Rephrase existing experience to use JD terminology
+2. Add [METRIC_NEEDED] placeholders where numbers are missing
+3. Reorder skills to put JD matches first
+4. Suggest where user should add real data
+5. Flag genuine skill gaps (don't try to hide them)
+
+**OUTPUT FORMAT:**
+Return ONLY valid JSON (no markdown, no explanations outside JSON):
+
+{
+  "optimizedResume": {
+    "image": null,
+    "fullname": "string",
+    "title": "string | null",
+    "summary": "string | null",
+    "email": "string | null",
+    "phone": "string | null",
+    "location": "string | null",
+    "links": {
+      "linkedin": "string | null",
+      "github": "string | null",
+      "portfolio": "string | null"
+    },
+    "education": [
+      {
+        "school": "string",
+        "degree": "string",
+        "startDate": "string",
+        "endDate": "string",
+        "location": "string"
+      }
+    ],
+    "experience": [
+      {
+        "company": "string",
+        "title": "string",
+        "startDate": "string",
+        "endDate": "string",
+        "location": "string",
+        "description": "string"
+      }
+    ],
+    "projects": [
+      {
+        "title": "string",
+        "description": "string",
+        "stacks": "string",
+        "link": "string | null"
+      }
+    ],
+    "skills": "string",
+    "awards": [
+      {
+        "title": "string",
+        "description": "string",
+        "year": "string"
+      }
+    ],
+    "languages": [
+      {
+        "name": "string",
+        "level": "beginner | intermediate | advanced"
+      }
+    ]
+  },
+  "placeholdersNeeded": [
+    {
+      "section": "experience",
+      "field": "company name - description",
+      "placeholder": "[METRIC_NEEDED]",
+      "suggestion": "Add percentage improvement, team size, or user count"
+    }
+  ],
+  "skillGaps": [
+    {
+      "skill": "AWS",
+      "priority": "critical",
+      "suggestion": "This is a required skill you don't have. Consider learning or targeting different roles."
+    }
+  ],
+  "changesMade": [
+    {
+      "section": "experience",
+      "original": "Built apps",
+      "optimized": "Developed and deployed production applications",
+      "reason": "Better matches JD terminology"
+    }
+  ],
+  "newEstimatedScore": 85,
+  "improvementFromOriginal": 12
+}
+
+**EXAMPLE - What to do with missing keywords:**
+
+Original Resume: "Experience with databases"
+Job Description requires: "PostgreSQL, MongoDB"
+
+WRONG: Add "PostgreSQL, MongoDB" to skills
+RIGHT: 
+- If they mentioned databases: "Experience with relational and NoSQL databases [ADD_SPECIFIC: PostgreSQL, MongoDB if applicable]"
+- Add to skillGaps: {"skill": "PostgreSQL", "priority": "high", "suggestion": "Required skill not found in resume"}
+
+**SPECIAL INSTRUCTIONS:**
+- For links: Only keep if they start with "http", otherwise return null
+- For image: Always return null
+- For missing sections (awards, projects): Don't fabricate, just flag in skillGaps
+- Description fields: Keep newlines for bullet points (use \\n)
+- Skills: Return as comma-separated string, prioritize JD matches first
+- All dates must remain exactly as they were
+- All personal info (name, email, phone) must remain unchanged
+
+Do not include any text before or after the JSON object.
+  `,
+  });
+  const data = text;
+  try {
+    if (data) {
+      const parsed = cleanJSONparse(data);
+      return parsed;
+    }
+  } catch (error) {
+    throw new Error("Error parsing JSON");
+  }
 };

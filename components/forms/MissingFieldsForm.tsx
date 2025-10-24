@@ -72,6 +72,8 @@ const MissingFieldsForm = ({
     },
   });
 
+  console.log("template ame", templateName);
+
   const onSubmit = async (data: MissingLinksFormType) => {
     let projectIndex = 0;
     const updatedProjects = incompleteResume?.projects?.map((project) => {
@@ -155,66 +157,67 @@ const MissingFieldsForm = ({
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
-        {missingFields.includes("image") && (
-          <div className="flex  gap-10 items-center">
-            <FormField
-              control={form.control}
-              name="image"
-              render={() => (
-                <FormItem className="w-full">
-                  <FormLabel>Image</FormLabel>
-                  <FormControl>
-                    <Input
-                      type="file"
-                      accept="image/*"
-                      onChange={(e) => {
-                        handleImageChange(e);
-                        const file = e.target.files?.[0];
-                        if (file) {
-                          const previewUrl = URL.createObjectURL(file);
-                          setPreview(previewUrl);
-                          form.setValue("image", file);
-                        }
-                      }}
-                    />
-                  </FormControl>
-                  <FormMessage className="text-red-500" />
-                </FormItem>
-              )}
-            />
-            {/* preview image */}
-            {preview && (
-              <>
-                <div className="flex flex-col gap-2">
-                  <div className="max-w-40  border rounded overflow-hidden">
-                    <img
-                      src={preview!}
-                      alt="preview"
-                      className="w-full h-full object-cover"
-                    />
+        {missingFields.includes("image") &&
+          templateName === "Template Three" && (
+            <div className="flex  gap-10 items-center">
+              <FormField
+                control={form.control}
+                name="image"
+                render={() => (
+                  <FormItem className="w-full">
+                    <FormLabel>Image</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) => {
+                          handleImageChange(e);
+                          const file = e.target.files?.[0];
+                          if (file) {
+                            const previewUrl = URL.createObjectURL(file);
+                            setPreview(previewUrl);
+                            form.setValue("image", file);
+                          }
+                        }}
+                      />
+                    </FormControl>
+                    <FormMessage className="text-red-500" />
+                  </FormItem>
+                )}
+              />
+              {/* preview image */}
+              {preview && (
+                <>
+                  <div className="flex flex-col gap-2">
+                    <div className="max-w-40  border rounded overflow-hidden">
+                      <img
+                        src={preview!}
+                        alt="preview"
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <div className="">
+                      <Button
+                        type="button"
+                        onClick={() => setShowCropModal(true)}
+                      >
+                        Resize
+                      </Button>
+                    </div>
                   </div>
-                  <div className="">
-                    <Button
-                      type="button"
-                      onClick={() => setShowCropModal(true)}
-                    >
-                      Resize
-                    </Button>
-                  </div>
-                </div>
 
-                <CropImage
-                  form={form}
-                  setPreview={setPreview}
-                  setCroppedFile={setCroppedFile}
-                  image={selectedImage!}
-                  open={showCropModal}
-                  closeModal={() => setShowCropModal(false)}
-                />
-              </>
-            )}
-          </div>
-        )}
+                  <CropImage
+                    form={form}
+                    setPreview={setPreview}
+                    setCroppedFile={setCroppedFile}
+                    image={selectedImage!}
+                    open={showCropModal}
+                    closeModal={() => setShowCropModal(false)}
+                  />
+                </>
+              )}
+            </div>
+          )}
         {socialLinks.map(
           (field) =>
             missingFields.includes(field) && (

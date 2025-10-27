@@ -25,12 +25,16 @@ export const PracticeSchema = z.object({
     message: "Please select an experience level",
   }),
 });
-
+export const atsAnalyzerSchema = z.object({
+  jobTitle: z.string().min(1),
+  jobDescription: z.string().min(1),
+  resume: z.any(),
+});
 export const updateProfileSchema = z.object({
   image: z.string().optional(),
   firstname: z.string().min(1).optional(),
   lastname: z.string().min(1).optional(),
-  email: z.string().email().optional(),
+  email: z.email().optional(),
   password: strongPassword.optional(),
   currentPassword: z.string().min(1).optional(),
 });

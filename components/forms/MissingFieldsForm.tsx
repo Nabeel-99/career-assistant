@@ -18,8 +18,6 @@ import { Button } from "../ui/button";
 import axios from "axios";
 import { ImSpinner9 } from "react-icons/im";
 import { toast } from "sonner";
-
-import supabase from "@/lib/supabase";
 import CropImage from "./CropImage";
 
 type ResumeSchema = z.infer<typeof resumeSchema>;

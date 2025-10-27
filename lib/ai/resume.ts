@@ -96,7 +96,8 @@ export const generateCV = async (rawText: string) => {
 
 export const analyzeATS = async (
   resumeText: string,
-  jobDescription: string
+  jobDescription: string,
+  jobTitle: string
 ) => {
   const { text } = await generateText({
     model: google("gemini-2.5-flash"),
@@ -105,6 +106,9 @@ export const analyzeATS = async (
     **INPUTS:**
     Resume Text:
     ${resumeText}
+    
+    Job Title: 
+    ${jobTitle}
     
     Job Description:
     ${jobDescription}

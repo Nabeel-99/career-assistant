@@ -14,6 +14,7 @@ export const metadata: Metadata = {
   icons: {
     icon: "/logo.png",
   },
+
   openGraph: {
     title: "AI-Powered Career Assistant",
     description:
@@ -22,9 +23,9 @@ export const metadata: Metadata = {
     siteName: "AI Career Assistant",
     images: [
       {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
+        url: "https://career-assistant-beta.vercel.app/og-image.png",
+        width: 1130,
+        height: 608,
         alt: "AI Career Assistant Preview",
       },
     ],
@@ -36,7 +37,7 @@ export const metadata: Metadata = {
     title: "AI-Powered Career Assistant",
     description:
       "Practice AI interviews, optimize your CV, and grow your career smarter.",
-    images: ["/og-image.png"],
+    images: ["https://career-assistant-beta.vercel.app/og-image.png"],
   },
 };
 

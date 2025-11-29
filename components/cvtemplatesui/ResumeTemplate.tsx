@@ -4,13 +4,13 @@ import React, { useEffect, useRef, useState } from "react";
 import { useReactToPrint } from "react-to-print";
 import { toast } from "sonner";
 import { z } from "zod";
-import TemplateOne from "../cvtemplates/TemplateOne";
-import TemplateTwo from "../cvtemplates/TemplateTwo";
+import TemplateOne from "../templatescv/TemplateOne";
+import TemplateTwo from "../templatescv/TemplateTwo";
 import { Button } from "../ui/button";
 import { FaDownload, FaTrash } from "react-icons/fa";
 import { resumeSchema } from "@/lib/validation";
 import { DeleteDialog } from "../practiceui/DeleteDialog";
-import TemplateThree from "../cvtemplates/TemplateThree";
+import TemplateThree from "../templatescv/TemplateThree";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 type Content = z.infer<typeof resumeSchema>;
 type ResumeTemplateProps = {

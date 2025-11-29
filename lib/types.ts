@@ -32,3 +32,29 @@ export type Template = {
   title: string;
   description: string;
 };
+
+export type ATSFeedback = {
+  overallScore: number;
+  estimatedPassRate: number;
+  categoryScores: {
+    keywords: {
+      score: number;
+      missing: string[];
+    };
+    experience: {
+      score: number;
+      metricsCount: number;
+    };
+    skills: {
+      score: number;
+      missing: string[];
+    };
+  };
+  topImprovements: [
+    {
+      priority: "critical" | "high" | "medium";
+      title: string;
+      description: string;
+    }
+  ];
+};

@@ -18,7 +18,6 @@ import {
 } from "../ui/form";
 import { Button } from "../ui/button";
 import { FaEye } from "react-icons/fa";
-import supabase from "@/lib/supabase";
 import {
   Dialog,
   DialogContent,
@@ -70,12 +69,10 @@ const PracticeForm = ({
   const [publicUrl, setPublicUrl] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
-  const openPreview = async (filePath: string) => {
-    if (!filePath) return;
-    const { data } = supabase.storage.from("resumes").getPublicUrl(filePath);
-    if (data.publicUrl) {
+  const openPreview = async (publicUrl: string) => {
+    if (publicUrl) {
       setPreview(true);
-      setPublicUrl(data.publicUrl);
+      setPublicUrl(publicUrl);
       //   setShowResume(true);
     }
   };
